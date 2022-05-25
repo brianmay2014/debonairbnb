@@ -1,0 +1,98 @@
+@import url('./theme.css');
+
+
+.btn {
+    background-color: var(--medgold);
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    border: 2px solid var(--darkgold);
+    transition: all 0.3s;
+}
+
+.btn-cancel {
+    background-color: var(--medred);
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    border: 2px solid var(--darkred);
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--lightegg);
+    border: 2px solid var(--medgold);
+    box-shadow: 0 0 8px var(--lightgold);
+    color: var(--darkgold);
+}
+
+.btn-cancel:hover {
+    background-color: var(--lightestpink);
+    border: 2px solid var(--medred);
+    box-shadow: 0 0 8px var(--lightred);
+    color: var(--darkred);
+}
+
+.form-errors li {
+    color: var(--darkred);
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+.fake-body{
+    margin-left: 50px;
+}
+
+a:visited {
+    color: var(--visitedlink);
+}
+
+body {
+    margin: 0;
+}
+
+.footer{
+    background-color: var(--footerbg);
+    text-align: center;
+    color: var(--lightbg);
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+}
+
+.header{
+    text-align: center;
+    width: 100%;
+    height: 3em;
+    background: var(--lightegg);
+    border-bottom: 2px solid var(--lightgold)
+}
+/*
+html {
+
+}
+
+ form {
+
+}
+label {
+
+}
+html {
+       
+}
+select, input {
+   
+}
+select:focus, input:focus{
+  
+} */
+
+button {
+    cursor: pointer;
+}

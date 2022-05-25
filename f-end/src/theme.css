@@ -1,0 +1,38 @@
+:root {
+    font-family: 'Baloo Da 2', cursive;
+    background-color: var(--lightbg);
+
+    --lightbg:  #eee9e5;
+    --footerbg: #b1616a;
+
+
+    --accentbrown: #9b5e40;
+    --accentgold: #e0ae5c;
+    --visitedlink: #D5DCE0;
+
+    --lightestred: #fde0e2;
+    --lightestpink: #f2e6e7;
+    --lightestegg: #f6f3ed;
+    --lightestgold: #eedecc;
+
+    --lightred: #fcb0b6;
+    --lightpink: #e7bec2;
+    --lightegg: #faf0df;
+    --lightgold: #deb78c;
+
+    --medred: #be2f3b;
+    --medpink: #b1616a;
+    --medegg: #f9d69f;
+    --medgold: #c28849;
+
+    --darkred: #852129;
+    --darkpink: #8b4d54;
+    --darkegg: #cbaf85;
+    --darkgold: #9f703f;
+
+    --darkestred: #3d070b;
+    --darkestpink: #54292e;
+    --darkestegg: #635643;
+    --darkestgold: #4f3c27;
+
+}
