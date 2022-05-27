@@ -27,6 +27,8 @@ greenlet = "==1.1.0"
 Mako = "==1.1.4"
 geopy = "*"
 psycopg2-binary = "*"
+boto3 = "*"
+botocore = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"
