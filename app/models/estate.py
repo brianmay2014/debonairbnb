@@ -66,10 +66,7 @@ class Estate(db.Model):
 
     @staticmethod
     def seed(estate_data):
-        print(estate_data)
-        print(estate_data.get("address"));
         data = EstateLocationData.from_string(estate_data.get("address"))
-        print(data);
         estate = Estate()
         estate.owner_id = estate_data.get("owner_id")
         estate.title = estate_data.get("title")
