@@ -34,5 +34,14 @@ const getCheckoutDate = () => {
     return `${coYear}-${coMonth.toString()}-${coDay.toString()}`;
 }
 
+const getNightStay = () => {
+    let diffTime = Math.abs(checkout - checkin);
+    let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    if (diffDays < 1) {
+        diffDays = 0;
+    }
 
-module.exports = {getCheckinDate, getCheckoutDate} 
+    return diffDays;
+};
+
+module.exports = {getCheckinDate, getCheckoutDate, getNightStay} 
