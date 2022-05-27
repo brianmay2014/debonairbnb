@@ -12,6 +12,7 @@ class Estate(db.Model):
     address = db.Column(db.Text)
     city = db.Column(db.String(100))
     state = db.Column(db.String(100))
+    country = db.Column(db.String(100))
     postal_code = db.Column(db.String(100))
     latitude = db.Column(db.Float(precision=32), nullable=False)
     longitude = db.Column(db.Float(precision=32), nullable=False)
