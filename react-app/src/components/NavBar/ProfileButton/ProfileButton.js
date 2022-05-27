@@ -32,7 +32,7 @@ const ProfileButton = () => {
       </button>
 
       {showMenu && (
-        <ul className='profile-dropdown-menu'>
+        <ul className='profile-dropdown-menu' onClick={(e) => e.stopPropagation()}>
           <li>
             <NavLink to="/" exact={true} activeClassName="active">
               Home

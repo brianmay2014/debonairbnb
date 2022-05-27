@@ -1,0 +1,15 @@
+.search-container {
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-inputs {
+  display: flex;
+  justify-content: center;
+}
+
+.search-guests-input {
+  display: flex;
+}
