@@ -17,8 +17,8 @@ class User(db.Model, UserMixin):
     estates = db.relationship("Estate", back_populates="owner")
     critiques = db.relationship("Critique", back_populates="author")
     charters = db.relationship("Charter", back_populates="user")
-    sent_missives = db.relationship("Missive", back_populates="sender")
-    received_missives = db.relationship("Missive", back_populates="recipient")
+    # sent_missives = db.relationship("Missive", back_populates="sender")
+    # received_missives = db.relationship("Missive", back_populates="recipient")
 
     # many to many
     favourites = db.relationship("Estate", back_populates="fans", secondary=favourited_estates)

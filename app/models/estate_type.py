@@ -9,3 +9,7 @@ class EstateType(db.Model):
     #relationships
     #has many
     estates = db.relationship("Estate", back_populates="type")
+
+    @staticmethod
+    def new(type):
+        return EstateType(name=type)
