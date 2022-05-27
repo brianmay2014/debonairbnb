@@ -35,7 +35,7 @@ class Estate(db.Model):
 
     @property
     def rating(self):
-        ratings =  [critique.rating for critique in self.critiques if critique.getattr("rating", None) is not None]
+        ratings =  [critique.rating for critique in self.critiques if getattr(critique, "rating", None) is not None]
         if not ratings:
             return None
         else:
