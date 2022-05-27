@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar/NavBar';
@@ -9,11 +9,13 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import { genEstates } from './store/estate';
+import UploadImage from './components/UploadImage/UploadeImage';
 
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const estates = useSelector((state) => state.estates)
 
   useEffect(() => {
     dispatch(genEstates())
@@ -33,6 +35,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
+      <UploadImage estate={estates[1]} />
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
