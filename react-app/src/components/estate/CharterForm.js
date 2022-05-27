@@ -78,6 +78,7 @@ const CharterForm = () => {
 						onChange={(e) => setCheckoutDate(e.target.value)}
 					/>
 				</div>
+
 				<button className="btn" id="reserve-btn" type="submit">
 					Reserve
 				</button>
