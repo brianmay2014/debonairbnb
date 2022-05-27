@@ -1,0 +1,15 @@
+.nav-home {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 180px;
+}
+
+.nav-icon {
+display: flex;
+align-items: top;
+}
+
+#nav-icon-title {
+  margin: 0;
+  padding-top: 0;
+}
