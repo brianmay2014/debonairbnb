@@ -5,6 +5,8 @@ API_KEY = Config.GOOGLE_MAPS_API_KEY
 geo_service = GoogleV3(api_key=API_KEY)
 
 city_types = ['locality', 'political']
+neighbourhood_types = ['neighborhood', 'political']
+county_types = ['administrative_area_level_2', 'political']
 state_types = ['administrative_area_level_1', 'political']
 country_types =  ['country', 'political']
 postal_code_types = ['postal_code']
@@ -34,7 +36,14 @@ class EstateLocationData():
     @staticmethod
     def parse_raw(data):
         rawgoogledata = data.get("address_components");
+        print(rawgoogledata)
         city = [comp.get("long_name") for comp in rawgoogledata if comp.get("types") == city_types]
+        if not city:
+            city = [comp.get("long_name") for comp in rawgoogledata if comp.get("types") == neighbourhood_types]
+        if not city:
+            city = [comp.get("long_name") for comp in rawgoogledata if comp.get("types") == county_types]
+        if not city:
+            raise ValueError("Something is wrong with the location returned: couldn't extract city");
         state = [comp.get("long_name") for comp in rawgoogledata if comp.get("types") == state_types]
         country = [comp.get("long_name") for comp in rawgoogledata if comp.get("types") == country_types]
         code = [comp.get("long_name") for comp in rawgoogledata if comp.get("types") == postal_code_types]
