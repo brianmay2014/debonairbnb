@@ -41,31 +41,26 @@ const EstatePage = () => {
 	//     dispatchEvent(getEstate(id));
 	// }, [dispatch]);
 
-    const address = 'butts'
+    const address = `${estate?.city}, ${estate?.state}, ${estate?.country}`
 
         return (
-            <div id='estate-body'>
-			<div className='estate-head-info'>
-                <div id='estate-head-title'>
-                    {estate?.title}
-                </div>
-                <div id='estate-head-info'>
-                    <div>
-                        {estate?.rating} stars - {estate?.critique_ids.length} critiques
-                    </div>
-                    <div>
-                        {address}
-                    </div>
+			<div id="estate-body">
+				<div className="estate-head-info">
+					<div id="estate-head-title">{estate?.title}</div>
+					<div id="estate-head-info">
+						<div>
+							{estate?.rating} stars -{" "}
+							{estate?.critique_ids.length} critiques
+						</div>
+						<div>{address}</div>
+					</div>
+				</div>
 
-                </div>
-            </div>
-
-            <ImageDisplay />
-            <DescriptionAvailCharter />   
-            <CritiqueDisplay />
-           
-		</div>
-	);
+				<ImageDisplay estate={estate} />
+				<DescriptionAvailCharter estate={estate} />
+				<CritiqueDisplay estate={estate} />
+			</div>
+		);
     
 };
 

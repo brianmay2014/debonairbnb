@@ -25,7 +25,7 @@ const critiques = [
 ];
 
 
-const CritiqueDisplay = () => {
+const CritiqueDisplay = ( {estate} ) => {
 	// const { id } = useParams();
 
 	// const dispatch = useDispatch();
@@ -41,13 +41,13 @@ const CritiqueDisplay = () => {
 
 	// const { address, owner_id, title, nightly_rate, type_id, description } =
 	// 	estate;
-	const avg_rating = 4.5;
-	const rating_count = 15;
+
+
 
 	return (
 		<div id="critique-display-body">
 			<div id='critique-header'>
-                {avg_rating} stars - {rating_count} reviews
+                {estate?.rating} stars - {estate?.critique_ids.length} critiques
             </div>
             <div id='all-critiques'>
             {critiques.map((critique) => {
