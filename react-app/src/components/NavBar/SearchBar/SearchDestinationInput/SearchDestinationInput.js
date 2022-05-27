@@ -1,5 +1,6 @@
 import "./SearchDestinationInput.css";
 import { useState, useEffect } from "react";
+import {useDispatch, useSelector} from "react-redux"
 const SearchDestinationInput = ({ data }) => {
   const [destinationValue, setDestinationValue] = useState();
   const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
