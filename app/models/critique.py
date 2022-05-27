@@ -10,6 +10,15 @@ class Critique(db.Model):
     comment = db.Column(db.Text, nullable=False)
 
     #relationships
-    # belongs to 
+    # belongs to
     estate = db.relationship("Estate", back_populates="critiques")
     author = db.relationship("User", back_populates="critiques")
+
+    @staticmethod
+    def seed(data):
+        return Critique(
+            user_id=data.get("user_id"),
+            estate_id=data.get("estate_id"),
+            rating=data.get("rating"),
+            comment=data.get("comment"),
+        )
