@@ -21,7 +21,7 @@ const images = [
 	"https://a0.muscache.com/im/pictures/miso/Hosting-52634799/original/1238ce4f-94e6-445b-abaf-8c73aa50e9e3.jpeg",
 ];
 
-const ImageDisplay = () => {
+const ImageDisplay = ( { estate }) => {
 	// const { id } = useParams();
 
 	// const dispatch = useDispatch();

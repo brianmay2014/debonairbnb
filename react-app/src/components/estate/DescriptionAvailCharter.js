@@ -16,7 +16,7 @@ const estate = {
 };
 
 
-const DescriptionAvailCharter = () => {
+const DescriptionAvailCharter = ( {estate} ) => {
 	// const { id } = useParams();
 
 	// const dispatch = useDispatch();
@@ -30,8 +30,7 @@ const DescriptionAvailCharter = () => {
 	//     dispatchEvent(getEstate(id));
 	// }, [dispatch]);
 
-	const { title, description } =
-		estate;
+
     
     const ownerName = "Jerrey";
     const numGuests = 6;
@@ -43,13 +42,13 @@ const DescriptionAvailCharter = () => {
 		<div id="desc-avail-charter">
             <div id='dac-left'>
                 <div id='description-header'>
-                    {title} hosted by {ownerName}
+                    {estate?.title} hosted by {ownerName}
                 </div>
                 <div id='estate-details'>
                     {numGuests} guests - {numBeds} beds - {numBaths} baths
                 </div>
                 <div id='estate-description'>
-                    {description}
+                    {estate?.description}
                 </div>
                 <AvailabilityCal />
             </div>

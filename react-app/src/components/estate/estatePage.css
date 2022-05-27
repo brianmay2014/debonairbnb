@@ -106,3 +106,23 @@ img{
 .rdrDefinedRangesWrapper{
     display: none;
 }
+.critique-boxes{
+    background-color: var(--lightestegg);
+    padding: 38px;
+    margin: 56px;
+    border-radius: 26px;
+    box-shadow: inset 1px 1px 15px var(--lightestgold), inset -1px -1px 15px var(--lightestgold);
+}
+.critique-boxes div{
+    color: var(--darkestgold);
+}
+.critique-users{
+    font-size: 20px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+.critique-dates{
+    font-size: 13px;
+    color: var(--)
+}
+
