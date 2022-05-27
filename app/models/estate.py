@@ -25,9 +25,9 @@ class Estate(db.Model):
     type = db.relationship("EstateType", back_populates="estates")
 
     # has many
-    images = db.relationship("EstateImage", back_populates="estate")
-    critiques = db.relationship("Critique", back_populates="estate")
-    charters = db.relationship("Charter", back_populates="estate")
+    images = db.relationship("EstateImage", back_populates="estate", cascade="all, delete-orphan")
+    critiques = db.relationship("Critique", back_populates="estate", cascade="all, delete-orphan")
+    charters = db.relationship("Charter", back_populates="estate", cascade="all, delete-orphan")
 
     #many to many
     fans = db.relationship("User", back_populates="favourites", secondary=favourited_estates)

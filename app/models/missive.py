@@ -11,5 +11,5 @@ class Missive(db.Model):
 
     #relationships
     # belongs to one
-    sender = db.relationship("User", back_populates="sent_missives")
-    recipient = db.relationship("User", back_populates="received_missives")
+    sender = db.relationship("User", back_populates="sent_missives", cascade="all, delete-orphan")
+    recipient = db.relationship("User", back_populates="received_missives", cascade="all, delete-orphan")
