@@ -1,5 +1,6 @@
 from ..models.db import db, auto_str
 from statistics import mean
+from .favourited_estate import favourited_estates
 
 @auto_str
 class Estate(db.Model):
@@ -26,6 +27,9 @@ class Estate(db.Model):
     images = db.relationship("EstateImage", back_populates="estate")
     critiques = db.relationship("Critique", back_populates="estate")
     charters = db.relationship("Charter", back_populates="estate")
+
+    #many to many
+    fans = db.relationship("User", back_populates="favourites", secondary=favourited_estates)
 
     @property
     def rating(self):

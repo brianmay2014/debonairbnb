@@ -1,4 +1,5 @@
 from .db import db
+from .favourited_estate import favourited_estates
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -16,6 +17,11 @@ class User(db.Model, UserMixin):
     estates = db.relationship("Estate", back_populates="owner")
     critiques = db.relationship("Critique", back_populates="author")
     charters = db.relationship("Charter", back_populates="user")
+    sent_missives = db.relationship("Missives", back_populates="sender")
+    received_missives = db.relationship("Missives", back_populates="recipient")
+
+    # many to many
+    favourites = db.relationship("Estate", back_populates="fans", secondary=favourited_estates)
 
     @property
     def password(self):
