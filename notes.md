@@ -17,6 +17,10 @@ https://rsuitejs.com/components/date-picker/
 https://rsuitejs.com/components/date-range-picker/
 
 
+additional npm installs:
+https://www.npmjs.com/package/react-date-range
+npm install --save react-date-range
+npm install --save react date-fns
 
 
 

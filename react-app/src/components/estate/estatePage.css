@@ -46,6 +46,8 @@ img{
     display: flex;
     min-width: 1121px;
     margin-top: 38px;
+    border-bottom: 2px var(--lightgold) solid;
+    padding-bottom: 38px;
 }
 
 #description-header{
@@ -100,4 +102,7 @@ img{
 }
 #total-cost{
     color: var(--darkestgold);
+}
+.rdrDefinedRangesWrapper{
+    display: none;
 }

@@ -4,6 +4,7 @@ import { Route, Redirect, useParams } from "react-router-dom";
 import './estatePage.css';
 import ImageDisplay from "./ImageDisplay";
 import DescriptionAvailCharter from "./DescriptionAvailCharter";
+import CritiqueDisplay from "./CritiqueDisplay";
 
 const estate = {
 	address: "10922 Corbly Gulch Rd, Belgrade, MT 59714",
@@ -53,6 +54,7 @@ const EstatePage = () => {
 
             <ImageDisplay />
             <DescriptionAvailCharter />   
+            <CritiqueDisplay />
            
 		</div>
 	);
