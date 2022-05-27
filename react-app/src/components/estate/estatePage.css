@@ -48,10 +48,6 @@ img{
     margin-top: 38px;
 }
 
-#dac-left, #dac-right{
-    border:1px solid black;
-}
-
 #description-header{
     font-size: 24px;
 }
@@ -65,10 +61,43 @@ img{
     padding: 24px;
 }
 
+.checkdates{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 40%;
+    margin: 0 auto;
 
+}
+#no-charge-yet{
+    text-align: center;
+    font-size: 13px;
+}
 
 #charter-form{
     width: 370px;
     height: 500px;
-    padding: 10px;
+    padding: 20px;
+    border: 1px var(--lightgold) solid;
+    border-radius: 18px;
+}
+ #charter-form input{
+    margin: 15px 0;
+ }
+ #reserve-btn{
+     width: 100%;
+     margin: 0 auto;
+     font-size: 18px;
+ }
+
+#service-cost{
+    border-bottom: 2px var(--lightgold) solid
+}
+.invoice-row{
+    display: flex;
+    justify-content: space-between;
+    color: var(--darkgold);
+}
+#total-cost{
+    color: var(--darkestgold);
 }
