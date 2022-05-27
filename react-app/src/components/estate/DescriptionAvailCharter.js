@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Route, Redirect, useParams } from "react-router-dom";
+// import { useSelector, useDispatch } from "react-redux";
+// import { Route, Redirect, useParams } from "react-router-dom";
 import "./estatePage.css";
 import CharterForm from "./CharterForm";
 import AvailabilityCal from "./AvailabilityCal";
@@ -17,7 +17,7 @@ const estate = {
 
 
 const DescriptionAvailCharter = () => {
-	const { id } = useParams();
+	// const { id } = useParams();
 
 	// const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ const DescriptionAvailCharter = () => {
 	//     dispatchEvent(getEstate(id));
 	// }, [dispatch]);
 
-	const { address, owner_id, title, nightly_rate, type_id, description } =
+	const { title, description } =
 		estate;
     
     const ownerName = "Jerrey";
