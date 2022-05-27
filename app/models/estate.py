@@ -22,12 +22,12 @@ class Estate(db.Model):
 
     #relationships
     # belongs to one
-    owner = db.relationship("User", back_populates="estates")
-    type = db.relationship("EstateType", back_populates="estates")
+    owner = db.relationship("User", back_populates="estates", lazy="joined")
+    type = db.relationship("EstateType", back_populates="estates", lazy="joined")
 
     # has many
-    images = db.relationship("EstateImage", back_populates="estate", cascade="all, delete-orphan")
-    critiques = db.relationship("Critique", back_populates="estate", cascade="all, delete-orphan")
+    images = db.relationship("EstateImage", back_populates="estate", cascade="all, delete-orphan", lazy="joined")
+    critiques = db.relationship("Critique", back_populates="estate", cascade="all, delete-orphan", lazy="joined")
     charters = db.relationship("Charter", back_populates="estate", cascade="all, delete-orphan")
 
     #many to many
@@ -35,16 +35,38 @@ class Estate(db.Model):
 
     @property
     def rating(self):
-        return mean(
-            [critique.rating for critique in self.critiques if critique.getattr("rating", None) is not None]
-        )
+        ratings =  [critique.rating for critique in self.critiques if critique.getattr("rating", None) is not None]
+        if not ratings:
+            return None
+        else:
+            return mean(ratings)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'owner_id': self.owner_id,
+            'title': self.title,
+            'description': self.description,
+            'nightly_rate': self.nightly_rate,
+            'type_id' : self.type_id,
+            'type': self.type.name,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'country': self.country,
+            'postal_code': self.postal_code,
+            'latitude': self.latitude,
+            'longitude': self.longitude,
+            'critique_ids': [critique.id for critique in self.critiques],
+            'image_ids': [image.id for image in self.images],
+            'images': self.images,
+            'rating': self.rating,
+        }
+
 
     @staticmethod
     def seed(estate_data):
-        print(estate_data)
-        print(estate_data.get("address"));
         data = EstateLocationData.from_string(estate_data.get("address"))
-        print(data);
         estate = Estate()
         estate.owner_id = estate_data.get("owner_id")
         estate.title = estate_data.get("title")

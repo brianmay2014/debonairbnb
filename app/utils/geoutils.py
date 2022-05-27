@@ -86,23 +86,23 @@ class EstateLocationData():
         return EstateLocationData.build(results)
 
 
-test_str = "20 W 34th St New York 10001"
-test2_str = "350 fifth avenue new york city"
-test2_dict = {"houseNumber": "20", "street": "W 34th St", "city": "new york city", "postalCode": "10001"}
-test3_lat = 37.755205
-test3_lon = -122.451298
+# test_str = "20 W 34th St New York 10001"
+# test2_str = "350 fifth avenue new york city"
+# test2_dict = {"houseNumber": "20", "street": "W 34th St", "city": "new york city", "postalCode": "10001"}
+# test3_lat = 37.755205
+# test3_lon = -122.451298
 
-test = EstateLocationData.from_string(test_str)
-print(test.__dict__)
+# test = EstateLocationData.from_string(test_str)
+# print(test.__dict__)
 
-test = EstateLocationData.from_string(test2_str)
-print(test.__dict__)
+# test = EstateLocationData.from_string(test2_str)
+# print(test.__dict__)
 
-test = EstateLocationData.from_structured(test2_dict)
-print(test.__dict__)
+# test = EstateLocationData.from_structured(test2_dict)
+# print(test.__dict__)
 
-test = EstateLocationData.reverse(test3_lat, test3_lon)
-print(test.__dict__)
+# test = EstateLocationData.reverse(test3_lat, test3_lon)
+# print(test.__dict__)
 
-test = EstateLocationData.reverse(35.7099552,139.8104001)
-print(test.__dict__)
+# test = EstateLocationData.reverse(35.7099552,139.8104001)
+# print(test.__dict__)
