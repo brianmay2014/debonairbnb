@@ -1,0 +1,43 @@
+#estate-body{
+    
+    width: 65%;
+    margin: 0 auto;
+}
+
+#estate-head-title{
+ font-size: 48px;
+}
+
+#estate-head-info{
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+}
+#estate-head-info div {
+    padding: 8px;
+}
+
+
+#image-display-body{
+    border-radius: 12px;
+    /* border: 2px black solid; */
+    display: flex;
+    min-width: 1121px;
+}
+img{
+    border-radius: 12px;
+    border: 1px var(--medgold) solid;
+}
+
+#main-image img{
+    width: 555px;
+    height: 555px;
+    object-fit: cover;
+    padding: 
+}
+#cluster-images img{
+    width: 275px;
+    height: 275px;
+    object-fit: cover;
+    margin-left: 5px;
+}
