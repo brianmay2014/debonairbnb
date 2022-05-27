@@ -1,8 +1,8 @@
 
-const ADD_ESTATE = "estate/addEstate";
-const REMOVE_ESTATE = "estate/removeEstate";
-const LOAD_ESTATES = "estate/loadEstates";
-const UPDATE_ESTATE = "estate/updateEstate";
+const ADD_ESTATE = "estates/addEstate";
+const REMOVE_ESTATE = "estates/removeEstate";
+const LOAD_ESTATES = "estates/loadEstates";
+const UPDATE_ESTATE = "estates/updateEstate";
 
 const addEstate = (estate) => {
   return {
@@ -55,8 +55,10 @@ export const editEstate = (estate, data) => async (dispatch) => {
 
 export const deleteEstate = (estate) => async (dispatch) => {
   const { id } = estate;
-  const estate = await fetch(`/api/estates/${id}}`, "DELETE");
-  dispatch(removeEstate(estate));
+  const response = await fetch(`/api/estates/${id}}`, "DELETE");
+  if (response.ok) {
+    dispatch(removeEstate(estate));
+  }
 };
 
 export const genEstates = () => async (dispatch) => {
@@ -67,8 +69,9 @@ export const genEstates = () => async (dispatch) => {
   const [estates] = await Promise.all([
     estatesResponse.json(),
   ]);
+  console.log(estates);
   if (estatesResponse.ok) {
-    dispatch(loadEstates(estates))
+    dispatch(loadEstates(estates.estates))
     return estates;
   }
 };
