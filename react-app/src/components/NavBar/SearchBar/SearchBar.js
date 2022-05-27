@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import SearchDestinationInput from "./SearchDestinationInput/SearchDestinationInput";
 import SearchDurationInput from "./SearchDurationInput/SearchDurationInput";
 import SearchGuestsInput from "./SearchGuestsInput/SearchGuestsInput";
+import EstateData from "../../../EstateData.json"
+
 import "./SearchBar.css";
 
 function SearchBar() {
@@ -41,7 +43,7 @@ function SearchBar() {
       </div>
       {showSearchForm && (
         <div className="search-inputs" onClick={(e) => e.stopPropagation()}>
-          <SearchDestinationInput  />
+          <SearchDestinationInput data={EstateData}/>
           <SearchDurationInput />
           <SearchGuestsInput />
         </div>

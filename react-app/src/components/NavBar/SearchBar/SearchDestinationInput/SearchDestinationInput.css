@@ -1,0 +1,18 @@
+.destination-results {
+  position: absolute;
+  overflow-y: auto;
+  margin-top: 5px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.destination-result .destination-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: black;
+}
+
+.destination-item:hover {
+  background-color: lightgray;
+}
