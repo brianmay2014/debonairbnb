@@ -50,6 +50,9 @@ function App() {
         <Route path='/' exact={true} >
           <h1>My Home Page</h1>
         </Route>
+        <Route path='/estates/:id' exact={true} >
+          <EstatePage />
+        </Route>
         <Route path='/search'>
           <SearchResults />
         </Route>
