@@ -8,12 +8,14 @@ const SearchDestinationInput = ({ data, setDestination }) => {
   const [filteredData, setFilteredData] = useState([]);
   const estates = useSelector((state) => Object.values(state.estates));
 
+  // sets value of input to search suggestion
   const displayInputValue = (e) => {
     // console.log(e.target.value);
     setShowSearchSuggestions(false);
     setDestinationValue(e.target.innerText);
   };
 
+  // filters through states to list corresponding states in list
   const handleDestinationFilter = (e) => {
     const searchWord = e.target.value;
     const filteredSet = new Set();
@@ -28,11 +30,12 @@ const SearchDestinationInput = ({ data, setDestination }) => {
     newFilter.map((estate) => {
       filteredSet.add(estate.state);
     });
-    // console.log(filteredSet);
 
     setFilteredData(Array.from(filteredSet));
     setDestinationValue(searchWord);
   };
+
+  // shows suggestions if there is data to filter through and closes suggestions if it's an empty string
 
   useEffect(() => {
     if (filteredData) {

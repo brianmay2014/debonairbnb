@@ -35,7 +35,7 @@ function SearchBar() {
     return () => document.removeEventListener("click", closeSearchForm);
   }, [showSearchForm]);
 
-
+// Submits filtered search results to store and redirects to link which displays results
   const handleSubmit = (e) => {
     e.preventDefault()
     const filteredEstateResults = estates.filter(estate => {
