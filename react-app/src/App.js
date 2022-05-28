@@ -11,6 +11,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import { genEstates } from './store/estate';
 import UploadImage from './components/UploadImage/UploadeImage';
+import SearchResults from './components/SearchResults/SearchResults'
 
 
 function App() {
@@ -19,11 +20,11 @@ function App() {
   const estates = useSelector((state) => state.estates)
 
   useEffect(() => {
-    dispatch(genEstates())
-  }, [dispatch])
+    dispatch(genEstates());
+  }, [dispatch]);
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -38,23 +39,26 @@ function App() {
       <NavBar />
       <UploadImage estate={estates[1]} />
       <Switch>
-        <Route path='/login' exact={true}>
+        <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
-        <Route path='/sign-up' exact={true}>
+        <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+        <ProtectedRoute path="/users" exact={true}>
+          <UsersList />
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
+        <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
+        <ProtectedRoute path="/" exact={true}>
           <h1>My Home Page</h1>
         </ProtectedRoute>
-        <Route path='/estates/:id' exact={true} >
+        <Route path="/estates/:id" exact={true}>
           <EstatePage />
+        </Route>
+        <Route path="/search">
+          <SearchResults />
         </Route>
       </Switch>
     </BrowserRouter>
