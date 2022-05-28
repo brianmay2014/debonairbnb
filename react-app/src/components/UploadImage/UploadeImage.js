@@ -1,30 +1,26 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { editEstate } from "../../store/estate";
 
-const UploadImage = ({estate}) => {
-  const history = useHistory(); // so that we can redirect after the image upload is successful
+const UploadImage = ({ estate }) => {
+  const dispatch = useDispatch();
   const [image, setImage] = useState(null);
+  const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", image);
-
-    // aws uploads can be a bit slow—displaying
-    // some sort of loading message is a good idea
-
+    setErrors([]);
     setLoading(true);
-    const res = await fetch("/api/images", {
-      method: "POST",
-      body: formData,
-    });
-    if (res.ok) {
-      await res.json();
+    const updateEstate = await dispatch(editEstate(estate, {image})).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }
+    );
+    if (updateEstate && errors.length === 0) {
       setLoading(false);
-      history.push("/images");
-    } else {
-      setLoading(false);
-      console.log("error");
+      return updateEstate;
     }
   };
 
@@ -42,4 +38,4 @@ const UploadImage = ({estate}) => {
   );
 };
 
-export default UploadImage
+export default UploadImage;

@@ -59,7 +59,7 @@ class Estate(db.Model):
             'longitude': self.longitude,
             'critique_ids': [critique.id for critique in self.critiques],
             'image_ids': [image.id for image in self.images],
-            'images': self.images,
+            'images': [image.to_dict() for image in self.images],
             'rating': self.rating,
         }
 

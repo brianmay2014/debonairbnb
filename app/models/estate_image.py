@@ -11,3 +11,11 @@ class EstateImage(db.Model):
     #relationships
     # belongs to one
     estate = db.relationship("Estate", back_populates="images")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "estate_id": self.estate_id,
+            "url": self.url,
+            "title": self.title,
+        }
