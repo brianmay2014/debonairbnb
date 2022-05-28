@@ -37,7 +37,3 @@ const SearchResults = () => {
 };
 
 export default SearchResults;
-
-//     <Route path='/search'>
-{/* <SearchResults />
-</Route> */}
