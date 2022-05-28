@@ -34,19 +34,16 @@ const loadEstates = (estates) => {
 
 export const editEstate = (estate, data) => async (dispatch) => {
   const { id } = estate;
-  const { title, description, file } = data;
-  const formData = new FormData();
-  formData.append("title", title);
-  formData.append("description", description);
-  if (file) {
-    formData.append("image", file);
+  const { title, description, image } = data;
+  const f = new FormData();
+  f.append("title", title);
+  f.append("description", description);
+  if (image) {
+    f.append("image", image);
   }
   const response = await fetch(`/api/estates/${id}`, {
     method: "PATCH",
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-    body: formData,
+    body: f,
   });
   const estateData = await response.json();
   dispatch(addEstate(estateData))
@@ -69,7 +66,6 @@ export const genEstates = () => async (dispatch) => {
   const [estates] = await Promise.all([
     estatesResponse.json(),
   ]);
-  console.log(estates);
   if (estatesResponse.ok) {
     dispatch(loadEstates(estates.estates))
     return estates;
