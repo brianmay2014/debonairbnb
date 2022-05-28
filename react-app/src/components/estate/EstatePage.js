@@ -6,6 +6,7 @@ import ImageDisplay from "./ImageDisplay";
 import DescriptionAvailCharter from "./DescriptionAvailCharter";
 import CritiqueDisplay from "./CritiqueDisplay";
 import { genEstates } from "../../store/estate";
+import LocationDisplay from "./LocationDisplay";
 
 
 // const estate = {
@@ -59,6 +60,7 @@ const EstatePage = () => {
 				<ImageDisplay estate={estate} />
 				<DescriptionAvailCharter estate={estate} />
 				<CritiqueDisplay estate={estate} />
+                <LocationDisplay estate={estate} />
 			</div>
 		);
     
