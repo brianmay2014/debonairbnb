@@ -1,8 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
+
 import loadAllResults from "../../store/search";
-import SearchMap from "./SearchMap/SearchMap"
+import SearchMap from "./SearchMap/SearchMap";
 import "./SearchResults.css";
 
 const SearchResults = () => {
@@ -41,26 +42,30 @@ const SearchResults = () => {
                 resultIds === estate.id.toString()
               ) {
                 return (
-                  <>
-                    <div className="search-results-card">
+                  <div className="search-results-card">
+                    <Link to={`/estates/${estate.id}`}>
                       <img src={images[0]}></img>
-                      <h3>
+                    </Link>
+                    <Link to={`/estates/${estate.id}`}>
+                      <h3 style={{ color: "black" }}>
                         {estate.type} in {estate.state}{" "}
                       </h3>
-                      <p>${estate.nightly_rate} night</p>
-                    </div>
-                  </>
+                    </Link>
+                    <p>${estate.nightly_rate} night</p>
+                  </div>
                 );
               }
             })}
       </div>
       <div className="search-results-map">
-        <SearchMap isMarkerShown
+        <SearchMap
+          isMarkerShown
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `400px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
-        selectedEstate={estates[0]} />
+          resultIds={resultIds}
+        />
       </div>
     </div>
   );
