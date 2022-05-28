@@ -1,21 +1,23 @@
 import "./SearchDestinationInput.css";
 import { useState, useEffect } from "react";
-import {useDispatch, useSelector} from "react-redux"
-const SearchDestinationInput = ({ data }) => {
+import { useDispatch, useSelector } from "react-redux";
+
+const SearchDestinationInput = ({ data, setDestination }) => {
   const [destinationValue, setDestinationValue] = useState();
   const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
+  const estates = useSelector((state) => Object.values(state.estates));
 
   const displayInputValue = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setShowSearchSuggestions(false);
     setDestinationValue(e.target.innerText);
   };
 
   const handleDestinationFilter = (e) => {
     const searchWord = e.target.value;
-
-    const newFilter = data.filter((value) => {
+    const filteredSet = new Set();
+    const newFilter = estates.filter((value) => {
       // console.log(value.state)
       if (value.state) {
         return value.state.toLowerCase().includes(searchWord.toLowerCase());
@@ -23,7 +25,12 @@ const SearchDestinationInput = ({ data }) => {
         return;
       }
     });
-    setFilteredData(newFilter);
+    newFilter.map((estate) => {
+      filteredSet.add(estate.state);
+    });
+    // console.log(filteredSet);
+
+    setFilteredData(Array.from(filteredSet));
     setDestinationValue(searchWord);
   };
 
@@ -34,6 +41,7 @@ const SearchDestinationInput = ({ data }) => {
     if (destinationValue === "") {
       setShowSearchSuggestions(false);
     }
+    setDestination(destinationValue);
   }, [destinationValue]);
 
   return (
@@ -48,13 +56,11 @@ const SearchDestinationInput = ({ data }) => {
         {filteredData.length != 0 &&
           showSearchSuggestions &&
           filteredData.map((value, key) => {
-            if (value.state && value.country) {
-              return (
-                <div className="destination-item" onClick={displayInputValue}>
-                  {value.state}, {value.country}
-                </div>
-              );
-            }
+            return (
+              <div className="destination-item" onClick={displayInputValue}>
+                {value}
+              </div>
+            );
           })}
       </div>
     </div>
