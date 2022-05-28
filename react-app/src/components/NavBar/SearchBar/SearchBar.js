@@ -41,9 +41,13 @@ function SearchBar() {
     const filteredEstateResults = estates.filter(estate => {
       return estate.state === destination
     })
-    // console.log(filteredEstateResults)
     dispatch(createResults(filteredEstateResults))
-    return history.push('/search-results')
+let searchUrlArray = []
+    filteredEstateResults.map(estate => {
+      searchUrlArray.push(estate.id)
+})
+console.log(searchUrlArray)
+    return history.push(`/search?estateids=${searchUrlArray.join(',')}`)
 }
 
   return (

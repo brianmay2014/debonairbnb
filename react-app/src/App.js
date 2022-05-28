@@ -50,7 +50,7 @@ function App() {
         <Route path='/' exact={true} >
           <h1>My Home Page</h1>
         </Route>
-        <Route path='/search-results'>
+        <Route path='/search'>
           <SearchResults />
         </Route>
       </Switch>
