@@ -11,7 +11,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import { genEstates } from './store/estate';
 import UploadImage from './components/UploadImage/UploadeImage';
-
+import SearchResults from './components/SearchResults/SearchResults'
 
 
 function App() {
