@@ -1,0 +1,14 @@
+/* button.effect{
+  animation: slide 1s;
+}
+@keyframes slide {
+  from {
+    margin: 0;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+} */

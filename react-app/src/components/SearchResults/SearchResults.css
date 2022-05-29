@@ -1,5 +1,5 @@
 .search-results-container {
-  margin: 20px 180px;
+  margin: 0;
   width: 100%;
   display: flex;
 }
@@ -7,13 +7,22 @@
 .search-results-card img {
 width: 300px;
 height: 300px;
+margin: 5px;
 }
 
 .search-results-list {
   width: 33.33%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px;
+
+}
+
+.search-results-card {
+  flex: 1 0 21%;
 }
 
 .search-results-map {
   width: 66.66%;
-  margin-right: 40px;
+  padding-top: 20px;
 }
