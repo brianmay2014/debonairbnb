@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
-
+import "./SearchMap.css";
 import {
   withScriptjs,
   withGoogleMap,
@@ -8,13 +8,10 @@ import {
   useJsApiLoader,
   Marker,
 } from "@react-google-maps/api";
-// import Marker from "./Marker/Marker"
-// import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
-import MarkerWithLabel from "react-google-maps/lib/components/addons/MarkerWithLabel";
 
 const containerStyle = {
-  width: "66.66%",
-  height: "800px",
+  width: "100%",
+  height:"100%",
 };
 
 const SearchMap = ({ resultIds }) => {
@@ -31,13 +28,13 @@ const SearchMap = ({ resultIds }) => {
     )
   );
 
-  console.log(estates[0]?.latitude, "HEEERE ========");
+  // console.log(estates[0]?.latitude, "HEEERE ========");
 
   const [map, setMap] = useState(null);
 
   const [estatesLoaded, setEstatesLoaded] = useState(false);
 
-  console.log(estates, "AHHHHHHH");
+  // console.log(estates, "AHHHHHHH");
   const onLoad = useCallback(function callback(map) {
     if (estatesLoaded) {
       const bounds = new window.google.maps.LatLngBounds({
@@ -60,6 +57,8 @@ const SearchMap = ({ resultIds }) => {
   }, []);
 
   return isLoaded ? (
+    <>
+
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={{ lat: estates[0]?.latitude, lng: estates[0]?.longitude }}
@@ -75,10 +74,12 @@ const SearchMap = ({ resultIds }) => {
               position={{ lat: estate?.latitude, lng: estate?.longitude }}
               labelAnchor={{ lat: estate?.latitude, lng: estate?.longitude }}
               label={`$${estate.nightly_rate.toString()}`}
-            ></Marker>
+            >
+            </Marker>
           );
         })}
     </GoogleMap>
+    </>
   ) : (
     <></>
   );
