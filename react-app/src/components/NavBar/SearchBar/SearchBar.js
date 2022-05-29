@@ -83,7 +83,10 @@ function SearchBar() {
         </button>
         <button onClick={openGuestsMenu}>
           <p>Add guests</p>
+                <div className="search-icon">
+      </div>
         </button>
+
       </div>
 
       <form
@@ -91,6 +94,9 @@ function SearchBar() {
         className="search-inputs"
         onClick={(e) => e.stopPropagation()}
       >
+              <button type="submit">
+          <i class="fak fa-magnifying-glass-solid"></i>
+        </button>
         {showDestinationMenu && (
           <SearchDestinationInput setDestination={setDestination} />
         )}
