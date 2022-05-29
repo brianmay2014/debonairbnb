@@ -19,6 +19,8 @@ function SearchBar() {
   const [guestNumber, setGuestNumber] = useState(1);
   const estates = useSelector((state) => Object.values(state.estates));
   const history = useHistory();
+  const [destinationValueHolder, setDestinationValueHolder] =
+    useState("Anywhere");
 
   const openDestinationMenu = (e) => {
     e.stopPropagation();
@@ -67,8 +69,22 @@ function SearchBar() {
     filteredEstateResults.map((estate) => {
       searchUrlArray.push(estate.id);
     });
+    let anywhereArrayResults = [];
+    estates.map((estate) => {
+      anywhereArrayResults.push(estate.id);
+    });
+    // console.log(anywhereArrayResults)
     console.log(searchUrlArray);
-    return history.push(`/search?estateids=${searchUrlArray.join(",")}`);
+    if (searchUrlArray.length) {
+      // console.log('===========')
+      setDestinationValueHolder(destination)
+      return history.push(`/search?estateids=${searchUrlArray.join(",")}`);
+    } else {
+      console.log(anywhereArrayResults);
+      return history.push(
+        `/search?estateids=${anywhereArrayResults.join(",")}`
+      );
+    }
   };
 
   return (
@@ -76,17 +92,15 @@ function SearchBar() {
       <div className="search-buttons-container">
         {/* <AnimatedButton /> */}
         <button onClick={openDestinationMenu}>
-          <p>Anywhere</p>
+          <p>{destinationValueHolder}</p>
         </button>
         <button onClick={openDateMenu}>
           <p>Any Week</p>
         </button>
         <button onClick={openGuestsMenu}>
           <p>Add guests</p>
-                <div className="search-icon">
-      </div>
+          <div className="search-icon"></div>
         </button>
-
       </div>
 
       <form
@@ -94,7 +108,7 @@ function SearchBar() {
         className="search-inputs"
         onClick={(e) => e.stopPropagation()}
       >
-              <button type="submit">
+        <button type="submit">
           <i class="fak fa-magnifying-glass-solid"></i>
         </button>
         {showDestinationMenu && (

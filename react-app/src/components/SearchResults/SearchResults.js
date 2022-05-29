@@ -13,7 +13,7 @@ const SearchResults = () => {
   const { search } = useLocation();
   const resultIds = search.split("=")[1].split(",");
   const [isLoaded, setIsLoaded] = useState(false);
-
+console.log(resultIds)
   useEffect(() => {
     if (reloadEstates) {
       setIsLoaded(true);
