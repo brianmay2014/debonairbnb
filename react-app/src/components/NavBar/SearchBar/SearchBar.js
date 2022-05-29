@@ -5,35 +5,56 @@ import SearchDestinationInput from "./SearchDestinationInput/SearchDestinationIn
 import SearchDurationInput from "./SearchDurationInput/SearchDurationInput";
 import SearchGuestsInput from "./SearchGuestsInput/SearchGuestsInput";
 import { createResults } from "../../../store/search";
+// import AnimatedButton from "./AnimatedButton/AnimatedButton"
 
 import "./SearchBar.css";
 
 function SearchBar() {
   const dispatch = useDispatch();
-  const [showSearchForm, setShowSearchForm] = useState(false);
+  const [showDestinationMenu, setShowDestinationMenu] = useState(false);
+  const [showDateMenu, setShowDateMenu] = useState(false);
+  const [showGuestsMenu, setShowGuestsMenu] = useState(false);
   const [destination, setDestination] = useState("");
   const [dateRange, setDateRange] = useState(null);
   const [guestNumber, setGuestNumber] = useState(1);
   const estates = useSelector((state) => Object.values(state.estates));
   const history = useHistory();
 
-  const openSearchForm = (e) => {
+  const openDestinationMenu = (e) => {
     e.stopPropagation();
-    if (showSearchForm) return;
-    setShowSearchForm(true);
+    if (showDestinationMenu) return;
+    setShowDestinationMenu(true);
+    setShowDateMenu(false);
+    setShowGuestsMenu(false);
+  };
+  const openDateMenu = (e) => {
+    e.stopPropagation();
+    if (showDateMenu) return;
+    setShowDateMenu(true);
+    setShowGuestsMenu(false);
+    setShowDestinationMenu(false);
+  };
+  const openGuestsMenu = (e) => {
+    e.stopPropagation();
+    if (showGuestsMenu) return;
+    setShowGuestsMenu(true);
+    setShowDestinationMenu(false);
+    setShowDateMenu(false);
   };
 
   useEffect(() => {
-    if (!showSearchForm) return;
+    if (!showDestinationMenu && !showDateMenu && !showGuestsMenu) return;
 
-    const closeSearchForm = () => {
-      setShowSearchForm(false);
+    const closeForms = () => {
+      setShowDestinationMenu(false);
+      setShowDateMenu(false);
+      setShowGuestsMenu(false);
     };
 
-    document.addEventListener("click", closeSearchForm);
+    document.addEventListener("click", closeForms);
 
-    return () => document.removeEventListener("click", closeSearchForm);
-  }, [showSearchForm]);
+    return () => document.removeEventListener("click", closeForms);
+  }, [showDestinationMenu, showDateMenu, showGuestsMenu]);
 
   // Submits filtered search results to store and redirects to link which displays results
   const handleSubmit = (e) => {
@@ -53,27 +74,31 @@ function SearchBar() {
   return (
     <div className="search-container">
       <div className="search-buttons-container">
-        <button onClick={openSearchForm}>
+        {/* <AnimatedButton /> */}
+        <button onClick={openDestinationMenu}>
           <p>Anywhere</p>
         </button>
-        <button onClick={openSearchForm}>
+        <button onClick={openDateMenu}>
           <p>Any Week</p>
         </button>
-        <button onClick={openSearchForm}>
+        <button onClick={openGuestsMenu}>
           <p>Add guests</p>
         </button>
       </div>
-      {showSearchForm && (
-        <form
-          onSubmit={handleSubmit}
-          className="search-inputs"
-          onClick={(e) => e.stopPropagation()}
-        >
+
+      <form
+        onSubmit={handleSubmit}
+        className="search-inputs"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {showDestinationMenu && (
           <SearchDestinationInput setDestination={setDestination} />
-          <SearchDurationInput setDateRange={setDateRange} />
+        )}
+        {showDateMenu && <SearchDurationInput setDateRange={setDateRange} />}
+        {showGuestsMenu && (
           <SearchGuestsInput setGuestNumber={setGuestNumber} />
-        </form>
-      )}
+        )}
+      </form>
     </div>
   );
 }

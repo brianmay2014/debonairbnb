@@ -65,6 +65,7 @@ const SearchMap = ({ resultIds }) => {
       zoom={4}
       onLoad={onLoad}
       onUnmount={onUnmount}
+      className="google-map-search"
     >
       {/* Child components, such as markers, info windows, etc. */}
       {isLoaded &&
