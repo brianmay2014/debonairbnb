@@ -24,3 +24,17 @@
   outline: none;
   appearance: none;
 }
+
+.hidden-buttons {
+  display: none;
+}
+
+.inputs-revealed {
+  display: flex;
+  width: 
+
+}
+
+.inputs-hidden {
+  display: none;
+}

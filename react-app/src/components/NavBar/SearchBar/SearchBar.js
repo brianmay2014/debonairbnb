@@ -21,7 +21,9 @@ function SearchBar() {
   const history = useHistory();
   const [destinationValueHolder, setDestinationValueHolder] =
     useState("Anywhere");
-  const [ alphabetizedSet, setAlphabetizedSet] = useState([])
+  const [alphabetizedSet, setAlphabetizedSet] = useState([]);
+  const [hiddenButtonsDest, setHiddenButtonsDest] = useState(false);
+  const [hiddenButtons, setHiddenButtons] = useState(false);
 
   const openDestinationMenu = (e) => {
     e.stopPropagation();
@@ -53,11 +55,26 @@ function SearchBar() {
       setShowDateMenu(false);
       setShowGuestsMenu(false);
     };
-
     document.addEventListener("click", closeForms);
-
     return () => document.removeEventListener("click", closeForms);
   }, [showDestinationMenu, showDateMenu, showGuestsMenu]);
+
+  // useEffect for hiding buttons
+  useEffect(() => {
+    const unHideButtons = () => {
+      setHiddenButtonsDest(false);
+      setHiddenButtons(false)
+    };
+
+    document.addEventListener("click", unHideButtons);
+    return () => document.removeEventListener("click", unHideButtons);
+  }, [hiddenButtonsDest, hiddenButtons]);
+
+
+  const handleHiddenButtonsDestination = () => {
+    setHiddenButtonsDest(true);
+    setHiddenButtons(true);
+  };
 
   // Submits filtered search results to store and redirects to link which displays results
   const handleSubmit = (e) => {
@@ -65,8 +82,6 @@ function SearchBar() {
     const filteredEstateResults = estates.filter((estate) => {
       return estate.state === destination;
     });
-    // console.log(destination)
-    // console.log(filteredEstateResults)
     dispatch(createResults(filteredEstateResults));
     let searchUrlArray = [];
     filteredEstateResults.map((estate) => {
@@ -76,73 +91,72 @@ function SearchBar() {
     estates.map((estate) => {
       anywhereArrayResults.push(estate.id);
     });
-    // console.log(anywhereArrayResults)
-    // console.log(searchUrlArray);
     if (searchUrlArray.length) {
-      // console.log('===========')
-      setDestinationValueHolder(destination)
+      setDestinationValueHolder(destination);
       return history.push(`/search?estateids=${searchUrlArray.join(",")}`);
     }
-console.log(alphabetizedSet, "==============")
+
+    // returns all estates if there are no search result suggestions
     if (!alphabetizedSet.length) {
       return history.push(
         `/search?estateids=${anywhereArrayResults.join(",")}`
-      )
+      );
     } else {
-    // const singleEstateFromSearchResults = estates.find(estate => estate.state === alphabetizedSet[0])
-    // console.log(singleEstateFromSearchResults)
-    let firstSearchResultArray = []
+      // returns results of first item in search result suggestions
+      let firstSearchResultArray = [];
 
-    const firstSearchFilter = estates.filter((estate) => estate.state === alphabetizedSet[0])
+      const firstSearchFilter = estates.filter(
+        (estate) => estate.state === alphabetizedSet[0]
+      );
 
-    firstSearchFilter.map(estate => {
-      firstSearchResultArray.push(estate.id)
-    })
-    setAlphabetizedSet([])
+      firstSearchFilter.map((estate) => {
+        firstSearchResultArray.push(estate.id);
+      });
+      setAlphabetizedSet([]);
 
-    return history.push(
-      `/search?estateids=${firstSearchResultArray.join(",")}`
-    )
+      return history.push(
+        `/search?estateids=${firstSearchResultArray.join(",")}`
+      );
     }
-    // else {
-    //   // console.log(anywhereArrayResults);
-      // return history.push(
-      //   `/search?estateids=${anywhereArrayResults.join(",")}`
-    //   );
-    // }
   };
+
+
+
+
 
   return (
     <div className="search-container">
-      <div className="search-buttons-container">
-        {/* <AnimatedButton /> */}
-        <button onClick={openDestinationMenu}>
-          <p>{destinationValueHolder}</p>
-        </button>
-        <button onClick={openDateMenu}>
-          <p>Any Week</p>
-        </button>
-        <button onClick={openGuestsMenu}>
-          <p>Add guests</p>
-          <div className="search-icon"></div>
-        </button>
-      </div>
-
       <form
         onSubmit={handleSubmit}
         className="search-inputs"
         onClick={(e) => e.stopPropagation()}
       >
-        <button type="submit">
-          <i class="fak fa-magnifying-glass-solid"></i>
-        </button>
-        {showDestinationMenu && (
-          <SearchDestinationInput setDestination={setDestination} setAlphabetizedSet={setAlphabetizedSet}/>
-        )}
-        {showDateMenu && <SearchDurationInput setDateRange={setDateRange} />}
-        {showGuestsMenu && (
+        <div
+          className={
+            hiddenButtonsDest ? "hidden-buttons" : "search-buttons-container"
+          }
+        >
+          {/* <AnimatedButton /> */}
+          <button onClick={handleHiddenButtonsDestination}>
+            <p>{destinationValueHolder}</p>
+          </button>
+          <button onClick={openDateMenu}>
+            <p>Any Week</p>
+          </button>
+          <button onClick={openGuestsMenu}>
+            <p>Add guests</p>
+            <div className="search-icon"></div>
+          </button>
+          <button type="submit">Sub</button>
+        </div>
+        <div className={hiddenButtons ? "inputs-revealed" : "inputs-hidden"}>
+          <SearchDestinationInput
+            setDestination={setDestination}
+            setAlphabetizedSet={setAlphabetizedSet}
+          />
+          <SearchDurationInput setDateRange={setDateRange} />
           <SearchGuestsInput setGuestNumber={setGuestNumber} />
-        )}
+        </div>
       </form>
     </div>
   );
