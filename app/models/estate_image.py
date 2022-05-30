@@ -19,3 +19,11 @@ class EstateImage(db.Model):
             "url": self.url,
             "title": self.title,
         }
+
+    @staticmethod
+    def seed(data):
+        return EstateImage(
+            estate_id=data.get("estate_id"),
+            url=data.get("url"),
+            title=data.get("title"),
+        )
