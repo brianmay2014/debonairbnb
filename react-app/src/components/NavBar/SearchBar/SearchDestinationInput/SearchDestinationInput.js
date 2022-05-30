@@ -2,7 +2,7 @@ import "./SearchDestinationInput.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const SearchDestinationInput = ({ data, setDestination }) => {
+const SearchDestinationInput = ({ data, setDestination, setAlphabetizedSet}) => {
   const [destinationValue, setDestinationValue] = useState();
   const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
@@ -31,8 +31,12 @@ const SearchDestinationInput = ({ data, setDestination }) => {
       filteredSet.add(estate.state);
     });
 const filteredAlphabetized = Array.from(filteredSet).sort()
-console.log(filteredAlphabetized)
+// console.log(filteredAlphabetized)
     setFilteredData(Array.from(filteredSet).sort());
+    if (filteredAlphabetized.length) {
+
+      setAlphabetizedSet(filteredAlphabetized)
+    }
     setDestinationValue(searchWord);
   };
 

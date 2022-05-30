@@ -21,6 +21,7 @@ function SearchBar() {
   const history = useHistory();
   const [destinationValueHolder, setDestinationValueHolder] =
     useState("Anywhere");
+  const [ alphabetizedSet, setAlphabetizedSet] = useState([])
 
   const openDestinationMenu = (e) => {
     e.stopPropagation();
@@ -64,6 +65,8 @@ function SearchBar() {
     const filteredEstateResults = estates.filter((estate) => {
       return estate.state === destination;
     });
+    // console.log(destination)
+    // console.log(filteredEstateResults)
     dispatch(createResults(filteredEstateResults));
     let searchUrlArray = [];
     filteredEstateResults.map((estate) => {
@@ -74,17 +77,39 @@ function SearchBar() {
       anywhereArrayResults.push(estate.id);
     });
     // console.log(anywhereArrayResults)
-    console.log(searchUrlArray);
+    // console.log(searchUrlArray);
     if (searchUrlArray.length) {
       // console.log('===========')
       setDestinationValueHolder(destination)
       return history.push(`/search?estateids=${searchUrlArray.join(",")}`);
-    } else {
-      console.log(anywhereArrayResults);
+    }
+
+    if (!alphabetizedSet.length) {
       return history.push(
         `/search?estateids=${anywhereArrayResults.join(",")}`
-      );
+      )
+    } else {
+    // const singleEstateFromSearchResults = estates.find(estate => estate.state === alphabetizedSet[0])
+    // console.log(singleEstateFromSearchResults)
+
+    let firstSearchResultArray = []
+
+    const firstSearchFilter = estates.filter((estate) => estate.state === alphabetizedSet[0])
+
+    firstSearchFilter.map(estate => {
+      firstSearchResultArray.push(estate.id)
+    })
+
+    return history.push(
+      `/search?estateids=${firstSearchResultArray.join(",")}`
+    )
     }
+    // else {
+    //   // console.log(anywhereArrayResults);
+      // return history.push(
+      //   `/search?estateids=${anywhereArrayResults.join(",")}`
+    //   );
+    // }
   };
 
   return (
@@ -112,7 +137,7 @@ function SearchBar() {
           <i class="fak fa-magnifying-glass-solid"></i>
         </button>
         {showDestinationMenu && (
-          <SearchDestinationInput setDestination={setDestination} />
+          <SearchDestinationInput setDestination={setDestination} setAlphabetizedSet={setAlphabetizedSet}/>
         )}
         {showDateMenu && <SearchDurationInput setDateRange={setDateRange} />}
         {showGuestsMenu && (
