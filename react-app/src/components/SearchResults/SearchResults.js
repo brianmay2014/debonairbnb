@@ -8,18 +8,17 @@ import "./SearchResults.css";
 
 const SearchResults = () => {
   const dispatch = useDispatch();
-  const estates = useSelector((state) => Object.values(state.searchResults));
   const reloadEstates = useSelector((state) => Object.values(state.estates));
   const [estateResults, setEstateResults] = useState([]);
   const { search } = useLocation();
   const resultIds = search.split("=")[1].split(",");
   const [isLoaded, setIsLoaded] = useState(false);
-
+console.log(resultIds)
   useEffect(() => {
     if (reloadEstates) {
       setIsLoaded(true);
     }
-  }, [dispatch]);
+  }, []);
 
   const images = [
     "https://a0.muscache.com/im/pictures/miso/Hosting-52634799/original/a29c28ab-814d-4e6d-b3e5-40596e17ae03.jpeg",
@@ -32,11 +31,7 @@ const SearchResults = () => {
   return (
     <div className="search-results-container">
       <div className="search-results-list">
-        {estates && !isLoaded
-          ? estates.map((estate) => {
-              return <p> {estate.address}</p>;
-            })
-          : reloadEstates.map((estate) => {
+        {isLoaded && reloadEstates.map((estate) => {
               if (
                 resultIds.includes(estate.id.toString()) ||
                 resultIds === estate.id.toString()

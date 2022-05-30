@@ -30,8 +30,9 @@ const SearchDestinationInput = ({ data, setDestination }) => {
     newFilter.map((estate) => {
       filteredSet.add(estate.state);
     });
-
-    setFilteredData(Array.from(filteredSet));
+const filteredAlphabetized = Array.from(filteredSet).sort()
+console.log(filteredAlphabetized)
+    setFilteredData(Array.from(filteredSet).sort());
     setDestinationValue(searchWord);
   };
 
