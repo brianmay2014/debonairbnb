@@ -83,7 +83,7 @@ function SearchBar() {
       setDestinationValueHolder(destination)
       return history.push(`/search?estateids=${searchUrlArray.join(",")}`);
     }
-
+console.log(alphabetizedSet, "==============")
     if (!alphabetizedSet.length) {
       return history.push(
         `/search?estateids=${anywhereArrayResults.join(",")}`
@@ -91,7 +91,6 @@ function SearchBar() {
     } else {
     // const singleEstateFromSearchResults = estates.find(estate => estate.state === alphabetizedSet[0])
     // console.log(singleEstateFromSearchResults)
-
     let firstSearchResultArray = []
 
     const firstSearchFilter = estates.filter((estate) => estate.state === alphabetizedSet[0])
@@ -99,6 +98,7 @@ function SearchBar() {
     firstSearchFilter.map(estate => {
       firstSearchResultArray.push(estate.id)
     })
+    setAlphabetizedSet([])
 
     return history.push(
       `/search?estateids=${firstSearchResultArray.join(",")}`
