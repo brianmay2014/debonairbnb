@@ -10,6 +10,21 @@
   z-index: 5;
 }
 
+
+.search-container-with-nav {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
+
+.search-container-with-nav nav {
+  margin-bottom: 20px;
+  padding-top: 0;
+  bottom: 8px;
+  position: relative;
+  top: 8px;
+}
 .search-guests-input {
   display: flex;
 }
@@ -17,12 +32,28 @@
 .search-buttons-container button {
   text-decoration: none;
   background: transparent;
-
+  height: 48px;
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 4px;
   outline: none;
   appearance: none;
+}
+
+.search-inputs {
+  border-radius: 40px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
+  height: 66px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color:#f7f7f7;
+  width: 270px;
+  padding-left: 30px;
+}
+
+.search-inputs:hover {
+  background-color: rgb(217, 209, 209);
 }
 
 .hidden-buttons {
@@ -31,10 +62,30 @@
 
 .inputs-revealed {
   display: flex;
-  width: 
+  width: 850px;
+  justify-content: space-evenly;
+  height: 66px;
+  align-items: center;
+  position: relative;
+  background-color:#f7f7f7;
+  border-radius: 40px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
 
+}
+
+.inputs-revealed * {
+  text-align: left;
 }
 
 .inputs-hidden {
   display: none;
+}
+
+.guest-input {
+  display: flex;
+}
+
+.search-input-destination {
+  display: flex;
+  flex-direction: column;
 }

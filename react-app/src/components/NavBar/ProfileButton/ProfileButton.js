@@ -28,7 +28,7 @@ const ProfileButton = () => {
   return (
     <div>
       <button className="menu-button" onClick={openMenu}>
-        <i class="fa-solid fa-bars"></i>
+          Profile
       </button>
 
       {showMenu && (

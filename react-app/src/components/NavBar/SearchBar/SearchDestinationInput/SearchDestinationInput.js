@@ -56,7 +56,7 @@ const filteredAlphabetized = Array.from(filteredSet).sort()
     <div>
       <input
         type="text"
-        placeholder="Destination"
+        placeholder="Search destination"
         value={destinationValue}
         onChange={handleDestinationFilter}
       />

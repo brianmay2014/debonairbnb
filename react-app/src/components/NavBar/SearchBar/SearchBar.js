@@ -63,13 +63,12 @@ function SearchBar() {
   useEffect(() => {
     const unHideButtons = () => {
       setHiddenButtonsDest(false);
-      setHiddenButtons(false)
+      setHiddenButtons(false);
     };
 
     document.addEventListener("click", unHideButtons);
     return () => document.removeEventListener("click", unHideButtons);
   }, [hiddenButtonsDest, hiddenButtons]);
-
 
   const handleHiddenButtonsDestination = () => {
     setHiddenButtonsDest(true);
@@ -120,44 +119,56 @@ function SearchBar() {
     }
   };
 
-
-
-
-
   return (
-    <div className="search-container">
-      <form
-        onSubmit={handleSubmit}
-        className="search-inputs"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div
-          className={
-            hiddenButtonsDest ? "hidden-buttons" : "search-buttons-container"
-          }
+    <div className="search-container-with-nav">
+      {hiddenButtons && <nav className="search-mini-nav">Stays</nav>}
+      <div className="search-container">
+        <form
+          onSubmit={handleSubmit}
+          className="search-form"
+          onClick={(e) => e.stopPropagation()}
         >
-          {/* <AnimatedButton /> */}
-          <button onClick={handleHiddenButtonsDestination}>
-            <p>{destinationValueHolder}</p>
-          </button>
-          <button onClick={openDateMenu}>
-            <p>Any Week</p>
-          </button>
-          <button onClick={openGuestsMenu}>
-            <p>Add guests</p>
-            <div className="search-icon"></div>
-          </button>
-          <button type="submit">Sub</button>
-        </div>
-        <div className={hiddenButtons ? "inputs-revealed" : "inputs-hidden"}>
-          <SearchDestinationInput
-            setDestination={setDestination}
-            setAlphabetizedSet={setAlphabetizedSet}
-          />
-          <SearchDurationInput setDateRange={setDateRange} />
-          <SearchGuestsInput setGuestNumber={setGuestNumber} />
-        </div>
-      </form>
+          <div
+            className={
+              hiddenButtonsDest ? "hidden-buttons" : "search-buttons-container"
+            }
+          >
+            {/* <AnimatedButton /> */}
+            <button onClick={handleHiddenButtonsDestination}>
+              <p>{destinationValueHolder}</p>
+            </button>
+            <button onClick={openDateMenu}>
+              <p>Any Week</p>
+            </button>
+            <button onClick={openGuestsMenu}>
+              <p>Add guests</p>
+              <div className="search-icon"></div>
+            </button>
+            <button>ICON</button>
+          </div>
+
+          <div className={hiddenButtons ? "inputs-revealed" : "inputs-hidden"}>
+            <div className="search-inputs">
+              <label>Where</label>
+              <SearchDestinationInput
+                setDestination={setDestination}
+                setAlphabetizedSet={setAlphabetizedSet}
+              />
+            </div>
+            <div className="search-inputs">
+              <label>When</label>
+              <SearchDurationInput setDateRange={setDateRange} />
+            </div>
+            <div className="search-inputs">
+              <label>Who</label>
+              <div className="guest-input">
+                <SearchGuestsInput setGuestNumber={setGuestNumber} />
+                <button type="submit">Sub</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
