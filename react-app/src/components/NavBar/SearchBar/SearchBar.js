@@ -122,7 +122,7 @@ function SearchBar() {
   return (
     <div className="search-container-with-nav">
       {hiddenButtons && <nav className="search-mini-nav">Stays</nav>}
-      <div className="search-container">
+      <div className={hiddenButtons ? '' : "search-container"}>
         <form
           onSubmit={handleSubmit}
           className="search-form"

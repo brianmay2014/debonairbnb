@@ -11,6 +11,8 @@
 }
 
 
+
+
 .search-container-with-nav {
  display: flex;
  flex-direction: column;
@@ -24,6 +26,7 @@
   bottom: 8px;
   position: relative;
   top: 8px;
+
 }
 .search-guests-input {
   display: flex;
@@ -78,7 +81,20 @@
 }
 
 .inputs-hidden {
+  animation-duration: 1s;
+  animation-name: slideout;
+
   display: none;
+}
+@keyframes slidein {
+  from {
+
+    bottom: 0;
+  }
+
+  to {
+    bottom: 200px;
+  }
 }
 
 .guest-input {
@@ -88,4 +104,20 @@
 .search-input-destination {
   display: flex;
   flex-direction: column;
+}
+
+
+.inputs-revealed {
+  animation-duration: 1s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    bottom: 200px;
+  }
+
+  to {
+    bottom: 0;
+  }
 }
