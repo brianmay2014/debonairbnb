@@ -151,3 +151,11 @@ img{
 #loc-description{
     padding: 18px;
 }
+
+
+
+
+/* avail calendar */
+button.rdrDay{
+    color: var(--darkgold);
+}

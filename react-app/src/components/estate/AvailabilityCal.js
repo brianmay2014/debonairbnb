@@ -1,32 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { addDays } from "date-fns";
 import { DateRangePicker } from "react-date-range";
-import { useSelector, useDispatch } from "react-redux";
-import { Route, Redirect, useParams } from "react-router-dom";
+// import { useSelector, useDispatch } from "react-redux";
+// import { Route, Redirect, useParams } from "react-router-dom";
 import "./estatePage.css";
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 
-const estate = {
-	address: "10922 Corbly Gulch Rd, Belgrade, MT 59714",
-	owner_id: 2,
-	title: "Bozeman Overlook",
-	nightly_rate: 790,
-	type_id: 3,
-	description:
-		"Don’t miss the opportunity to stay at this unique cabin getaway! This private and cozy home books up fast with the unparalleled 360 views and outstanding accommodations on 100 acres featuring premium bedding, extensive new renovations, and comfortable entertainment space. The home is perfect for an intimate getaway or group gathering! Ideal location for access to trails minutes away, 15 mins to the outskirts of Bozeman, and surrounded by local event venues.",
-};
+const AvailabilityCal = ({ estate, stateVars } ) => {
+	// const { id } = useParams();
 
-const AvailabilityCal = () => {
-	const { id } = useParams();
+	// let {
+	// 	checkinDate,
+	// 	setCheckinDate,
+	// 	checkoutDate,
+	// 	setCheckoutDate,
+	// 	nightStay,
+	// 	setNightStay,
+	// } = stateVars;
 
-    const [state, setState] = useState([
+	// if (checkinDate === undefined) checkinDate = new Date();
+
+	const [state, setState] = useState([
 		{
-			startDate: new Date(),
-			endDate: addDays(new Date(), 7),
+			// startDate: new Date(),
+			// endDate: addDays(new Date(), 7),
+			// key: "selection",
+			startDate: stateVars?.checkinDate,
+			endDate: stateVars?.checkoutDate,
 			key: "selection",
+			color: '#c28849'
 		},
 	]);
+
 
 	// const dispatch = useDispatch();
 
@@ -38,7 +44,6 @@ const AvailabilityCal = () => {
 	// useEffect(() => {
 	//     dispatchEvent(getEstate(id));
 	// }, [dispatch]);
-
 
 	return (
 		<div id="avail-cal">

@@ -14,7 +14,7 @@ const LocationDisplay = ({ estate }) => {
                 Where you'll be...
             </div>
             <div id='google-display'>
-                Just imagine a pretty google maps represenation, oooooo la la.
+                Just imagine a pretty google maps representation, oooooo la la.
             </div>
             <div id='location-footer'>
                 <div id='loc-name'>
