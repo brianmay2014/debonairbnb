@@ -11,8 +11,6 @@
 }
 
 
-
-
 .search-container-with-nav {
  display: flex;
  flex-direction: column;
@@ -41,6 +39,7 @@
   border-radius: 4px;
   outline: none;
   appearance: none;
+  width: 125px;
 }
 
 .search-inputs {
@@ -120,4 +119,14 @@
   to {
     bottom: 0;
   }
+}
+
+.search-button-spans {
+  font-size: 80%;
+  line-height: normal;
+  width: 100%;
+  line-height: 2rem;
+  border-left: 1px solid #323435;
+  border-radius: 25px;
+  cursor: pointer;
 }

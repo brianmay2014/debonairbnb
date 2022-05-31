@@ -11,10 +11,6 @@
   margin-top: 12px;
 }
 
-.nav-icon-div {
-display: flex;
-align-items: top;
-}
 
 #nav-icon-title {
   margin: 0;
@@ -22,9 +18,18 @@ align-items: top;
   bottom: 8px;
   position: absolute;
   top: 8px;
+  left: 195px;
 }
 
 #icon-img-div {
   display: flex;
   align-items: center;
+}
+
+#nav-icon {
+  margin: 0;
+  padding-top: 0;
+  bottom: 8px;
+  position: absolute;
+  top: 22px;
 }

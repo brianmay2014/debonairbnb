@@ -2,7 +2,11 @@ import "./SearchDestinationInput.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const SearchDestinationInput = ({ data, setDestination, setAlphabetizedSet}) => {
+const SearchDestinationInput = ({
+  data,
+  setDestination,
+  setAlphabetizedSet,
+}) => {
   const [destinationValue, setDestinationValue] = useState();
   const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
@@ -28,14 +32,14 @@ const SearchDestinationInput = ({ data, setDestination, setAlphabetizedSet}) => 
       }
     });
     newFilter.map((estate) => {
-      filteredSet.add(estate.state);
+      filteredSet.add(`${estate.state}, ${estate.country}`);
     });
-const filteredAlphabetized = Array.from(filteredSet).sort()
-// console.log(filteredAlphabetized)
+    const filteredAlphabetized = Array.from(filteredSet).sort();
+
+
     setFilteredData(Array.from(filteredSet).sort());
     if (filteredAlphabetized.length) {
-
-      setAlphabetizedSet(filteredAlphabetized)
+      setAlphabetizedSet(filteredAlphabetized);
     }
     setDestinationValue(searchWord);
   };
@@ -60,12 +64,19 @@ const filteredAlphabetized = Array.from(filteredSet).sort()
         value={destinationValue}
         onChange={handleDestinationFilter}
       />
-      <div className="destination-results">
+      <div
+        className={
+          filteredData.length != 0 && showSearchSuggestions
+            ? "destination-results"
+            : "destination-results-hidden"
+        }
+      >
         {filteredData.length != 0 &&
           showSearchSuggestions &&
           filteredData.map((value, key) => {
             return (
               <div className="destination-item" onClick={displayInputValue}>
+                <i class="fa-solid fa-location-dot"></i>
                 {value}
               </div>
             );

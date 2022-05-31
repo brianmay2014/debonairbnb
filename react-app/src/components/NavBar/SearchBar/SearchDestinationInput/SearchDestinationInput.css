@@ -1,9 +1,15 @@
 .destination-results {
   position: absolute;
   overflow-y: auto;
-  margin-top: 5px;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 32px;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 4%), 0 8px 16px rgb(0 0 0 / 15%);
+  margin-top: 12px;
+  padding: 16px 32px;
+  overflow-x: hidden;
+  top: 100%;
+  left: 0;
+  width: 33%;
 }
 
 .destination-result .destination-item {
@@ -15,4 +21,8 @@
 
 .destination-item:hover {
   background-color: lightgray;
+}
+
+.destination-results-hidden {
+  display: hidden;
 }

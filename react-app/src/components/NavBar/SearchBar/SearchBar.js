@@ -105,7 +105,7 @@ function SearchBar() {
       let firstSearchResultArray = [];
 
       const firstSearchFilter = estates.filter(
-        (estate) => estate.state === alphabetizedSet[0]
+        (estate) => estate.state === alphabetizedSet[0].split(",")[0]
       );
 
       firstSearchFilter.map((estate) => {
@@ -122,7 +122,7 @@ function SearchBar() {
   return (
     <div className="search-container-with-nav">
       {hiddenButtons && <nav className="search-mini-nav">Stays</nav>}
-      <div className={hiddenButtons ? '' : "search-container"}>
+      <div className={hiddenButtons ? "" : "search-container"}>
         <form
           onSubmit={handleSubmit}
           className="search-form"
@@ -137,14 +137,17 @@ function SearchBar() {
             <button onClick={handleHiddenButtonsDestination}>
               <p>{destinationValueHolder}</p>
             </button>
+            <span className="search-button-spans"></span>
             <button onClick={openDateMenu}>
               <p>Any Week</p>
             </button>
-            <button onClick={openGuestsMenu}>
-              <p>Add guests</p>
-              <div className="search-icon"></div>
+            <span className="search-button-spans"></span>
+
+            <button onClick={openGuestsMenu} className="guest-icon-button">
+              <p>Add guests     <i class="fa-solid fa-magnifying-glass"></i></p>
+
+
             </button>
-            <button>ICON</button>
           </div>
 
           <div className={hiddenButtons ? "inputs-revealed" : "inputs-hidden"}>
@@ -163,7 +166,9 @@ function SearchBar() {
               <label>Who</label>
               <div className="guest-input">
                 <SearchGuestsInput setGuestNumber={setGuestNumber} />
-                <button type="submit">Sub</button>
+                <button type="submit">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
               </div>
             </div>
           </div>
