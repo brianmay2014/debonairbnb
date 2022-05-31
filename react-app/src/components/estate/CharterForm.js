@@ -36,16 +36,31 @@ const CharterForm = ( {estate, stateVars} ) => {
 	} = stateVars;
 	
 	useEffect(() => {
-
+		console.log('------=-=-=-=-=--=USE EFFECT-=-=-=-=-=-=-=-')
+		console.log('check in date', checkinDate)
+		console.log("check in date type", typeof checkinDate);
+		console.log("------=-=-=-=-=--=USE EFFECT-=-=-=-=-=-=-=-");
+		// console.log("check out date", checkoutDate);
+		// console.log("check out date type", typeof checkoutDate);
+		
 	}, [checkinDate, checkoutDate, nightStay]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 	};
+	let test = new Date();
 
 	const setCheckinFunc = async (e) => {
-		setCheckinDate(e.target.value)
-		setNightStay(getNightStay(checkinDate, checkoutDate))
+		let strDate = e.target.value;
+		console.log('-*/-*/-*/-*/-*/-*/-CHECKIN FUNC*/-*/-*/-*/-*/-*/-*/-*/-*/-*/');
+		console.log("strDate", strDate);
+		let newDate = new Date(strDate);
+		console.log("newDate", newDate);
+		setCheckinDate(newDate);
+		console.log('CHECKIN DATE', checkinDate);
+		console.log("-*/-*/-*/-*/-*/-*/-*CHECKINFUNC/-*/-*/-*/-*/-*/-*/-*/-*/-*/");
+		// setCheckinDate(e.target.value)
+		setNightStay(getNightStay(checkinDate, checkoutDate));
 	}
 
 	const setCheckoutFunc = async (e) => {
@@ -55,15 +70,30 @@ const CharterForm = ( {estate, stateVars} ) => {
 
 	const errors = [];
 
-	// const { address, owner_id, title, estate?.nightly_rate, type_id, description } =
-	// 	estate;
-
-
     const baseCost = nightStay * estate?.nightly_rate;
     const cleanCost = estate?.nightly_rate * cleanRate;
     const servCost = 0;
     const totalCost = baseCost + cleanCost + servCost;
 
+
+	const dateParser = (dateobj) => {
+		// console.log('test',test);
+		// let retu = getCheckinDate(dateobj)
+		// return retu;
+
+		let year = dateobj.getFullYear();
+		let month = dateobj.getMonth() + 1;
+		let day = dateobj.getDate();
+
+		if (month < 10) {
+			month = `0${month.toString()}`;
+		}
+		if (day < 10) {
+			day = `0${day.toString()}`;
+		}
+
+		return `${year}-${month.toString()}-${day.toString()}`;
+	}
 
 	return (
 		<div id="charter-form">
@@ -78,7 +108,8 @@ const CharterForm = ( {estate, stateVars} ) => {
 					<label>Check-in</label>
 					<input
 						type="date"
-						value={checkinDate}
+						// value={checkinDate}
+						value={dateParser(checkinDate)}
 						required
 						onChange={setCheckinFunc}
 					/>
@@ -87,7 +118,7 @@ const CharterForm = ( {estate, stateVars} ) => {
 					<label>Check-out</label>
 					<input
 						type="date"
-						value={checkoutDate}
+						value={dateParser(checkoutDate)}
 						required
 						onChange={setCheckoutFunc}
 					/>

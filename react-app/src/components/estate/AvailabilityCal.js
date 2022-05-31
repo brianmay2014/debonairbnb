@@ -10,40 +10,39 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 const AvailabilityCal = ({ estate, stateVars } ) => {
 	// const { id } = useParams();
 
-	// let {
-	// 	checkinDate,
-	// 	setCheckinDate,
-	// 	checkoutDate,
-	// 	setCheckoutDate,
-	// 	nightStay,
-	// 	setNightStay,
-	// } = stateVars;
+	let {
+		checkinDate,
+		setCheckinDate,
+		checkoutDate,
+		setCheckoutDate,
+		nightStay,
+		setNightStay,
+	} = stateVars;
 
+
+	
+	
 	// if (checkinDate === undefined) checkinDate = new Date();
-
+	
 	const [state, setState] = useState([
 		{
 			// startDate: new Date(),
 			// endDate: addDays(new Date(), 7),
 			// key: "selection",
-			startDate: stateVars?.checkinDate,
-			endDate: stateVars?.checkoutDate,
+			startDate: checkinDate,
+			endDate: checkoutDate,
 			key: "selection",
 			color: '#c28849'
 		},
 	]);
-
-
-	// const dispatch = useDispatch();
-
-	// once state is constructed
-	// const estate = useSelector((state) => state.estate[id])
-
-	// const user = useSelector((state) => state.session.user);
-
-	// useEffect(() => {
-	//     dispatchEvent(getEstate(id));
-	// }, [dispatch]);
+	
+	
+	useEffect(() => {
+		console.log(state);
+		console.log(typeof state[0].endDate);
+		setCheckinDate(state[0].startDate)
+		setCheckoutDate(state[0].endDate)
+	}, [state])
 
 	return (
 		<div id="avail-cal">

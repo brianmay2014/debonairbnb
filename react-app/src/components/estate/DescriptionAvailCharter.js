@@ -5,26 +5,25 @@ import "./estatePage.css";
 import CharterForm from "./CharterForm";
 import AvailabilityCal from "./AvailabilityCal";
 import { getCheckinDate, getCheckoutDate, getNightStay } from "./utils";
+import { addDays } from 'date-fns';
 
-
-// const estate = {
-// 	address: "10922 Corbly Gulch Rd, Belgrade, MT 59714",
-// 	owner_id: 2,
-// 	title: "Bozeman Overlook",
-// 	nightly_rate: 790,
-// 	type_id: 3,
-// 	description:
-// 		"Don’t miss the opportunity to stay at this unique cabin getaway! This private and cozy home books up fast with the unparalleled 360 views and outstanding accommodations on 100 acres featuring premium bedding, extensive new renovations, and comfortable entertainment space. The home is perfect for an intimate getaway or group gathering! Ideal location for access to trails minutes away, 15 mins to the outskirts of Bozeman, and surrounded by local event venues.",
-// };
 
 
 const DescriptionAvailCharter = ( {estate} ) => {
 	// const { id } = useParams();
-    const [checkinDate, setCheckinDate] = useState(getCheckinDate());
-    const [checkoutDate, setCheckoutDate] = useState(getCheckoutDate());
+
+    let ciDate = new Date();
+    let coDate = addDays( new Date(), 7);
+
+    const [checkinDate, setCheckinDate] = useState(ciDate);
+    // console.log('-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/');
+    // console.log(checkinDate);
+    // console.log(typeof checkinDate);
+    // console.log("-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/");
+    const [checkoutDate, setCheckoutDate] = useState(coDate);
     // let date = new Date()
-    // const [checkinDate, setCheckinDate] = useState(date);
-	// const [checkoutDate, setCheckoutDate] = useState(date);
+    // const [checkinDate, setCheckinDate] = useState(new Date());
+	// const [checkoutDate, setCheckoutDate] = useState(addDays(new Date(), 7));
 
     const [nightStay, setNightStay] = useState(getNightStay());
 
@@ -58,7 +57,10 @@ const DescriptionAvailCharter = ( {estate} ) => {
 					{/* {numGuests} guests - {numBeds} beds - {numBaths} baths */}
 				</div>
 				<div id="estate-description">{estate?.description}</div>
-				<AvailabilityCal />
+				<AvailabilityCal 
+                estate={estate}
+                stateVars={stateVars}
+                />
 			</div>
 			<div id="dac-right">
 				<CharterForm
