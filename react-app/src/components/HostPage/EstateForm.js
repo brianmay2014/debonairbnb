@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { createEstate } from "../../store/estate";
 import "./HostPage.css";
 
 const EstateForm = () => {
 
     const user = useSelector((state) => state.session.user);
 
+	const dispatch = useDispatch();
+
+	const [errors, setErrors] = useState(['hello']);
     const [address, setAddress] = useState('');
     const [title, setTitle] = useState('');
     const [nightlyRate, setNightlyRate] = useState(0);
     const [type, setType] = useState(0);
     const [description, setDescription] = useState('');
     const [ownerId, setOwnerId] = useState(user.id);
-
-    const errors = [];
 
     const typeList = [
 		{id: 1, name: "Castle"},
@@ -28,13 +30,21 @@ const EstateForm = () => {
 		{id: 10, name: "Vineyard"},
 	];
 
+	const submitEstate = async (e) => {
+		e.preventDefault();
+		const data = await dispatch(createEstate(address, title, nightlyRate, type, description, ownerId));
+		if (data) {
+			setErrors(data)
+		}
+	};
+
 	return (
-		<form id="estate-form" action="" method="post">
-			<ul className="form-errors">
+		<form id="estate-form" onSubmit={submitEstate}>
+			{/* <ul className="form-errors">
 				{errors.map((error, idx) => (
 					<li key={idx}>{error}</li>
 				))}
-			</ul>
+			</ul> */}
 			<div className="form-field">
 				<label>Estate Title</label>
 				<input

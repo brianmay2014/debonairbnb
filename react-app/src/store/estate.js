@@ -50,6 +50,35 @@ export const editEstate = (estate, data) => async (dispatch) => {
   return { ...estateData}
 };
 
+export const createEstate = (address, title, nightlyRate, type, description, ownerId) =>
+	async (dispatch) => {
+		const response = await fetch(`/api/estates/new`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				address,
+				title,
+				nightlyRate,
+				type,
+				description,
+				ownerId,
+			}),
+		});
+
+		if (response.ok) {
+			const estate = await response.json();
+			dispatch(addEstate(estate));
+			return estate;
+		} else if (response.status < 500) {
+			const data = await response.json();
+			if (data.errors) {
+				return data.errors;
+			}
+		} else {
+			return ["An error occurred. Please try again."];
+		}
+	};
+
 export const deleteEstate = (estate) => async (dispatch) => {
   const { id } = estate;
   const response = await fetch(`/api/estates/${id}}`, "DELETE");
@@ -71,6 +100,7 @@ export const genEstates = () => async (dispatch) => {
     return estates;
   }
 };
+
 
 const estateReducer = (state = {}, action) => {
   switch (action.type) {

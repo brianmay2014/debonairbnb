@@ -4,9 +4,19 @@ from app.forms.critique_form import CritiqueForm
 from app.models import db, Estate, EstateImage, Critique
 from app.forms import EstateForm
 from ..utils.s3utils import  upload_file_to_s3, allowed_file, get_unique_filename
+from ..utils.geoutils import EstateLocationData
 
 estate_routes = Blueprint('estates', __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
 
 @estate_routes.route('/')
 def estates():
@@ -89,6 +99,44 @@ def estate(id):
 @estate_routes.route('/new', methods=["POST"])
 @login_required
 def post_new_estate():
+    """
+    Creates a new estate
+    """
     form = EstateForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-    return estate.to_dict();
+    print(form.data)
+
+    if form.validate_on_submit():
+        data = EstateLocationData.from_string(form.data['address'])
+        estate = Estate(
+            title=form.data['title'],
+            # address=form.data['address'],
+            nightly_rate=form.data['nightlyRate'],
+            # type_id=form.data['type'],
+            type_id=2,
+            description=form.data['description'],
+            owner_id=form.data['ownerId'],
+
+            address=data.address,
+            city=data.city,
+            state=data.state,
+            country=data.country,
+            postal_code=data.postal_code,
+            latitude=data.latitude,
+            longitude=data.longitude
+
+            # create a geolocation data
+            # it will createa fully geocoded location, 
+            # fill in the object with that
+        )
+        print('-*/-*/-*/-*/-*/-*/-*/')
+        # print(estate)
+        print('-*/-*/-*/-*/-*/-*/-*/')
+
+        db.session.add(estate)
+        db.session.commit()
+        print('----------------we out here----------')
+        return estate.to_dict()
+    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': 'woops'}, 401

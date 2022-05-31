@@ -24,8 +24,8 @@ from ..seeds.estate_types import estate_types
 class EstateForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     address = StringField('address', validators=[DataRequired()])
-    nightly_rate = IntegerField('nightly_rate')
+    nightlyRate = IntegerField('nightlyRate')
     type = SelectField('type', choices=estate_types)
     description = StringField('description')
-    owner_id = IntegerField('owner_id', validators=[DataRequired()])
+    ownerId = IntegerField('ownerId', validators=[DataRequired()])
 
