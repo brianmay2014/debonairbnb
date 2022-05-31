@@ -22,25 +22,6 @@ const EstatePage = () => {
 		// dispatch(genUsers());
     }, [dispatch])
 
-	const [users, setUsers] = useState([]);
-
-	useEffect(() => {
-		async function fetchData() {
-			const response = await fetch("/api/users/");
-			const responseData = await response.json();
-			setUsers(responseData.users);
-		}
-		fetchData();
-	}, []);
-    
-	// console.log(users);
-	const usersData = {};
-	if (users) {
-		for (let user of users) {
-			usersData[user.id] = user;
-		}
-	}
-
        
     const estate = useSelector((state) => state.estates[id]);
     // console.log(estate);
@@ -65,7 +46,7 @@ const EstatePage = () => {
 
 				<ImageDisplay estate={estate} />
 				<DescriptionAvailCharter estate={estate} />
-				<CritiqueDisplay estate={estate} usersData={usersData}/>
+				<CritiqueDisplay estate={estate} />
                 <LocationDisplay estate={estate} />
 			</div>
 		);
