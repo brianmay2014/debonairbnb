@@ -96,12 +96,29 @@ function SearchBar() {
     }
 
     // returns all estates if there are no search result suggestions
-    if (!alphabetizedSet.length) {
+    if (!destination) {
       return history.push(
         `/search?estateids=${anywhereArrayResults.join(",")}`
       );
-    } else {
-      // returns results of first item in search result suggestions
+    }
+
+    if (destination && estates.find(estate => `${estate.state}, ${estate.country}` === destination)) {
+
+      let estatesArraySingle = []
+
+      estates.map(estate => {
+        if (`${estate.state}, ${estate.country}` === destination) {
+          estatesArraySingle.push(estate.id)
+        }
+      })
+      console.log(estatesArraySingle)
+      return history.push(
+        `/search?estateids=${estatesArraySingle.join(",")}`
+      );
+
+    }
+    // returns results of first item in search result suggestions
+    if (alphabetizedSet.length && destination !== alphabetizedSet[0].split(',')[0]) {
       let firstSearchResultArray = [];
 
       const firstSearchFilter = estates.filter(
@@ -111,12 +128,29 @@ function SearchBar() {
       firstSearchFilter.map((estate) => {
         firstSearchResultArray.push(estate.id);
       });
-      setAlphabetizedSet([]);
+
 
       return history.push(
         `/search?estateids=${firstSearchResultArray.join(",")}`
       );
     }
+
+    if (alphabetizedSet.length > 1 && alphabetizedSet.includes(destination)) {
+      let firstSearchResultArray = [];
+      const firstSearchFilter = estates.filter(
+        (estate) => `${estate.state}, ${estate.country}` === destination
+      );
+
+      firstSearchFilter.map((estate) => {
+        firstSearchResultArray.push(estate.id);
+      });
+
+
+      return history.push(
+        `/search?estateids=${firstSearchResultArray.join(",")}`
+      );
+    }
+    setAlphabetizedSet([]);
   };
 
   return (
@@ -144,9 +178,9 @@ function SearchBar() {
             <span className="search-button-spans"></span>
 
             <button onClick={openGuestsMenu} className="guest-icon-button">
-              <p>Add guests     <i class="fa-solid fa-magnifying-glass"></i></p>
-
-
+              <p>
+                Add guests <i class="fa-solid fa-magnifying-glass"></i>
+              </p>
             </button>
           </div>
 

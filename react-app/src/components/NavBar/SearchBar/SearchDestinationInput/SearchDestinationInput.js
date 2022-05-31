@@ -17,12 +17,13 @@ const SearchDestinationInput = ({
     // console.log(e.target.value);
     setShowSearchSuggestions(false);
     setDestinationValue(e.target.innerText);
+    setFilteredData(Array.from(filteredSet).sort())
   };
 
+  const filteredSet = new Set();
   // filters through states to list corresponding states in list
   const handleDestinationFilter = (e) => {
     const searchWord = e.target.value;
-    const filteredSet = new Set();
     const newFilter = estates.filter((value) => {
       // console.log(value.state)
       if (value.state) {
@@ -42,6 +43,7 @@ const SearchDestinationInput = ({
       setAlphabetizedSet(filteredAlphabetized);
     }
     setDestinationValue(searchWord);
+
   };
 
   // shows suggestions if there is data to filter through and closes suggestions if it's an empty string
@@ -54,6 +56,7 @@ const SearchDestinationInput = ({
       setShowSearchSuggestions(false);
     }
     setDestination(destinationValue);
+
   }, [destinationValue]);
 
   return (
