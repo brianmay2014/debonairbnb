@@ -12,6 +12,7 @@ import { authenticate } from "./store/session";
 import { genEstates } from "./store/estate";
 import UploadImage from "./components/UploadImage/UploadeImage";
 import SearchResults from "./components/SearchResults/SearchResults";
+import HomePage from "./components/HomePage/HomePage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -51,7 +52,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true}>
-          <h1>My Home Page</h1>
+          <HomePage />
         </ProtectedRoute>
         <Route path="/estates/:id" exact={true}>
           <EstatePage />
