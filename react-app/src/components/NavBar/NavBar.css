@@ -1,24 +1,35 @@
 .nav-home {
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
-  padding: 0 180px;
-  height: 80px;
+  height: 100%;
+  position: relative;
+  width: 100%;
   align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+  padding: 0 160px;
+  margin-top: 12px;
 }
 
-.nav-icon-div {
-display: flex;
-align-items: top;
-}
 
 #nav-icon-title {
   margin: 0;
   padding-top: 0;
-  display: flex;
-  align-items: center;
+  bottom: 8px;
+  position: absolute;
+  top: 8px;
+  left: 195px;
 }
 
 #icon-img-div {
   display: flex;
   align-items: center;
+}
+
+#nav-icon {
+  margin: 0;
+  padding-top: 0;
+  bottom: 8px;
+  position: absolute;
+  top: 22px;
 }

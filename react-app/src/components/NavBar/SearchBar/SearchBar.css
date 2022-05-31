@@ -5,11 +5,27 @@
   flex-direction: column;
   border-radius: 40px;
   box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
-  border: 1px solid;
+  border: 1px solid rgba(0, 0, 0, 0.108);
   background-color: white;
   z-index: 5;
 }
 
+
+.search-container-with-nav {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
+
+.search-container-with-nav nav {
+  margin-bottom: 20px;
+  padding-top: 0;
+  bottom: 8px;
+  position: relative;
+  top: 8px;
+
+}
 .search-guests-input {
   display: flex;
 }
@@ -17,10 +33,100 @@
 .search-buttons-container button {
   text-decoration: none;
   background: transparent;
-
+  height: 48px;
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 4px;
   outline: none;
   appearance: none;
+  width: 125px;
+}
+
+.search-inputs {
+  border-radius: 40px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
+  height: 66px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color:#f7f7f7;
+  width: 270px;
+  padding-left: 30px;
+}
+
+.search-inputs:hover {
+  background-color: rgb(217, 209, 209);
+}
+
+.hidden-buttons {
+  display: none;
+}
+
+.inputs-revealed {
+  display: flex;
+  width: 850px;
+  justify-content: space-evenly;
+  height: 66px;
+  align-items: center;
+  position: relative;
+  background-color:#f7f7f7;
+  border-radius: 40px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
+
+}
+
+.inputs-revealed * {
+  text-align: left;
+}
+
+.inputs-hidden {
+  animation-duration: 1s;
+  animation-name: slideout;
+
+  display: none;
+}
+@keyframes slidein {
+  from {
+
+    bottom: 0;
+  }
+
+  to {
+    bottom: 200px;
+  }
+}
+
+.guest-input {
+  display: flex;
+}
+
+.search-input-destination {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.inputs-revealed {
+  animation-duration: 1s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    bottom: 200px;
+  }
+
+  to {
+    bottom: 0;
+  }
+}
+
+.search-button-spans {
+  font-size: 80%;
+  line-height: normal;
+  width: 100%;
+  line-height: 2rem;
+  border-left: 1px solid #323435;
+  border-radius: 25px;
+  cursor: pointer;
 }
