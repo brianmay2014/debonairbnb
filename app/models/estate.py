@@ -63,6 +63,13 @@ class Estate(db.Model):
             'rating': self.rating,
         }
 
+    def to_compact_dict(self):
+        return {
+            'id': self.id,
+            'owner_id': self.owner_id,
+            'title': self.title,
+        }
+
 
     @staticmethod
     def seed(estate_data):

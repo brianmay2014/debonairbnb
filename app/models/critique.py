@@ -22,3 +22,13 @@ class Critique(db.Model):
             rating=data.get("rating"),
             comment=data.get("comment"),
         )
+
+    def to_dict(self):
+        return {
+            "id" : id,
+            "user_id" : self.user_id,
+            "username": self.author.username,
+            "estate_id" : self.estate_id,
+            "rating" : self.rating,
+            "comment" : self.comment,
+        }
