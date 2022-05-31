@@ -18,11 +18,6 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 		nightStay,
 		setNightStay,
 	} = stateVars;
-
-
-	
-	
-	// if (checkinDate === undefined) checkinDate = new Date();
 	
 	const [state, setState] = useState([
 		{
@@ -44,9 +39,10 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 		setCheckoutDate(state[0].endDate)
 	}, [state])
 
-	// useEffect(() => {
-
-	// }, [checkinDate, checkoutDate])
+	useEffect(() => {
+		state[0].startDate = checkinDate;
+		state[0].endDate = checkoutDate;
+	}, [checkinDate, checkoutDate])
 
 	return (
 		<div id="avail-cal">

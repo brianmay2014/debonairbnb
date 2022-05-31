@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // import { Route, Redirect, useParams } from "react-router-dom";
 import "./estatePage.css";
 import { getCheckinDate, getCheckoutDate, getNightStay } from "./utils";
+import { addDays } from 'date-fns';
 
 const CharterForm = ( {estate, stateVars} ) => {
 	// const { id } = useParams();
@@ -14,17 +15,7 @@ const CharterForm = ( {estate, stateVars} ) => {
     //cleaning rate, can set up fancy randomizer, or just leave it as 15% of one night's stay
     const cleanRate = 0.15;
 
-	// const dispatch = useDispatch();
-
-	// once state is constructed
-	// const estate = useSelector((state) => state.estate[id])
-
 	// const user = useSelector((state) => state.session.user);
-
-	// useEffect(() => {
-	//     dispatchEvent(getEstate(id));
-	// }, [dispatch]);
-
 	
 	let {
 		checkinDate,
@@ -48,24 +39,29 @@ const CharterForm = ( {estate, stateVars} ) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 	};
-	let test = new Date();
+
 
 	const setCheckinFunc = async (e) => {
 		let strDate = e.target.value;
-		console.log('-*/-*/-*/-*/-*/-*/-CHECKIN FUNC*/-*/-*/-*/-*/-*/-*/-*/-*/-*/');
-		console.log("strDate", strDate);
+		// console.log('-*/-*/-*/-*/-*/-*/-CHECKIN FUNC*/-*/-*/-*/-*/-*/-*/-*/-*/-*/');
+		// console.log("strDate", strDate);
 		let newDate = new Date(strDate);
-		console.log("newDate", newDate);
-		setCheckinDate(newDate);
-		console.log('CHECKIN DATE', checkinDate);
-		console.log("-*/-*/-*/-*/-*/-*/-*CHECKINFUNC/-*/-*/-*/-*/-*/-*/-*/-*/-*/");
+		// console.log("newDate", newDate);
+
+		let setDate = addDays(newDate, 1);
+		setCheckinDate(setDate);
+		// console.log('CHECKIN DATE', checkinDate);
+		// console.log("-*/-*/-*/-*/-*/-*/-*CHECKINFUNC/-*/-*/-*/-*/-*/-*/-*/-*/-*/");
 		// setCheckinDate(e.target.value)
 		// setNightStay(getNightStay(checkinDate, checkoutDate));
 	}
 
 	const setCheckoutFunc = async (e) => {
-		setCheckoutDate(e.target.value)
-		// setNightStay(getNightStay(checkinDate, checkoutDate));
+		let strDate = e.target.value;
+
+		let newDate = new Date(strDate);
+		let setDate = addDays(newDate, 1);
+		setCheckoutDate(setDate);
 	};
 
 	const errors = [];
@@ -77,10 +73,6 @@ const CharterForm = ( {estate, stateVars} ) => {
 
 
 	const dateParser = (dateobj) => {
-		// console.log('test',test);
-		// let retu = getCheckinDate(dateobj)
-		// return retu;
-
 		let year = dateobj.getFullYear();
 		let month = dateobj.getMonth() + 1;
 		let day = dateobj.getDate();
