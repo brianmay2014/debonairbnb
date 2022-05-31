@@ -1,0 +1,19 @@
+#estate-form{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: 0 auto;
+}
+
+.form-field{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#text-input{
+    height: 100px;
+}
+label, input, button{
+    margin: 5px;
+}

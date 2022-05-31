@@ -58,6 +58,9 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
+				<ProtectedRoute path="/estates/new" exact={true}>
+					<HostPage />
+				</ProtectedRoute>
         <ProtectedRoute path="/" exact={true}>
           <HomePage />
         </ProtectedRoute>
@@ -75,6 +78,7 @@ function App() {
         </Route>
       </Switch>
     </BrowserRouter>
+		
   );
 }
 
