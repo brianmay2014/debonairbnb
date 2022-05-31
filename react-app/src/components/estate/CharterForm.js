@@ -8,8 +8,9 @@ import {useSelector, useDispatch} from "react-redux"
 import {addOneCharter} from "../../store/charter"
 
 const CharterForm = ( {estate, stateVars} ) => {
-	const { id } = useParams();
-
+	const params = useParams();
+	const estateId = parseInt(params.id)
+	const dispatch = useDispatch()
 	// const [checkinDate, setCheckinDate] = useState(getCheckinDate());
 	// const [checkoutDate, setCheckoutDate] = useState(getCheckoutDate());
 	// const [nightStay, setNightStay] = useState(getNightStay());
@@ -28,7 +29,7 @@ const CharterForm = ( {estate, stateVars} ) => {
 		setNightStay,
 	} = stateVars;
 
-
+const [guestNum, setGuestNum] = useState(0)
 const sessionUserId = useSelector(state => state.session.user.id)
 
 
@@ -45,8 +46,11 @@ const sessionUserId = useSelector(state => state.session.user.id)
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		const startDate = dateParser(checkinDate)
+		const endDate = dateParser(checkoutDate)
+
 		const payload = {
-			sessionUserId, id, guestNum, checkinDate, checkoutDate
+			sessionUserId, estateId, guestNum, startDate, endDate
 		}
 
 		dispatch(addOneCharter(payload))

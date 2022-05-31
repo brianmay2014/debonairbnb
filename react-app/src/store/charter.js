@@ -33,7 +33,10 @@ const updateCharter = (charter) => {
 
 export const addOneCharter = (charter) => async (dispatch) => {
   const {userId, estateId, guestNum, startDate, endDate} = charter
-console.log(charter, '==================')
+  function getMonthFromString(mon){
+    return new Date(Date.parse(mon +" 1, 2012")).getMonth()+1
+ }
+// console.log(getMonthFromString(), '==================')
   const response = await fetch(`/api/charters`, {
     method: "POST",
     body: charter
