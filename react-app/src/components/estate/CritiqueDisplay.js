@@ -41,7 +41,6 @@ const CritiqueDisplay = ( {estate} ) => {
 	const critiques = useSelector((state) => state.critiques);
 	const critiquesCount = Object.keys(critiques).length;
 
-
 	return (
     <div id="critique-display-body">
       <div id="critique-header">
