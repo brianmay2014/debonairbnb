@@ -60,7 +60,7 @@ const SearchDestinationInput = ({
     <div>
       <input
         type="text"
-        placeholder="Search destination"
+        placeholder="Search destinations"
         value={destinationValue}
         onChange={handleDestinationFilter}
       />
