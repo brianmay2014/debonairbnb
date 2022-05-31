@@ -12,14 +12,14 @@ def estates():
     all_estates = Estate.query.all()
     return {'estates': [estate.to_dict() for estate in all_estates]}
 
-@estate_routes.route('/<int:id>/critiques')
-def critiques(id):
-    estate = estate = Estate.query.get(id)
-    if not estate:
-        return {"errors": f"No estate with id {id} exists"}, 404
-    else:
-        critiques = estate.critiques
-        return [critique.to_dict() for critique in critiques]
+# @estate_routes.route('/<int:id>/critiques')
+# def critiques(id):
+#     estate = estate = Estate.query.get(id)
+#     if not estate:
+#         return {"errors": f"No estate with id {id} exists"}, 404
+#     else:
+#         critiques = estate.critiques
+#         return [critique.to_dict() for critique in critiques]
 
 @estate_routes.route('/<int:id>/critiques')
 def critiques(id):
@@ -28,7 +28,9 @@ def critiques(id):
         return {"errors": f"No estate with id {id} exists"}, 404
     else:
         critiques = estate.critiques
-        return [critique.to_dict() for critique in critiques]
+        print ("hello")
+        print (critiques);
+        return {"critiques" : [critique.to_dict() for critique in critiques]}
 
 @estate_routes.route('/<int:id>/critiques', methods=["POST"])
 def post_critique(id):

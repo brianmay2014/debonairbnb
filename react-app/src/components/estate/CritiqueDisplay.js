@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 // import { useSelector, useDispatch } from "react-redux";
 // import { Route, Redirect, useParams } from "react-router-dom";
 import "./estatePage.css";
 import IndCritique from "./IndCritique";
+import { genCritiques } from "../../store/critique";
 
 
 // const estate = {
@@ -26,21 +28,15 @@ const critiques = [
 
 
 const CritiqueDisplay = ( {estate} ) => {
-	// const { id } = useParams();
+	const dispatch = useDispatch()
 
-	// const dispatch = useDispatch();
+	useEffect(() => {
+		if (estate) {
+			dispatch(genCritiques(estate))
+		}
+	}, [estate, dispatch]);
 
-	// once state is constructed
-	// const estate = useSelector((state) => state.estate[id])
-
-	// const user = useSelector((state) => state.session.user);
-
-	// useEffect(() => {
-	//     dispatchEvent(getEstate(id));
-	// }, [dispatch]);
-
-	// const { address, owner_id, title, nightly_rate, type_id, description } =
-	// 	estate;
+	const critiques = useSelector((state) => state.critiques);
 
 
 	return (
@@ -49,7 +45,7 @@ const CritiqueDisplay = ( {estate} ) => {
                 {estate?.rating} stars - {estate?.critique_ids.length} critiques
             </div>
             <div id='all-critiques'>
-            {critiques.map((critique) => {
+            {Object.values(critiques).map((critique) => {
                 // console.log(critique);
                 return (
                     <IndCritique
