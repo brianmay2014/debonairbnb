@@ -1,0 +1,30 @@
+.estate-cards{
+    width: 280px;
+    margin: 13px;
+    font-size: 0.9em;
+}
+
+.home-card-img img{
+    width: 277px;
+    height: 277px;
+    object-fit: cover;
+}
+.home-card-text{
+    padding: 5px 5px;
+}
+.card-top-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.card-critique{
+    color: var(--medgold);
+}
+.fa-star {
+    font-size: 0.9em;
+}
+.per-night, .card-critique, .card-availabilty{
+    font-weight: 300;
+}
+
