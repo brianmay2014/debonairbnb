@@ -33,6 +33,9 @@ const LoginForm = () => {
   return (
     <form onSubmit={onLogin}>
       <div>
+        Debonairbnb is an exclusive platform, you must log in to continue.
+        </div>
+      <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
