@@ -8,7 +8,7 @@ import RatingDisplay from "./RatingDisplay";
 dayjs.extend(calendar)
 
 
-const IndCritique = ({ critique }) => {
+const IndCritique = ({ critique, usersData }) => {
 	// const { id } = useParams();
 
 	// const dispatch = useDispatch();
