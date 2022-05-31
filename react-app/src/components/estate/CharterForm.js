@@ -30,7 +30,7 @@ const CharterForm = ( {estate, stateVars} ) => {
 	} = stateVars;
 
 const [guestNum, setGuestNum] = useState(0)
-const sessionUserId = useSelector(state => state.session.user.id)
+const sessionUserId = useSelector(state => state.session.user?.id)
 
 
 	useEffect(() => {
@@ -52,7 +52,7 @@ const sessionUserId = useSelector(state => state.session.user.id)
 		const payload = {
 			sessionUserId, estateId, guestNum, startDate, endDate
 		}
-
+console.log(payload)
 		dispatch(addOneCharter(payload))
 	};
 

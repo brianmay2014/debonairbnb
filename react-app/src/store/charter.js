@@ -31,16 +31,25 @@ const updateCharter = (charter) => {
   };
 };
 
-export const addOneCharter = (charter) => async (dispatch) => {
-  const {userId, estateId, guestNum, startDate, endDate} = charter
-  function getMonthFromString(mon){
-    return new Date(Date.parse(mon +" 1, 2012")).getMonth()+1
- }
-// console.log(getMonthFromString(), '==================')
-  const response = await fetch(`/api/charters`, {
+export const addOneCharter = (charterTest) => async (dispatch) => {
+  const {sessionUserId, estateId, guestNum, startDate, endDate} = charterTest
+
+console.log(charterTest, '==================')
+
+const f = new FormData();
+
+f.append("user_id", sessionUserId)
+f.append("estate_id", estateId)
+f.append("guest_num", guestNum)
+f.append("start_date", startDate)
+f.append("end_date", endDate)
+
+
+  const response = await fetch(`/api/charters/`, {
     method: "POST",
-    body: charter
+    body: f
   })
+
   console.log(response, '===========')
   const charterData = await response.json()
   dispatch(addCharter(charterData))

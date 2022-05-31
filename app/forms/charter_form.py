@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, DateField
 from wtforms.validators import DataRequired, Email, ValidationError
-import datetime
+
 from app.models import Charter
 
 def charter_exists_start(form, field):
@@ -12,5 +12,5 @@ class CharterForm(FlaskForm):
   user_id = IntegerField('user_id', validators=[DataRequired()])
   estate_id = IntegerField('estate_id', validators=[DataRequired()])
   guest_num = IntegerField('guest_num', validators=[DataRequired()])
-  start_date = DateField('start_date', validators=[DataRequired(), charter_exists_start])
+  start_date = DateField('start_date', validators=[DataRequired()])
   end_date = DateField('end_date', validators=[DataRequired()])

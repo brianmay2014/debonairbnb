@@ -14,3 +14,13 @@ class Charter(db.Model):
     # belongs to
     estate = db.relationship("Estate", back_populates="charters")
     user = db.relationship("User", back_populates="charters")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'estate_id': self.estate_id,
+            'guest_num': self.guest_num,
+            'start_date': self.start_date,
+            'end_date': self.end_date
+            }
