@@ -25,7 +25,7 @@ const critiques = [
 ];
 
 
-const CritiqueDisplay = ( {estate, usersData} ) => {
+const CritiqueDisplay = ( {estate} ) => {
 	// const { id } = useParams();
 
 	// const dispatch = useDispatch();
@@ -54,8 +54,7 @@ const CritiqueDisplay = ( {estate, usersData} ) => {
                 return (
                     <IndCritique
                     key={`critique-${critique.id}`}
-                    critique={critique}
-					usersData={usersData} />
+                    critique={critique} />
                 )
             })}
             </div>
