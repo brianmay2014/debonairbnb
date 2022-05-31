@@ -34,7 +34,7 @@ const updateCharter = (charter) => {
 export const addOneCharter = (charterTest) => async (dispatch) => {
   const {sessionUserId, estateId, guestNum, startDate, endDate} = charterTest
 
-console.log(charterTest, '==================')
+
 
 const f = new FormData();
 
@@ -50,7 +50,6 @@ f.append("end_date", endDate)
     body: f
   })
 
-  console.log(response, '===========')
   const charterData = await response.json()
   dispatch(addCharter(charterData))
   return {...charterData}
