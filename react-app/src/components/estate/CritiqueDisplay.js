@@ -54,7 +54,7 @@ const CritiqueDisplay = ( {estate} ) => {
                 // console.log(critique);
                 return (
                     <IndCritique
-                    key={`critique${critique.id}`}
+                    key={`critique-${critique.id}`}
                     critique={critique} />
                 )
             })}

@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
 
 import "./HomePage.css";
 
@@ -15,7 +14,9 @@ const EstateCard = ( { estate } ) => {
 		<div className="estate-cards" id={`estate-card-${estate?.id}`}>
 			<div id="type-filter-bar"></div>
 			<div className="home-card-img" id="estate-display">
-				<img src={dispImg} alt="yup" />
+				<a href={`/estates/${estate?.id}`}>
+                <img src={dispImg} alt="yup" />
+                </a>
 			</div>
 			<div className="home-card-text">
 				<div className="card-top-bar">

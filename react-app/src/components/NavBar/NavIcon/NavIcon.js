@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const NavIcon = () => {
   return (
@@ -6,7 +6,9 @@ const NavIcon = () => {
       <div id="icon-img-div">
         <i class="fa-brands fa-airbnb fa-2xl" id="nav-icon"></i>
       </div>
+      <a id='header-homepage-link' href='/'>
       <h2 id="nav-icon-title">Debonairbnb</h2>
+      </a>
     </div>
   );
 };

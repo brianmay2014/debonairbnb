@@ -1,3 +1,17 @@
+#home-page-container{
+    display: flex;
+    width: 1431px;
+    /* margin: 0 auto; */
+}
+
+.estate-display{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 1225px;
+    margin: 0 auto;
+}
+
 .estate-cards{
     width: 280px;
     margin: 13px;
@@ -16,7 +30,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 .card-critique{
     color: var(--medgold);

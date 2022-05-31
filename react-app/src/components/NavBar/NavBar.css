@@ -33,3 +33,7 @@
   position: absolute;
   top: 22px;
 }
+
+#header-homepage-link{
+  color: var(--darkgold);
+}

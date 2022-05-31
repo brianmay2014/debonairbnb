@@ -16,14 +16,22 @@ const HomePage = () => {
 
     const estates = useSelector((state) => state.estates);
 
-    console.log(estates);
+    const estateArr = Object.values(estates);
+    console.log(estateArr);
 	// const address = `${estate?.city}, ${estate?.state}, ${estate?.country}`;
 
 	return (
 		<div id="home-page-container">
 			<div id="type-filter-bar"></div>
-			<div id="estate-display">
-				<EstateCard estate={estates[1]}/>
+			<div class="estate-display">
+                {estateArr.map((estate) => {
+                    return (
+                        <EstateCard
+                        key={`estate-${estate.id}`}
+                        estate={estate}/>
+
+                    )
+                })}
 			</div>
 		</div>
 	);
