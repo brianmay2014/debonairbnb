@@ -29,7 +29,7 @@ const CharterForm = ( {estate, stateVars, setCharterPayload} ) => {
 		setNightStay,
 	} = stateVars;
 
-const [guestNum, setGuestNum] = useState(0)
+const [guestNum, setGuestNum] = useState(1)
 const sessionUserId = useSelector(state => state.session.user?.id)
 
 
