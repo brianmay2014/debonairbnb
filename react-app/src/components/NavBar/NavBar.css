@@ -37,3 +37,8 @@
 #header-homepage-link{
   color: var(--darkgold);
 }
+
+.nav-buttons{
+  display: flex;
+  width: 200px;
+}

@@ -27,7 +27,7 @@ const ProfileButton = () => {
 
   return (
     <div>
-      <button className="menu-button" onClick={openMenu}>
+      <button className="menu-button btn" onClick={openMenu}>
           Profile
       </button>
 

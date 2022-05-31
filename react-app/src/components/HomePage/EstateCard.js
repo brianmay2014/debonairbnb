@@ -6,9 +6,9 @@ const EstateCard = ( { estate } ) => {
 
 
 	const address = `${estate?.city}, ${estate?.state}`;
-    const dispImg = estate?.images[0].url;
+    const dispImg = estate?.images[0]?.url;
 
-    console.log(estate);
+    // console.log(estate);
 
 	return (
 		<div className="estate-cards" id={`estate-card-${estate?.id}`}>
