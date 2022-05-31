@@ -16,6 +16,7 @@ import HomePage from "./components/HomePage/HomePage";
 import CharterPage from "./components/CharterPage/CharterPage";
 import MyCharters from "./components/MyCharters/MyCharters"
 import {genCharters} from "./store/charter"
+import HostPage from "./components/HostPage/HostPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
