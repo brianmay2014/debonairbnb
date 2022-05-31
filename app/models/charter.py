@@ -23,4 +23,4 @@ class Charter(db.Model):
             'guest_num': self.guest_num,
             'start_date': self.start_date,
             'end_date': self.end_date
-            }
+        }

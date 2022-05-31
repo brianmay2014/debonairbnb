@@ -9,7 +9,7 @@ def print_filter(attname):
 
 def auto_str(cls):
     def __str__(self):
-        if self.hasattr("to_dict") and callable(self.to_dict):
+        if hasattr(self, "to_dict") and callable(self.to_dict):
             return str(self.to_dict())
         else:
             ret = dict(self.__dict__)
