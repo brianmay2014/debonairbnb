@@ -54,12 +54,12 @@ function App() {
         <ProtectedRoute path="/" exact={true}>
           <HomePage />
         </ProtectedRoute>
-        <Route path="/estates/:id" exact={true}>
+        <ProtectedRoute path="/estates/:id" exact={true}>
           <EstatePage />
-        </Route>
-        <Route path="/search">
+        </ProtectedRoute>
+        <ProtectedRoute path="/search">
           <SearchResults />
-        </Route>
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 // import { Route, Redirect, useParams } from "react-router-dom";
 import "./estatePage.css";
 
-const IndCritique = ({ critique }) => {
+const IndCritique = ({ critique, usersData }) => {
 	// const { id } = useParams();
 
 	// const dispatch = useDispatch();
@@ -23,11 +23,14 @@ const IndCritique = ({ critique }) => {
 	// const rating_count = 15;
 
 	const critId = critique.id;
+	const critUser = critique.userId;
 	critique.date = "05/24/2022";
+	
+	// console.log(usersData);
 
 	return (
 		<div className='critique-boxes' id={`critique-${critId}`}>
-			<div className="critique-users">User Id: {critique.userId}</div>
+			<div className="critique-users">Username: {usersData[critUser]?.username}</div>
 			<div className="critique-dates">Date: {critique.date}</div>
 			<div className="critique-comments">{critique.comment}</div>
 		</div>
