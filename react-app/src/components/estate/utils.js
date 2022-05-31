@@ -48,23 +48,25 @@ const getCheckoutDate = () => {
 }
 
 const getNightStay = (checkin, checkout) => {
-    // console.log(checkin);
-    // console.log(typeof checkin)
-    
-    let dateIn = new Date(checkin);
-    // console.log('in', dateIn);
-    let dateOut = new Date(checkout);
-    // console.log('out', dateOut);
+	// console.log(checkin);
+	// console.log(typeof checkin);
+	// console.log(checkout);
+	// console.log(typeof checkout);
 
-    let diffTime = Math.abs(dateOut - dateIn);
-    // console.log('diffTime', diffTime);
-    let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    // console.log('diffDays', diffDays);
-    if (diffDays < 1) {
-        diffDays = 0;
-    }
+	let dateIn = new Date(checkin);
+	// console.log('in', dateIn);
+	let dateOut = new Date(checkout);
+	// console.log('out', dateOut);
 
-    return diffDays;
+	let diffTime = Math.abs(dateOut - dateIn);
+	// console.log('diffTime', diffTime);
+	let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+	// console.log('diffDays', diffDays);
+	if (diffDays < 1) {
+		diffDays = 0;
+	}
+
+	return diffDays;
 };
 
 module.exports = {getCheckinDate, getCheckoutDate, getNightStay} 

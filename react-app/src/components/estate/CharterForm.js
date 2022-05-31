@@ -42,7 +42,7 @@ const CharterForm = ( {estate, stateVars} ) => {
 		console.log("------=-=-=-=-=--=USE EFFECT-=-=-=-=-=-=-=-");
 		// console.log("check out date", checkoutDate);
 		// console.log("check out date type", typeof checkoutDate);
-		
+		setNightStay(getNightStay(checkinDate, checkoutDate))
 	}, [checkinDate, checkoutDate, nightStay]);
 
 	const handleSubmit = async (e) => {
@@ -60,12 +60,12 @@ const CharterForm = ( {estate, stateVars} ) => {
 		console.log('CHECKIN DATE', checkinDate);
 		console.log("-*/-*/-*/-*/-*/-*/-*CHECKINFUNC/-*/-*/-*/-*/-*/-*/-*/-*/-*/");
 		// setCheckinDate(e.target.value)
-		setNightStay(getNightStay(checkinDate, checkoutDate));
+		// setNightStay(getNightStay(checkinDate, checkoutDate));
 	}
 
 	const setCheckoutFunc = async (e) => {
 		setCheckoutDate(e.target.value)
-		setNightStay(getNightStay(checkinDate, checkoutDate));
+		// setNightStay(getNightStay(checkinDate, checkoutDate));
 	};
 
 	const errors = [];

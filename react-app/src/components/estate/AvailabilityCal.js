@@ -38,11 +38,15 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 	
 	
 	useEffect(() => {
-		console.log(state);
-		console.log(typeof state[0].endDate);
+		// console.log(state);
+		// console.log(typeof state[0].endDate);
 		setCheckinDate(state[0].startDate)
 		setCheckoutDate(state[0].endDate)
 	}, [state])
+
+	// useEffect(() => {
+
+	// }, [checkinDate, checkoutDate])
 
 	return (
 		<div id="avail-cal">
