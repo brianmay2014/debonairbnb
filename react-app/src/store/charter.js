@@ -34,8 +34,6 @@ const updateCharter = (charter) => {
 export const addOneCharter = (charterTest) => async (dispatch) => {
   const {sessionUserId, estateId, guestNum, startDate, endDate} = charterTest
 
-
-
 const f = new FormData();
 
 f.append("user_id", sessionUserId)
@@ -51,6 +49,7 @@ f.append("end_date", endDate)
   })
 
   const charterData = await response.json()
+
   dispatch(addCharter(charterData))
   return {...charterData}
 }
@@ -79,11 +78,12 @@ export const deleteCharter = (charter) => async (dispatch) => {
 export const genCharters = () => async (dispatch) => {
   // doing it this way in case we want more types of responses here later ...
   const [chartersResponse] = await Promise.all([
-    fetch("/api/charters"),
+    fetch("/api/charters/"),
   ]);
   const [charters] = await Promise.all([
     chartersResponse.json(),
   ]);
+  console.log(charters, 'AHHHHHH')
   if (chartersResponse.ok) {
     dispatch(loadCharters(charters.charters))
     return charters;
