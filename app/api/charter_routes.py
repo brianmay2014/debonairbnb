@@ -7,6 +7,12 @@ from app.forms import CharterForm
 
 charter_routes = Blueprint('charters', __name__)
 
+@charter_routes.route('/')
+@login_required
+def charters():
+  all_charters = Charter.query.all()
+  print(all_charters, "==================")
+  return {'charters': [charter.to_dict() for charter in all_charters]}
 
 @charter_routes.route('/', methods=['POST'])
 @login_required

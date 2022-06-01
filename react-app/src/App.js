@@ -14,6 +14,8 @@ import UploadImage from "./components/UploadImage/UploadeImage";
 import SearchResults from "./components/SearchResults/SearchResults";
 import HomePage from "./components/HomePage/HomePage";
 import CharterPage from "./components/CharterPage/CharterPage";
+import MyCharters from "./components/MyCharters/MyCharters"
+import {genCharters} from "./store/charter"
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -23,6 +25,8 @@ function App() {
 
   useEffect(() => {
     dispatch(genEstates());
+      dispatch(genCharters())
+
   }, [dispatch]);
 
   useEffect(() => {
@@ -62,8 +66,11 @@ function App() {
         <Route path="/search">
           <SearchResults />
         </Route>
-        <Route exact path="/charters">
+        <Route path="/charters">
           <CharterPage charterPayload={charterPayload} setCharterPayload={setCharterPayload} />
+        </Route>
+        <Route path='/:id/my-charters'>
+          <MyCharters/>
         </Route>
       </Switch>
     </BrowserRouter>
