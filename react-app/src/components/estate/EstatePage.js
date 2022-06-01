@@ -12,17 +12,17 @@ import LocationDisplay from "./LocationDisplay";
 
 
 
-const EstatePage = () => {
+const EstatePage = ({setCharterPayload}) => {
 	const { id } = useParams();
 
 	const dispatch = useDispatch();
-    
+
     useEffect(() => {
-        dispatch(genEstates());       
+        dispatch(genEstates());
 		// dispatch(genUsers());
     }, [dispatch])
 
-       
+
     const estate = useSelector((state) => state.estates[id]);
     // console.log(estate);
 
@@ -45,12 +45,12 @@ const EstatePage = () => {
 				</div>
 
 				<ImageDisplay estate={estate} />
-				<DescriptionAvailCharter estate={estate} />
+				<DescriptionAvailCharter estate={estate} setCharterPayload={setCharterPayload} />
 				<CritiqueDisplay estate={estate} />
                 <LocationDisplay estate={estate} />
 			</div>
 		);
-    
+
 };
 
 export default EstatePage;

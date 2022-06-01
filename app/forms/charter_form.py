@@ -23,7 +23,7 @@ def charter_exists_start(form, field):
 
 def charter_exists_end(form, field):
   end_date = field.data
-
+  
   all_charters = Charter.query.filter(Charter.estate_id == form.data['estate_id']).all()
 
   def charter_date_checker(end_date):

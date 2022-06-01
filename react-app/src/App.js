@@ -13,12 +13,13 @@ import { genEstates } from "./store/estate";
 import UploadImage from "./components/UploadImage/UploadeImage";
 import SearchResults from "./components/SearchResults/SearchResults";
 import HomePage from "./components/HomePage/HomePage";
-import CharterPage from "./components/CharterPage/CharterPage"
+import CharterPage from "./components/CharterPage/CharterPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const estates = useSelector((state) => state.estates);
+  const [charterPayload, setCharterPayload] = useState(null)
 
   useEffect(() => {
     dispatch(genEstates());
@@ -55,12 +56,15 @@ function App() {
         <ProtectedRoute path="/" exact={true}>
           <HomePage />
         </ProtectedRoute>
-        <ProtectedRoute path="/estates/:id" exact={true}>
-          <EstatePage />
-        </ProtectedRoute>
-        <ProtectedRoute path="/search">
+        <Route path="/estates/:id" exact={true}>
+          <EstatePage setCharterPayload={setCharterPayload} />
+        </Route>
+        <Route path="/search">
           <SearchResults />
-        </ProtectedRoute>
+        </Route>
+        <Route exact path="/charters">
+          <CharterPage charterPayload={charterPayload} />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
