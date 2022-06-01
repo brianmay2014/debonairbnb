@@ -13,11 +13,11 @@ import { genEstates } from "./store/estate";
 import UploadImage from "./components/UploadImage/UploadeImage";
 import SearchResults from "./components/SearchResults/SearchResults";
 import HomePage from "./components/HomePage/HomePage";
-import CharterPage from "./components/CharterPage/CharterPage";
-import MyCharters from "./components/MyCharters/MyCharters"
+import CharterPage from "./components/Charters/CharterPage/CharterPage";
+import MyCharters from "./components/Charters/MyCharters/MyCharters"
 import {genCharters} from "./store/charter"
 import HostPage from "./components/HostPage/HostPage";
-import SingleCharterPage from "./components/SingleCharterPage/SingleCharterPage"
+import SingleCharterPage from "./components/Charters/SingleCharterPage/SingleCharterPage"
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -74,10 +74,10 @@ function App() {
         <Route path="/charters">
           <CharterPage />
         </Route>
-        <Route exact path={`/:id/my-charters/`}>
+        <Route exact path={`/users/:id/my-charters/`}>
           <MyCharters />
         </Route>
-        <Route path={`/:id/my-charters/:id`}>
+        <Route path={`/users/:id/my-charters/:id`}>
           <SingleCharterPage/>
         </Route>
       </Switch>
