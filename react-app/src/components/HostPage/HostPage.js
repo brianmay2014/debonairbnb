@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { genEstates } from "../../store/estate";
 import EstateForm from "./EstateForm";
+import EstateRow from "./EstateRow";
 import "./HostPage.css";
 
 const HostPage = () => {
@@ -35,16 +36,22 @@ const HostPage = () => {
     // console.log(estatesArr)
 
     const userEstates = estatesArr.filter((estate) => estate.owner_id === user.id);
-    // console.log(userEstates);
+    console.log(userEstates);
 
 	return (
 		<div>
             <h1> Welcome to the caviar and truffle of debonairbnb, hosting estates</h1>
             
             {userEstates.length && (
-
+                <div id='hosted-estates-container'>
                     <h2>Hello from inside with length</h2>
-
+                    
+                    {userEstates.map((estate) =>  {
+                        return (
+                            <EstateRow key={`hosted-${estate.id}`} estate={estate}/>
+                        )
+                    })}
+                </div>
             )}
 
             {userEstates.length === 0 && (

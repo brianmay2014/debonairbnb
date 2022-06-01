@@ -17,3 +17,38 @@
 label, input, button{
     margin: 5px;
 }
+
+
+.row-left img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.estate-rows{
+    width: 60%;
+    margin: 0 auto 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: fit-content;
+    border: 1px var(--lightestgold) solid;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: inset 1px 1px 5px var(--lightestgold), inset -1px -1px 2px var(--medgold);
+}
+
+.estate-rows div{
+    padding: 10px;
+}
+
+#hosted-estates-container{
+    margin: 0 auto;
+}
+.row-description{
+    font-size: 0.8em;
+}
+
+.row-buttons{
+    display: flex;
+    flex-direction: column;
+}
