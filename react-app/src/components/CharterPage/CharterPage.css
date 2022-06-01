@@ -1,8 +1,22 @@
 .charter-container {
+  padding-top: 80px;
   display: block;
 }
 
 .charter-boxes {
   padding: 0 80px;
   margin: 0 320px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.charter-img-box img {
+  width: 100px;
+  height: 100px;
+}
+
+.confirm-back-button {
+  text-align: left;
+  margin: 0 400px;
+  display: flex;
 }
