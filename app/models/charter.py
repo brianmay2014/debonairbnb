@@ -25,3 +25,14 @@ class Charter(db.Model, CrUpMixin):
             'start_date': self.start_date,
             'end_date': self.end_date
         }
+    @staticmethod
+    def seed(charter_data):
+        charter = Charter()
+        charter.user_id = charter_data.get("user_id")
+        charter.estate_id = charter_data.get("estate_id")
+        charter.guest_num = charter_data.get("guest_num")
+        charter.start_date = charter_data.get("start_date")
+        charter.end_date = charter_data.get("end_date")
+
+
+        return charter
