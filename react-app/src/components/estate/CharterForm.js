@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 // import { useSelector, useDispatch } from "react-redux";
-// import { Route, Redirect, useParams } from "react-router-dom";
+import { Route, Redirect, useParams, useHistory } from "react-router-dom";
 import "./estatePage.css";
 import { getCheckinDate, getCheckoutDate, getNightStay } from "./utils";
 import { addDays } from 'date-fns';
+import {useSelector, useDispatch} from "react-redux"
+import {addOneCharter} from "../../store/charter"
 
 const CharterForm = ( {estate, stateVars} ) => {
-	// const { id } = useParams();
+	const { id } = useParams();
 
 	// const [checkinDate, setCheckinDate] = useState(getCheckinDate());
 	// const [checkoutDate, setCheckoutDate] = useState(getCheckoutDate());
@@ -16,7 +18,7 @@ const CharterForm = ( {estate, stateVars} ) => {
     const cleanRate = 0.15;
 
 	// const user = useSelector((state) => state.session.user);
-	
+
 	let {
 		checkinDate,
 		setCheckinDate,
@@ -25,7 +27,11 @@ const CharterForm = ( {estate, stateVars} ) => {
 		nightStay,
 		setNightStay,
 	} = stateVars;
-	
+
+
+const sessionUserId = useSelector(state => state.session.user.id)
+
+
 	useEffect(() => {
 		console.log('------=-=-=-=-=--=USE EFFECT-=-=-=-=-=-=-=-')
 		console.log('check in date', checkinDate)
@@ -38,6 +44,12 @@ const CharterForm = ( {estate, stateVars} ) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		const payload = {
+			sessionUserId, id, guestNum, checkinDate, checkoutDate
+		}
+
+		dispatch(addOneCharter(payload))
 	};
 
 
@@ -65,6 +77,14 @@ const CharterForm = ( {estate, stateVars} ) => {
 	};
 
 	const errors = [];
+
+	// const { address, owner_id, title, estate?.nightly_rate, type_id, description } =
+	// 	estate;
+
+
+	const handleGuestNum = (e) => {
+		setGuestNum(e.target.value)
+	}
 
     const baseCost = nightStay * estate?.nightly_rate;
     const cleanCost = estate?.nightly_rate * cleanRate;
@@ -113,6 +133,15 @@ const CharterForm = ( {estate, stateVars} ) => {
 						value={dateParser(checkoutDate)}
 						required
 						onChange={setCheckoutFunc}
+					/>
+				</div>
+				<div>
+					<label>Number of guests</label>
+					<input
+					type="number"
+					value={guestNum}
+					required
+					onChange={handleGuestNum}
 					/>
 				</div>
 
