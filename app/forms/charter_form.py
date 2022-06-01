@@ -42,3 +42,4 @@ class CharterForm(FlaskForm):
   guest_num = IntegerField('guest_num', validators=[DataRequired()])
   start_date = DateField('start_date', validators=[DataRequired(), charter_exists_start])
   end_date = DateField('end_date', validators=[DataRequired(), charter_exists_end])
+

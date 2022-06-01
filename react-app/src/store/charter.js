@@ -35,6 +35,7 @@ const updateCharter = (charter) => {
 
 export const addOneCharter = (charterTest) => async (dispatch) => {
   const { sessionUserId, estateId, guestNum, startDate, endDate } = charterTest;
+  console.log(charterTest, 'CREATE CHARTER DATA ===============')
 
   const f = new FormData();
 
@@ -55,7 +56,7 @@ export const addOneCharter = (charterTest) => async (dispatch) => {
       let error;
       if (response.status === 401) {
         error = await response.json()
-   
+
         throw new ValidationError(error.errors, response.statusText)
       } else {
         let errorJSON;
@@ -82,13 +83,22 @@ export const addOneCharter = (charterTest) => async (dispatch) => {
   }
 }
 
-export const editCharter = (charter, data) => async (dispatch) => {
-  const { id } = charter;
-  const { userId, estateId, guestNum, startDate, endDate } = data;
+export const editCharter = (data) => async (dispatch) => {
+
+  const { id, userId, estateId, guestNum, startDate, endDate } = data;
+console.log(data, '======================data')
+
+const f = new FormData();
+
+f.append("user_id", userId);
+f.append("estate_id", estateId);
+f.append("guest_num", guestNum);
+f.append("start_date", startDate);
+f.append("end_date", endDate);
 
   const response = await fetch(`/api/charters/${id}`, {
     method: "PATCH",
-    body: data,
+    body: f,
   });
   const charterData = await response.json();
   dispatch(addCharter(charterData));
