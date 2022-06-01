@@ -5,7 +5,7 @@ FROM python:3.9
 #
 # REACT_APP_BASE_URL -> Your deployment URL
 # replace iwth heroku deployed app
-ENV REACT_APP_BASE_URL=https://debonairbnb.herokuapp.com/
+ENV REACT_APP_BASE_URL=http://debonairbnb.herokuapp.com/
 
 # FLASK_APP -> entry point to your flask app
 ENV FLASK_APP=app
