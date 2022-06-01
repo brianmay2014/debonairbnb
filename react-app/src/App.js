@@ -14,14 +14,9 @@ import UploadImage from "./components/UploadImage/UploadeImage";
 import SearchResults from "./components/SearchResults/SearchResults";
 import HomePage from "./components/HomePage/HomePage";
 import CharterPage from "./components/CharterPage/CharterPage";
-<<<<<<< HEAD
 import MyCharters from "./components/MyCharters/MyCharters"
 import {genCharters} from "./store/charter"
 import HostPage from "./components/HostPage/HostPage";
-=======
-import MyCharters from "./components/MyCharters/MyCharters";
-import { genCharters } from "./store/charter";
->>>>>>> 52fcdf0 (fixed migration version)
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -82,7 +77,7 @@ function App() {
         </Route>
       </Switch>
     </BrowserRouter>
-		
+
   );
 }
 
