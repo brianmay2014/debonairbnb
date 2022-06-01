@@ -63,7 +63,7 @@ function App() {
           <SearchResults />
         </Route>
         <Route exact path="/charters">
-          <CharterPage charterPayload={charterPayload} />
+          <CharterPage charterPayload={charterPayload} setCharterPayload={setCharterPayload} />
         </Route>
       </Switch>
     </BrowserRouter>
