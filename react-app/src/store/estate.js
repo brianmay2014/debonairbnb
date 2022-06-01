@@ -100,7 +100,7 @@ export const deleteEstate = (estate) => async (dispatch) => {
 export const genEstates = () => async (dispatch) => {
   // doing it this way in case we want more types of responses here later ...
   const [estatesResponse] = await Promise.all([
-    fetch("/api/estates"),
+    fetch("/api/estates/"),
   ]);
   const [estates] = await Promise.all([
     estatesResponse.json(),
