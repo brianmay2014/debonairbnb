@@ -6,6 +6,7 @@ from app.models import db, Estate, EstateImage, Critique
 from app.forms import EstateForm
 from ..utils.s3utils import  upload_file_to_s3, allowed_file, get_unique_filename
 from ..utils.geoutils import EstateLocationData
+from ..config import Config
 from ..seeds.estate_types import estate_types
 
 estate_routes = Blueprint('estates', __name__)
@@ -33,6 +34,12 @@ def estates():
 #     else:
 #         critiques = estate.critiques
 #         return [critique.to_dict() for critique in critiques]
+
+@login_required
+@estate_routes.route('/key')
+def api():
+    return Config.GOOGLE_MAPS_API_KEY;
+
 
 @estate_routes.route('/<int:id>/critiques')
 def critiques(id):
@@ -126,7 +133,7 @@ def estate(id):
 #             latitude=data.latitude,
 #             longitude=data.longitude
 #         )
-        
+
 #         db.session.add(estate)
 #         db.session.commit()
 

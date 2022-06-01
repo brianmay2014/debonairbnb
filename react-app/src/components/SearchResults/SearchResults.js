@@ -13,6 +13,17 @@ const SearchResults = () => {
   const { search } = useLocation();
   const resultIds = search.split("=")[1].split(",");
   const [isLoaded, setIsLoaded] = useState(false);
+  const [gKey, setGKey] = useState(null);
+
+
+    useEffect(() => {
+      const getKey = async () => {
+        const response = await fetch("api/estates/key");
+        const key = await response.text();
+        setGKey(key);
+      };
+      getKey();
+    }, []);
 
   useEffect(() => {
     if (reloadEstates) {
@@ -46,11 +57,12 @@ const SearchResults = () => {
           })}
       </div>
       <div className="search-results-map">
-        <SearchMap
+        {gKey && <SearchMap
           isMarkerShown
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
           resultIds={resultIds}
-        />
+          gKey={gKey}
+        />}
       </div>
     </div>
   );
