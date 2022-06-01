@@ -14,12 +14,11 @@ const containerStyle = {
   height:"800px",
 };
 
-const SearchMap = ({ resultIds }) => {
-  console.log(process.env)
-  console.log( process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
+const SearchMap = ({ resultIds, gKey }) => {
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: gKey,
   });
 
   const estates = useSelector((state) =>
