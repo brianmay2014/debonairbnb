@@ -28,13 +28,8 @@ console.log(sessionUser, "USER")
 
   return (
     <div>
-<<<<<<< HEAD
       <button className="menu-button btn" onClick={openMenu}>
           Profile
-=======
-      <button className="menu-button" onClick={openMenu}>
-        Profile
->>>>>>> cfdf4cd (started working on individual charter page)
       </button>
 
       {showMenu && (
