@@ -7,11 +7,21 @@ from app.forms import CharterForm
 
 charter_routes = Blueprint('charters', __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{error}')
+    return errorMessages
+
 @charter_routes.route('/')
 @login_required
 def charters():
   all_charters = Charter.query.all()
-  print(all_charters, "==================")
+
   return {'charters': [charter.to_dict() for charter in all_charters]}
 
 @charter_routes.route('/', methods=['POST'])
@@ -34,4 +44,4 @@ def charter_form_submit():
     db.session.commit()
     return charter.to_dict()
   else:
-    print(form.errors, 'ERROR')
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

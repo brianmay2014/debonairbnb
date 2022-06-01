@@ -2,9 +2,11 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { addOneCharter } from "../../store/charter";
+import { ValidationError } from "../../utils/validationError";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import "./CharterPage.css";
 
-const CharterPage = ({ setCharterPayload, charterPayload }) => {
+const CharterPage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const estates = useSelector((state) => Object.values(state.estates));
@@ -13,28 +15,27 @@ const CharterPage = ({ setCharterPayload, charterPayload }) => {
   const [guestNum, setGuestNum] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const sessionUser = useSelector((state) => Object.values(state.session));
+  const [errorMessages, setErrorMessages] = useState({});
 
   // const [searchParams, setSearchParams] = useSearchParams()
   // console.log(useSearchParams())
 
   const lengthOfCharter =
-    (Date.parse(endDate) -
-      Date.parse(startDate)) /
-    (60 * 60 * 24 * 1000);
-
-
+    (Date.parse(endDate) - Date.parse(startDate)) / (60 * 60 * 24 * 1000);
 
   const charterEstate = estates?.find(
     (estate) => parseInt(estateId) === estate.id
   );
 
-  console.log(estateId, '============')
+  // console.log(estateId, '============')
 
   const serviceFees = charterEstate?.nightly_rate * lengthOfCharter * 0.1;
   const occupancyFees = charterEstate?.nightly_rate * lengthOfCharter * 0.09;
   const cleaningFees = charterEstate?.nightly_rate * lengthOfCharter * 0.08;
   const { search } = useLocation();
-
+  // const params = new URLSearchParams(search)
+  // console.log(params.get(), '============')
   const totalCost = (serviceFees, occupancyFees, cleaningFees) => {
     const total =
       serviceFees +
@@ -44,38 +45,38 @@ const CharterPage = ({ setCharterPayload, charterPayload }) => {
     return total;
   };
 
-
-
-  //  const newParams = search.split('&')
-
-  //  const newestParams = newParams.forEach(keyVal => {
-  //    if (keyVal[0] === '?sessionUserId') {
-  //      setSessionUserId(keyVal[1])
-  //     }
-  //     if (keyVal[0] === 'estateId') {
-  //       setEstateId(keyVal[1])
-  //     }
-  //     if (keyVal[0] === 'guestNum') {
-  //       setGuestNum(keyVal[1])
-  //     }
-  //     if (keyVal[0] === 'startDate') {
-  //       setStartDate(keyVal[1])
-  //     }
-  //     if (keyVal[0] === 'endDate') {
-  //       setEndDate(keyVal[1])
-  //     }
-  //     return keyVal
-  //   })
-
-  //   console.log(newestParams, "=============== AHHHH")
-
   const handleBackButton = (e) => {
     return history.goBack();
   };
 
-  const handleConfirm = (e) => {
-    dispatch(addOneCharter(charterPayload));
+  const handleConfirm = async (e) => {
+    const payload = { sessionUserId, estateId, guestNum, startDate, endDate };
+    let createdCharter;
+    try {
+      createdCharter = await dispatch(addOneCharter(payload));
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        setErrorMessages(error.errors);
+        console.log(error.errors);
+      }
+    }
   };
+
+  useEffect(async () => {
+    const handleConfirm = async (e) => {
+      const payload = { sessionUserId, estateId, guestNum, startDate, endDate };
+      let createdCharter;
+      try {
+        createdCharter = await dispatch(addOneCharter(payload));
+      } catch (error) {
+        if (error instanceof ValidationError) {
+          setErrorMessages(error.errors);
+          console.log(error.errors);
+        }
+      }
+    };
+    setErrorMessages(null)
+  }, []);
 
   const queryParamsArray = search.split("&");
   let newParams = [];
@@ -83,13 +84,8 @@ const CharterPage = ({ setCharterPayload, charterPayload }) => {
     newParams.push(keyVal.toString());
   });
 
-
-
-
-
-  useEffect(()=> {
+  useEffect(() => {
     const newestParams = newParams.forEach((keyVal) => {
-      console.log(keyVal.split("="));
       if (keyVal.split("=")[0] === "?sessionUserId") {
         setSessionUserId(keyVal.split("=")[1]);
       }
@@ -106,7 +102,7 @@ const CharterPage = ({ setCharterPayload, charterPayload }) => {
         setEndDate(keyVal.split("=")[1]);
       }
     });
-  },[])
+  }, []);
 
   return (
     <>
@@ -133,6 +129,9 @@ const CharterPage = ({ setCharterPayload, charterPayload }) => {
               </div>
             </div>
             <button onClick={handleConfirm}>Confirm charter</button>
+            {errorMessages && (
+              <ErrorMessage label={"Invalid dates"} message={errorMessages} />
+            )}
           </div>
           <div className="right-charter-box">
             <div className="charter-img-box">

@@ -71,7 +71,7 @@ function App() {
           <SearchResults />
         </Route>
         <Route path="/charters">
-          <CharterPage charterPayload={charterPayload} setCharterPayload={setCharterPayload} />
+          <CharterPage />
         </Route>
         <Route path='/:id/my-charters'>
           <MyCharters/>
