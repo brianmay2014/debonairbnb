@@ -2,9 +2,10 @@ from ..models.db import db, auto_str
 from statistics import mean
 from .favourited_estate import favourited_estates
 from ..utils.geoutils import EstateLocationData
+from .creation_mixin import CrUpMixin
 
 @auto_str
-class Estate(db.Model):
+class Estate(db.Model, CrUpMixin):
     __tablename__ = "estates"
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
@@ -61,6 +62,13 @@ class Estate(db.Model):
             'image_ids': [image.id for image in self.images],
             'images': [image.to_dict() for image in self.images],
             'rating': self.rating,
+        }
+
+    def to_compact_dict(self):
+        return {
+            'id': self.id,
+            'owner_id': self.owner_id,
+            'title': self.title,
         }
 
 

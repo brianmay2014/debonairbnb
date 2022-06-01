@@ -1,7 +1,8 @@
 from ..models.db import db, auto_str
+from .creation_mixin import CrUpMixin
 
 @auto_str
-class Charter(db.Model):
+class Charter(db.Model, CrUpMixin):
     __tablename__ = "charters"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)

@@ -1,7 +1,8 @@
 from ..models.db import db, auto_str
+from .creation_mixin import CrUpMixin
 
 @auto_str
-class Critique(db.Model):
+class Critique(db.Model, CrUpMixin):
     __tablename__ = "critiques"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
@@ -12,7 +13,7 @@ class Critique(db.Model):
     #relationships
     # belongs to
     estate = db.relationship("Estate", back_populates="critiques")
-    author = db.relationship("User", back_populates="critiques")
+    author = db.relationship("User", back_populates="critiques", lazy="joined")
 
     @staticmethod
     def seed(data):
@@ -22,3 +23,15 @@ class Critique(db.Model):
             rating=data.get("rating"),
             comment=data.get("comment"),
         )
+
+    def to_dict(self):
+        return {
+            "id" : self.id,
+            "user_id" : self.user_id,
+            "username": self.author.username,
+            "estate_id" : self.estate_id,
+            "rating" : self.rating,
+            "comment" : self.comment,
+            "created_at" : self.created_at.timestamp(),
+            "updated_at" : self.updated_at.timestamp(),
+        }

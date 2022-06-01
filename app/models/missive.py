@@ -1,7 +1,8 @@
 from ..models.db import db, auto_str
+from .creation_mixin import CrUpMixin
 
 @auto_str
-class Missive(db.Model):
+class Missive(db.Model, CrUpMixin):
     __tablename__ = "missives"
     id = db.Column(db.Integer, primary_key=True)
     sender_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)

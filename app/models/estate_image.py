@@ -1,7 +1,8 @@
 from ..models.db import db, auto_str
+from .creation_mixin import CrUpMixin
 
 @auto_str
-class EstateImage(db.Model):
+class EstateImage(db.Model, CrUpMixin):
     __tablename__ = "estate_images"
     id = db.Column(db.Integer, primary_key=True)
     estate_id = db.Column(db.Integer, db.ForeignKey("estates.id"), nullable=False)

@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 // import { useSelector, useDispatch } from "react-redux";
 // import { Route, Redirect, useParams } from "react-router-dom";
 import "./estatePage.css";
 import IndCritique from "./IndCritique";
+import { genCritiques } from "../../store/critique";
+import { ratingEmoji } from "./StarRating";
+import RatingDisplay from "./RatingDisplay";
 
 
 // const estate = {
@@ -26,40 +30,33 @@ const critiques = [
 
 
 const CritiqueDisplay = ( {estate} ) => {
-	// const { id } = useParams();
+	const dispatch = useDispatch()
 
-	// const dispatch = useDispatch();
+	useEffect(() => {
+		if (estate) {
+			dispatch(genCritiques(estate))
+		}
+	}, [estate, dispatch]);
 
-	// once state is constructed
-	// const estate = useSelector((state) => state.estate[id])
-
-	// const user = useSelector((state) => state.session.user);
-
-	// useEffect(() => {
-	//     dispatchEvent(getEstate(id));
-	// }, [dispatch]);
-
-	// const { address, owner_id, title, nightly_rate, type_id, description } =
-	// 	estate;
+	const critiques = useSelector((state) => state.critiques);
+	const critiquesCount = Object.keys(critiques).length;
 
 
 	return (
-		<div id="critique-display-body">
-			<div id='critique-header'>
-                {estate?.rating} stars - {estate?.critique_ids.length} critiques
-            </div>
-            <div id='all-critiques'>
-            {critiques.map((critique) => {
-                // console.log(critique);
-                return (
-                    <IndCritique
-                    key={`critique-${critique.id}`}
-                    critique={critique} />
-                )
-            })}
-            </div>
-		</div>
-	);
+    <div id="critique-display-body">
+      <div id="critique-header">
+        <RatingDisplay rating={estate?.rating} places={2} /> ({critiquesCount} critiques)
+      </div>
+      <div id="all-critiques">
+        {Object.values(critiques).map((critique) => {
+          // console.log(critique);
+          return (
+            <IndCritique key={`critique-${critique.id}`} critique={critique} />
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 
 export default CritiqueDisplay;

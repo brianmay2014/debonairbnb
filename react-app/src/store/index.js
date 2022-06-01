@@ -4,12 +4,14 @@ import session from './session';
 import estateReducer from './estate';
 import searchReducer from './search';
 import charterReducer from './charter'
+import critiqueReducer from './critique';
 
 const rootReducer = combineReducers({
   session,
   estates: estateReducer,
   searchResults: searchReducer,
-  charters: charterReducer
+  charters: charterReducer,
+  critiques: critiqueReducer,
 });
 
 

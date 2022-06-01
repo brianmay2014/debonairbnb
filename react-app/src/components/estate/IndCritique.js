@@ -2,6 +2,11 @@ import React, { useEffect } from "react";
 // import { useSelector, useDispatch } from "react-redux";
 // import { Route, Redirect, useParams } from "react-router-dom";
 import "./estatePage.css";
+import dayjs from "dayjs"
+import calendar from "dayjs/plugin/calendar";
+import RatingDisplay from "./RatingDisplay";
+dayjs.extend(calendar)
+
 
 const IndCritique = ({ critique }) => {
 	// const { id } = useParams();
@@ -24,13 +29,12 @@ const IndCritique = ({ critique }) => {
 
 	const critId = critique.id;
 	const critUser = critique.userId;
-	critique.date = "05/24/2022";
-	
+	const timeformat = dayjs.unix((critique.created_at)).calendar(dayjs());
 
 	return (
 		<div className='critique-boxes' id={`critique-${critId}`}>
-			<div className="critique-users">Username: Placeholder Username</div>
-			<div className="critique-dates">Date: {critique.date}</div>
+			<div className="critique-users">{critique?.username} (<RatingDisplay rating={critique?.rating} />)</div>
+			<div className="critique-dates">{timeformat}</div>
 			<div className="critique-comments">{critique.comment}</div>
 		</div>
 	);
