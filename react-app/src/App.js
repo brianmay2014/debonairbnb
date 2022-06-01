@@ -14,20 +14,24 @@ import UploadImage from "./components/UploadImage/UploadeImage";
 import SearchResults from "./components/SearchResults/SearchResults";
 import HomePage from "./components/HomePage/HomePage";
 import CharterPage from "./components/CharterPage/CharterPage";
+<<<<<<< HEAD
 import MyCharters from "./components/MyCharters/MyCharters"
 import {genCharters} from "./store/charter"
 import HostPage from "./components/HostPage/HostPage";
+=======
+import MyCharters from "./components/MyCharters/MyCharters";
+import { genCharters } from "./store/charter";
+>>>>>>> 52fcdf0 (fixed migration version)
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const estates = useSelector((state) => state.estates);
-  const [charterPayload, setCharterPayload] = useState(null)
+  const [charterPayload, setCharterPayload] = useState(null);
 
   useEffect(() => {
     dispatch(genEstates());
-      dispatch(genCharters())
-
+    dispatch(genCharters());
   }, [dispatch]);
 
   useEffect(() => {
@@ -73,8 +77,8 @@ function App() {
         <Route path="/charters">
           <CharterPage />
         </Route>
-        <Route path='/:id/my-charters'>
-          <MyCharters/>
+        <Route path="/:id/my-charters">
+          <MyCharters />
         </Route>
       </Switch>
     </BrowserRouter>
