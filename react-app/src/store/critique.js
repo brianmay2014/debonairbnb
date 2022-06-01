@@ -24,6 +24,25 @@ const loadCritiques = (critiques) => {
   };
 };
 
+export const makeCritique = (critique) => async (dispatch) => {
+  const estateId  = critique.estate_id;
+  console.log(critique)
+  const form = new FormData();
+  form.append("estate_id", estateId)
+  form.append("user_id", critique.user_id)
+  form.append("rating", critique.rating)
+  form.append("comment", critique.comment)
+  const response = await fetch(
+    `/api/estates/${estateId}/critiques`,
+    {method: "POST", body: form}
+  );
+  if (response.ok) {
+    const critiqueData = await response.json();
+    dispatch(loadCritiques(critiqueData.critiques));
+    return { ...critiqueData.critiques };
+  }
+};
+
 export const deleteCritique = (critique) => async (dispatch) => {
   const {id} = critique;
   const response = await fetch(`/api/critiques/${id}}`, "DELETE");

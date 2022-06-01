@@ -28,8 +28,6 @@ def critiques(id):
         return {"errors": f"No estate with id {id} exists"}, 404
     else:
         critiques = estate.critiques
-        print ("hello")
-        print (critiques);
         return {"critiques" : [critique.to_dict() for critique in critiques]}
 
 @estate_routes.route('/<int:id>/critiques', methods=["POST"])
@@ -42,12 +40,14 @@ def post_critique(id):
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
             critique = Critique()
-            form.populate_obj(Critique)
+            form.populate_obj(critique)
             db.session.add(critique)
             db.session.commit()
-            return critique.to_dict()
+            estate = Estate.query.get(id)
+            critiques = estate.critiques
+            return {"critiques" : [critique.to_dict() for critique in critiques]}
         else:
-            return form.errors, 400
+            return {"errors": form.errors}, 400
 
 
 @estate_routes.route('/<int:id>', methods=["PATCH"])
