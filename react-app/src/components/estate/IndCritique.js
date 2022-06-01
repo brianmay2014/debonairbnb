@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import "./estatePage.css";
 import dayjs from "dayjs"
 import calendar from "dayjs/plugin/calendar";
+import RatingDisplay from "./RatingDisplay";
 dayjs.extend(calendar)
 
 
@@ -32,7 +33,7 @@ const IndCritique = ({ critique }) => {
 
 	return (
 		<div className='critique-boxes' id={`critique-${critId}`}>
-			<div className="critique-users">{critique?.username}</div>
+			<div className="critique-users">{critique?.username} (<RatingDisplay rating={critique?.rating} />)</div>
 			<div className="critique-dates">{timeformat}</div>
 			<div className="critique-comments">{critique.comment}</div>
 		</div>
