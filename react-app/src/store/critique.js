@@ -36,10 +36,14 @@ export const makeCritique = (critique) => async (dispatch) => {
     `/api/estates/${estateId}/critiques`,
     {method: "POST", body: form}
   );
+  const critiqueData = await response.json();
+  console.log(critiqueData);
   if (response.ok) {
-    const critiqueData = await response.json();
     dispatch(loadCritiques(critiqueData.critiques));
     return { ...critiqueData.critiques };
+  } else {
+      console.log("boop");
+      return critiqueData;
   }
 };
 
@@ -55,6 +59,7 @@ export const genCritiques = (estate) => async (dispatch) => {
   // doing it this way in case we want more types of responses here later ...
   const { id } = estate;
   const [critiquesResponse] = await Promise.all([fetch(`/api/estates/${id}/critiques`)]);
+
   if (critiquesResponse.ok) {
     const [critiques] = await Promise.all([critiquesResponse.json()]);
     console.log(critiques)

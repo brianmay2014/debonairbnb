@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { ratingLabels } from "./StarRating";
 
 
 const SingleEmoji = ({emoji, rating, currentRating, setCurrentRating, hoverRating, setHoverRating}) => {
@@ -68,11 +69,13 @@ const EmojiRatingComponent = ({ emoji, onEmojiClick, maxRating }) => {
       />
     );
   }
-  console.log(emojis);
+
+  const label = currentRating ? `Selected Rating: ${currentRating}` : "Select a Rating"
+  console.log(ratingLabels);
 
   return (
     <div className={"emoji-ratings"}>
-      {emojis}
+      {emojis} {label}
     </div>
 
   );

@@ -3,13 +3,13 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { makeCritique } from "../../store/critique";
 import EmojiRatingComponent from "./EmojiRatingComponent";
-import ratingEmoji from "./StarRating";
+import { ratingEmoji, ratingLabels } from "./StarRating";
 
 function EstateCritiqueForm({ estate }) {
   const sessionUser = useSelector((state) => state.session.user);
   const [body, setBody] = useState("");
   const [rating, setRating] = useState(null);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const [disabled, setDisabled] = useState(true)
   const dispatch = useDispatch();
 
@@ -21,38 +21,60 @@ function EstateCritiqueForm({ estate }) {
       comment: body,
       rating: rating,
     };
-    if (data && data.errors) {
-      setErrors(data.errors);
+    setErrors({});
+    const critique = await dispatch(makeCritique(data));
+    if (critique.errors) {
+      console.log(critique.errors)
+      setErrors(critique.errors);
       return;
     }
-    console.log(data);
-    const critique = await dispatch(makeCritique(data));
-    if (critique)
-    setBody("");
+    if (critique && Object.keys(errors).length === 0) {
+      setBody("");
+      setRating(0);
+    }
   };
 
   useEffect(() => {
     setDisabled(body.length === 0);
   }, [body]);
 
+  const ratingInner = rating &&
+  <>
+    <h3>Rating Guide: {ratingLabels[rating].label} ({rating}{ratingEmoji})</h3>
+    <p>{ratingLabels[rating].description}</p>
+  </>;
+
   return (
-    <form className="critiqueAddForm" onSubmit={handleSubmit}>
-      <div className="critiqueInput">
-        <textarea
-          name="body"
-          placeholder="Leave a review... "
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-        />
-        <EmojiRatingComponent
-          emoji={ratingEmoji}
-          onEmojiClick={(r) => setRating(r)}
-          maxRating={5}
-        />
-        <button className={"btn"} disabled={disabled} type="submit">
-          Leave Critique
-        </button>
+    <form className="critiqueAddForm critique-boxes" onSubmit={handleSubmit}>
+      <div className={"critique-input"}>
+        <div>
+          <EmojiRatingComponent
+            emoji={ratingEmoji}
+            onEmojiClick={(r) => setRating(r)}
+            maxRating={5}
+          />
+          <textarea
+            className={"critique-text-area"}
+            name="body"
+            placeholder="Leave a review... "
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+          />
+        </div>
+        <div className={"rating-descriptions"}>
+          {ratingInner}
+        </div>
       </div>
+      <button className={"btn"} disabled={disabled} type="submit">
+        Leave Critique
+      </button>
+      {Object.keys(errors).length > 0 && (
+        <div className="errors">
+          {Object.keys(errors).map(
+            (key) => `${key.toUpperCase()}: ${errors[key]}`
+          )}
+        </div>
+      )}
     </form>
   );
 }

@@ -47,7 +47,7 @@ def post_critique(id):
             critiques = estate.critiques
             return {"critiques" : [critique.to_dict() for critique in critiques]}
         else:
-            return {"errors": form.errors}, 400
+            return {"errors": form.errors}, 403
 
 
 @estate_routes.route('/<int:id>', methods=["PATCH"])

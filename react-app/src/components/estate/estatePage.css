@@ -166,3 +166,17 @@ img{
     font-size: 2em;
     filter: grayscale(100%);
 }
+
+.critique-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.critique-text-area {
+    width: 100%;
+    background-color: var(--lightestegg);
+    padding: 18px;
+    border-radius: 26px;
+    box-shadow: inset 1px 1px 15px var(--lightestgold), inset -1px -1px 15px var(--lightestgold);
+}

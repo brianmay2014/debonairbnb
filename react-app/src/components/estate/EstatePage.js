@@ -10,7 +10,7 @@ import { genEstates } from "../../store/estate";
 import LocationDisplay from "./LocationDisplay";
 import { genCritiques } from "../../store/critique";
 import EstateCritiqueForm from "./EstateCritiqueForm";
-import ratingEmoji from "./StarRating";
+import { ratingEmoji } from "./StarRating";
 
 const EstatePage = ({setCharterPayload}) => {
   const { id } = useParams();
@@ -46,6 +46,7 @@ const EstatePage = ({setCharterPayload}) => {
 
       <ImageDisplay estate={estate} />
       <DescriptionAvailCharter estate={estate} setCharterPayload={setCharterPayload}/>
+	  <EstateCritiqueForm estate={estate} />
       <CritiqueDisplay estate={estate} />
       <LocationDisplay estate={estate} />
     </div>
