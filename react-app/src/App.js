@@ -17,17 +17,18 @@ import CharterPage from "./components/CharterPage/CharterPage";
 import MyCharters from "./components/MyCharters/MyCharters"
 import {genCharters} from "./store/charter"
 import HostPage from "./components/HostPage/HostPage";
+import SingleCharterPage from "./components/SingleCharterPage/SingleCharterPage"
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const estates = useSelector((state) => state.estates);
-  const [charterPayload, setCharterPayload] = useState(null)
+  const [charterPayload, setCharterPayload] = useState(null);
+  const sessionUser = useSelector(state => state.session.user)
 
   useEffect(() => {
     dispatch(genEstates());
-      dispatch(genCharters())
-
+    dispatch(genCharters());
   }, [dispatch]);
 
   useEffect(() => {
@@ -71,14 +72,17 @@ function App() {
           <SearchResults />
         </Route>
         <Route path="/charters">
-          <CharterPage charterPayload={charterPayload} setCharterPayload={setCharterPayload} />
+          <CharterPage />
         </Route>
-        <Route path='/:id/my-charters'>
-          <MyCharters/>
+        <Route exact path={`/:id/my-charters/`}>
+          <MyCharters />
+        </Route>
+        <Route path={`/:id/my-charters/:id`}>
+          <SingleCharterPage/>
         </Route>
       </Switch>
     </BrowserRouter>
-		
+
   );
 }
 

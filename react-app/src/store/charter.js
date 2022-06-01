@@ -1,3 +1,5 @@
+import { ValidationError } from "../utils/validationError";
+
 const ADD_CHARTER = "charters/addCharter";
 const REMOVE_CHARTER = "charters/removeCharter";
 const LOAD_CHARTERS = "charters/loadCharters";
@@ -32,39 +34,65 @@ const updateCharter = (charter) => {
 };
 
 export const addOneCharter = (charterTest) => async (dispatch) => {
-  const {sessionUserId, estateId, guestNum, startDate, endDate} = charterTest
+  const { sessionUserId, estateId, guestNum, startDate, endDate } = charterTest;
 
-const f = new FormData();
+  const f = new FormData();
 
-f.append("user_id", sessionUserId)
-f.append("estate_id", estateId)
-f.append("guest_num", guestNum)
-f.append("start_date", startDate)
-f.append("end_date", endDate)
+  f.append("user_id", sessionUserId);
+  f.append("estate_id", estateId);
+  f.append("guest_num", guestNum);
+  f.append("start_date", startDate);
+  f.append("end_date", endDate);
+
+  try {
+    const response = await fetch(`/api/charters/`, {
+      method: "POST",
+      body: f,
+    });
 
 
-  const response = await fetch(`/api/charters/`, {
-    method: "POST",
-    body: f
-  })
+    if (!response.ok) {
+      let error;
+      if (response.status === 401) {
+        error = await response.json()
+   
+        throw new ValidationError(error.errors, response.statusText)
+      } else {
+        let errorJSON;
+        error = await response.text();
+        try {
+          // Check if the error is JSON, i.e., from the Pokemon server. If so,
+          // don't throw error yet or it will be caught by the following catch
+          errorJSON = JSON.parse(error);
+        } catch {
+          // Case if server could not be reached
+          throw new Error(error);
+        }
+        throw new Error(`${errorJSON.title}: ${errorJSON.message}`);
+      }
+    }
+    const charterData = await response.json();
 
-  const charterData = await response.json()
+    dispatch(addCharter(charterData));
+    return { ...charterData };
 
-  dispatch(addCharter(charterData))
-  return {...charterData}
+  } catch (error) {
+
+    throw error;
+  }
 }
 
 export const editCharter = (charter, data) => async (dispatch) => {
   const { id } = charter;
-  const { userId, estateId, guestNum, startDate, endDate} = data;
+  const { userId, estateId, guestNum, startDate, endDate } = data;
 
   const response = await fetch(`/api/charters/${id}`, {
     method: "PATCH",
     body: data,
   });
   const charterData = await response.json();
-  dispatch(addCharter(charterData))
-  return { ...charterData}
+  dispatch(addCharter(charterData));
+  return { ...charterData };
 };
 
 export const deleteCharter = (charter) => async (dispatch) => {
@@ -77,15 +105,11 @@ export const deleteCharter = (charter) => async (dispatch) => {
 
 export const genCharters = () => async (dispatch) => {
   // doing it this way in case we want more types of responses here later ...
-  const [chartersResponse] = await Promise.all([
-    fetch("/api/charters/"),
-  ]);
-  const [charters] = await Promise.all([
-    chartersResponse.json(),
-  ]);
-  console.log(charters, 'AHHHHHH')
+  const [chartersResponse] = await Promise.all([fetch("/api/charters/")]);
+  const [charters] = await Promise.all([chartersResponse.json()]);
+  console.log(charters, "AHHHHHH");
   if (chartersResponse.ok) {
-    dispatch(loadCharters(charters.charters))
+    dispatch(loadCharters(charters.charters));
     return charters;
   }
 };
@@ -107,6 +131,6 @@ const charterReducer = (state = {}, action) => {
     default:
       return state;
   }
-}
+};
 
 export default charterReducer;
