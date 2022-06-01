@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 // import { useSelector, useDispatch } from "react-redux";
-import { Route, Redirect, useParams, useHistory } from "react-router-dom";
+import { Route, Redirect, useParams, useHistory, Switch } from "react-router-dom";
 import "./estatePage.css";
 import { getCheckinDate, getCheckoutDate, getNightStay } from "./utils";
 import { addDays } from 'date-fns';
 import {useSelector, useDispatch} from "react-redux"
-import {addOneCharter} from "../../store/charter"
 
-const CharterForm = ( {estate, stateVars} ) => {
+const CharterForm = ( {estate, stateVars, setCharterPayload} ) => {
 	const params = useParams();
 	const estateId = parseInt(params.id)
+	const history = useHistory()
 	const dispatch = useDispatch()
 	// const [checkinDate, setCheckinDate] = useState(getCheckinDate());
 	// const [checkoutDate, setCheckoutDate] = useState(getCheckoutDate());
@@ -52,8 +52,10 @@ const sessionUserId = useSelector(state => state.session.user?.id)
 		const payload = {
 			sessionUserId, estateId, guestNum, startDate, endDate
 		}
-console.log(payload)
-		dispatch(addOneCharter(payload))
+
+		setCharterPayload(payload)
+		return history.push('/charters')
+		// dispatch(addOneCharter(payload))
 	};
 
 
@@ -112,6 +114,8 @@ console.log(payload)
 	}
 
 	return (
+		<>
+
 		<div id="charter-form">
 			<form id="charter-reserve-form" onSubmit={handleSubmit}>
 				<ul className="form-errors">
@@ -177,6 +181,10 @@ console.log(payload)
 				</div>
 			</div>
 		</div>
+		<div>
+
+		</div>
+		</>
 	);
 };
 

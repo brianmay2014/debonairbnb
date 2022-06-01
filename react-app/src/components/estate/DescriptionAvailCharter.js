@@ -9,7 +9,7 @@ import { addDays } from 'date-fns';
 
 
 
-const DescriptionAvailCharter = ( {estate} ) => {
+const DescriptionAvailCharter = ( {estate, setCharterPayload} ) => {
 	// const { id } = useParams();
 
     let ciDate = new Date();
@@ -40,7 +40,7 @@ const DescriptionAvailCharter = ( {estate} ) => {
 
     let stateVars = {checkinDate, setCheckinDate, checkoutDate, setCheckoutDate, nightStay, setNightStay}
 
-    
+
     const ownerName = "Jerrey";
     // const numGuests = 6;
     // const numBaths = 3;
@@ -57,7 +57,7 @@ const DescriptionAvailCharter = ( {estate} ) => {
 					{/* {numGuests} guests - {numBeds} beds - {numBaths} baths */}
 				</div>
 				<div id="estate-description">{estate?.description}</div>
-				<AvailabilityCal 
+				<AvailabilityCal
                 estate={estate}
                 stateVars={stateVars}
                 />
@@ -66,7 +66,8 @@ const DescriptionAvailCharter = ( {estate} ) => {
 				<CharterForm
 					estate={estate}
 					stateVars={stateVars}
-					
+					setCharterPayload={setCharterPayload}
+
 				/>
 			</div>
 		</div>
@@ -74,4 +75,3 @@ const DescriptionAvailCharter = ( {estate} ) => {
 };
 
 export default DescriptionAvailCharter;
-
