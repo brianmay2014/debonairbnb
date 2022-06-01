@@ -50,19 +50,29 @@ export const editEstate = (estate, data) => async (dispatch) => {
   return { ...estateData}
 };
 
-export const createEstate = (address, title, nightlyRate, type, description, ownerId) =>
+export const createEstate = (address, title, nightlyRate, type_id, description, ownerId) =>
 	async (dispatch) => {
-		const response = await fetch(`/api/estates/new`, {
+		const f = new FormData();
+    f.append('address', address);
+    f.append('title', title);
+    f.append('nightly_rate', nightlyRate);
+    f.append('type_id', type_id);
+    f.append('description', description);
+    f.append('owner_id', ownerId);
+    
+    const response = await fetch(`/api/estates/new`, {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				address,
-				title,
-				nightlyRate,
-				type,
-				description,
-				ownerId,
-			}),
+      body: f,
+
+			// headers: { "Content-Type": "application/json" },
+			// body: JSON.stringify({
+			// 	address,
+			// 	title,
+			// 	nightly_rate: nightlyRate,
+			// 	type_id,
+			// 	description,
+			// 	owner_id: ownerId
+			// }),
 		});
 
 		if (response.ok) {

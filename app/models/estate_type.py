@@ -9,7 +9,7 @@ class EstateType(db.Model, CrUpMixin):
 
     #relationships
     #has many
-    estates = db.relationship("Estate", back_populates="type")
+    estates = db.relationship("Estate", back_populates="type", lazy='joined')
 
     @staticmethod
     def new(type):

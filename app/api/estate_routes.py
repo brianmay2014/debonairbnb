@@ -1,3 +1,4 @@
+import types
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.forms.critique_form import CritiqueForm
@@ -5,6 +6,7 @@ from app.models import db, Estate, EstateImage, Critique
 from app.forms import EstateForm
 from ..utils.s3utils import  upload_file_to_s3, allowed_file, get_unique_filename
 from ..utils.geoutils import EstateLocationData
+from ..seeds.estate_types import estate_types
 
 estate_routes = Blueprint('estates', __name__)
 
@@ -104,20 +106,28 @@ def post_new_estate():
     """
     form = EstateForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    # print('-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/')
+    # print('ffffffffform')
+    # print(form.data)
+    # print('eeeeeeend form')
+    # test = EstateType.query.all()
 
-    print(form.data)
+    # list comprehension on estate types
+    # choices = [(type.id, type.name) for type in test]
+    
+    # form.type.choices=choices
 
     if form.validate_on_submit():
+        # create a geolocation data from input string
         data = EstateLocationData.from_string(form.data['address'])
         estate = Estate(
             title=form.data['title'],
-            # address=form.data['address'],
-            nightly_rate=form.data['nightlyRate'],
-            # type_id=form.data['type'],
-            type_id=2,
+            nightly_rate=form.data['nightly_rate'],
+            type_id=form.data['type_id'],
+            # type_id=5,
             description=form.data['description'],
-            owner_id=form.data['ownerId'],
-
+            owner_id=form.data['owner_id'],
+            # extract all the details from geolocation
             address=data.address,
             city=data.city,
             state=data.state,
@@ -125,18 +135,12 @@ def post_new_estate():
             postal_code=data.postal_code,
             latitude=data.latitude,
             longitude=data.longitude
-
-            # create a geolocation data
-            # it will createa fully geocoded location, 
-            # fill in the object with that
         )
-        print('-*/-*/-*/-*/-*/-*/-*/')
-        # print(estate)
-        print('-*/-*/-*/-*/-*/-*/-*/')
-
+        
         db.session.add(estate)
         db.session.commit()
-        print('----------------we out here----------')
+
         return estate.to_dict()
+    # print(form.errors)
     # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
     return {'errors': 'woops'}, 401
