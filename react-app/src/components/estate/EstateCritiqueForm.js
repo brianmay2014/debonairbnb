@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { makeCritique } from "../../store/critique";
 import EmojiRatingComponent from "./EmojiRatingComponent";
+import RatingDisplay from "./RatingDisplay";
 import { ratingEmoji, ratingLabels } from "./StarRating";
 
 function EstateCritiqueForm({ estate }) {
@@ -40,7 +41,7 @@ function EstateCritiqueForm({ estate }) {
 
   const ratingInner = (rating !== 0) &&
   <>
-    <h3>Rating Guide: {ratingLabels[rating].label} ({rating}{ratingEmoji})</h3>
+    <h3>Rating Guide: {ratingLabels[rating].label} (<RatingDisplay rating={rating} />)</h3>
     <p>{ratingLabels[rating].description}</p>
   </>;
 

@@ -11,6 +11,7 @@ import LocationDisplay from "./LocationDisplay";
 import { genCritiques } from "../../store/critique";
 import EstateCritiqueForm from "./EstateCritiqueForm";
 import { ratingEmoji } from "./StarRating";
+import RatingDisplay from "./RatingDisplay";
 
 const EstatePage = ({setCharterPayload}) => {
   const { id } = useParams();
@@ -38,7 +39,7 @@ const EstatePage = ({setCharterPayload}) => {
         <div id="estate-head-title">{estate?.title}</div>
         <div id="estate-head-info">
           <div>
-            {estate?.rating.toFixed(2)} {ratingEmoji} ({critiquesCount} critiques)
+           <RatingDisplay rating={estate?.rating} places={2}/> ({critiquesCount} critiques)
           </div>
           <div>{address}</div>
         </div>

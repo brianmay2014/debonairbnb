@@ -6,6 +6,7 @@ import "./estatePage.css";
 import IndCritique from "./IndCritique";
 import { genCritiques } from "../../store/critique";
 import { ratingEmoji } from "./StarRating";
+import RatingDisplay from "./RatingDisplay";
 
 
 // const estate = {
@@ -44,7 +45,7 @@ const CritiqueDisplay = ( {estate} ) => {
 	return (
     <div id="critique-display-body">
       <div id="critique-header">
-        {estate?.rating.toFixed(2)} {ratingEmoji} ({critiquesCount} critiques)
+        <RatingDisplay rating={estate?.rating} places={2} /> ({critiquesCount} critiques)
       </div>
       <div id="all-critiques">
         {Object.values(critiques).map((critique) => {
