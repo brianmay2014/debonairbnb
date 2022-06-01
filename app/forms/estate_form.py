@@ -27,5 +27,5 @@ class EstateForm(FlaskForm):
     type_id = IntegerField('type_id')
     # type_id = SelectField('type_id', choices=[], validators=[DataRequired()])
     description = StringField('description')
-    ownerId = IntegerField('ownerId', validators=[DataRequired()])
+    owner_id = IntegerField('owner_id', validators=[DataRequired()])
 
