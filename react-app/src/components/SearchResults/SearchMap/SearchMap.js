@@ -15,6 +15,7 @@ const containerStyle = {
 };
 
 const SearchMap = ({ resultIds }) => {
+  console.log(process.env)
   console.log( process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
