@@ -36,7 +36,7 @@ const HostPage = () => {
     // console.log(estatesArr)
 
     const userEstates = estatesArr.filter((estate) => estate.owner_id === user.id);
-    // console.log(userEstates);
+    console.log(userEstates);
 
 	return (
 		<div>
