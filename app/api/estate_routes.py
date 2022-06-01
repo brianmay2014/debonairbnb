@@ -98,49 +98,39 @@ def estate(id):
 
 
 
-@estate_routes.route('/new', methods=["POST"])
-@login_required
-def post_new_estate():
-    """
-    Creates a new estate
-    """
-    form = EstateForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    # print('-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/-*/')
-    # print('ffffffffform')
-    # print(form.data)
-    # print('eeeeeeend form')
-    # test = EstateType.query.all()
+# @estate_routes.route('/new', methods=["POST"])
+# @login_required
+# def post_new_estate():
+#     """
+#     Creates a new estate
+#     """
+#     form = EstateForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
 
-    # list comprehension on estate types
-    # choices = [(type.id, type.name) for type in test]
-    
-    # form.type.choices=choices
-
-    if form.validate_on_submit():
-        # create a geolocation data from input string
-        data = EstateLocationData.from_string(form.data['address'])
-        estate = Estate(
-            title=form.data['title'],
-            nightly_rate=form.data['nightly_rate'],
-            type_id=form.data['type_id'],
-            # type_id=5,
-            description=form.data['description'],
-            owner_id=form.data['owner_id'],
-            # extract all the details from geolocation
-            address=data.address,
-            city=data.city,
-            state=data.state,
-            country=data.country,
-            postal_code=data.postal_code,
-            latitude=data.latitude,
-            longitude=data.longitude
-        )
+#     if form.validate_on_submit():
+#         # create a geolocation data from input string
+#         data = EstateLocationData.from_string(form.data['address'])
+#         estate = Estate(
+#             title=form.data['title'],
+#             nightly_rate=form.data['nightly_rate'],
+#             type_id=form.data['type_id'],
+#             # type_id=5,
+#             description=form.data['description'],
+#             owner_id=form.data['owner_id'],
+#             # extract all the details from geolocation
+#             address=data.address,
+#             city=data.city,
+#             state=data.state,
+#             country=data.country,
+#             postal_code=data.postal_code,
+#             latitude=data.latitude,
+#             longitude=data.longitude
+#         )
         
-        db.session.add(estate)
-        db.session.commit()
+#         db.session.add(estate)
+#         db.session.commit()
 
-        return estate.to_dict()
-    # print(form.errors)
-    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-    return {'errors': 'woops'}, 401
+#         return estate.to_dict()
+#     # print(form.errors)
+#     # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+#     return {'errors': 'woops'}, 401

@@ -1,13 +1,24 @@
 import React from "react";
+import { useDispatch } from 'react-redux'
+import { deleteEstate } from "../../store/estate";
 // import "./HomePage.css";
 
 const EstateRow = ({ estate }) => {
 	const address = `${estate?.city}, ${estate?.state}`;
 	const dispImg = estate?.images[0]?.url;
 
+	const dispatch = useDispatch();
+
 	// console.log(estate);
 
-    // submitDelete
+	const submitDelete = async (e) => {
+		e.preventDefault();
+
+		const data = await dispatch(deleteEstate(estate))
+		// if (data) {
+		// 	setErrors(data)
+		// }
+	};
 
     // submitEdit
 
@@ -22,7 +33,7 @@ const EstateRow = ({ estate }) => {
 				</a>
 				<div className="row-buttons">
 					<button className='btn'>Modify</button>
-					<button className='btn-cancel'>Dispose</button>
+					<button className='btn-cancel' onClick={submitDelete}>Dispose</button>
 				</div>
 			</div>
 			<div className="home-row-text">
