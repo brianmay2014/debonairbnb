@@ -1,4 +1,5 @@
 import React from "react";
+import RatingDisplay from "../estate/RatingDisplay";
 
 import "./HomePage.css";
 
@@ -22,8 +23,7 @@ const EstateCard = ( { estate } ) => {
 				<div className="card-top-bar">
 					<div className="card-address">{address}</div>
 					<div className="card-critique">
-						{estate?.rating}{' '}
-						<i class="fa fa-star" aria-hidden="true"></i>
+						<RatingDisplay rating={estate?.rating} places={2} />
 					</div>
 				</div>
 				<div className="card-availabilty">Feb 1-6</div>

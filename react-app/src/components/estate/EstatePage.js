@@ -39,7 +39,7 @@ const EstatePage = ({setCharterPayload}) => {
         <div id="estate-head-title">{estate?.title}</div>
         <div id="estate-head-info">
           <div>
-           <RatingDisplay rating={estate?.rating} places={2}/> ({critiquesCount} critiques)
+        	<RatingDisplay rating={estate?.rating} places={2}/> ({critiquesCount} critiques)
           </div>
           <div>{address}</div>
         </div>
