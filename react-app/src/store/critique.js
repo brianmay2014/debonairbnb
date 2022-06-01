@@ -42,16 +42,39 @@ export const makeCritique = (critique) => async (dispatch) => {
     dispatch(loadCritiques(critiqueData.critiques));
     return { ...critiqueData.critiques };
   } else {
-      console.log("boop");
       return critiqueData;
   }
 };
 
-export const deleteCritique = (critique) => async (dispatch) => {
-  const {id} = critique;
-  const response = await fetch(`/api/critiques/${id}}`, "DELETE");
+export const editCritique = (critique) => async (dispatch) => {
+  const id = critique.id;
+  const estateId = critique.estateId;
+  const form = new FormData();
+  form.append("estate_id", estateId);
+  form.append("user_id", critique.user_id);
+  form.append("rating", critique.rating);
+  form.append("comment", critique.comment);
+  const response = await fetch(`/api/estates/${estateId}/critiques/${id}`, {
+    method: "PATCH",
+    body: form,
+  });
+  const critiqueData = await response.json();
   if (response.ok) {
-    dispatch(removeCritique(critique));
+    dispatch(loadCritiques(critiqueData.critiques));
+    return { ...critiqueData.critiques };
+  } else {
+    return critiqueData;
+  }
+};
+
+export const deleteCritique = (critique) => async (dispatch) => {
+  const {id, estate_id} = critique;
+  console.log(id, estate_id);
+  console.log(`/api/estates/${estate_id}/critiques/${id}`);
+  const response = await fetch(`/api/estates/${estate_id}/critiques/${id}`, {method: "DELETE"});
+  if (response.ok) {
+    const critiques = await response.json();
+    dispatch(loadCritiques(critiques.critiques));
   }
 };
 

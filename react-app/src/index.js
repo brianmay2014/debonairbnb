@@ -12,8 +12,12 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import configureStore from './store';
+<<<<<<< HEAD
 >>>>>>> add modal for deleting critiques
 import { ModalProvider } from "./context/Modal";
+=======
+import { ModalProvider } from "./context/Modal"
+>>>>>>> edit and delete
 
 const store = configureStore();
 
