@@ -38,12 +38,11 @@ const EstatePage = ({setCharterPayload}) => {
         <div id="estate-head-title">{estate?.title}</div>
         <div id="estate-head-info">
           <div>
-            {estate?.rating} {ratingEmoji} ({critiquesCount} critiques)
+            {estate?.rating.toFixed(2)} {ratingEmoji} ({critiquesCount} critiques)
           </div>
           <div>{address}</div>
         </div>
       </div>
-
       <ImageDisplay estate={estate} />
       <DescriptionAvailCharter estate={estate} setCharterPayload={setCharterPayload}/>
 	  <EstateCritiqueForm estate={estate} />

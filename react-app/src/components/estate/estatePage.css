@@ -167,16 +167,41 @@ img{
     filter: grayscale(100%);
 }
 
+.critiqueAddForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .critique-input {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5em;
+    margin: 1em;
+}
+
+.critiqueAddForm .btn {
+     width: 33%;
+     margin: 0 auto;
+     font-size: 18px;
+}
+
+.critique-input-container {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
+    margin: 1em;
+    padding: 1em;
 }
 
 .critique-text-area {
+    display: block;
     width: 100%;
     background-color: var(--lightestegg);
-    padding: 18px;
+    resize: vertical;
     border-radius: 26px;
+    padding: 1em;
     box-shadow: inset 1px 1px 15px var(--lightestgold), inset -1px -1px 15px var(--lightestgold);
 }

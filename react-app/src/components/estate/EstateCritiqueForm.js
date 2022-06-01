@@ -8,7 +8,7 @@ import { ratingEmoji, ratingLabels } from "./StarRating";
 function EstateCritiqueForm({ estate }) {
   const sessionUser = useSelector((state) => state.session.user);
   const [body, setBody] = useState("");
-  const [rating, setRating] = useState(null);
+  const [rating, setRating] = useState(0);
   const [errors, setErrors] = useState({});
   const [disabled, setDisabled] = useState(true)
   const dispatch = useDispatch();
@@ -38,16 +38,16 @@ function EstateCritiqueForm({ estate }) {
     setDisabled(body.length === 0);
   }, [body]);
 
-  const ratingInner = rating &&
+  const ratingInner = (rating !== 0) &&
   <>
     <h3>Rating Guide: {ratingLabels[rating].label} ({rating}{ratingEmoji})</h3>
     <p>{ratingLabels[rating].description}</p>
   </>;
 
   return (
-    <form className="critiqueAddForm critique-boxes" onSubmit={handleSubmit}>
+    <form className="critiqueAddForm  critique-boxes" onSubmit={handleSubmit}>
       <div className={"critique-input"}>
-        <div>
+        <div className={"critique-input-container"}>
           <EmojiRatingComponent
             emoji={ratingEmoji}
             onEmojiClick={(r) => setRating(r)}

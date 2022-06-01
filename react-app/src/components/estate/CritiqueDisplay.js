@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./estatePage.css";
 import IndCritique from "./IndCritique";
 import { genCritiques } from "../../store/critique";
+import { ratingEmoji } from "./StarRating";
 
 
 // const estate = {
@@ -37,25 +38,24 @@ const CritiqueDisplay = ( {estate} ) => {
 	}, [estate, dispatch]);
 
 	const critiques = useSelector((state) => state.critiques);
+	const critiquesCount = Object.keys(critiques).length;
 
 
 	return (
-		<div id="critique-display-body">
-			<div id='critique-header'>
-                {estate?.rating} stars - {estate?.critique_ids.length} critiques
-            </div>
-            <div id='all-critiques'>
-            {Object.values(critiques).map((critique) => {
-                // console.log(critique);
-                return (
-                    <IndCritique
-                    key={`critique-${critique.id}`}
-                    critique={critique} />
-                )
-            })}
-            </div>
-		</div>
-	);
+    <div id="critique-display-body">
+      <div id="critique-header">
+        {estate?.rating.toFixed(2)} {ratingEmoji} ({critiquesCount} critiques)
+      </div>
+      <div id="all-critiques">
+        {Object.values(critiques).map((critique) => {
+          // console.log(critique);
+          return (
+            <IndCritique key={`critique-${critique.id}`} critique={critique} />
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 
 export default CritiqueDisplay;
