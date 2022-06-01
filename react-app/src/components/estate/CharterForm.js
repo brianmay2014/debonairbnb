@@ -54,7 +54,7 @@ const sessionUserId = useSelector(state => state.session.user?.id)
 		}
 
 		setCharterPayload(payload)
-		return history.push('/charters')
+		return history.push(`/charters?sessionUserId=${sessionUserId}&estateId=${estateId}&guestNum=${guestNum}&startDate=${startDate}&endDate=${endDate}`)
 		// dispatch(addOneCharter(payload))
 	};
 
