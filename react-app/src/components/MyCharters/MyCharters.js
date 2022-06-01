@@ -20,8 +20,8 @@ const MyCharters = () => {
             <h1>
               {charter.start_date} to {charter.end_date}
             </h1>
-            <button onClick={handleEdit}>Edit</button>
-            <button onClick={handleDelete}>Delete</button>
+            {/* <button onClick={handleEdit}>Edit</button>
+            <button onClick={handleDelete}>Delete</button> */}
           </div>
         );
       })}
