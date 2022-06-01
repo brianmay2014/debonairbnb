@@ -52,6 +52,7 @@ export const editEstate = (estate, data) => async (dispatch) => {
 
 export const createEstate = (address, title, nightlyRate, type_id, description, ownerId) =>
 	async (dispatch) => {
+    
 		const f = new FormData();
     f.append('address', address);
     f.append('title', title);
@@ -60,7 +61,8 @@ export const createEstate = (address, title, nightlyRate, type_id, description, 
     f.append('description', description);
     f.append('owner_id', ownerId);
     
-    const response = await fetch(`/api/estates/new`, {
+
+    const response = await fetch(`/api/users/${ownerId}/estates/`, {
 			method: "POST",
       body: f,
 
@@ -91,7 +93,13 @@ export const createEstate = (address, title, nightlyRate, type_id, description, 
 
 export const deleteEstate = (estate) => async (dispatch) => {
   const { id } = estate;
-  const response = await fetch(`/api/estates/${id}}`, "DELETE");
+  console.log('inside the thunk');
+  console.log('estateowner', estate.owner_id);
+  console.log("estateid", estate.id);
+  const response = await fetch(`/api/users/${estate.owner_id}/estates/${estate.id}/`, {
+    method: "DELETE",
+    body: JSON.stringify({ estate_id: estate.id })
+  });
   if (response.ok) {
     dispatch(removeEstate(estate));
   }

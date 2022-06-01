@@ -1,6 +1,8 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User
+from app.models import db, User, Estate
+from app.forms import EstateForm
+from ..utils.geoutils import EstateLocationData
 
 user_routes = Blueprint('users', __name__)
 
@@ -10,6 +12,56 @@ user_routes = Blueprint('users', __name__)
 def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
+
+@user_routes.route('/<int:owner_id>/estates/<int:estate_id>/', methods=["DELETE"])
+@login_required
+def del_user_estate(owner_id, estate_id):
+    """
+    Deletes an estate from the database
+    """
+    estate = Estate.query.get(estate_id)
+    db.session.delete(estate)
+    db.session.commit()
+
+    return f'estate number {estate_id} deleted';
+
+
+@user_routes.route('/<int:id>/estates/', methods=["POST"])
+@login_required
+def post_new_estate(id):
+    """
+    Creates a new estate
+    """
+    form = EstateForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        # create a geolocation data from input string
+        data = EstateLocationData.from_string(form.data['address'])
+        estate = Estate(
+            title=form.data['title'],
+            nightly_rate=form.data['nightly_rate'],
+            type_id=form.data['type_id'],
+            # type_id=5,
+            description=form.data['description'],
+            owner_id=form.data['owner_id'],
+            # extract all the details from geolocation
+            address=data.address,
+            city=data.city,
+            state=data.state,
+            country=data.country,
+            postal_code=data.postal_code,
+            latitude=data.latitude,
+            longitude=data.longitude
+        )
+        
+        db.session.add(estate)
+        db.session.commit()
+
+        return estate.to_dict()
+    # print(form.errors)
+    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': 'woops'}, 401
 
 
 @user_routes.route('/<int:id>')
