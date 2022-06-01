@@ -60,7 +60,7 @@ console.log(sessionUser, "USER")
                 </NavLink>
               </li>
               <li>
-                <NavLink to={`/${sessionUser.id}/my-charters/`} activeClassName="active">
+                <NavLink to={`/users/${sessionUser.id}/my-charters/`} activeClassName="active">
                   My Charters
                 </NavLink>
               </li>
