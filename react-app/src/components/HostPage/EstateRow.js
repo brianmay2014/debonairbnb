@@ -7,6 +7,10 @@ const EstateRow = ({ estate }) => {
 
 	// console.log(estate);
 
+    // submitDelete
+
+    // submitEdit
+
 	return (
 		<div className="estate-rows" id={`estate-row-${estate?.id}`}>
 			<div className="row-left" id="estate-display">
