@@ -13,6 +13,7 @@ import { genEstates } from "./store/estate";
 import UploadImage from "./components/UploadImage/UploadeImage";
 import SearchResults from "./components/SearchResults/SearchResults";
 import HomePage from "./components/HomePage/HomePage";
+import CharterPage from "./components/CharterPage/CharterPage"
 
 function App() {
   const [loaded, setLoaded] = useState(false);
