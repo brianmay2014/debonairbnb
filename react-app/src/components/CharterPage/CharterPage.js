@@ -69,7 +69,7 @@ const CharterPage = ({ setCharterPayload, charterPayload }) => {
               <button onClick={handleConfirm}>Confirm charter</button>
             </div>
             <div className="right-charter-box">
-              <div>
+              <div className="charter-img-box">
                 <img src={charterEstate?.images[0].url}></img>
                 <div>
                   <p>{charterEstate?.title}</p>
