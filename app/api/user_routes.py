@@ -61,7 +61,40 @@ def post_new_estate(id):
         return estate.to_dict()
     # print(form.errors)
     # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-    return {'errors': 'woops'}, 401
+    return {'errors': form.errors}, 403
+
+
+@user_routes.route('/<int:owner_id>/estates/<int:estate_id>', methods=["PATCH"])
+@login_required
+def patch_estate(owner_id, estate_id):
+    """
+    Edits an estate
+    """
+    estate = Estate.query.get(estate_id)
+    if not estate:
+        return {"errors": f"No estate with id {estate_id} exists"}, 404
+    else:
+        form = EstateForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        form['owner_id'].data = owner_id
+        if form.validate_on_submit():
+            # create a geolocation data from input string
+            data = EstateLocationData.from_string(form.data['address'])
+            estate.address=data.address,
+            estate.city=data.city,
+            estate.state=data.state,
+            estate.country=data.country,
+            estate.postal_code=data.postal_code,
+            estate.latitude=data.latitude,
+            estate.longitude=data.longitude
+            form.populate_obj(estate)       
+            db.session.add(estate)
+            db.session.commit()
+
+            return estate.to_dict()
+        # print(form.errors)
+        # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        return {'errors': form.errors}, 403
 
 
 @user_routes.route('/<int:id>')

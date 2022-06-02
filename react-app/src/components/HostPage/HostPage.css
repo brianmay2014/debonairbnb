@@ -64,3 +64,6 @@ label, input, button{
     width: 100%;
 }
 
+.estate-edit-form{
+    width: 460px;
+}
