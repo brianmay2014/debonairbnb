@@ -102,23 +102,27 @@ function SearchBar() {
       );
     }
 
-    if (destination && estates.find(estate => `${estate.state}, ${estate.country}` === destination)) {
+    if (
+      destination &&
+      estates.find(
+        (estate) => `${estate.state}, ${estate.country}` === destination
+      )
+    ) {
+      let estatesArraySingle = [];
 
-      let estatesArraySingle = []
-
-      estates.map(estate => {
+      estates.map((estate) => {
         if (`${estate.state}, ${estate.country}` === destination) {
-          estatesArraySingle.push(estate.id)
+          estatesArraySingle.push(estate.id);
         }
-      })
-      console.log(estatesArraySingle)
-      return history.push(
-        `/search?estateids=${estatesArraySingle.join(",")}`
-      );
-
+      });
+      console.log(estatesArraySingle);
+      return history.push(`/search?estateids=${estatesArraySingle.join(",")}`);
     }
     // returns results of first item in search result suggestions
-    if (alphabetizedSet.length && destination !== alphabetizedSet[0].split(',')[0]) {
+    if (
+      alphabetizedSet.length &&
+      destination !== alphabetizedSet[0].split(",")[0]
+    ) {
       let firstSearchResultArray = [];
 
       const firstSearchFilter = estates.filter(
@@ -128,7 +132,6 @@ function SearchBar() {
       firstSearchFilter.map((estate) => {
         firstSearchResultArray.push(estate.id);
       });
-
 
       return history.push(
         `/search?estateids=${firstSearchResultArray.join(",")}`
@@ -144,7 +147,6 @@ function SearchBar() {
       firstSearchFilter.map((estate) => {
         firstSearchResultArray.push(estate.id);
       });
-
 
       return history.push(
         `/search?estateids=${firstSearchResultArray.join(",")}`
@@ -175,13 +177,13 @@ function SearchBar() {
             <button onClick={openDateMenu}>
               <p>Any Week</p>
             </button>
-            <span className="search-button-spans"></span>
-
+            {/* <span className="search-button-spans"></span> */}
+{/*
             <button onClick={openGuestsMenu} className="guest-icon-button">
               <p>
-                Add guests <i class="fa-solid fa-magnifying-glass"></i>
+                Add guests
               </p>
-            </button>
+            </button> */}
           </div>
 
           <div className={hiddenButtons ? "inputs-revealed" : "inputs-hidden"}>
@@ -194,17 +196,20 @@ function SearchBar() {
             </div>
             <div className="search-inputs">
               <label>When</label>
-              <SearchDurationInput setDateRange={setDateRange} />
-            </div>
-            <div className="search-inputs">
-              <label>Who</label>
-              <div className="guest-input">
-                <SearchGuestsInput setGuestNumber={setGuestNumber} />
+              <div id="search-duration-input">
+                <SearchDurationInput setDateRange={setDateRange} />
                 <button type="submit">
                   <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
               </div>
             </div>
+            {/* <div className="search-inputs">
+              <label>Who</label>
+              <div className="guest-input">
+                <SearchGuestsInput setGuestNumber={setGuestNumber} />
+
+              </div>
+            </div> */}
           </div>
         </form>
       </div>

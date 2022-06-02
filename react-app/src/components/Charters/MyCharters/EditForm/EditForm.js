@@ -4,6 +4,7 @@ import { addDays } from 'date-fns';
 import {useDispatch, useSelector} from "react-redux"
 import {editCharter} from "../../../../store/charter"
 import {dateParser} from "../../../../utils/dateParser"
+import {dateArrayCreator} from "../../../../utils/dateArrayCreator"
 
 const EditForm = ({charter}) => {
   let ciDate = new Date(charter.start_date.replace('GMT', ''));
@@ -17,6 +18,14 @@ const EditForm = ({charter}) => {
   const allCharters = useSelector(state => {Object.values(state.charters)})
   const allChartersForEstate = allCharters?.filter(charter => charter.estate_id === charter.estate_id)
 
+
+  let disabledDatesArray = []
+
+	allChartersForEstate?.forEach(charter => {
+		(dateArrayCreator(new Date (charter?.start_date), new Date (charter.end_date))).forEach(date => {
+			disabledDatesArray.push(date)
+		})
+	})
 
   const [dateRange, setDateRange] = useState([
 		{
@@ -66,7 +75,7 @@ const EditForm = ({charter}) => {
 				months={2}
 				ranges={dateRange}
 				direction="horizontal"
-        disabledDates={[today, addDays(today, 2)]}
+        disabledDates={disabledDatesArray}
 			/>
 		</div>
     <div>
