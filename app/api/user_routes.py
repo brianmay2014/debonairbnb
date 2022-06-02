@@ -26,7 +26,7 @@ def del_user_estate(owner_id, estate_id):
     return f'estate number {estate_id} deleted';
 
 
-@user_routes.route('/<int:id>/estates/', methods=["POST"])
+@user_routes.route('/<int:id>/estates', methods=["POST"])
 @login_required
 def post_new_estate(id):
     """
