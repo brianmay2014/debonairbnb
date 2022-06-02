@@ -66,7 +66,7 @@ export const createEstate = (address, title, nightlyRate, type_id, description, 
     f.append('owner_id', ownerId);
     
 
-    const response = await fetch(`/api/users/${ownerId}/estates/`, {
+    const response = await fetch(`/api/users/${ownerId}/estates`, {
 			method: "POST",
       body: f,
 
