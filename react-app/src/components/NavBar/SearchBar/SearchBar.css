@@ -39,7 +39,7 @@
   border-radius: 4px;
   outline: none;
   appearance: none;
-  width: 125px;
+  width: 300px;
 }
 
 .search-inputs {
@@ -50,7 +50,7 @@
   flex-direction: column;
   justify-content: center;
   background-color:#f7f7f7;
-  width: 270px;
+  width: 395px;
   padding-left: 30px;
 }
 
@@ -129,4 +129,10 @@
   border-left: 1px solid #323435;
   border-radius: 25px;
   cursor: pointer;
+}
+
+#search-duration-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

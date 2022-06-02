@@ -14,7 +14,7 @@ const SearchDestinationInput = ({
 
   // sets value of input to search suggestion
   const displayInputValue = (e) => {
-    // console.log(e.target.value);
+
     setShowSearchSuggestions(false);
     setDestinationValue(e.target.innerText);
     setFilteredData(Array.from(filteredSet).sort())
@@ -25,7 +25,7 @@ const SearchDestinationInput = ({
   const handleDestinationFilter = (e) => {
     const searchWord = e.target.value;
     const newFilter = estates.filter((value) => {
-      // console.log(value.state)
+
       if (value.state) {
         return value.state.toLowerCase().includes(searchWord.toLowerCase());
       } else {

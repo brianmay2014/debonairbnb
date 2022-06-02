@@ -7,14 +7,14 @@ import { Modal } from "../../../context/Modal";
 import { addDays } from 'date-fns';
 
 const CharterRow = ({ charter, estateId }) => {
-  // console.log(typeof charter.start_date)
+
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const dateConverter = (string) => {
     let date = new Date(string);
-    // console.log(date.toLocaleString().split(",")[0], '============')
+
 
     return addDays(date, 1).toLocaleString().split(",")[0];
   };
@@ -58,12 +58,12 @@ const CharterRow = ({ charter, estateId }) => {
           </div>
         </div>
         <div className="home-row-text">
-          <Link to={`/users/${charter.user_id}/my-charters/${charter.id}`}>
-            <h2>
+
+            <h3>
               {dateConverter(charter.start_date)} -
               {dateConverter(charter.end_date)}
-            </h2>
-          </Link>
+            </h3>
+
           <div className="row-title">{estate?.title}</div>
           <div className="row-address">{estate?.address}</div>
           <div className="row-description">{estate?.description}</div>
@@ -79,7 +79,7 @@ const CharterRow = ({ charter, estateId }) => {
       </div>
       {showEditModal && (
         <Modal onClose={() => setShowEditModal(false)}>
-          <EditForm charter={charter}/>
+          <EditForm currCharter={charter} setShowEditModal={setShowEditModal}/>
         </Modal>
       )}
       {showDeleteModal && (

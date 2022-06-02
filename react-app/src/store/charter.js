@@ -101,7 +101,7 @@ f.append("start_date", startDate);
 f.append("end_date", endDate);
 f.append("charter_id", id)
 
-  const response = await Promise.all([fetch(`/api/charters/${id}`, {
+  const [response] = await Promise.all([fetch(`/api/charters/${id}`, {
     method: "PATCH",
     body: f,
   })]);

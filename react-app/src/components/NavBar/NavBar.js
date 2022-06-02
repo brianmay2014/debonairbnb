@@ -10,7 +10,7 @@ import {useLocation} from "react-router-dom"
 
 const NavBar = () => {
   let location = useLocation()
-  console.log(location)
+
   if (location.pathname === "/charters") {
     return (
       <nav className="nav-home">
