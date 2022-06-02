@@ -75,19 +75,23 @@ def post_critique(id):
 @login_required
 def patch_critique(estate_id, critique_id):
     critique = Critique.query.get(critique_id)
-    if not estate:
+    if not critique:
         return {"errors": f"No critique with id {critique_id} exists"}, 404
     else:
         form = CritiqueForm()
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
+            print(critique)
+            print(form.data)
             form.populate_obj(critique)
+            print(critique)
             db.session.add(critique)
             db.session.commit()
             estate = Estate.query.get(estate_id)
             critiques = estate.critiques
             return {"critiques" : [critique.to_dict() for critique in critiques]}
         else:
+            print(form.errors);
             return {"errors": form.errors}, 403
 
 @estate_routes.route('/<int:estate_id>/critiques/<int:critique_id>', methods=["DELETE"])

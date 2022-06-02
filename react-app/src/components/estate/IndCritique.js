@@ -7,6 +7,7 @@ import calendar from "dayjs/plugin/calendar";
 import RatingDisplay from "./RatingDisplay";
 import { useSelector, useDispatch } from "react-redux"
 import { deleteCritique, editCritique } from "../../store/critique"
+import { genEstates } from "../../store/estate";
 import { Modal } from "../../context/Modal";
 import EmojiRatingComponent from './EmojiRatingComponent';
 import { ratingEmoji } from "./StarRating";
@@ -43,11 +44,14 @@ const IndCritiqueDeleteModal = ({critique, setShowModal}) => {
 		}
 	};
 	return (
-		<div className={"critique-display"}>
-			<IndCritique critique={critique} showControls={false} />
-			<button className="btn" onClick={handleDelete}>Confirm Delete?</button>
-		</div>
-	);
+    <div className={"critique-delete-display"}>
+      <h2>Delete Critique?</h2>
+      <IndCritique critique={critique} showControls={false} />
+      <button className="btn" onClick={handleDelete}>
+        Confirm Delete?
+      </button>
+    </div>
+  );
 }
 /// 000000000000000000000000
 
@@ -85,19 +89,22 @@ const IndCritiqueEditModal = ({ critique, setShowModal }) => {
   const disabled = Object.keys(errors).length > 0;
 
   const handleSubmit = async (e) => {
+	e.preventDefault();
 	const updateCritique = {...critique}
 	updateCritique.rating = rating;
 	updateCritique.comment = body;
-    const editConfirm = await dispatch(editCritique(critique));
+    const editConfirm = await dispatch(editCritique(updateCritique));
     if (editConfirm.errors) {
       setErrors(editConfirm.errors)
 	  return;
     } else {
+	  await dispatch(genEstates())
       setShowModal(false);
     }
   };
   return (
     <form className="critiqueAddForm  critique-boxes" onSubmit={handleSubmit}>
+	  <h2>Edit Critique</h2>
       <div className={"critique-input"}>
         <div className={"critique-input-container"}>
           <EmojiRatingComponent
@@ -114,7 +121,6 @@ const IndCritiqueEditModal = ({ critique, setShowModal }) => {
             onChange={(e) => setBody(e.target.value)}
           />
         </div>
-        {/* <div className={"rating-descriptions"}>{ratingInner}</div> */}
       </div>
       <button className={"btn"} disabled={disabled} type="submit">
         Update Critique
@@ -141,13 +147,15 @@ const IndCritique = ({ critique, showControls=true }) => {
 	const user = useSelector((state) => state.session.user);
 	const critId = critique.id;
 	const critUser = critique.userId;
-	const isOwnedByThisUser = critUser === user?.id;
 	const timeformat = dayjs.unix((critique.created_at)).calendar(dayjs());
 
 	return (
     <div className="critique-boxes" id={`critique-${critId}`}>
-      {showControls && <IndCritiqueDelButton critique={critique} />}
-      {showControls && <IndCritiqueEditButton critique={critique} />}
+      <div className={"critique-controls"}>
+        {showControls && <IndCritiqueDelButton critique={critique} />}
+        {showControls && <IndCritiqueEditButton critique={critique} />}
+      </div>
+
       <div className="critique-users">
         {critique?.username} (<RatingDisplay rating={critique?.rating} />)
       </div>

@@ -47,8 +47,9 @@ export const makeCritique = (critique) => async (dispatch) => {
 };
 
 export const editCritique = (critique) => async (dispatch) => {
+  console.log("YOOOOO")
   const id = critique.id;
-  const estateId = critique.estateId;
+  const estateId = critique.estate_id;
   const form = new FormData();
   form.append("estate_id", estateId);
   form.append("user_id", critique.user_id);
@@ -59,6 +60,10 @@ export const editCritique = (critique) => async (dispatch) => {
     body: form,
   });
   const critiqueData = await response.json();
+  if (critiqueData.errors) {
+      return critiqueData;
+  }
+  console.log(critiqueData);
   if (response.ok) {
     dispatch(loadCritiques(critiqueData.critiques));
     return { ...critiqueData.critiques };

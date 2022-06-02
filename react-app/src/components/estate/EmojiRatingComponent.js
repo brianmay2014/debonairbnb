@@ -48,8 +48,8 @@ const SingleEmoji = ({emoji, rating, currentRating, setCurrentRating, hoverRatin
     );
   };
 
-const EmojiRatingComponent = ({ emoji, onEmojiClick, maxRating }) => {
-  const [currentRating, setCurrentRating] = useState(0);
+const EmojiRatingComponent = ({ emoji, onEmojiClick, maxRating, defaultRating }) => {
+  const [currentRating, setCurrentRating] = useState(defaultRating ?? 0);
   const [hoverRating, setHoverRating] = useState(0);
 
   useEffect(() => {

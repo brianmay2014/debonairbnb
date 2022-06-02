@@ -20,6 +20,7 @@ const EstatePage = ({setCharterPayload}) => {
   const estate = useSelector((state) => state.estates[id]);
   const user = useSelector((state) => state.session.user);
   const critiquesCount = useSelector((state) => Object.keys(state.critiques).length)
+  const rating = useSelector((state) => state.estates[id]?.rating)
 
   useEffect(() => {
 	if (estate) {
@@ -39,7 +40,7 @@ const EstatePage = ({setCharterPayload}) => {
         <div id="estate-head-title">{estate?.title}</div>
         <div id="estate-head-info">
           <div>
-        	<RatingDisplay rating={estate?.rating} places={2}/> ({critiquesCount} critiques)
+        	<RatingDisplay rating={rating} places={2}/> ({critiquesCount} critiques)
           </div>
           <div>{address}</div>
         </div>

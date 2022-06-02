@@ -25,7 +25,6 @@ function EstateCritiqueForm({ estate }) {
     setErrors({});
     const critique = await dispatch(makeCritique(data));
     if (critique.errors) {
-      console.log(critique.errors)
       setErrors(critique.errors);
       return;
     }

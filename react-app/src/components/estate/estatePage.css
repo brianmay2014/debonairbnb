@@ -199,9 +199,24 @@ img{
 .critique-text-area {
     display: block;
     width: 100%;
+    min-height: 200px;
     background-color: var(--lightestegg);
     resize: vertical;
     border-radius: 26px;
     padding: 1em;
     box-shadow: inset 1px 1px 15px var(--lightestgold), inset -1px -1px 15px var(--lightestgold);
+}
+
+.critique-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+    align-items: center;
+}
+
+.critique-delete-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
