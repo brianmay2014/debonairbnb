@@ -84,7 +84,7 @@ const CharterRow = ({ charter, estateId }) => {
       )}
       {showDeleteModal && (
         <Modal onClose={() => setShowDeleteModal(false)}>
-          <DeleteForm charter={charter} />
+          <DeleteForm charter={charter} setShowDeleteModal={setShowDeleteModal} />
         </Modal>
       )}
     </>
