@@ -6,17 +6,18 @@ import {editCharter} from "../../../../store/charter"
 import {dateParser} from "../../../../utils/dateParser"
 import {dateArrayCreator} from "../../../../utils/dateArrayCreator"
 
-const EditForm = ({charter}) => {
-  let ciDate = new Date(charter.start_date.replace('GMT', ''));
-  let coDate = new Date(charter.end_date.replace('GMT', ''))
+const EditForm = ({currCharter, setShowEditModal}) => {
+  let ciDate = new Date(currCharter.start_date.replace('GMT', ''));
+  let coDate = new Date(currCharter.end_date.replace('GMT', ''))
   let today = new Date()
 
   const dispatch = useDispatch()
   const [checkinDate, setCheckinDate] = useState(ciDate)
   const [checkoutDate, setCheckoutDate] = useState(coDate)
-  const [guestNum, setGuestNum] = useState(charter.guest_num)
-  const allCharters = useSelector(state => {Object.values(state.charters)})
-  const allChartersForEstate = allCharters?.filter(charter => charter.estate_id === charter.estate_id)
+  const [guestNum, setGuestNum] = useState(currCharter.guest_num)
+  const allCharters = useSelector(state => Object.values(state.charters))
+  const allChartersForEstate = allCharters?.filter(charter => charter.estate_id === currCharter.estate_id)
+
 
 
   let disabledDatesArray = []
@@ -26,6 +27,7 @@ const EditForm = ({charter}) => {
 			disabledDatesArray.push(date)
 		})
 	})
+  // console.log(allChartersForEstate)
 
   const [dateRange, setDateRange] = useState([
 		{
@@ -41,10 +43,9 @@ const EditForm = ({charter}) => {
 
   const handleEdit = (e) => {
     e.preventDefault()
-    const payload = {id:charter.id, userId:charter.user_id, estateId:charter.estate_id, guestNum: guestNum, startDate: dateParser(checkinDate), endDate: dateParser(checkoutDate)}
+    const payload = {id:currCharter.id, userId:currCharter.user_id, estateId:currCharter.estate_id, guestNum: guestNum, startDate: dateParser(checkinDate), endDate: dateParser(checkoutDate)}
     dispatch(editCharter(payload))
-    console.log(checkinDate, "DATE BEFORE PARSER")
-    console.log(dateParser(checkinDate), "DATE PARSERR")
+    setShowEditModal(false)
   }
 
   const handleGuestNum = (e) => {

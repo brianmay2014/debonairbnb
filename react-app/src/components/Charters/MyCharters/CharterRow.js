@@ -79,7 +79,7 @@ const CharterRow = ({ charter, estateId }) => {
       </div>
       {showEditModal && (
         <Modal onClose={() => setShowEditModal(false)}>
-          <EditForm charter={charter}/>
+          <EditForm currCharter={charter} setShowEditModal={setShowEditModal}/>
         </Modal>
       )}
       {showDeleteModal && (
