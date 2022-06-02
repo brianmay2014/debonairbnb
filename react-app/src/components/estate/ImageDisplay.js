@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
+import CrossfadeImage from "react-crossfade-image";
 // import { useSelector, useDispatch } from "react-redux";
 // import { Route, Redirect, useParams } from "react-router-dom";
 import "./estatePage.css";
@@ -22,41 +23,55 @@ import "./estatePage.css";
 // ];
 
 const ImageDisplay = ( { estate }) => {
-	// const { id } = useParams();
-	// console.log(id);
-
-	// const dispatch = useDispatch();
-
-	// once state is constructed
-	// const estate = useSelector((state) => state.estate[id])
-
-	// const user = useSelector((state) => state.session.user);
-
-	// useEffect(() => {
-	//     dispatchEvent(getEstate(id));
-	// }, [dispatch]);
-
-	// const { address, owner_id, title, nightly_rate, type_id, description } =
-	// 	estate;
-	// const avg_rating = 4.5;
-	// const rating_count = 15;
 
 	//map images from state for display
 	const imgUrls = estate?.images.map((obj) => obj.url);
 	const imgDesc = estate?.images.map((obj) => obj.title);
+
+	const [imgDisplays, setImgDisplays] = useState(estate?.images.map(i => {
+		return (
+      		<img
+			  key={i.id}
+			  src={i.url}
+			  alt={`${estate.title} ${i.title}`}
+			/>
+    	);
+	}));
+	const mainImg = imgDisplays?.length ? imgDisplays[0] : null;
+	const clusterImg = imgDisplays?.slice(1,5);
+
+	const interval = useRef();
+
+	useEffect(() => {
+		interval.current = setInterval(() => {
+			const displayCopy =  [...imgDisplays];
+			const first = displayCopy.shift();
+			displayCopy.push(first);
+			setImgDisplays(displayCopy)
+		}, 10000)
+		return () => clearInterval(interval.current)
+	},[imgDisplays])
+
+	if (!mainImg) {
+		clearInterval(interval.current)
+		return (
+		<div id="img-display-body">
+			<div id="main-image">
+			<p className="no-img"> No images!</p>
+			</div>
+		</div>
+		);
+	}
 
 	return (
 		<div>
 		{imgUrls && (
 			<div id="image-display-body">
 				<div id="main-image">
-					<img src={`${imgUrls[0]}`} alt={`${estate?.title} ${imgDesc[0]}`}></img>
+					{mainImg}
 				</div>
 				<div id="cluster-images">
-					<img src={`${imgUrls[1]}`} alt={`${estate?.title} ${imgDesc[1]}`}></img>
-					<img src={`${imgUrls[2]}`} alt={`${estate?.title} ${imgDesc[2]}`}></img>
-					<img src={`${imgUrls[3]}`} alt={`${estate?.title} ${imgDesc[3]}`}></img>
-					<img src={`${imgUrls[4]}`} alt={`${estate?.title} ${imgDesc[4]}`}></img>
+					{clusterImg}
 				</div>
 		</div>
 			)}

@@ -18,8 +18,7 @@ label, input, button{
     margin: 5px;
 }
 
-
-.row-left img{
+.row-left img, .row-left .no-img.small{
     width: 100px;
     height: 100px;
     object-fit: cover;

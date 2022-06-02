@@ -12,7 +12,7 @@ const UploadImage = ({ estate }) => {
     e.preventDefault();
     setErrors([]);
     setLoading(true);
-    const updateEstate = await dispatch(editEstate(estate, {image})).catch(
+    const updateEstate = await dispatch(editEstate(estate, image)).catch(
       async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);

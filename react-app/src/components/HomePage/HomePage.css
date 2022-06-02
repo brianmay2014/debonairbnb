@@ -18,11 +18,20 @@
     font-size: 0.9em;
 }
 
-.home-card-img img{
+.home-card-img img, .home-card-img p {
     width: 277px;
     height: 277px;
     object-fit: cover;
 }
+
+.no-img {
+    display: flex;
+    color: var(--darkred);
+    background-color: var(--lightestgold);
+    justify-content: center;
+    align-items: center;
+}
+
 .home-card-text{
     padding: 5px 5px;
 }

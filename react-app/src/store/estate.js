@@ -32,7 +32,8 @@ const loadEstates = (estates) => {
 //   };
 // };
 
-export const editEstate = (estate) => async (dispatch) => {
+export const editEstate = (estate, image) => async (dispatch) => {
+  console.log(estate, image);
   const { id, address, title, nightly_rate, type_id, description, owner_id } = estate;
   // console.log(estate['owner_id']);
   const f = new FormData();
@@ -42,9 +43,10 @@ export const editEstate = (estate) => async (dispatch) => {
   f.append("nightly_rate", nightly_rate);
   f.append("type_id", type_id);
   f.append("owner_id", owner_id);
-  // if (image) {
-  //   f.append("image", image);
-  // }
+  if (image) {
+    console.log(image);
+    f.append("image", image);
+  }
   const response = await fetch(`/api/users/${estate.owner_id}/estates/${id}`, {
     method: "PATCH",
     body: f,
@@ -58,7 +60,7 @@ export const editEstate = (estate) => async (dispatch) => {
 
 export const createEstate = (address, title, nightlyRate, type_id, description, ownerId) =>
 	async (dispatch) => {
-    
+
 		const f = new FormData();
     f.append('address', address);
     f.append('title', title);
@@ -66,7 +68,7 @@ export const createEstate = (address, title, nightlyRate, type_id, description, 
     f.append('type_id', type_id);
     f.append('description', description);
     f.append('owner_id', ownerId);
-    
+
 
     const response = await fetch(`/api/users/${ownerId}/estates`, {
 			method: "POST",

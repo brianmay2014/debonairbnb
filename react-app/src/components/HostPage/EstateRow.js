@@ -28,7 +28,8 @@ const EstateRow = ({ estate }) => {
 		<div className="estate-rows" id={`estate-row-${estate?.id}`}>
 			<div className="row-left" id="estate-display">
 				<a href={`/estates/${estate?.id}`}>
-					<img src={dispImg} alt={`main-estate-${estate?.id}`} />
+					{dispImg ? <img src={dispImg} alt={`main-estate-${estate?.id}`} />
+					: <p className="no-img small">No Images!</p>}
 				</a>
 				<div className="row-buttons">
 					<button className="btn" onClick={() => setShowModal(true)}>
@@ -57,7 +58,7 @@ const EstateRow = ({ estate }) => {
 						<span className="per-night">per night</span>
 					</div>
 					<div className="upload-image">
-						<UploadImage estate={estates[estate?.id]} />
+						<UploadImage estate={estate} />
 					</div>
 				</div>
 			</div>
