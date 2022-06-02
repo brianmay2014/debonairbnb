@@ -45,7 +45,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <UploadImage estate={estates[1]} />
+      {/* <UploadImage estate={estates[1]} /> */}
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm />

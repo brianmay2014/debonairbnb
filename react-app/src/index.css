@@ -72,26 +72,6 @@ body {
     background: var(--lightegg);
     border-bottom: 2px solid var(--lightgold)
 }
-/*
-html {
-
-}
-
- form {
-
-}
-label {
-
-}
-html {
-
-}
-select, input {
-
-}
-select:focus, input:focus{
-
-} */
 
 button {
     cursor: pointer;

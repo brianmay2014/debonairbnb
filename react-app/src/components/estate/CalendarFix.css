@@ -1,8 +1,10 @@
 .rdrDays{
     width: 340px;
+    margin: 0;
 }
 .rdrDay{
-    width: 37.5px;
+    width: 47.5px;
+    margin: 0px;
 }
 
 .rdrDayToday .rdrDayNumber span:after {
@@ -15,4 +17,30 @@
   height: 2px;
   border-radius: 2px;
   background: var(--darkgold);
+}
+
+.rdrDayDisabled{
+  background: var(--lightestpink);
+}
+.rdrDayDisabled .rdrDayNumber span{
+  color: var(--medred);
+}
+
+.rdrNextPrevButton {
+  background: var(--medegg);
+}
+
+.rdrNextPrevButton:hover {
+  background: var(--lightgold);
+}
+
+.rdrDateDisplayWrapper {
+  background: var(--lightgold);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.rdrCalendarWrapper.rdrDateRangeWrapper{
+  border-radius: 15px;
+  
 }
