@@ -13,6 +13,7 @@ class Config:
         'DATABASE_URL').replace('postgres://', 'postgresql://')
     SQLALCHEMY_ECHO = True
     GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
+    REACT_APP_GOOGLE_MAPS_API_KEY = os.environ.get('REACT_APP_GOOGLE_MAPS_API_KEY')
     AWS_S3_ACCESS_KEY = os.environ.get('AWS_S3_ACCESS_KEY')
     AWS_S3_SECRET_ACCESS_KEY = os.environ.get('AWS_S3_SECRET_ACCESS_KEY')
     AWS_S3_BUCKET =  os.environ.get('AWS_S3_BUCKET')

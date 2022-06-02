@@ -38,7 +38,7 @@ def estates():
 @login_required
 @estate_routes.route('/key')
 def api():
-    return Config.GOOGLE_MAPS_API_KEY;
+    return Config.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 
 @estate_routes.route('/<int:id>/critiques')
