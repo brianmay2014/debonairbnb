@@ -13,7 +13,7 @@ const EstateForm = () => {
     const [address, setAddress] = useState('');
     const [title, setTitle] = useState('');
     const [nightlyRate, setNightlyRate] = useState(0);
-    const [type, setType] = useState(6);
+    const [type, setType] = useState(1);
     const [description, setDescription] = useState('');
     const [ownerId, setOwnerId] = useState(user.id);
 
@@ -40,9 +40,16 @@ const EstateForm = () => {
 		// console.log(address, title, nightlyRate, type_id, description, ownerId);
 		const newEstate = await dispatch(createEstate(address, title, nightlyRate, type, description, ownerId));
 		if (newEstate.errors) {
-			
+			console.log(newEstate.errors)
 			setErrors(newEstate.errors)
 			return;
+		} else {
+			setAddress('')
+			setTitle('')
+			setNightlyRate(0)
+			setType(1)
+			setDescription('')
+			setErrors({})
 		}
 	};
 
@@ -53,6 +60,7 @@ const EstateForm = () => {
 				{Object.keys(errors).length > 0 && (
 					<div className="form-errors">
 						{Object.keys(errors).map(
+							// (key) => `${errors[key]}`
 							(key) => `${key.toUpperCase()}: ${errors[key]}`
 						)}
 					</div>

@@ -25,8 +25,8 @@ class EstateForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     address = StringField('address', validators=[DataRequired()])
     nightly_rate = IntegerField('nightly_rate', validators=[DataRequired(), nightly_rate_enough])
-    type_id = IntegerField('type_id')
+    type_id = IntegerField('type_id', validators=[DataRequired()])
     # type_id = SelectField('type_id', choices=[], validators=[DataRequired()])
-    description = StringField('description')
+    description = StringField('description', validators=[DataRequired()])
     owner_id = IntegerField('owner_id', validators=[DataRequired()])
 

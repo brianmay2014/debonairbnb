@@ -70,6 +70,10 @@ class EstateLocationData():
     @staticmethod
     def from_string(blob):
         results = geo_service.geocode(blob, exactly_one=True)
+        if results is None:
+            return {'Address': 'Please input a valid address'}
+        # print('*-*-*-*-*--**-*-*-*--*insidefromstring*-*-*-*-*--**-*-*-*-')
+        # print(results)
         return EstateLocationData.build(results)
 
     @staticmethod

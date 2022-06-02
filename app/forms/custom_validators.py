@@ -30,7 +30,5 @@ def password_matches(form, field):
 def nightly_rate_enough(form, field):
     # Ensuring nightly_rate is over $300
     nightly_rate = field.data
-    print('----=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-==-')
-    print(nightly_rate)
     if nightly_rate < 300:
         raise ValidationError('Nightly Rate must be over $300')
