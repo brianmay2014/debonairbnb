@@ -80,6 +80,8 @@ def patch_estate(owner_id, estate_id):
         if form.validate_on_submit():
             # create a geolocation data from input string
             data = EstateLocationData.from_string(form.data['address'])
+            if not data.latitude:
+                return {'errors': "geolocation failed"}, 403
             estate.address=data.address,
             estate.city=data.city,
             estate.state=data.state,
