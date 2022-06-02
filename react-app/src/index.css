@@ -19,7 +19,7 @@
     transition: all 0.3s;
 }
 
-.btn:hover {
+.btn:hover:not(:disabled) {
     background-color: var(--lightegg);
     border: 2px solid var(--medgold);
     box-shadow: 0 0 8px var(--lightgold);
@@ -84,15 +84,20 @@ label {
 
 }
 html {
-       
+
 }
 select, input {
-   
+
 }
 select:focus, input:focus{
-  
+
 } */
 
 button {
     cursor: pointer;
+}
+
+button:disabled {
+    filter: grayscale(100%);
+    cursor: not-allowed;
 }
