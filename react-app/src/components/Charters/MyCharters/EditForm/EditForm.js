@@ -6,7 +6,6 @@ import {editCharter} from "../../../../store/charter"
 import {dateParser} from "../../../../utils/dateParser"
 
 const EditForm = ({charter}) => {
-console.log(charter.start_date, '========= start date')
   let ciDate = new Date(charter.start_date.replace('GMT', ''));
   let coDate = new Date(charter.end_date.replace('GMT', ''))
   let today = new Date()

@@ -38,7 +38,7 @@ const updateCharter = (charter) => {
 
 export const addOneCharter = (charterTest) => async (dispatch) => {
   const { sessionUserId, estateId, guestNum, startDate, endDate } = charterTest;
-  console.log(charterTest, 'CREATE CHARTER DATA ===============')
+  // console.log(charterTest, 'CREATE CHARTER DATA ===============')
 
   const f = new FormData();
 
@@ -101,10 +101,10 @@ f.append("start_date", startDate);
 f.append("end_date", endDate);
 f.append("charter_id", id)
 
-  const response = await fetch(`/api/charters/${id}`, {
+  const response = await Promise.all([fetch(`/api/charters/${id}`, {
     method: "PATCH",
     body: f,
-  });
+  })]);
   const charterData = await response.json();
   dispatch(addCharter(charterData));
   return { ...charterData };
@@ -113,9 +113,12 @@ f.append("charter_id", id)
 export const deleteCharter = (charter) => async (dispatch) => {
   const { id } = charter;
 
-  const response = await fetch(`/api/charters/${id}}`, "DELETE");
+  const [response] = await Promise.all([fetch(`/api/charters/${id}`, {method: "DELETE"})]);
+
+  console.log(response.ok, 'HEEEEERE')
   if (response.ok) {
-    dispatch(removeCharter(charter));
+    const charterResponse = await response.json();
+    dispatch(removeCharter(charterResponse))
   }
 };
 

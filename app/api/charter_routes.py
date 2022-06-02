@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import db, Charter
+from app.models import db, Charter, User
 from app.forms import CharterForm, CharterEditForm
 
 
@@ -72,6 +72,9 @@ def charter_update(id):
 @login_required
 def charter_delete(id):
     charter = Charter.query.get(id)
-    db.session.delete(charter)
-    db.session.commit()
-    return charter.to_dict()
+    if not charter:
+        return {"errors": f"No charter with id {id} exists"}, 404
+    else:
+        db.session.delete(charter)
+        db.session.commit()
+        return charter.to_dict()

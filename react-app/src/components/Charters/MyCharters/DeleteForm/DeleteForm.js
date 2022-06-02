@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
-import {useDispatch} from "react-redux"
-import {deleteCharter} from "../../../../store/charter"
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { deleteCharter, genCharters } from "../../../../store/charter";
 
 const DeleteForm = ({ charter, setShowDeleteModal }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleDelete = (e) => {
-    dispatch(deleteCharter(charter))
+    e.preventDefault();
+    dispatch(deleteCharter(charter)).then(setShowDeleteModal(false));
   };
+  // useEffect(() => {
+  //   dispatch(genCharters())
+  // }, [dispatch]);
 
   return (
     <>

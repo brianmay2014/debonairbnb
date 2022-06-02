@@ -36,7 +36,49 @@ charters = [
         "guest_num": 4,
         "start_date": datetime.date(2022, 6, 21),
         "end_date": datetime.date(2022, 6, 28)
-    }
+    },
+        {
+        "user_id": 1,
+        "estate_id": 1,
+        "guest_num": 5,
+        "start_date": datetime.date(2022, 7, 5),
+        "end_date": datetime.date(2022, 7, 12)
+    },
+        {
+        "user_id": 1,
+        "estate_id": 1,
+        "guest_num": 5,
+        "start_date": datetime.date(2022, 8, 5),
+        "end_date": datetime.date(2022, 8, 12)
+    },
+        {
+        "user_id": 1,
+        "estate_id": 1,
+        "guest_num": 5,
+        "start_date": datetime.date(2022, 9, 5),
+        "end_date": datetime.date(2022, 9, 12)
+    },
+        {
+        "user_id": 1,
+        "estate_id": 1,
+        "guest_num": 5,
+        "start_date": datetime.date(2022, 10, 5),
+        "end_date": datetime.date(2022, 10, 12)
+    },
+        {
+        "user_id": 1,
+        "estate_id": 1,
+        "guest_num": 5,
+        "start_date": datetime.date(2022, 11, 5),
+        "end_date": datetime.date(2022, 11, 12)
+    },
+        {
+        "user_id": 1,
+        "estate_id": 1,
+        "guest_num": 5,
+        "start_date": datetime.date(2022, 12, 5),
+        "end_date": datetime.date(2022, 12, 12)
+    },
 ]
 
 
