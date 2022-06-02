@@ -32,16 +32,20 @@ const loadEstates = (estates) => {
 //   };
 // };
 
-export const editEstate = (estate, data) => async (dispatch) => {
-  const { id } = estate;
-  const { title, description, image } = data;
+export const editEstate = (estate) => async (dispatch) => {
+  const { id, address, title, nightly_rate, type_id, description, owner_id } = estate;
+  // console.log(estate['owner_id']);
   const f = new FormData();
   f.append("title", title);
   f.append("description", description);
-  if (image) {
-    f.append("image", image);
-  }
-  const response = await fetch(`/api/estates/${id}`, {
+  f.append("address", address);
+  f.append("nightly_rate", nightly_rate);
+  f.append("type_id", type_id);
+  f.append("owner_id", owner_id);
+  // if (image) {
+  //   f.append("image", image);
+  // }
+  const response = await fetch(`/api/users/${estate.owner_id}/estates/${id}`, {
     method: "PATCH",
     body: f,
   });

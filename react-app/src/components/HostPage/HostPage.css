@@ -26,6 +26,7 @@ label, input, button{
 }
 .estate-rows{
     width: 60%;
+    min-width: 1000px;
     margin: 0 auto 15px;
     display: flex;
     flex-direction: row;
@@ -51,4 +52,18 @@ label, input, button{
 .row-buttons{
     display: flex;
     flex-direction: column;
+}
+
+.row-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.home-row-text{
+    width: 100%;
+}
+
+.estate-edit-form{
+    width: 460px;
 }
