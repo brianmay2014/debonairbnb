@@ -43,7 +43,7 @@ const SearchResults = () => {
               return (
                 <div className="search-results-card">
                   <Link to={`/estates/${estate.id}`}>
-                    <img src={estate.images[0]}></img>
+                    <img src={estate.images[0].url}></img>
                   </Link>
                   <Link to={`/estates/${estate.id}`}>
                     <h3 style={{ color: "black" }}>
