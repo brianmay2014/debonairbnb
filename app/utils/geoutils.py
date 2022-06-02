@@ -91,6 +91,7 @@ class EstateLocationData():
 
 
 # test_str = "20 W 34th St New York 10001"
+# test_str = "189"
 # test2_str = "350 fifth avenue new york city"
 # test2_dict = {"houseNumber": "20", "street": "W 34th St", "city": "new york city", "postalCode": "10001"}
 # test3_lat = 37.755205
@@ -98,6 +99,7 @@ class EstateLocationData():
 
 # test = EstateLocationData.from_string(test_str)
 # print(test.__dict__)
+# print(test.address)
 
 # test = EstateLocationData.from_string(test2_str)
 # print(test.__dict__)

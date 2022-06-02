@@ -23,7 +23,7 @@ def del_user_estate(owner_id, estate_id):
     db.session.delete(estate)
     db.session.commit()
 
-    return f'estate number {estate_id} deleted';
+    return f'Estate id:{estate_id} deleted';
 
 
 @user_routes.route('/<int:id>/estates', methods=["POST"])
@@ -38,15 +38,9 @@ def post_new_estate(id):
     if form.validate_on_submit():
         # create a geolocation data from input string
         data = EstateLocationData.from_string(form.data['address'])
-        # print('*-/*/-/*-*/-/-*/*/--/*-/**-/*-/*-//*-*/-')
-        # print(isinstance(data, EstateLocationData))
         if not isinstance(data, EstateLocationData):
             return {'errors': data }
         else:
-
-        # print('------==-=-=--==--=-==-=-=--==-=-=-=-=-=-=--==-=-=--==-=--=-=-=-==-=--=')
-        # print(data)
-        # print('------==-=-=--==--=-==-=-=--==-=-=-=-=-=-=--==-=-=--==-=--=-=-=-==-=--=')
             estate = Estate(
                 title=form.data['title'],
                 nightly_rate=form.data['nightly_rate'],
@@ -92,8 +86,9 @@ def patch_estate(owner_id, estate_id):
             data = EstateLocationData.from_string(form.data['address'])
             if not isinstance(data, EstateLocationData):
                 return {'errors': data }
-            if not data.latitude:
-                return {'errors': "geolocation failed"}, 403
+            # if not data.latitude:
+            #     return {'errors': "geolocation failed"}, 403
+            form.populate_obj(estate)  
             estate.address=data.address,
             estate.city=data.city,
             estate.state=data.state,
@@ -101,10 +96,9 @@ def patch_estate(owner_id, estate_id):
             estate.postal_code=data.postal_code,
             estate.latitude=data.latitude,
             estate.longitude=data.longitude
-            form.populate_obj(estate)       
             db.session.add(estate)
             db.session.commit()
-
+            
             return estate.to_dict()
         # print(form.errors)
         # return {'errors': validation_errors_to_error_messages(form.errors)}, 401

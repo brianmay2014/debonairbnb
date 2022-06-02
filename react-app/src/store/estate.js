@@ -50,6 +50,8 @@ export const editEstate = (estate) => async (dispatch) => {
     body: f,
   });
   const estateData = await response.json();
+  console.log('*-/*-/*/-*/-*/-*/-*/--*/*-/*-/*-//*-*-/*-/*-/*-/');
+  console.log(estateData)
   dispatch(addEstate(estateData))
   return { ...estateData}
 };
