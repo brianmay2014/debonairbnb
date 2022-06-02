@@ -3,6 +3,7 @@ from wtforms import StringField, IntegerField, SelectField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import db, Estate, EstateType
 from ..seeds.estate_types import estate_types
+from .custom_validators import nightly_rate_enough
 
 
 # def username_exists(form, field):
@@ -23,7 +24,7 @@ from ..seeds.estate_types import estate_types
 class EstateForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     address = StringField('address', validators=[DataRequired()])
-    nightly_rate = IntegerField('nightly_rate')
+    nightly_rate = IntegerField('nightly_rate', validators=[DataRequired(), nightly_rate_enough])
     type_id = IntegerField('type_id')
     # type_id = SelectField('type_id', choices=[], validators=[DataRequired()])
     description = StringField('description')

@@ -9,7 +9,7 @@ const EstateForm = () => {
 
 	const dispatch = useDispatch();
 
-	const [errors, setErrors] = useState(['hello']);
+	const [errors, setErrors] = useState({});
     const [address, setAddress] = useState('');
     const [title, setTitle] = useState('');
     const [nightlyRate, setNightlyRate] = useState(0);
@@ -33,31 +33,31 @@ const EstateForm = () => {
 
 	const submitEstate = async (e) => {
 		e.preventDefault();
-		// console.log('the type is', type);
-		// console.log(typeof type)
-		// console.log( typeof parseInt(type, 10))
-
-
 		// default image url:
 		// https://debonairbnb.s3.amazonaws.com/607f9451bb2d43dab5a7d456c0537d86.png
 
-
 		const type_id = parseInt(type, 10)
 		// console.log(address, title, nightlyRate, type_id, description, ownerId);
-		const data = await dispatch(createEstate(address, title, nightlyRate, type, description, ownerId));
-		if (data) {
-			setErrors(data)
+		const newEstate = await dispatch(createEstate(address, title, nightlyRate, type, description, ownerId));
+		if (newEstate.errors) {
+			
+			setErrors(newEstate.errors)
+			return;
 		}
 	};
 
 
 	return (
 		<form id="estate-form" onSubmit={submitEstate}>
-			{/* <ul className="form-errors">
-				{errors.map((error, idx) => (
-					<li key={idx}>{error}</li>
-				))}
-			</ul> */}
+			{/* <ul className="form-errors"> */}
+				{Object.keys(errors).length > 0 && (
+					<div className="form-errors">
+						{Object.keys(errors).map(
+							(key) => `${key.toUpperCase()}: ${errors[key]}`
+						)}
+					</div>
+				)}
+			{/* </ul> */}
 			<div className="form-field">
 				<label>Estate Title</label>
 				<input
@@ -91,13 +91,15 @@ const EstateForm = () => {
 				<select
 					className="short-input"
 					onChange={(e) => {
-						console.log(e.target.value)
-						setType(e.target.value)}
-					}
+						console.log(e.target.value);
+						setType(e.target.value);
+					}}
 					value={type}
 				>
 					{typeList.map((type) => (
-						<option key={type.id} value={type.id}>{type.name}</option>
+						<option key={type.id} value={type.id}>
+							{type.name}
+						</option>
 					))}
 				</select>
 			</div>
@@ -114,7 +116,9 @@ const EstateForm = () => {
 				/>
 			</div>
 			<input type="number" value={ownerId} required hidden />
-            <button type="submit" className='btn'>Add Estate</button>
+			<button type="submit" className="btn">
+				Add Estate
+			</button>
 		</form>
 	);
 };
