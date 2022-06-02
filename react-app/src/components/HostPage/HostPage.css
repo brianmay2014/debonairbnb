@@ -23,6 +23,7 @@ label, input, button{
     height: 100px;
     object-fit: cover;
 }
+
 .estate-rows{
     width: 60%;
     min-width: 1000px;
@@ -51,6 +52,7 @@ label, input, button{
 .row-buttons{
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .row-bottom {
@@ -65,4 +67,12 @@ label, input, button{
 
 .estate-edit-form{
     width: 460px;
+}
+
+.upload-image {
+    display: none;
+}
+
+.upload-image.active {
+    display: block;
 }

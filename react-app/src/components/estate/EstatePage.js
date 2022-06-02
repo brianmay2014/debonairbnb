@@ -15,7 +15,6 @@ import RatingDisplay from "./RatingDisplay";
 
 const EstatePage = ({setCharterPayload}) => {
   const { id } = useParams();
-
   const dispatch = useDispatch();
   const estate = useSelector((state) => state.estates[id]);
   const user = useSelector((state) => state.session.user);
@@ -32,7 +31,11 @@ const EstatePage = ({setCharterPayload}) => {
 	  dispatch(genEstates())
   }, [dispatch, critiquesCount])
 
-  const address = `${estate?.city}, ${estate?.state}, ${estate?.country}`;
+  if (!estate) {
+    return null;
+  }
+
+  const address = `${estate.city}, ${estate.state}, ${estate.country}`;
 
   return (
     <div id="estate-body">

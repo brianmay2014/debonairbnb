@@ -114,7 +114,9 @@ def patch_estate(owner_id, estate_id):
             db.session.add(estate)
             db.session.commit()
             return estate.to_dict()
-        # print(form.errors)
+        print(form.errors)
+        print("hello")
+        print("hello")
         # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
         return {'errors': form.errors}, 403
 

@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from "react";
-import CrossfadeImage from "react-crossfade-image";
 // import { useSelector, useDispatch } from "react-redux";
 // import { Route, Redirect, useParams } from "react-router-dom";
 import "./estatePage.css";
@@ -24,10 +23,6 @@ import "./estatePage.css";
 
 const ImageDisplay = ( { estate }) => {
 
-	//map images from state for display
-	const imgUrls = estate?.images.map((obj) => obj.url);
-	const imgDesc = estate?.images.map((obj) => obj.title);
-
 	const [imgDisplays, setImgDisplays] = useState(estate?.images.map(i => {
 		return (
       		<img
@@ -37,6 +32,7 @@ const ImageDisplay = ( { estate }) => {
 			/>
     	);
 	}));
+
 	const mainImg = imgDisplays?.length ? imgDisplays[0] : null;
 	const clusterImg = imgDisplays?.slice(1,5);
 
@@ -65,7 +61,7 @@ const ImageDisplay = ( { estate }) => {
 
 	return (
 		<div>
-		{imgUrls && (
+		{estate && mainImg && (
 			<div id="image-display-body">
 				<div id="main-image">
 					{mainImg}
