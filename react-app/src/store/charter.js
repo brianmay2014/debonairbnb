@@ -4,6 +4,7 @@ const ADD_CHARTER = "charters/addCharter";
 const REMOVE_CHARTER = "charters/removeCharter";
 const LOAD_CHARTERS = "charters/loadCharters";
 const UPDATE_CHARTER = "charters/updateCharter";
+const DELETE_CHARTER = "charters/deleteCharter"
 
 const addCharter = (charter) => {
   return {
@@ -32,6 +33,8 @@ const updateCharter = (charter) => {
     payload: charter,
   };
 };
+
+
 
 export const addOneCharter = (charterTest) => async (dispatch) => {
   const { sessionUserId, estateId, guestNum, startDate, endDate } = charterTest;
@@ -87,7 +90,7 @@ export const addOneCharter = (charterTest) => async (dispatch) => {
 export const editCharter = (data) => async (dispatch) => {
 
   const { id, userId, estateId, guestNum, startDate, endDate } = data;
-console.log(data, '======================data')
+// console.log(data, '======================data')
 
 const f = new FormData();
 
@@ -109,6 +112,7 @@ f.append("charter_id", id)
 
 export const deleteCharter = (charter) => async (dispatch) => {
   const { id } = charter;
+
   const response = await fetch(`/api/charters/${id}}`, "DELETE");
   if (response.ok) {
     dispatch(removeCharter(charter));

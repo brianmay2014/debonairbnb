@@ -65,5 +65,13 @@ def charter_update(id):
       db.session.commit()
       return charter.to_dict()
     else:
-      print(form.errors)
+    #   print(form.errors)
       return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@charter_routes.route('/<int:id>', methods=["DELETE"])
+@login_required
+def charter_delete(id):
+    charter = Charter.query.get(id)
+    db.session.delete(charter)
+    db.session.commit()
+    return charter.to_dict()
