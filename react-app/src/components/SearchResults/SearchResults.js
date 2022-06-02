@@ -5,6 +5,7 @@ import { useParams, useLocation, Link } from "react-router-dom";
 import loadAllResults from "../../store/search";
 import SearchMap from "./SearchMap/SearchMap";
 import "./SearchResults.css";
+import EstateCard from "../HomePage/EstateCard";
 
 const SearchResults = () => {
   const dispatch = useDispatch();
@@ -41,17 +42,11 @@ const SearchResults = () => {
               resultIds === estate.id.toString()
             ) {
               return (
-                <div className="search-results-card">
-                  <Link to={`/estates/${estate.id}`}>
-                    <img src={estate.images[0].url}></img>
-                  </Link>
-                  <Link to={`/estates/${estate.id}`}>
-                    <h3 style={{ color: "black" }}>
-                      {estate.type} in {estate.state}{" "}
-                    </h3>
-                  </Link>
-                  <p>${estate.nightly_rate} night</p>
-                </div>
+                <EstateCard
+                  className="search-results-card"
+                  estate={estate}
+                  showType={true}
+                />
               );
             }
           })}

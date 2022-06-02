@@ -4,7 +4,7 @@ import CrossfadeImage from "react-crossfade-image";
 
 import "./HomePage.css";
 
-const EstateCard = ({ estate }) => {
+const EstateCard = ({ estate, showType }) => {
   const [imageIndex, setImageIndex] = useState(0);
   const [carouseling, setCarouseling] = useState(false);
   const carouselLength = estate?.images?.length;
@@ -13,6 +13,7 @@ const EstateCard = ({ estate }) => {
   const interval = useRef();
 
   const address = `${estate?.city}, ${estate?.state}`;
+  const typeLine = `${estate?.type} in ${address}`;
 
   useEffect(() => {
     if (carouseling) {
@@ -39,7 +40,7 @@ const EstateCard = ({ estate }) => {
       </div>
       <div className="home-card-text">
         <div className="card-top-bar">
-          <div className="card-address">{address}</div>
+          <div className="card-address">{showType ? typeLine : address}</div>
           <div className="card-critique">
             <RatingDisplay rating={estate?.rating} places={2} />
           </div>
