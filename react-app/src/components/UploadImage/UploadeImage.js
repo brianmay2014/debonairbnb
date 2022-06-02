@@ -26,7 +26,7 @@ const UploadImage = ({ estate, onFinish }) => {
       {previewImg ? (
         <img src={previewImg} />
       ) : (
-        <i className="fa-solid fa-file-arrow-up iEmpty"></i>
+        <i className="fa fa-file-arrow-up iEmpty"></i>
       )}
       <span>Drag & Drop or Click to Select an Image</span>
       {typeArea}
@@ -37,7 +37,7 @@ const UploadImage = ({ estate, onFinish }) => {
 
   const dropAreaErrored = (
     <div className="dropArea ">
-      <i className="fa-solid fa-file-circle-xmark iError"></i>
+      <i className="fa fa-file-circle-xmark iError"></i>
       <span className="fileError">That file didn't adhere to our dress code.</span>
       {typeArea}
     </div>
