@@ -33,7 +33,7 @@
     color: var(--darkred);
 }
 
-.form-errors li {
+.form-errors {
     color: var(--darkred);
     list-style: none;
 }

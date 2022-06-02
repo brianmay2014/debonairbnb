@@ -78,7 +78,7 @@ const EstateEditModal = ({ estate, setShowModal }) => {
 	const [description, setDescription] = useState(estate.description);
 	const [ownerId, setOwnerId] = useState(user.id);
 
-	const disabled = Object.keys(errors).length > 0;
+	// const disabled = Object.keys(errors).length > 0;
 
 
 	const typeList = [
@@ -183,11 +183,11 @@ const EstateEditModal = ({ estate, setShowModal }) => {
 					</div>
 					<input type="number" value={ownerId} required hidden readOnly/>
 			</div>
-			<button className={"btn"} disabled={disabled} type="submit">
+			<button className={"btn"} type="submit">
 				Update Estate
 			</button>
 			{Object.keys(errors).length > 0 && (
-				<div className="errors">
+				<div className="form-errors">
 					{Object.keys(errors).map(
 						(key) => `${key.toUpperCase()}: ${errors[key]}`
 					)}

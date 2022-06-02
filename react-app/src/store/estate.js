@@ -81,18 +81,26 @@ export const createEstate = (address, title, nightlyRate, type_id, description, 
 			// }),
 		});
 
+    const estateData = await response.json();
+		console.log(estateData);
 		if (response.ok) {
-			const estate = await response.json();
-			dispatch(addEstate(estate));
-			return estate;
-		} else if (response.status < 500) {
-			const data = await response.json();
-			if (data.errors) {
-				return data.errors;
-			}
+			dispatch(addEstate(estateData));
+			return estateData;
 		} else {
-			return ["An error occurred. Please try again."];
+			return estateData;
 		}
+		// if (response.ok) {
+		// 	const estate = await response.json();
+		// 	dispatch(addEstate(estate));
+		// 	return estate;
+		// } else if (response.status < 500) {
+		// 	const data = await response.json();
+		// 	if (data.errors) {
+		// 		return data.errors;
+		// 	}
+		// } else {
+		// 	return ["An error occurred. Please try again."];
+		// }
 	};
 
 export const deleteEstate = (estate) => async (dispatch) => {

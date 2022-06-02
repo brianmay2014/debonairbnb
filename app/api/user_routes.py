@@ -38,30 +38,40 @@ def post_new_estate(id):
     if form.validate_on_submit():
         # create a geolocation data from input string
         data = EstateLocationData.from_string(form.data['address'])
-        estate = Estate(
-            title=form.data['title'],
-            nightly_rate=form.data['nightly_rate'],
-            type_id=form.data['type_id'],
-            # type_id=5,
-            description=form.data['description'],
-            owner_id=form.data['owner_id'],
-            # extract all the details from geolocation
-            address=data.address,
-            city=data.city,
-            state=data.state,
-            country=data.country,
-            postal_code=data.postal_code,
-            latitude=data.latitude,
-            longitude=data.longitude
-        )
-        
-        db.session.add(estate)
-        db.session.commit()
+        # print('*-/*/-/*-*/-/-*/*/--/*-/**-/*-/*-//*-*/-')
+        # print(isinstance(data, EstateLocationData))
+        if not isinstance(data, EstateLocationData):
+            return {'errors': data }
+        else:
 
-        return estate.to_dict()
+        # print('------==-=-=--==--=-==-=-=--==-=-=-=-=-=-=--==-=-=--==-=--=-=-=-==-=--=')
+        # print(data)
+        # print('------==-=-=--==--=-==-=-=--==-=-=-=-=-=-=--==-=-=--==-=--=-=-=-==-=--=')
+            estate = Estate(
+                title=form.data['title'],
+                nightly_rate=form.data['nightly_rate'],
+                type_id=form.data['type_id'],
+                # type_id=5,
+                description=form.data['description'],
+                owner_id=form.data['owner_id'],
+                # extract all the details from geolocation
+                address=data.address,
+                city=data.city,
+                state=data.state,
+                country=data.country,
+                postal_code=data.postal_code,
+                latitude=data.latitude,
+                longitude=data.longitude
+            )
+            
+            db.session.add(estate)
+            db.session.commit()
+
+            return estate.to_dict()
+    else: 
     # print(form.errors)
     # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-    return {'errors': form.errors}, 403
+        return {'errors': form.errors}, 403
 
 
 @user_routes.route('/<int:owner_id>/estates/<int:estate_id>', methods=["PATCH"])
@@ -80,6 +90,8 @@ def patch_estate(owner_id, estate_id):
         if form.validate_on_submit():
             # create a geolocation data from input string
             data = EstateLocationData.from_string(form.data['address'])
+            if not isinstance(data, EstateLocationData):
+                return {'errors': data }
             if not data.latitude:
                 return {'errors': "geolocation failed"}, 403
             estate.address=data.address,
