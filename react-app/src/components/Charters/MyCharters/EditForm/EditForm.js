@@ -1,19 +1,22 @@
 import {DateRangePicker} from "react-date-range"
 import {useState, useEffect} from "react"
 import { addDays } from 'date-fns';
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {editCharter} from "../../../../store/charter"
 import {dateParser} from "../../../../utils/dateParser"
 
 const EditForm = ({charter}) => {
-
-  let ciDate = new Date(charter.start_date);
-  let coDate = new Date(charter.end_date)
+console.log(charter.start_date, '========= start date')
+  let ciDate = new Date(charter.start_date.replace('GMT', ''));
+  let coDate = new Date(charter.end_date.replace('GMT', ''))
+  let today = new Date()
 
   const dispatch = useDispatch()
   const [checkinDate, setCheckinDate] = useState(ciDate)
   const [checkoutDate, setCheckoutDate] = useState(coDate)
   const [guestNum, setGuestNum] = useState(charter.guest_num)
+  const allCharters = useSelector(state => {Object.values(state.charters)})
+  const allChartersForEstate = allCharters?.filter(charter => charter.estate_id === charter.estate_id)
 
 
   const [dateRange, setDateRange] = useState([
@@ -32,6 +35,8 @@ const EditForm = ({charter}) => {
     e.preventDefault()
     const payload = {id:charter.id, userId:charter.user_id, estateId:charter.estate_id, guestNum: guestNum, startDate: dateParser(checkinDate), endDate: dateParser(checkoutDate)}
     dispatch(editCharter(payload))
+    console.log(checkinDate, "DATE BEFORE PARSER")
+    console.log(dateParser(checkinDate), "DATE PARSERR")
   }
 
   const handleGuestNum = (e) => {
@@ -62,6 +67,7 @@ const EditForm = ({charter}) => {
 				months={2}
 				ranges={dateRange}
 				direction="horizontal"
+        disabledDates={[today, addDays(today, 2)]}
 			/>
 		</div>
     <div>

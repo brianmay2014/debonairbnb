@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, Charter
-from app.forms import CharterForm
+from app.forms import CharterForm, CharterEditForm
+
 
 
 charter_routes = Blueprint('charters', __name__)
@@ -53,17 +54,8 @@ def charter_form_submit():
 @login_required
 def charter_update(id):
     charter = Charter.query.get(id)
-    form = CharterForm()
+    form = CharterEditForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
-    params = {
-        "user_id": form.data['user_id'],
-        "estate_id": form.data['estate_id'],
-        "guest_num": form.data['guest_num'],
-        "start_date": form.data['start_date'],
-        "end_date": form.data['end_date']
-    }
-
     if form.validate_on_submit():
       charter.user_id = form.data['user_id']
       charter.estate_id = form.data['estate_id']
