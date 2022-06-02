@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import RatingDisplay from "../estate/RatingDisplay";
+import CrossfadeImage from "react-crossfade-image";
 
 import "./HomePage.css";
 
@@ -16,6 +17,7 @@ const EstateCard = ({ estate }) => {
   useEffect(() => {
     if (carouseling) {
       interval.current = setInterval(() => {
+		console.log("ticking")
         setImageIndex((index) => (index + 1) % carouselLength);
       }, 3000);
     } else {
@@ -28,13 +30,12 @@ const EstateCard = ({ estate }) => {
     <div className="estate-cards" id={`estate-card-${estate?.id}`}>
       <div id="type-filter-bar"></div>
       <div className="home-card-img" id="estate-display">
-        <a href={`/estates/${estate?.id}`}>
-          <img
-            src={src}
-            alt={img?.title}
-            onMouseEnter={() => setCarouseling(true)}
-            onMouseLeave={() => setCarouseling(false)}
-          />
+        <a
+          href={`/estates/${estate?.id}`}
+          onMouseEnter={() => setCarouseling(true)}
+          onMouseLeave={() => setCarouseling(false)}
+        >
+          <CrossfadeImage src={src} alt={img?.title} duration={1500}/>
         </a>
       </div>
       <div className="home-card-text">
