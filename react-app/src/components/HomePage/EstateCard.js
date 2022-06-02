@@ -17,7 +17,6 @@ const EstateCard = ({ estate }) => {
   useEffect(() => {
     if (carouseling) {
       interval.current = setInterval(() => {
-		console.log("ticking")
         setImageIndex((index) => (index + 1) % carouselLength);
       }, 3000);
     } else {
@@ -35,7 +34,7 @@ const EstateCard = ({ estate }) => {
           onMouseEnter={() => setCarouseling(true)}
           onMouseLeave={() => setCarouseling(false)}
         >
-          <CrossfadeImage src={src} alt={img?.title} duration={1500}/>
+          <CrossfadeImage src={src} alt={img?.title} duration={2200} />
         </a>
       </div>
       <div className="home-card-text">
