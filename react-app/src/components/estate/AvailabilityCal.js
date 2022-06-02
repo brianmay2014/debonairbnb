@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { addDays } from "date-fns";
 import { DateRangePicker } from "react-date-range";
-// import { useSelector, useDispatch } from "react-redux";
+import {dateArrayCreator} from "../../utils/dateArrayCreator"
+import { useSelector, useDispatch } from "react-redux";
 // import { Route, Redirect, useParams } from "react-router-dom";
 import "./estatePage.css";
 import 'react-date-range/dist/styles.css'; // main css file
@@ -20,7 +21,7 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 		nightStay,
 		setNightStay,
 	} = stateVars;
-	
+
 	const [state, setState] = useState([
 		{
 			// startDate: new Date(),
@@ -32,8 +33,21 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 			color: '#c28849'
 		},
 	]);
-	
-	
+
+	const charters = useSelector((state) => Object.values(state.charters))
+
+	const estateCharters = charters?.filter(charter => estate.id === charter.estate_id)
+
+	// console.log(dateArrayCreator(checkinDate, checkoutDate).concat(dateArrayCreator(new Date('2022-07-17T03:24:00'), new Date('2022-07-20T03:24:00'))), "==============")
+
+	let disabledDatesArray = []
+
+	estateCharters?.forEach(charter => {
+		(dateArrayCreator(new Date (charter?.start_date), new Date (charter.end_date))).forEach(date => {
+			disabledDatesArray.push(date)
+		})
+	})
+
 	useEffect(() => {
 		// console.log(state);
 		// console.log(typeof state[0].endDate);
@@ -56,6 +70,7 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 				months={2}
 				ranges={state}
 				direction="horizontal"
+				disabledDates={disabledDatesArray}
 			/>
 		</div>
 	);
