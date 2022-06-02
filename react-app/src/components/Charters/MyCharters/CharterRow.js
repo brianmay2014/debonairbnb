@@ -58,12 +58,12 @@ const CharterRow = ({ charter, estateId }) => {
           </div>
         </div>
         <div className="home-row-text">
-          <Link to={`/users/${charter.user_id}/my-charters/${charter.id}`}>
-            <h2>
+
+            <h3>
               {dateConverter(charter.start_date)} -
               {dateConverter(charter.end_date)}
-            </h2>
-          </Link>
+            </h3>
+
           <div className="row-title">{estate?.title}</div>
           <div className="row-address">{estate?.address}</div>
           <div className="row-description">{estate?.description}</div>
