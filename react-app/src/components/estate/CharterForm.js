@@ -39,10 +39,10 @@ const CharterForm = ({ estate, stateVars, setCharterPayload }) => {
   const sessionUserId = useSelector((state) => state.session.user?.id);
 
   useEffect(() => {
-    console.log("------=-=-=-=-=--=USE EFFECT-=-=-=-=-=-=-=-");
-    console.log("check in date", checkinDate);
-    console.log("check in date type", typeof checkinDate);
-    console.log("------=-=-=-=-=--=USE EFFECT-=-=-=-=-=-=-=-");
+    // console.log("------=-=-=-=-=--=USE EFFECT-=-=-=-=-=-=-=-");
+    // console.log("check in date", checkinDate);
+    // console.log("check in date type", typeof checkinDate);
+    // console.log("------=-=-=-=-=--=USE EFFECT-=-=-=-=-=-=-=-");
     // console.log("check out date", checkoutDate);
     // console.log("check out date type", typeof checkoutDate);
     setNightStay(getNightStay(checkinDate, checkoutDate));
@@ -150,7 +150,7 @@ const CharterForm = ({ estate, stateVars, setCharterPayload }) => {
               onChange={setCheckoutFunc}
             />
           </div>
-          <div>
+          <div className='checkdates'>
             <label>Number of guests</label>
             <input
               type="number"

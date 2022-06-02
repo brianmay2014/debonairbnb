@@ -60,12 +60,12 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 
 	return (
 		<div id="avail-cal">
-			Availability
+			<p id='avail-info'>{nightStay} nights stay in {estate?.city}</p>
 			<DateRangePicker
 				onChange={(item) => setState([item.selection])}
 				showSelectionPreview={true}
 				moveRangeOnFirstSelection={false}
-				months={1}
+				months={2}
 				ranges={state}
 				direction="horizontal"
 				disabledDates={disabledDatesArray}

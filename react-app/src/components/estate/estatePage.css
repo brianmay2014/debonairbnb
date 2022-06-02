@@ -12,17 +12,26 @@
     display: flex;
     flex-direction: row;
     font-size: 16px;
+    align-items: center;
 }
 #estate-head-info div {
-    padding: 8px;
+    padding: 7px 10px 17px 17px;
+    
 }
 
+#avail-info{
+    font-size: 20px;
+    padding-top: 25px;
+    text-align: center;
+    border-top: 1px var(--lightgold) solid;
+}
 
 #image-display-body{
     border-radius: 12px;
     /* border: 2px black solid; */
     display: flex;
     min-width: 1121px;
+    width: 1121px;
 }
 img, .no-img {
     border-radius: 12px;
@@ -69,7 +78,7 @@ img, .no-img {
     text-align: left;
     width: 40%;
     margin: 0 auto;
-
+    
 }
 #no-charge-yet{
     text-align: center;
@@ -78,19 +87,20 @@ img, .no-img {
 
 #charter-form{
     width: 370px;
-    height: 500px;
+    height: 530px;
     padding: 20px;
     border: 1px var(--lightgold) solid;
     border-radius: 18px;
+    box-shadow: inset 1px 1px 5px var(--lightestgold), inset -1px -1px 2px var(--medgold);
 }
- #charter-form input{
-    margin: 15px 0;
- }
- #reserve-btn{
-     width: 100%;
-     margin: 0 auto;
-     font-size: 18px;
- }
+#charter-form input{
+    margin: 0px 0 15px 0;
+}
+#reserve-btn{
+    width: 100%;
+    margin: 0 auto;
+    font-size: 18px;
+}
 
 #service-cost{
     border-bottom: 2px var(--lightgold) solid
@@ -143,7 +153,7 @@ img, .no-img {
     height: 400px;
     border-radius: 38px;
     padding: 38px 0 0 38px;
-
+    
 }
 #loc-name{
     font-size: 28px;
@@ -183,9 +193,9 @@ img, .no-img {
 }
 
 .critiqueAddForm .btn {
-     width: 33%;
-     margin: 0 auto;
-     font-size: 18px;
+    width: 33%;
+    margin: 0 auto;
+    font-size: 18px;
 }
 
 .critique-input-container {
@@ -219,4 +229,16 @@ img, .no-img {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+}
+
+.checkdates input {
+    margin-top: 6px;
+    margin-bottom: 12px;
+    border: 0.2px var(--lightgold) solid;
+    border-radius: 2px;
+    box-shadow: 0px 0px 2px var(--medgold);
+}
+.checkdates select:focus, .checkdates input:focus{
+    outline: none;
+    box-shadow: 1px 1px 6px var(--medgold);
 }
