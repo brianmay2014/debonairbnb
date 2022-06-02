@@ -42,6 +42,7 @@ def api():
 
 
 @estate_routes.route('/<int:id>/critiques')
+@login_required
 def critiques(id):
     estate = estate = Estate.query.get(id)
     if not estate:
@@ -51,8 +52,9 @@ def critiques(id):
         return {"critiques" : [critique.to_dict() for critique in critiques]}
 
 @estate_routes.route('/<int:id>/critiques', methods=["POST"])
+@login_required
 def post_critique(id):
-    estate = estate = Estate.query.get(id)
+    estate = Estate.query.get(id)
     if not estate:
         return {"errors": f"No estate with id {id} exists"}, 404
     else:
@@ -68,6 +70,42 @@ def post_critique(id):
             return {"critiques" : [critique.to_dict() for critique in critiques]}
         else:
             return {"errors": form.errors}, 403
+
+@estate_routes.route('/<int:estate_id>/critiques/<int:critique_id>', methods=["PATCH"])
+@login_required
+def patch_critique(estate_id, critique_id):
+    critique = Critique.query.get(critique_id)
+    if not critique:
+        return {"errors": f"No critique with id {critique_id} exists"}, 404
+    else:
+        form = CritiqueForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            print(critique)
+            print(form.data)
+            form.populate_obj(critique)
+            print(critique)
+            db.session.add(critique)
+            db.session.commit()
+            estate = Estate.query.get(estate_id)
+            critiques = estate.critiques
+            return {"critiques" : [critique.to_dict() for critique in critiques]}
+        else:
+            print(form.errors);
+            return {"errors": form.errors}, 403
+
+@estate_routes.route('/<int:estate_id>/critiques/<int:critique_id>', methods=["DELETE"])
+@login_required
+def delete_critique(estate_id, critique_id):
+    critique = Critique.query.get(critique_id)
+    if not critique:
+        return {"errors": f"No critique with id {critique_id} exists"}, 404
+    else:
+        db.session.delete(critique)
+        db.session.commit()
+        estate = Estate.query.get(estate_id)
+        critiques = estate.critiques
+        return {"critiques" : [critique.to_dict() for critique in critiques]}
 
 
 @estate_routes.route('/<int:id>', methods=["PATCH"])

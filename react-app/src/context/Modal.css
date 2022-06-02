@@ -17,9 +17,17 @@
   left: 0;
   bottom: 0;
   background-color: rgba(213, 211, 211, 0.788);
+  backdrop-filter: blur(2px);
 }
 
 #modal-content {
   position: absolute;
-  background-color:white;
+  height: fit-content;
+  min-height: 300px;
+  min-width: 300px;
+  width: fit-content;
+  padding: 1em;
+  background-color:var(--lightestegg);
+  border: none;
+  border-radius: 16px;
 }
