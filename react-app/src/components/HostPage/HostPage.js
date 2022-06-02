@@ -43,9 +43,7 @@ const HostPage = () => {
             <h1> Welcome to the caviar and truffle of debonairbnb, hosting estates</h1>
             
             {userEstates.length && (
-                <div id='hosted-estates-container'>
-                    <h2>Hello from inside with length</h2>
-                    
+                <div id='hosted-estates-container'>                    
                     {userEstates.map((estate) =>  {
                         return (
                             <EstateRow key={`hosted-${estate.id}`} estate={estate}/>

@@ -29,23 +29,19 @@ const EstateForm = () => {
 		{id: 9, name: "Villa"},
 		{id: 10, name: "Vineyard"},
 	];
-	    // const typeList = {
-		// 		1: "Castle",
-		// 		2: "Chateau",
-		// 		3: "Country House",
-		// 		4: "Historic",
-		// 		5: "Island",
-		// 		6: "Manor",
-		// 		7: "Mansion",
-		// 		8: "Palace",
-		// 		9: "Villa",
-		// 		10: "Vineyard"};
+
 
 	const submitEstate = async (e) => {
 		e.preventDefault();
 		// console.log('the type is', type);
 		// console.log(typeof type)
 		// console.log( typeof parseInt(type, 10))
+
+
+		// default image url:
+		// https://debonairbnb.s3.amazonaws.com/607f9451bb2d43dab5a7d456c0537d86.png
+
+
 		const type_id = parseInt(type, 10)
 		// console.log(address, title, nightlyRate, type_id, description, ownerId);
 		const data = await dispatch(createEstate(address, title, nightlyRate, type, description, ownerId));
