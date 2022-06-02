@@ -4,6 +4,7 @@ import { useState } from "react";
 import DeleteForm from "./DeleteForm/DeleteForm";
 import EditForm from "./EditForm/EditForm";
 import { Modal } from "../../../context/Modal";
+import { addDays } from 'date-fns';
 
 const CharterRow = ({ charter, estateId }) => {
   // console.log(typeof charter.start_date)
@@ -13,8 +14,9 @@ const CharterRow = ({ charter, estateId }) => {
 
   const dateConverter = (string) => {
     let date = new Date(string);
-    date.toString().split(" ");
-    return date.toLocaleString().split(",")[0];
+    console.log(date.toLocaleString().split(",")[0], '============')
+
+    return addDays(date, 1).toLocaleString().split(",")[0];
   };
 
   const moneyFormatter = new Intl.NumberFormat("en-US", {

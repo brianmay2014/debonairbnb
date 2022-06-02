@@ -45,6 +45,7 @@ export const addOneCharter = (charterTest) => async (dispatch) => {
   f.append("start_date", startDate);
   f.append("end_date", endDate);
 
+
   try {
     const response = await fetch(`/api/charters/`, {
       method: "POST",
@@ -95,6 +96,7 @@ f.append("estate_id", estateId);
 f.append("guest_num", guestNum);
 f.append("start_date", startDate);
 f.append("end_date", endDate);
+f.append("charter_id", id)
 
   const response = await fetch(`/api/charters/${id}`, {
     method: "PATCH",
@@ -117,7 +119,7 @@ export const genCharters = () => async (dispatch) => {
   // doing it this way in case we want more types of responses here later ...
   const [chartersResponse] = await Promise.all([fetch("/api/charters/")]);
   const [charters] = await Promise.all([chartersResponse.json()]);
-  console.log(charters, "AHHHHHH");
+
   if (chartersResponse.ok) {
     dispatch(loadCharters(charters.charters));
     return charters;
