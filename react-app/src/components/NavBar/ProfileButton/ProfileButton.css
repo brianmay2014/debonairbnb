@@ -1,5 +1,22 @@
 .profile-dropdown-menu {
   position: absolute;
+  /* top: 28px;
+  right: -106px; */
+  width: fit-content;
+  background-color: var(--lightestgold);
+  padding: 15px;
+  border: solid 1px var(--medgold);
+  border-radius: 12px;
+  box-shadow: inset 1px 1px 5px var(--lightestgold), inset -1px -1px 2px var(--medgold);
+}
+
+
+.profile-dropdown-menu li{
+list-style: none;
+}
+
+.profile-dropdown-menu a{
+  color: var(--darkestegg);
 }
 
 .menu-button {

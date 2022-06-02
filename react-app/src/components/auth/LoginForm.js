@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import './AuthForms.css';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -13,6 +14,14 @@ const LoginForm = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
+    if (data) {
+      setErrors(data);
+    }
+  };
+
+  const demoSubmit = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login('demo@demo.com', 'password'));
     if (data) {
       setErrors(data);
     }
@@ -31,37 +40,45 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
-        Debonairbnb is an exclusive platform, you must log in to continue.
-        </div>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type='submit'>Login</button>
-      </div>
-    </form>
+		<form className="auth-form" onSubmit={onLogin}>
+			<div className='login-text'>
+				<h3>Debonairbnb is an exclusive platform</h3>
+				<h4>you must log in to continue.</h4>
+			</div>
+			<div>
+				{errors.map((error, ind) => (
+					<div key={ind}>{error}</div>
+				))}
+			</div>
+			<div className="auth-fields">
+				<label htmlFor="email">Email</label>
+				<input
+					name="email"
+					type="text"
+					placeholder="Email"
+					value={email}
+					onChange={updateEmail}
+				/>
+			</div>
+			<div className="auth-fields">
+				<label htmlFor="password">Password</label>
+				<input
+					name="password"
+					type="password"
+					placeholder="Password"
+					value={password}
+					onChange={updatePassword}
+				/>
+				<div>
+					<button className="btn" type="submit">
+						Login
+					</button>
+          <button className='btn-cancel' onClick={demoSubmit}>
+            Demo Login
+          </button>
+				</div>
+			</div>
+		</form>
   );
 };
 

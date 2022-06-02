@@ -26,56 +26,79 @@ const ProfileButton = () => {
   }, [showMenu]);
 
   return (
-    <div>
-      <button className="menu-button btn" onClick={openMenu}>
-          Profile
-      </button>
+		<div>
+			<button className="menu-button btn" onClick={openMenu}>
+				Profile
+			</button>
 
-      {showMenu && (
-        <ul
-          className="profile-dropdown-menu"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {!sessionUser && (
-            <>
-              <li>
-                <NavLink to="/sign-up" exact={true} activeClassName="active">
-                  Sign Up
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/login" exact={true} activeClassName="active">
-                  Login
-                </NavLink>
-              </li>
-            </>
-          )}
+			{showMenu && (
+				<ul
+					className="profile-dropdown-menu"
+					onClick={(e) => e.stopPropagation()}
+				>
+					{!sessionUser && (
+						<>
+							<li>
+								<NavLink
+									to="/sign-up"
+									exact={true}
+									activeClassName="active"
+								>
+									Sign Up
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to="/login"
+									exact={true}
+									activeClassName="active"
+								>
+									Login
+								</NavLink>
+							</li>
+						</>
+					)}
 
-          {sessionUser && (
-            <>
-              <li>
-                <NavLink to="/" exact={true} activeClassName="active">
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={`/users/${sessionUser.id}/my-charters/`} activeClassName="active">
-                  My Charters
-                </NavLink>
-              </li>
-              <li>
+					{sessionUser && (
+						<>
+							<li>
+								<NavLink
+									to="/"
+									exact={true}
+									activeClassName="active"
+								>
+									Home
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to={`/users/${sessionUser.id}/my-charters/`}
+									activeClassName="active"
+								>
+									My Charters
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to={`/users/${sessionUser.id}/estates/`}
+									activeClassName="active"
+								>
+									My Estates
+								</NavLink>
+							</li>
+							{/* <li>
                 <NavLink to="/users" exact={true} activeClassName="active">
                   Users
                 </NavLink>
-              </li>
-              <li>
-                <LogoutButton />
-              </li>
-            </>
-          )}
-        </ul>
-      )}
-    </div>
+              </li> */}
+							<li>
+								<LogoutButton />
+							</li>
+						</>
+					)}
+				</ul>
+			)}
+		</div>
   );
 };
 

@@ -65,21 +65,21 @@ function App() {
         <ProtectedRoute path="/" exact={true}>
           <HomePage />
         </ProtectedRoute>
-        <Route path="/estates/:id" exact={true}>
+        <ProtectedRoute path="/estates/:id" exact={true}>
           <EstatePage setCharterPayload={setCharterPayload} />
-        </Route>
-        <Route path="/search">
+        </ProtectedRoute>
+        <ProtectedRoute path="/search">
           <SearchResults />
-        </Route>
-        <Route path="/charters">
+        </ProtectedRoute>
+        <ProtectedRoute path="/charters">
           <CharterPage />
-        </Route>
-        <Route exact path={`/users/:id/my-charters/`}>
+        </ProtectedRoute>
+        <ProtectedRoute exact path={`/users/:id/my-charters/`}>
           <MyCharters />
-        </Route>
-        <Route path={`/users/:id/my-charters/:id`}>
+        </ProtectedRoute>
+        <ProtectedRoute path={`/users/:id/my-charters/:id`}>
           <SingleCharterPage/>
-        </Route>
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
 
