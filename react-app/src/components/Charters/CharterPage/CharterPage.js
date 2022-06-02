@@ -5,6 +5,7 @@ import { addOneCharter } from "../../../store/charter";
 import { ValidationError } from "../../../utils/validationError";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import "./CharterPage.css";
+import { Modal } from "../../../context/Modal";
 
 const CharterPage = () => {
   const history = useHistory();
@@ -17,6 +18,7 @@ const CharterPage = () => {
   const [endDate, setEndDate] = useState("");
   const sessionUser = useSelector((state) => Object.values(state.session));
   const [errorMessages, setErrorMessages] = useState({});
+  const [showThankYouModal, setShowThankYouModal] = useState();
 
   // const [searchParams, setSearchParams] = useSearchParams()
   // console.log(useSearchParams())
@@ -54,6 +56,10 @@ const CharterPage = () => {
     let createdCharter;
     try {
       createdCharter = await dispatch(addOneCharter(payload));
+      if (createdCharter) {
+        // history.push("/")
+        setShowThankYouModal(true);
+      }
     } catch (error) {
       if (error instanceof ValidationError) {
         setErrorMessages(error.errors);
@@ -62,20 +68,22 @@ const CharterPage = () => {
     }
   };
 
+
+  console.log(sessionUser, "USERHAHAHAHAH")
   useEffect(async () => {
-    const handleConfirm = async (e) => {
-      const payload = { sessionUserId, estateId, guestNum, startDate, endDate };
-      let createdCharter;
-      try {
-        createdCharter = await dispatch(addOneCharter(payload));
-      } catch (error) {
-        if (error instanceof ValidationError) {
-          setErrorMessages(error.errors);
-          console.log(error.errors);
-        }
-      }
-    };
-    setErrorMessages(null)
+    // const handleConfirm = async (e) => {
+    //   const payload = { sessionUserId, estateId, guestNum, startDate, endDate };
+    //   let createdCharter;
+    //   try {
+    //     createdCharter = await dispatch(addOneCharter(payload));
+    //   } catch (error) {
+    //     if (error instanceof ValidationError) {
+    //       setErrorMessages(error.errors);
+    //       console.log(error.errors);
+    //     }
+    //   }
+    // };
+    setErrorMessages(null);
   }, []);
 
   const queryParamsArray = search.split("&");
@@ -174,6 +182,12 @@ const CharterPage = () => {
           </div>
         </div>
       </div>
+      {showThankYouModal && (
+        <Modal onClose={() => history.push(`/users/${sessionUser[0]?.id}/my-charters/`)}>
+          <h1>You have great taste...</h1>
+          <p>Your charter has been confirmed.</p>
+        </Modal>
+      )}
     </>
   );
 };
