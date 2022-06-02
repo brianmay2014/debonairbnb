@@ -45,6 +45,7 @@ const SearchResults = () => {
                 <EstateCard
                   className="search-results-card"
                   estate={estate}
+                  showType={true}
                 />
               );
             }
