@@ -19,6 +19,8 @@ class EstateImage(db.Model, CrUpMixin):
             "estate_id": self.estate_id,
             "url": self.url,
             "title": self.title,
+            "created_at" : self.created_at.timestamp(),
+            "updated_at" : self.updated_at.timestamp(),
         }
 
     @staticmethod

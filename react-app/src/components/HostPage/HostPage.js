@@ -36,14 +36,13 @@ const HostPage = () => {
     // console.log(estatesArr)
 
     const userEstates = estatesArr.filter((estate) => estate.owner_id === user.id);
-    console.log(userEstates);
 
 	return (
 		<div>
             <h1> Welcome to the caviar and truffle of debonairbnb, hosting estates</h1>
-            
+
             {userEstates.length && (
-                <div id='hosted-estates-container'>                    
+                <div id='hosted-estates-container'>
                     {userEstates.map((estate) =>  {
                         return (
                             <EstateRow key={`hosted-${estate.id}`} estate={estate}/>
@@ -60,7 +59,7 @@ const HostPage = () => {
             )}
 
             <EstateForm />
-        
+
 		</div>
 	);
 };
