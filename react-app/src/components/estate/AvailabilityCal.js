@@ -36,7 +36,7 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 
 	const charters = useSelector((state) => Object.values(state.charters))
 
-	const estateCharters = charters?.filter(charter => estate.id === charter.estate_id)
+	const estateCharters = charters?.filter(charter => estate?.id === charter.estate_id)
 
 	// console.log(dateArrayCreator(checkinDate, checkoutDate).concat(dateArrayCreator(new Date('2022-07-17T03:24:00'), new Date('2022-07-20T03:24:00'))), "==============")
 
@@ -67,10 +67,11 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 				onChange={(item) => setState([item.selection])}
 				showSelectionPreview={true}
 				moveRangeOnFirstSelection={false}
-				months={2}
+				months={1}
 				ranges={state}
 				direction="horizontal"
 				disabledDates={disabledDatesArray}
+				dragSelectionEnabled={true}
 			/>
 		</div>
 	);
