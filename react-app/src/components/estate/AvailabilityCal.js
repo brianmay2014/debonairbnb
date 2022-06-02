@@ -13,6 +13,8 @@ import './CalendarFix.css';
 const AvailabilityCal = ({ estate, stateVars } ) => {
 	// const { id } = useParams();
 
+	const today = new Date()
+
 	let {
 		checkinDate,
 		setCheckinDate,
@@ -22,13 +24,15 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 		setNightStay,
 	} = stateVars;
 
+// console.log(checkinDate, checkoutDate, today, 'AHHHHHHH')
+
 	const [state, setState] = useState([
 		{
 			// startDate: new Date(),
 			// endDate: addDays(new Date(), 7),
 			// key: "selection",
-			startDate: checkinDate,
-			endDate: checkoutDate,
+			startDate: today,
+			endDate: addDays(today, 1),
 			key: "selection",
 			color: '#c28849'
 		},

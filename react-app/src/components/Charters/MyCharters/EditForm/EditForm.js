@@ -7,6 +7,7 @@ import {dateParser} from "../../../../utils/dateParser"
 import {dateArrayCreator} from "../../../../utils/dateArrayCreator"
 
 const EditForm = ({currCharter, setShowEditModal}) => {
+
   let ciDate = new Date(currCharter.start_date.replace('GMT', ''));
   let coDate = new Date(currCharter.end_date.replace('GMT', ''))
   let today = new Date()
@@ -16,7 +17,7 @@ const EditForm = ({currCharter, setShowEditModal}) => {
   const [checkoutDate, setCheckoutDate] = useState(coDate)
   const [guestNum, setGuestNum] = useState(currCharter.guest_num)
   const allCharters = useSelector(state => Object.values(state.charters))
-  const allChartersForEstate = allCharters?.filter(charter => charter.estate_id === currCharter.estate_id)
+  const allChartersForEstate = allCharters?.filter(charter => charter.estate_id === currCharter.estate_id && charter.id != currCharter.id)
 
 
 

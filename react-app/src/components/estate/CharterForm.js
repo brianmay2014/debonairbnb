@@ -64,7 +64,7 @@ const CharterForm = ({ estate, stateVars, setCharterPayload }) => {
 
     setCharterPayload(payload);
     return history.push(
-      `/charters?sessionUserId=${sessionUserId}&estateId=${estateId}&guestNum=${guestNum}&startDate=${startDate}&endDate=${endDate}`
+      `/charters?user_id=${sessionUserId}&estate_id=${estateId}&guest_num=${guestNum}&start_date=${startDate}&end_date=${endDate}`
     );
     // dispatch(addOneCharter(payload))
   };
