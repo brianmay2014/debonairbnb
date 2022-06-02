@@ -14,7 +14,7 @@ const CharterRow = ({ charter, estateId }) => {
 
   const dateConverter = (string) => {
     let date = new Date(string);
-    console.log(date.toLocaleString().split(",")[0], '============')
+    // console.log(date.toLocaleString().split(",")[0], '============')
 
     return addDays(date, 1).toLocaleString().split(",")[0];
   };
