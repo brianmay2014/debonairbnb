@@ -35,7 +35,7 @@ const EstateCard = ({ estate, showType }) => {
           onMouseEnter={() => setCarouseling(true)}
           onMouseLeave={() => setCarouseling(false)}
         >
-          <CrossfadeImage src={src} alt={img?.title} duration={2200} />
+          {src ? <CrossfadeImage src={src} alt={img?.title} duration={2200} /> : <p className={"no-img"}>No Images</p>}
         </a>
       </div>
       <div className="home-card-text">

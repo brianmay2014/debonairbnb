@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import db, User, Estate
+from app.models import db, User, Estate, EstateImage
 from app.forms import EstateForm
 from ..utils.geoutils import EstateLocationData
-
+from ..utils.s3utils import allowed_file, get_unique_filename, upload_file_to_s3
 user_routes = Blueprint('users', __name__)
 
 
@@ -57,12 +57,12 @@ def post_new_estate(id):
                 latitude=data.latitude,
                 longitude=data.longitude
             )
-            
+
             db.session.add(estate)
             db.session.commit()
 
             return estate.to_dict()
-    else: 
+    else:
     # print(form.errors)
     # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
         return {'errors': form.errors}, 403
@@ -82,13 +82,28 @@ def patch_estate(owner_id, estate_id):
         form['csrf_token'].data = request.cookies['csrf_token']
         form['owner_id'].data = owner_id
         if form.validate_on_submit():
+            print(request.files)
+            print("hello")
+            if "image" in request.files:
+                image = request.files["image"]
+                if not allowed_file(image.filename):
+                    return {"errors": "file type not permitted"}, 400
+                image.filename = get_unique_filename(image.filename)
+                upload = upload_file_to_s3(image)
+                if "url" not in upload:
+                    # then the upload le failed, oh no!
+                    return upload, 400
+                url = upload["url"]
+                new_image = EstateImage(estate=estate, title=estate.title, url=url)
+                db.session.add(new_image)
+                db.session.commit()
             # create a geolocation data from input string
             data = EstateLocationData.from_string(form.data['address'])
             if not isinstance(data, EstateLocationData):
                 return {'errors': data }
             # if not data.latitude:
             #     return {'errors': "geolocation failed"}, 403
-            form.populate_obj(estate)  
+            form.populate_obj(estate)
             estate.address=data.address,
             estate.city=data.city,
             estate.state=data.state,
@@ -98,7 +113,6 @@ def patch_estate(owner_id, estate_id):
             estate.longitude=data.longitude
             db.session.add(estate)
             db.session.commit()
-            
             return estate.to_dict()
         # print(form.errors)
         # return {'errors': validation_errors_to_error_messages(form.errors)}, 401

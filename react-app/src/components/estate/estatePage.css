@@ -24,7 +24,7 @@
     display: flex;
     min-width: 1121px;
 }
-img{
+img, .no-img {
     border-radius: 12px;
     border: 1px var(--medgold) solid;
 }
