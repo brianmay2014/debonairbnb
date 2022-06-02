@@ -27,7 +27,7 @@ const EditForm = ({currCharter, setShowEditModal}) => {
 			disabledDatesArray.push(date)
 		})
 	})
-  // console.log(allChartersForEstate)
+
 
   const [dateRange, setDateRange] = useState([
 		{
@@ -53,8 +53,6 @@ const EditForm = ({currCharter, setShowEditModal}) => {
   }
 
   useEffect(() => {
-		// console.log(state);
-		// console.log(typeof state[0].endDate);
 		setCheckinDate(dateRange[0].startDate)
 		setCheckoutDate(dateRange[0].endDate)
 	}, [dateRange])

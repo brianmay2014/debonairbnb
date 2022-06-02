@@ -115,7 +115,7 @@ function SearchBar() {
           estatesArraySingle.push(estate.id);
         }
       });
-      console.log(estatesArraySingle);
+
       return history.push(`/search?estateids=${estatesArraySingle.join(",")}`);
     }
     // returns results of first item in search result suggestions

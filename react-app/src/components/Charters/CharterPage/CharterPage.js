@@ -21,7 +21,6 @@ const CharterPage = () => {
   const [showThankYouModal, setShowThankYouModal] = useState();
 
   // const [searchParams, setSearchParams] = useSearchParams()
-  // console.log(useSearchParams())
 
   const lengthOfCharter =
     (Date.parse(endDate) - Date.parse(startDate)) / (60 * 60 * 24 * 1000);
@@ -30,14 +29,14 @@ const CharterPage = () => {
     (estate) => parseInt(estateId) === estate.id
   );
 
-  // console.log(estateId, '============')
+
 
   const serviceFees = charterEstate?.nightly_rate * lengthOfCharter * 0.1;
   const occupancyFees = charterEstate?.nightly_rate * lengthOfCharter * 0.09;
   const cleaningFees = charterEstate?.nightly_rate * lengthOfCharter * 0.08;
   const { search } = useLocation();
   // const params = new URLSearchParams(search)
-  // console.log(params.get(), '============')
+
   const totalCost = (serviceFees, occupancyFees, cleaningFees) => {
     const total =
       serviceFees +
@@ -69,7 +68,7 @@ const CharterPage = () => {
   };
 
 
-  console.log(sessionUser, "USERHAHAHAHAH")
+
   useEffect(async () => {
     // const handleConfirm = async (e) => {
     //   const payload = { sessionUserId, estateId, guestNum, startDate, endDate };

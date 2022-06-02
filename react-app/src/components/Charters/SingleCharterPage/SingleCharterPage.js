@@ -13,7 +13,7 @@ const SingleCharterPage = () => {
   const singleCharter = allCharters.find(
     (charter) => charter.id === parseInt(charterId)
   );
-  // console.log(singleCharter)
+
   const charterEstate = allEstates.find(
     (estate) => estate.id === singleCharter.estate_id
   );

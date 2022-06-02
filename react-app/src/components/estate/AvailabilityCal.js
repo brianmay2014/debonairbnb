@@ -38,7 +38,7 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 
 	const estateCharters = charters?.filter(charter => estate?.id === charter.estate_id)
 
-	// console.log(dateArrayCreator(checkinDate, checkoutDate).concat(dateArrayCreator(new Date('2022-07-17T03:24:00'), new Date('2022-07-20T03:24:00'))), "==============")
+
 
 	let disabledDatesArray = []
 
@@ -49,8 +49,6 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 	})
 
 	useEffect(() => {
-		// console.log(state);
-		// console.log(typeof state[0].endDate);
 		setCheckinDate(state[0].startDate)
 		setCheckoutDate(state[0].endDate)
 	}, [state])

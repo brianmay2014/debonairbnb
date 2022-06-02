@@ -7,14 +7,14 @@ import { Modal } from "../../../context/Modal";
 import { addDays } from 'date-fns';
 
 const CharterRow = ({ charter, estateId }) => {
-  // console.log(typeof charter.start_date)
+
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const dateConverter = (string) => {
     let date = new Date(string);
-    // console.log(date.toLocaleString().split(",")[0], '============')
+
 
     return addDays(date, 1).toLocaleString().split(",")[0];
   };
