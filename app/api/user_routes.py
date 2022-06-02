@@ -82,8 +82,6 @@ def patch_estate(owner_id, estate_id):
         form['csrf_token'].data = request.cookies['csrf_token']
         form['owner_id'].data = owner_id
         if form.validate_on_submit():
-            print(request.files)
-            print("hello")
             if "image" in request.files:
                 image = request.files["image"]
                 if not allowed_file(image.filename):
@@ -114,9 +112,6 @@ def patch_estate(owner_id, estate_id):
             db.session.add(estate)
             db.session.commit()
             return estate.to_dict()
-        print(form.errors)
-        print("hello")
-        print("hello")
         # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
         return {'errors': form.errors}, 403
 
