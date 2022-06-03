@@ -58,7 +58,7 @@ const UploadImage = ({ estate, onFinish }) => {
     const dropAreaFilled = (
       <div className="dropArea drop-filled">
         <span>Upload this Image?</span>
-        <img src={previewImg} />
+        <img src={previewImg} className={"uploadImg"} />
         <span>Drag & Drop or Click to Change the Image</span>
       </div>);
       setDropChild(dropAreaFilled);
@@ -66,8 +66,10 @@ const UploadImage = ({ estate, onFinish }) => {
   }, [previewImg]);
 
   useEffect(() => {
-    setDisabled(Object.keys(errors).length !== 0)
-  },[errors])
+    if (image && errors.length === 0) {
+      setDisabled(false)
+    }
+  },[errors, image])
 
 
   const handleSubmit = async (e) => {
@@ -93,12 +95,17 @@ const UploadImage = ({ estate, onFinish }) => {
     setImage(file);
   };
 
+  const handleError = () => {
+    setDropChild(dropAreaErrored);
+    setErrors([...errors, "Incorrect file type"]);
+  }
+  console.log(image, disabled)
   return (
     <form onSubmit={handleSubmit}>
       <FileUploader
         className="setImg"
         children={[dropChild]}
-        onTypeError={() => setDropChild(dropAreaErrored)}
+        onTypeError={handleError}
         handleChange={updateImage}
         name="image"
         types={fileTypes}
