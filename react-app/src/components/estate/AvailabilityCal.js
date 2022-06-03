@@ -55,7 +55,7 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 	useEffect(() => {
 		setCheckinDate(state[0].startDate)
 		setCheckoutDate(state[0].endDate)
-		console.log(disabledDatesArray)
+		// console.log(disabledDatesArray)
 	}, [state])
 
 	useEffect(() => {

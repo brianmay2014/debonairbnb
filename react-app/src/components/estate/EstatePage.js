@@ -44,10 +44,6 @@ const EstatePage = ({setCharterPayload}) => {
   useEffect(() => {
     dispatch(genEstates())
   }, [dispatch, critiquesCount])
-
-  if (gKey) {
-    console.log(gKey);
-}
   
   if (!estate) {
     return null;
