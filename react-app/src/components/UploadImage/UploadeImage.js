@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { editEstate } from "../../store/estate";
 import { FileUploader } from "react-drag-drop-files";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileArrowUp, faFileCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 import "./UploadImage.css";
 
@@ -26,7 +28,9 @@ const UploadImage = ({ estate, onFinish }) => {
       {previewImg ? (
         <img src={previewImg} />
       ) : (
-        <i className="fa fa-file-arrow-up iEmpty"></i>
+        <div className={"dropAreaIcon iEmpty"}>
+          <FontAwesomeIcon icon={faFileArrowUp} />
+        </div>
       )}
       <span>Drag & Drop or Click to Select an Image</span>
       {typeArea}
@@ -37,8 +41,12 @@ const UploadImage = ({ estate, onFinish }) => {
 
   const dropAreaErrored = (
     <div className="dropArea ">
-      <i className="fa fa-file-circle-xmark iError"></i>
-      <span className="fileError">That file didn't adhere to our dress code.</span>
+      <div className={"dropAreaIcon iError"}>
+        <FontAwesomeIcon icon={faFileCircleXmark} />
+      </div>
+      <span className="fileError">
+        That file didn't adhere to our dress code.
+      </span>
       {typeArea}
     </div>
   );
