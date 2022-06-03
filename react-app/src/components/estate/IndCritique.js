@@ -11,6 +11,11 @@ import { genEstates } from "../../store/estate";
 import { Modal } from "../../context/Modal";
 import EmojiRatingComponent from './EmojiRatingComponent';
 import { ratingEmoji } from "./StarRating";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTrashCan,
+  faPenFancy,
+} from "@fortawesome/free-solid-svg-icons";
 
 
 dayjs.extend(calendar)
@@ -24,7 +29,7 @@ const IndCritiqueDelButton = ({critique}) => {
 	}
 	return (
     <>
-      <i className="fa fa-trash critique-delete-button" onClick={() => setShowModal(true)}/>
+      <FontAwesomeIcon icon={faTrashCan} onClick={() => setShowModal(true)}/>
 	  {showModal && (<Modal onClose={() => setShowModal(false)}>
 		  <IndCritiqueDeleteModal critique={critique} setShowModal={setShowModal} />
 	  </Modal>)}
@@ -64,8 +69,8 @@ const IndCritiqueEditButton = ({ critique }) => {
   }
   return (
     <>
-      <i
-        className="fa fa-pencil critique-edit-button"
+      <FontAwesomeIcon
+        icon={faPenFancy}
         onClick={() => setShowModal(true)}
       />
       {showModal && (

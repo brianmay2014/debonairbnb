@@ -21,7 +21,7 @@
     object-fit: cover;
 }
 
-.dropArea i {
+.dropAreaIcon {
     font-size: 5em;
     opacity: 50%;
 }
