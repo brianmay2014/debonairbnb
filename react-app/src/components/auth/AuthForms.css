@@ -38,7 +38,30 @@
 }
 
 #signup-button{
-
     width: fit-content;
     margin: 0 auto;
+}
+
+.center{
+    text-align: center;
+    width: fit-content;
+    margin: 0 auto;
+}
+#h3-login{
+    margin-top: 80px;
+    margin-bottom:0;
+}
+#h4-login{
+    margin-top: 0;
+    margin-bottom: 80px;
+}
+#to-sign-up {
+    width: 100%;
+    margin: 0 auto;
+    color: white;
+}
+.login-buttons-containers{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
