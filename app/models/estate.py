@@ -62,6 +62,7 @@ class Estate(db.Model, CrUpMixin):
             'image_ids': [image.id for image in self.images],
             'images': [image.to_dict() for image in self.images],
             'rating': self.rating,
+            'owner_username': self.owner.username
         }
 
     def to_compact_dict(self):

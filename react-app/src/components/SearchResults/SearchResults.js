@@ -19,7 +19,7 @@ const SearchResults = () => {
 
     useEffect(() => {
       const getKey = async () => {
-        const response = await fetch("api/estates/key");
+        const response = await fetch("/api/estates/key");
         const key = await response.text();
         setGKey(key);
       };
