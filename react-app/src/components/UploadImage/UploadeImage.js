@@ -4,6 +4,8 @@ import { editEstate } from "../../store/estate";
 import { FileUploader } from "react-drag-drop-files";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileArrowUp, faFileCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import errorico from "../../images/close.png"
+import camico from "../../images/camera.png"
 
 import "./UploadImage.css";
 
@@ -29,7 +31,7 @@ const UploadImage = ({ estate, onFinish }) => {
         <img src={previewImg} />
       ) : (
         <div className={"dropAreaIcon iEmpty"}>
-          <FontAwesomeIcon icon={faFileArrowUp} />
+          <img src={camico} />
         </div>
       )}
       <span>Drag & Drop or Click to Select an Image</span>
@@ -42,7 +44,7 @@ const UploadImage = ({ estate, onFinish }) => {
   const dropAreaErrored = (
     <div className="dropArea ">
       <div className={"dropAreaIcon iError"}>
-        <FontAwesomeIcon icon={faFileCircleXmark} />
+        <img src={errorico} />
       </div>
       <span className="fileError">
         That file didn't adhere to our dress code.

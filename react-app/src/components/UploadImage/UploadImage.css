@@ -15,28 +15,23 @@
     cursor: pointer;
 }
 
-.dropArea img {
+.dropArea .uploadImg {
     height: 200px;
     width: auto;
     object-fit: cover;
 }
 
 .dropAreaIcon {
-    font-size: 5em;
     opacity: 50%;
 }
 
-.iFilled {
-  color: var(--darkestgold)
+.dropAreaIcon img {
+    border: none;
+    width: 6em;
+    height: 6em;
+    padding: 1em;
 }
 
-.iError {
-    color: var(--medred)
-}
-
-.iEmpty {
-    color: var(--darkestgold)
-}
 
 .dropArea:hover {
     background-color: var(--lightgold);
