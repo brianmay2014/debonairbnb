@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import './AuthForms.css';
 
@@ -12,6 +12,7 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -20,8 +21,16 @@ const SignUpForm = () => {
       if (data) {
         setErrors(data)
       }
-    }
+    } else {
+		setErrors(['Both passwords must match, please try again']);
+	}
+
   };
+
+  	const toLogin = async (e) => {
+		e.preventDefault();
+		history.push("/login");
+	};
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -45,7 +54,13 @@ const SignUpForm = () => {
 
   return (
 		<form className="auth-form" onSubmit={onSignUp}>
-			<div>
+			<div className="login-text">
+				<h3 id="h3-login">Do yourself a favour.</h3>
+				<h4 id="h4-login">
+					Sign up for exclusive stays in your new favourite estate.
+				</h4>
+			</div>
+			<div className="form-errors center">
 				{errors.map((error, ind) => (
 					<div key={ind}>{error}</div>
 				))}
@@ -90,11 +105,15 @@ const SignUpForm = () => {
 					value={repeatPassword}
 					required={true}
 				></input>
-			</div>
 			<div id="signup-button">
 				<button className="btn" type="submit">
 					Sign Up
 				</button>
+			</div>
+			<p>Don't have an account?</p>
+			<button id="to-log-in" className="btn-pink" onClick={toLogin}>
+				Log in!
+			</button>
 			</div>
 		</form>
   );
