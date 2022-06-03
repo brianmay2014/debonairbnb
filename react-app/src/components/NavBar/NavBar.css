@@ -22,8 +22,11 @@
 }
 
 #icon-img-div {
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
+  position: absolute;
+  top: 4px;
+  font-size: 28px;
 }
 
 #nav-icon {

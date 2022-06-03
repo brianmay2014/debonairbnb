@@ -26,9 +26,6 @@
     text-align: center;
 }
 
-#text-input{
-    height: 100px;
-}
 
 label, input, button{
     margin: 5px;
@@ -146,7 +143,16 @@ h3.add-text{
 }
 
 #text-input{
+    height: 100px;
     word-break: break-all;
     overflow: scroll;
+    display: block;
+    width: 100%;
+    min-height: 200px;
+    /* background-color: var(--lightestegg); */
+    resize: vertical;
+    /* border-radius: 26px; */
+    /* padding: 1em; */
+    /* box-shadow: inset 1px 1px 15px var(--lightestgold), inset -1px -1px 15px var(--lightestgold); */
     /* background-color: green; */
 }
