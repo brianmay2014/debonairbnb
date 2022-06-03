@@ -4,6 +4,8 @@ import { editEstate } from "../../store/estate";
 import { FileUploader } from "react-drag-drop-files";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileArrowUp, faFileCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import errorico from "../../images/close.png"
+import camico from "../../images/camera.png"
 
 import "./UploadImage.css";
 
@@ -29,7 +31,7 @@ const UploadImage = ({ estate, onFinish }) => {
         <img src={previewImg} />
       ) : (
         <div className={"dropAreaIcon iEmpty"}>
-          <FontAwesomeIcon icon={faFileArrowUp} />
+          <img src={camico} />
         </div>
       )}
       <span>Drag & Drop or Click to Select an Image</span>
@@ -42,7 +44,7 @@ const UploadImage = ({ estate, onFinish }) => {
   const dropAreaErrored = (
     <div className="dropArea ">
       <div className={"dropAreaIcon iError"}>
-        <FontAwesomeIcon icon={faFileCircleXmark} />
+        <img src={errorico} />
       </div>
       <span className="fileError">
         That file didn't adhere to our dress code.
@@ -56,7 +58,7 @@ const UploadImage = ({ estate, onFinish }) => {
     const dropAreaFilled = (
       <div className="dropArea drop-filled">
         <span>Upload this Image?</span>
-        <img src={previewImg} />
+        <img src={previewImg} className={"uploadImg"} />
         <span>Drag & Drop or Click to Change the Image</span>
       </div>);
       setDropChild(dropAreaFilled);
@@ -64,8 +66,10 @@ const UploadImage = ({ estate, onFinish }) => {
   }, [previewImg]);
 
   useEffect(() => {
-    setDisabled(Object.keys(errors).length !== 0)
-  },[errors])
+    if (image && errors.length === 0) {
+      setDisabled(false)
+    }
+  },[errors, image])
 
 
   const handleSubmit = async (e) => {
@@ -91,12 +95,17 @@ const UploadImage = ({ estate, onFinish }) => {
     setImage(file);
   };
 
+  const handleError = () => {
+    setDropChild(dropAreaErrored);
+    setErrors([...errors, "Incorrect file type"]);
+  }
+  console.log(image, disabled)
   return (
     <form onSubmit={handleSubmit}>
       <FileUploader
         className="setImg"
         children={[dropChild]}
-        onTypeError={() => setDropChild(dropAreaErrored)}
+        onTypeError={handleError}
         handleChange={updateImage}
         name="image"
         types={fileTypes}
