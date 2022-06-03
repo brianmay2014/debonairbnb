@@ -24,6 +24,7 @@
 .dropAreaIcon {
     opacity: 75%;
     font-size: 6em;
+    display: contents;
 }
 
 .iEmpty {
