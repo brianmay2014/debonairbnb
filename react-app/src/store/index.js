@@ -5,6 +5,7 @@ import estateReducer from './estate';
 import searchReducer from './search';
 import charterReducer from './charter'
 import critiqueReducer from './critique';
+import estateTypeReducer from './estateType';
 
 const rootReducer = combineReducers({
   session,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   searchResults: searchReducer,
   charters: charterReducer,
   critiques: critiqueReducer,
+  estateTypes: estateTypeReducer,
 });
 
 

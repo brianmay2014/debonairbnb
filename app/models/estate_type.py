@@ -14,3 +14,10 @@ class EstateType(db.Model, CrUpMixin):
     @staticmethod
     def new(type):
         return EstateType(name=type)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "estate_ids": [estate.id for estate in self.estates]
+        }

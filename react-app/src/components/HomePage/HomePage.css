@@ -1,8 +1,9 @@
 #home-page-container{
     display: flex;
+    flex-direction: column;
     width: 1431px;
     margin: 0 auto 237px;
-    
+
 }
 
 .estate-display{
@@ -94,4 +95,42 @@
 .footer span{
     font-size: 15px;
     font-weight: 300;
+}
+
+#type-filter-bar {
+    width: 100%;
+    margin: 8px auto;
+    display: flex;
+    justify-content: center;
+
+}
+
+.estate-type-filter-link {
+    cursor: pointer;
+    padding: 4px 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.estate-type-filter-link:hover {
+    background-color: var(--medgold);
+    color: var(--lightestegg);
+}
+
+.estate-type-filter-link:not(:first-child) {
+    border-left: 1px solid black;
+}
+
+/* .estate-type-filter-link:not(:last-child) {
+    border-right: 1px solid black;
+} */
+
+.estate-type-filter-link.selected {
+    color: var(--medgold)
+}
+
+.estate-type-filter-link.selected:hover {
+    color: var(--lightestegg);
+    background-color: var(--darkred)
 }
