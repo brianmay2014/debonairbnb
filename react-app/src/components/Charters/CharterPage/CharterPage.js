@@ -162,7 +162,9 @@ console.log(guest_num, '=============')
               <div className="charter-title-rating">
                 <p>{charterEstate?.type}</p>
                 <h4>{charterEstate?.title}</h4>
-                <RatingDisplay rating={charterEstate?.rating}></RatingDisplay>
+                <div id='confirm-charter-rating'>
+                <RatingDisplay rating={charterEstate?.rating} places={2}></RatingDisplay>
+                </div>
               </div>
             </div>
             <div>
