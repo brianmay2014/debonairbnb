@@ -54,3 +54,37 @@
 .home-card-img a {
     width:277px;
 }
+
+.footer-backer{
+    position: fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height: 30px;
+    background: linear-gradient(217deg, var(--medgold), var(--footergold) 70.71%),
+            linear-gradient(127deg, var(--footergold), var(--medgold) 70.71%);
+    margin: 0;
+
+}
+.footer {
+    color: var(--lightestegg);
+    list-style: none;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    margin: 5px auto;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+}
+
+.footer li, .footer a{
+    color: var(--lightestegg);
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.footer span{
+    font-size: 15px;
+    font-weight: 300;
+}

@@ -18,6 +18,7 @@ import MyCharters from "./components/Charters/MyCharters/MyCharters"
 import {genCharters} from "./store/charter"
 import HostPage from "./components/HostPage/HostPage";
 import SingleCharterPage from "./components/Charters/SingleCharterPage/SingleCharterPage"
+import Footer from "./components/HomePage/Footer";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -81,6 +82,7 @@ function App() {
           <SingleCharterPage/>
         </ProtectedRoute>
       </Switch>
+      <Footer />
     </BrowserRouter>
 
   );

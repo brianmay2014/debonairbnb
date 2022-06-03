@@ -56,15 +56,6 @@ body {
     margin: 0;
 }
 
-.footer{
-    background-color: var(--footerbg);
-    text-align: center;
-    color: var(--lightbg);
-    width: 100%;
-    position: fixed;
-    bottom: 0px;
-}
-
 .header{
     text-align: center;
     width: 100%;
