@@ -45,7 +45,7 @@ const EstateCard = ({ estate, showType }) => {
             <RatingDisplay rating={estate?.rating} places={2} />
           </div>
         </div>
-        <div className="card-availabilty">Feb 1-6</div>
+        <div className="card-type">{estate?.type}</div>
         <div className="card-cost">
           ${estate?.nightly_rate} <span className="per-night">per night</span>
         </div>

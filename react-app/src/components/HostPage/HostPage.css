@@ -2,7 +2,12 @@
     display: flex;
     flex-direction: column;
     width: 30%;
-    margin: 0 auto;
+    margin: 138px auto 237px;
+}
+
+#my-estates-header {
+  margin-left: 375px;
+  margin-top: 50px;
 }
 
 #estate-display{
@@ -105,4 +110,43 @@ label, input, button{
 
 .btn-host-row {
     width: 130px;
+}
+
+.add-text{
+    color: var(--darkestgold);
+    margin: 0 auto;
+}
+
+h3.add-text{
+    margin-bottom: 50px;
+}
+
+#estate-form input, #estate-form select{
+    /* margin-bottom: 18px;
+    margin: 0 auto 18px; */
+    border: 0.2px var(--lightgold) solid;
+    border-radius: 2px;
+    box-shadow: 0px 0px 2px var(--medgold);
+}
+#estate-form input:focus, #estate-form select:focus{
+    outline: none;
+    box-shadow: 1px 1px 6px var(--medgold);
+}
+
+.estate-edit-form input, .estate-edit-form select{
+    /* margin-bottom: 18px;
+    margin: 0 auto 18px; */
+    border: 0.2px var(--lightgold) solid;
+    border-radius: 2px;
+    box-shadow: 0px 0px 2px var(--medgold);
+}
+.estate-edit-form input:focus, .estate-edit-form select:focus{
+    outline: none;
+    box-shadow: 1px 1px 6px var(--medgold);
+}
+
+#text-input{
+    word-break: break-all;
+    overflow: scroll;
+    /* background-color: green; */
 }
