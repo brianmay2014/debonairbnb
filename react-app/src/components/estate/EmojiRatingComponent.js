@@ -7,13 +7,11 @@ const SingleEmoji = ({emoji, rating, currentRating, setCurrentRating, hoverRatin
 
     const handleMouseEnter = (e) => {
       e.preventDefault();
-      console.log("in")
       setHoverRating(rating)
     }
 
     const handleMouseLeave = (e) => {
       e.preventDefault()
-      console.log("out")
       setHoverRating(0)
     }
 
@@ -29,7 +27,6 @@ const SingleEmoji = ({emoji, rating, currentRating, setCurrentRating, hoverRatin
     }
 
     useEffect(() => {
-      console.log(rating, currentRating, hoverRating)
       if (rating <= currentRating || rating <= hoverRating) {
         setIlluminated(true)
       } else {
@@ -60,6 +57,7 @@ const EmojiRatingComponent = ({ emoji, onEmojiClick, maxRating, defaultRating })
   for (let i=1; i <= maxRating; i++) {
     emojis.push(
       <SingleEmoji
+        key={i}
         rating={i}
         emoji={emoji}
         currentRating={currentRating}
@@ -71,7 +69,6 @@ const EmojiRatingComponent = ({ emoji, onEmojiClick, maxRating, defaultRating })
   }
 
   const label = currentRating ? `Selected Rating: ${currentRating}` : "Select a Rating"
-  console.log(ratingLabels);
 
   return (
     <div className={"emoji-ratings"}>
