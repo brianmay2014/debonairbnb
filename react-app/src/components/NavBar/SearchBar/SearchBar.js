@@ -45,6 +45,13 @@ function SearchBar() {
     setShowGuestsMenu(false);
     setShowDestinationMenu(false);
   };
+  const closeDateMenu = (e) => {
+		e.stopPropagation();
+		if (!showDateMenu) return;
+		setShowDateMenu(false);
+		setShowGuestsMenu(true);
+		setShowDestinationMenu(true);
+  };
   const openGuestsMenu = (e) => {
     e.stopPropagation();
     if (showGuestsMenu) return;
@@ -86,6 +93,8 @@ function SearchBar() {
   // Submits filtered search results to store and redirects to link which displays results
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    setShowDateRange(false);
 
     const dateRangeFromSearch = dateArrayCreator(
       new Date(checkinDate),
@@ -257,72 +266,80 @@ function SearchBar() {
   }
 
   return (
-    <div className="search-container-with-nav">
-      {hiddenButtons && <nav className="search-mini-nav">Stays</nav>}
-      <div className={hiddenButtons ? "" : "search-container"}>
-        <form
-          onSubmit={handleSubmit}
-          className="search-form"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div
-            className={
-              hiddenButtonsDest ? "hidden-buttons" : "search-buttons-container"
-            }
-          >
-            {/* <AnimatedButton /> */}
-            <button onClick={handleHiddenButtonsDestination}>
-              <p>{destinationValueHolder}</p>
-            </button>
-            <span className="search-button-spans"></span>
-            <button onClick={openDateMenu}>
-              <p>Any Week</p>
-            </button>
-            {/* <span className="search-button-spans"></span> */}
-            {/*
+		<div className="search-container-with-nav">
+			{hiddenButtons && <nav className="search-mini-nav">Stays</nav>}
+			<div className={hiddenButtons ? "" : "search-container"}>
+				<form
+					onSubmit={handleSubmit}
+					className="search-form"
+					onClick={(e) => e.stopPropagation()}
+				>
+					<div
+						className={
+							hiddenButtonsDest
+								? "hidden-buttons"
+								: "search-buttons-container"
+						}
+					>
+						{/* <AnimatedButton /> */}
+						<button onClick={handleHiddenButtonsDestination}>
+							<p>{destinationValueHolder}</p>
+						</button>
+						<span className="search-button-spans">|</span>
+						{/* <button onClick={openDateMenu}> */}
+						<button onClick={handleHiddenButtonsDestination}>
+							<p>Search Dates</p>
+						</button>
+						{/* <span className="search-button-spans"></span> */}
+						{/*
             <button onClick={openGuestsMenu} className="guest-icon-button">
               <p>
                 Add guests
               </p>
             </button> */}
-          </div>
+					</div>
 
-          <div className={hiddenButtons ? "inputs-revealed" : "inputs-hidden"}>
-            <div className="search-inputs">
-              <label>Where</label>
-              <SearchDestinationInput
-                setDestination={setDestination}
-                setAlphabetizedSet={setAlphabetizedSet}
-              />
-            </div>
-            <div className="search-inputs">
-              {/* <label id='when-label'>When</label> */}
-              <div id="search-duration-input">
-                <SearchDurationInput
-                  setCheckinDate={setCheckinDate}
-                  setCheckoutDate={setCheckoutDate}
-                  checkoutDate={checkoutDate}
-                  checkinDate={checkinDate}
-                  setDateRange={setDateRange}
-                  showDateRange={showDateRange}
-                  setShowDateRange={setShowDateRange}
-                />
-                <button type="submit">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-              </div>
-            </div>
-            {/* <div className="search-inputs">
+					<div
+						className={
+							hiddenButtons ? "inputs-revealed" : "inputs-hidden"
+						}
+					>
+						<div className="search-inputs">
+							<label>Where</label>
+							<SearchDestinationInput
+								setDestination={setDestination}
+								setAlphabetizedSet={setAlphabetizedSet}
+								setShowDateRange={setShowDateRange}
+							/>
+						</div>
+						<div className="search-inputs">
+							{/* <label id='when-label'>When</label> */}
+							<div id="search-duration-input">
+								<SearchDurationInput
+									setCheckinDate={setCheckinDate}
+									setCheckoutDate={setCheckoutDate}
+									checkoutDate={checkoutDate}
+									checkinDate={checkinDate}
+									setDateRange={setDateRange}
+									showDateRange={showDateRange}
+									setShowDateRange={setShowDateRange}
+								/>
+								<button type="submit">
+									<i class="fa-solid fa-magnifying-glass"></i>
+								</button>
+							</div>
+						</div>
+						{/* <div className="search-inputs">
               <label>Who</label>
               <div className="guest-input">
                 <SearchGuestsInput setGuestNumber={setGuestNumber} />
 
               </div>
             </div> */}
-          </div>
-        </form>
-      </div>
-    </div>
+					</div>
+				</form>
+			</div>
+		</div>
   );
 }
 

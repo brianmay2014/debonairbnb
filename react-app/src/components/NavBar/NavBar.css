@@ -8,7 +8,7 @@
   justify-content: space-between;
   z-index: 1;
   padding: 0 160px;
-  margin-top: 12px;
+  margin-top: 8px;
 }
 
 #nav-icon-title {
@@ -43,4 +43,9 @@
 .nav-buttons{
   display: flex;
   width: 200px;
+}
+
+.nav-icon-div{
+  width: 165px;
+  height: 30px;
 }

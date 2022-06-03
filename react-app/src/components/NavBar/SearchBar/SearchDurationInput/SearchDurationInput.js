@@ -69,48 +69,60 @@ const SearchDurationInput = ({setCheckoutDate, setCheckinDate, checkoutDate, che
     return () => document.removeEventListener("click", unHideCalendar);
   }, [showDateRange]);
 
+
   useEffect(() => {
 		setCheckinDate(state[0].startDate)
 		setCheckoutDate(state[0].endDate)
 		// console.log(disabledDatesArray)
 	}, [state])
 
+
+  const closeCal = async (e) => {
+    e.preventDefault();
+    setShowDateRange(false);
+  }
+
   return (
-    <div className="checkin-checkout-inputs">
-      <div className="checkdates-2">
-        <label>Check-in</label>
-        <input
-          type="date"
-          // value={checkinDate}
-          value={dateParser(checkinDate)}
-          required
-          onChange={setCheckinFunc}
-          onClick={() => setShowDateRange(true)}
-        />
-      </div>
-      <div className="checkdates-2">
-        <label>Check-out</label>
-        <input
-          type="date"
-          value={dateParser(checkoutDate)}
-          required
-          onChange={setCheckoutFunc}
-        />
-      </div>
-      {showDateRange && (
-        <div className="search-date-range">
-          <DateRangePicker
-            onChange={(item) => setState([item.selection])}
-            showSelectionPreview={true}
-            moveRangeOnFirstSelection={false}
-            months={2}
-            ranges={state}
-            direction="horizontal"
-            dragSelectionEnabled={true}
-          />
-        </div>
-      )}
-    </div>
+		<div className="checkin-checkout-inputs">
+			<div className="checkdates-2">
+				<label>Check-in</label>
+				<input
+					type="date"
+					// value={checkinDate}
+					value={dateParser(checkinDate)}
+					required
+					readonly="readonly"
+					onChange={setCheckinFunc}
+					onClick={() => setShowDateRange(true)}
+				/>
+			</div>
+			<div className="checkdates-2">
+				<label>Check-out</label>
+				<input
+					type="date"
+					readonly="readonly"
+					value={dateParser(checkoutDate)}
+					required
+					onChange={setCheckoutFunc}
+				/>
+			</div>
+			{showDateRange && (
+				<div className="search-date-range">
+					<DateRangePicker
+						onChange={(item) => setState([item.selection])}
+						showSelectionPreview={true}
+						moveRangeOnFirstSelection={false}
+						months={2}
+						ranges={state}
+						direction="horizontal"
+						dragSelectionEnabled={true}
+					/>
+          <button className='btn' onClick={closeCal}>
+            Use Selected Dates
+          </button>
+				</div>
+			)}
+		</div>
   );
 };
 
