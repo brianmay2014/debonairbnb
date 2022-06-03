@@ -18,7 +18,7 @@ const EditForm = ({currCharter, setShowEditModal}) => {
   const [guestNum, setGuestNum] = useState(currCharter.guest_num)
   const allCharters = useSelector(state => Object.values(state.charters))
   const allChartersForEstate = allCharters?.filter(charter => charter.estate_id === currCharter.estate_id && charter.id != currCharter.id)
-
+  const [dateBeforeToday, setDateBeforeToday] = useState(false);
 
 
   let disabledDatesArray = []
@@ -44,6 +44,7 @@ const EditForm = ({currCharter, setShowEditModal}) => {
 
   const handleEdit = (e) => {
     e.preventDefault()
+    console.log('------------handleEdit');
     const payload = {id:currCharter.id, userId:currCharter.user_id, estateId:currCharter.estate_id, guestNum: guestNum, startDate: dateParser(checkinDate), endDate: dateParser(checkoutDate)}
     dispatch(editCharter(payload))
     console.log(payload)
@@ -59,6 +60,16 @@ const EditForm = ({currCharter, setShowEditModal}) => {
 		setCheckoutDate(dateRange[0].endDate)
 	}, [dateRange])
 
+    useEffect(() => {
+		const today = new Date();
+		const compare = new Date(today.getTime() - 1000);
+
+		if (checkinDate < compare) {
+			setDateBeforeToday(true);
+		} else {
+			setDateBeforeToday(false);
+		}
+	}, [checkinDate]);
 
 
   return (
@@ -83,7 +94,10 @@ const EditForm = ({currCharter, setShowEditModal}) => {
       <label>New number of guests:</label>
       <input type="number" placeholder={`${guestNum}`} onChange={handleGuestNum}/>
     </div>
-    <button className="btn-request" onClick={handleEdit}>Request</button>
+    <button className="btn-request" disabled={dateBeforeToday} onClick={handleEdit}>Request</button>
+    {dateBeforeToday && (
+      <p className='edit-date-error'>Cannot request a charter change for today's date, or any date in the past.</p>
+    )}
     </form>
     </>
   )

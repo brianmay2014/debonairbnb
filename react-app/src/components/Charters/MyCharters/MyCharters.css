@@ -32,3 +32,11 @@
   display: flex;
   justify-content: space-around;
 }
+
+.error-message{
+  color: var(--darkred);
+}
+
+p.edit-date-error {
+  color: var(--darkred);
+}

@@ -40,7 +40,9 @@ def charter_form_submit():
         "start_date": form.data['start_date'],
         "end_date": form.data['end_date']
     }
-
+    print('=-0=-0=-0=-0=-0=-0=-0=-0=-0=-0')
+    print(form.data)
+    print('=-0=-0=-0=-0=-0=-0=-0=-0=-0=-0')
     if form.validate_on_submit():
         charter = Charter(**params)
         db.session.add(charter)
@@ -53,10 +55,16 @@ def charter_form_submit():
 @charter_routes.route('/<int:id>', methods=["PATCH"])
 @login_required
 def charter_update(id):
+    print('----------patch charters route')
     charter = Charter.query.get(id)
     form = CharterEditForm()
+    form.data['charter_id'] = id
     form['csrf_token'].data = request.cookies['csrf_token']
+    print('=-aptch=-0=-0=-0=-0=-0=-0')
+    print(form.data)
+    print('=-aptch=-0=-0=-0=-0=-0=-0')
     if form.validate_on_submit():
+      print('--------form is validated')
       charter.user_id = form.data['user_id']
       charter.estate_id = form.data['estate_id']
       charter.guest_num = form.data['guest_num']
@@ -65,7 +73,8 @@ def charter_update(id):
       db.session.commit()
       return charter.to_dict()
     else:
-    #   print(form.errors)
+      print('*/-/*-*/-/*-*-/*-/-*/*-/errrrrrrorsrs*/-*/-*-/*/-/*--/*/*-/*-*/-*-/')
+      print(form.errors)
       return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @charter_routes.route('/<int:id>', methods=["DELETE"])
