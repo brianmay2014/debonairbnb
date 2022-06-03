@@ -41,7 +41,7 @@ const DescriptionAvailCharter = ( {estate, setCharterPayload} ) => {
     let stateVars = {checkinDate, setCheckinDate, checkoutDate, setCheckoutDate, nightStay, setNightStay}
 
 
-    const ownerName = "Jerrey";
+    // const ownerName = "Jerrey";
     // const numGuests = 6;
     // const numBaths = 3;
     // const numBeds =  6;
@@ -51,7 +51,7 @@ const DescriptionAvailCharter = ( {estate, setCharterPayload} ) => {
 		<div id="desc-avail-charter">
 			<div id="dac-left">
 				<div id="description-header">
-					{estate?.title} hosted by {ownerName}
+					{estate?.title} hosted by {estate.owner_username}
 				</div>
 				<div id="estate-details">
 					{/* {numGuests} guests - {numBeds} beds - {numBaths} baths */}

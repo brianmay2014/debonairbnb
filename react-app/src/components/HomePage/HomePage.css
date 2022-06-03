@@ -50,3 +50,7 @@
 .per-night, .card-critique, .card-availabilty{
     font-weight: 300;
 }
+
+.home-card-img a {
+    width:277px;
+}

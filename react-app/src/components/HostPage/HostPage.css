@@ -5,6 +5,16 @@
     margin: 0 auto;
 }
 
+#estate-display{
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.row-left a {
+    margin: 0 auto;
+}
+
 .form-field{
     display: flex;
     flex-direction: column;
@@ -14,6 +24,7 @@
 #text-input{
     height: 100px;
 }
+
 label, input, button{
     margin: 5px;
 }
@@ -75,4 +86,23 @@ label, input, button{
 
 .upload-image.active {
     display: block;
+}
+
+.btn-pink {
+    background-color: var(--medpink);
+    padding: 5px;
+    border-radius: 3px;
+    border: 2px solid var(--darkpink);
+    transition: all 0.3s;
+}
+
+.btn-pink:hover:not(:disabled) {
+    background-color: var(--lightestpink);
+    border: 2px solid var(--medpink);
+    box-shadow: 0 0 8px var(--lightpink);
+    color: var(--darkpink);
+}
+
+.btn-host-row {
+    width: 130px;
 }

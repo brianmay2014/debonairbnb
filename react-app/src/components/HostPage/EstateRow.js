@@ -6,7 +6,7 @@ import { Modal } from "../../context/Modal";
 import { genEstates, editEstate } from '../../store/estate'
 
 const EstateRow = ({ estate }) => {
-	const address = `${estate?.city}, ${estate?.state}`;
+	// const address = `${estate?.city}, ${estate?.state}`;
 	let dispImg;
 	if (estate?.images.length) {
 		dispImg = estate?.images.reduce((img, accum) => img.created_at > accum.created_at ? img : accum
@@ -31,51 +31,71 @@ const EstateRow = ({ estate }) => {
 	// submitEdit
 
 	return (
-    <div className="estate-rows" id={`estate-row-${estate?.id}`}>
-      <div className="row-left" id="estate-display">
-        <a href={`/estates/${estate?.id}`}>
-          {dispImgURL ? (
-            <img src={dispImgURL} alt={`main-estate-${estate?.id}`} />
-          ) : (
-            <p className="no-img small">No Images!</p>
-          )}
-        </a>
-        <div className="row-buttons">
-          <button className="btn" onClick={() => setShowModal(true)}>
-            Modify
-          </button>
-          {showModal && (
-            <Modal onClose={() => setShowModal(false)}>
-              <EstateEditModal estate={estate} setShowModal={setShowModal} />
-            </Modal>
-          )}
-          <button className="btn-cancel" onClick={submitDelete}>
-            Dispose
-          </button>
-          <button
-            className="btn"
-            onClick={() => setImgFormVisible((prev) => !prev)}
-          >
-            {imgFormVisible ? "Close Image Form" : "Add Image"}
-          </button>
-        </div>
-      </div>
-	  {imgFormVisible ? <div className={`upload-image${imgFormVisible ? " active" : ""}`}>
-          <UploadImage estate={estate} onFinish={() => setImgFormVisible(false)}/>
-        </div> :
-		<div className="home-row-text">
-			<div className="row-title">{estate?.title}</div>
-			<div className="row-address">{estate?.address}</div>
-			<div className="row-description">{estate?.description}</div>
-			<div className="row-bottom">
-			<div className="estate-row-text">
-				${estate?.nightly_rate} <span className="per-night">per night</span>
+		<div className="estate-rows" id={`estate-row-${estate?.id}`}>
+			<div className="row-left" id="estate-display">
+				<a href={`/estates/${estate?.id}`}>
+					{dispImgURL ? (
+						<img
+							src={dispImgURL}
+							alt={`main-estate-${estate?.id}`}
+						/>
+					) : (
+						<p className="no-img small">No Images!</p>
+					)}
+				</a>
+				<div className="row-buttons">
+					<button
+						className="btn btn-host-row"
+						onClick={() => setShowModal(true)}
+					>
+						Modify
+					</button>
+					{showModal && (
+						<Modal onClose={() => setShowModal(false)}>
+							<EstateEditModal
+								estate={estate}
+								setShowModal={setShowModal}
+							/>
+						</Modal>
+					)}
+					<button
+						className="btn-cancel btn-host-row"
+						onClick={submitDelete}
+					>
+						Dispose
+					</button>
+					<button
+						className="btn btn-pink btn-host-row"
+						onClick={() => setImgFormVisible((prev) => !prev)}
+					>
+						{imgFormVisible ? "Close Image Form" : "Add Image"}
+					</button>
+				</div>
 			</div>
-			</div>
-      </div>
-	  }
-    </div>
-  );
+			{imgFormVisible ? (
+				<div
+					className={`upload-image${imgFormVisible ? " active" : ""}`}
+				>
+					<UploadImage
+						estate={estate}
+						onFinish={() => setImgFormVisible(false)}
+					/>
+				</div>
+			) : (
+				<div className="home-row-text">
+					<div className="row-title">{estate?.title}</div>
+					<div className="row-address">{estate?.address}</div>
+					<div className="row-description">{estate?.description}</div>
+					<div className="row-bottom">
+						<div className="estate-row-text">
+							${estate?.nightly_rate}{" "}
+							<span className="per-night">per night</span>
+						</div>
+					</div>
+				</div>
+			)}
+		</div>
+	);
 };
 
 const EstateEditModal = ({ estate, setShowModal }) => {
