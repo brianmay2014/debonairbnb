@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { login } from "../../store/session";
 import "./AuthForms.css";
 
@@ -10,6 +10,7 @@ const LoginForm = () => {
 	const [password, setPassword] = useState("");
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const onLogin = async (e) => {
 		e.preventDefault();
@@ -29,7 +30,7 @@ const LoginForm = () => {
 
 	const toSignup = async (e) => {
 		e.preventDefault();
-		return <Redirect to="/signup" />;
+		history.push("/sign-up");
 	};
 
 	const updateEmail = (e) => {

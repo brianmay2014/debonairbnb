@@ -60,6 +60,9 @@
     margin: 0 auto;
     color: white;
 }
+#to-sign-up:hover {
+    color: var(--medpink);
+}
 .login-buttons-containers{
     display:flex;
     flex-direction: row;
