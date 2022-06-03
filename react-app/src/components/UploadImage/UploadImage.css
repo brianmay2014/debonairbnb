@@ -15,6 +15,23 @@
     cursor: pointer;
 }
 
+.dropArea:hover {
+    background-color: var(--lightgold);
+    color: var(--darkestgold)
+}
+
+.withError {
+    background-color: var(--darkpink);
+}
+
+.withError:hover {
+    background-color: var(--medpink)
+}
+
+.withError span {
+    color: black;
+}
+
 .dropArea .uploadImg {
     height: 200px;
     width: auto;
@@ -22,9 +39,12 @@
 }
 
 .dropAreaIcon {
-    opacity: 75%;
     font-size: 6em;
     display: contents;
+}
+
+.dropAreaIcon svg {
+    opacity: 75%
 }
 
 .iEmpty {
@@ -32,10 +52,9 @@
 }
 
 .iError {
-    color: var(--darkred)
+    color: var(--darkestred)
 }
 
-.dropArea:hover {
-    background-color: var(--lightgold);
-    color: var(--darkestgold)
+.fileError {
+    font-weight: bold;
 }

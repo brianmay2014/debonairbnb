@@ -41,7 +41,7 @@ const UploadImage = ({ estate, onFinish }) => {
   const [dropChild, setDropChild] = useState(dropArea);
 
   const dropAreaErrored = (
-    <div className="dropArea ">
+    <div className="dropArea withError">
       <div className={"dropAreaIcon iError"}>
         <FontAwesomeIcon icon={icon} />
       </div>

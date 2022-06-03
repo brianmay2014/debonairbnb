@@ -11,6 +11,7 @@ import { dateArrayCreator } from "../../../utils/dateArrayCreator";
 import "./SearchBar.css";
 
 function SearchBar() {
+  const sessionUser = useSelector((state => state.session.user));
   const dispatch = useDispatch();
   const [showDestinationMenu, setShowDestinationMenu] = useState(false);
   const [showDateMenu, setShowDateMenu] = useState(false);
@@ -250,6 +251,10 @@ function SearchBar() {
     }
     setAlphabetizedSet([]);
   };
+
+  if (!sessionUser) {
+    return null;
+  }
 
   return (
     <div className="search-container-with-nav">
