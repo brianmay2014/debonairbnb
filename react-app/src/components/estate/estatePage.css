@@ -246,3 +246,7 @@ img, .no-img {
     outline: none;
     box-shadow: 1px 1px 6px var(--medgold);
 }
+
+.dates-invalid{
+    color: var(--darkred);
+}
