@@ -1,0 +1,48 @@
+.checkdates-2 input {
+  border: 0.2px var(--lightgold) solid;
+  border-radius: 2px;
+  box-shadow: 0px 0px 2px var(--medgold);
+  margin-top: 8px;
+}
+.checkdates-2 select:focus, .checkdates-2 input:focus{
+  outline: none;
+  box-shadow: 1px 1px 6px var(--medgold);
+}
+
+.checkin-checkout-inputs {
+  display: flex;
+
+}
+
+.checkdates-2 label {
+  /* font-weight: lighter; */
+  /* font-size: 13px; */
+  /* padding: 0; */
+  /* margin: 0; */
+  /* margin-bottom: -20px; */
+}
+
+.checkdates-2 {
+/* top: 20px; */
+margin-top: 2px;
+}
+
+
+.search-date-range {
+  box-sizing: border-box;
+  position: absolute;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 32px;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 4%), 0 8px 16px rgb(0 0 0 / 15%);
+  margin-top: 12px;
+  padding: 16px 32px;
+  overflow-x: hidden;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+.search-date-range .rdrCalendarWrapper {
+  margin-left: 39px;
+}
