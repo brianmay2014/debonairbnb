@@ -6,7 +6,12 @@ import { ValidationError } from "../../../utils/validationError";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import "./CharterPage.css";
 import { Modal } from "../../../context/Modal";
-import EditFormTwo from "./EditModalTwo"
+import EditFormTwo from "./EditModalTwo";
+import { set } from "date-fns/esm";
+import RatingDisplay from "../../estate/RatingDisplay";
+
+import { addDays } from 'date-fns';
+// import { ratingEmoji } from "../../estate/StarRating";
 
 const CharterPage = () => {
   const history = useHistory();
@@ -14,13 +19,15 @@ const CharterPage = () => {
   const estates = useSelector((state) => Object.values(state.estates));
   const [user_id, setSessionUserId] = useState("");
   const [estate_id, setEstateId] = useState("");
-  const [guest_num, setGuestNum] = useState("");
+  const [guest_num, setGuestNum] = useState();
   const [start_date, setStartDate] = useState("");
   const [end_date, setEndDate] = useState("");
   const sessionUser = useSelector((state) => Object.values(state.session));
   const [errorMessages, setErrorMessages] = useState({});
   const [showThankYouModal, setShowThankYouModal] = useState();
   const [showEditModal, setShowEditModal] = useState(false)
+  const [showGuestEdit, setShowGuestEdit] = useState(false)
+  const ratingEmoji =  "💎";
 
   // const [searchParams, setSearchParams] = useSearchParams()
 
@@ -41,6 +48,7 @@ const CharterPage = () => {
   const { search } = useLocation();
   // const params = new URLSearchParams(search)
 
+
   const totalCost = (serviceFees, occupancyFees, cleaningFees) => {
     const total =
       serviceFees +
@@ -56,7 +64,7 @@ const CharterPage = () => {
 
   const handleConfirm = async (e) => {
     const payload = { user_id, estate_id, guest_num, start_date, end_date };
-
+    console.log(payload)
     let createdCharter;
     try {
       createdCharter = await dispatch(addOneCharter(payload));
@@ -87,6 +95,7 @@ const CharterPage = () => {
     //     }
     //   }
     // };
+
     setErrorMessages(null);
   }, []);
 
@@ -116,11 +125,13 @@ const CharterPage = () => {
     });
   }, []);
 
+console.log(guest_num, '=============')
+
   return (
     <>
       <div className="charter-container">
         <div className="confirm-back-button">
-          <button onClick={handleBackButton}>Back</button>
+          <button onClick={handleBackButton}><i class="fas fa-arrow-left fa-xl"></i></button>
           <h1>Confirm and pay</h1>
         </div>
         <div className="charter-boxes">
@@ -129,28 +140,29 @@ const CharterPage = () => {
               <h2>Your trip</h2>
               <div className="charter-dates">
                 <h3>Dates</h3>
-                <button onClick={() => setShowEditModal(true)}>Edit your dates</button>
                 <p>
-                  {start_date} - {end_date}
+                  {addDays(new Date(start_date), 1).toDateString().split(" ").splice(1).join(' ')} - {addDays(new Date(end_date), 1).toDateString().split(" ").splice(1).join(' ')}
                 </p>
+                <button className="btn" onClick={() => setShowEditModal(true)}>Edit your dates</button>
               </div>
               <div className="charter-guests">
                 <h3>Guests</h3>
                 <p>{guest_num} guest(s)</p>
-                <button >Edit number of guests</button>
+
               </div>
             </div>
-            <button onClick={handleConfirm}>Confirm charter</button>
+            <button className="btn" onClick={handleConfirm}>Confirm charter</button>
             {errorMessages && (
-              <ErrorMessage label={"Invalid dates"} message={errorMessages} />
+              <ErrorMessage message={errorMessages[0]} />
             )}
           </div>
           <div className="right-charter-box">
             <div className="charter-img-box">
               <img src={charterEstate?.images[0].url}></img>
-              <div>
-                <p>{charterEstate?.title}</p>
-                <p>Rating: {charterEstate?.rating}</p>
+              <div className="charter-title-rating">
+                <p>{charterEstate?.type}</p>
+                <h4>{charterEstate?.title}</h4>
+                <RatingDisplay rating={charterEstate?.rating}></RatingDisplay>
               </div>
             </div>
             <div>
@@ -161,19 +173,19 @@ const CharterPage = () => {
                 </p>
                 <p>${charterEstate?.nightly_rate * lengthOfCharter}</p>
               </div>
-              <div>
+              <div className="charter-fees">
                 <p>Cleaning fee</p>
                 <p>${cleaningFees.toFixed(2)}</p>
               </div>
-              <div>
+              <div className="charter-fees">
                 <p>Service fee</p>
                 <p>${serviceFees.toFixed(2)}</p>
               </div>
-              <div>
+              <div className="charter-fees">
                 <p>Occupancy taxes and fees</p>
                 <p>${occupancyFees.toFixed(2)}</p>
               </div>
-              <div>
+              <div className="charter-total">
                 <p>Total(USD)</p>
                 <p>
                   $
@@ -188,8 +200,11 @@ const CharterPage = () => {
       </div>
       {showThankYouModal && (
         <Modal onClose={() => history.push(`/users/${sessionUser[0]?.id}/my-charters/`)}>
+          <div className="thank-you-modal">
+
           <h1>You have great taste...</h1>
           <p>Your charter has been confirmed.</p>
+          </div>
         </Modal>
       )}
             {showEditModal && (
@@ -197,6 +212,7 @@ const CharterPage = () => {
           <EditFormTwo currCharter={charter} setShowEditModal={setShowEditModal} setStartDate={setStartDate} setEndDate={setEndDate} endDate={end_date} startDate={start_date}/>
         </Modal>
       )}
+
     </>
   );
 };

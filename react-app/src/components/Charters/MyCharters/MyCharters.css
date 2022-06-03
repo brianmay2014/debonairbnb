@@ -1,0 +1,13 @@
+.my-charters-container h1 {
+  margin-left: 375px;
+  margin-top: 50px;
+}
+
+.delete-form-container {
+ padding: 80px;
+}
+
+.button-delete-form {
+  display: flex;
+  justify-content: space-around;
+}

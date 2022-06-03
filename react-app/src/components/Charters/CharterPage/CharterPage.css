@@ -11,12 +11,69 @@
 }
 
 .charter-img-box img {
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
+}
+
+.charter-img-box {
+  display: flex;
+
+  padding: 0;
+
 }
 
 .confirm-back-button {
   text-align: left;
   margin: 0 400px;
   display: flex;
+}
+
+
+.confirm-back-button button {
+  margin-top: 33px;
+  border: none;
+  height: 20px;
+  background-color: transparent;
+  color:#9b5e40;
+}
+
+.right-charter-box {
+  margin-top: 20px;
+  margin-right: 200px;
+  border-radius: 40px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
+  padding: 30px;
+}
+
+.charter-title-rating {
+  margin-left: 20px;
+}
+
+.charter-title-rating p {
+  margin: 0px;
+  color: rgb(82, 78, 78);
+  font-weight: lighter;
+  margin-bottom: 5px;
+}
+
+.charter-title-rating h4 {
+  margin: 0px;
+  margin-bottom: 70px;
+}
+
+.charter-nightly-cost {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
+}
+
+.charter-fees {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
+}
+
+.charter-total {
+  display: flex;
+  justify-content: space-between;
 }

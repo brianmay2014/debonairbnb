@@ -47,7 +47,7 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 	let disabledDatesArray = []
 
 	estateCharters?.forEach(charter => {
-		(dateArrayCreator(new Date (charter?.start_date), new Date (charter.end_date))).forEach(date => {
+		(dateArrayCreator(addDays(new Date (charter?.start_date), 1), addDays(new Date (charter.end_date), 1))).forEach(date => {
 			disabledDatesArray.push(date)
 		})
 	})
@@ -55,6 +55,7 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 	useEffect(() => {
 		setCheckinDate(state[0].startDate)
 		setCheckoutDate(state[0].endDate)
+		console.log(disabledDatesArray)
 	}, [state])
 
 	useEffect(() => {

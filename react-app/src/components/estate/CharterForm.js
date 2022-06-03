@@ -154,6 +154,8 @@ const CharterForm = ({ estate, stateVars, setCharterPayload }) => {
             <label>Number of guests</label>
             <input
               type="number"
+              min="1"
+              max='10'
               value={guestNum}
               required
               onChange={handleGuestNum}

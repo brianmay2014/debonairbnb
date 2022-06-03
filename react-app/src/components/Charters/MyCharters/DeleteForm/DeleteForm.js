@@ -14,15 +14,19 @@ const DeleteForm = ({ charter, setShowDeleteModal }) => {
   // }, [dispatch]);
 
   return (
-    <>
+    <div className="delete-form-container">
       <form method="PATCH">
         <h3>Are you sure you want to dispose of your charter?</h3>
-        <button onClick={handleDelete}>Yes, delete my charter</button>
-        <button onClick={() => setShowDeleteModal(false)}>
-          No, take me back to my charters
-        </button>
+        <div className="button-delete-form">
+          <button className="btn" onClick={handleDelete}>
+            Yes, banish my charter
+          </button>
+          <button className="btn" onClick={() => setShowDeleteModal(false)}>
+            No, escort me back
+          </button>
+        </div>
       </form>
-    </>
+    </div>
   );
 };
 

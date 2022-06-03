@@ -24,7 +24,7 @@ const EditForm = ({currCharter, setShowEditModal}) => {
   let disabledDatesArray = []
 
 	allChartersForEstate?.forEach(charter => {
-		(dateArrayCreator(new Date (charter?.start_date), new Date (charter.end_date))).forEach(date => {
+		(dateArrayCreator(addDays(new Date (charter?.start_date), 1), addDays(new Date (charter.end_date), 1))).forEach(date => {
 			disabledDatesArray.push(date)
 		})
 	})
@@ -46,6 +46,7 @@ const EditForm = ({currCharter, setShowEditModal}) => {
     e.preventDefault()
     const payload = {id:currCharter.id, userId:currCharter.user_id, estateId:currCharter.estate_id, guestNum: guestNum, startDate: dateParser(checkinDate), endDate: dateParser(checkoutDate)}
     dispatch(editCharter(payload))
+    console.log(payload)
     setShowEditModal(false)
   }
 
@@ -82,7 +83,7 @@ const EditForm = ({currCharter, setShowEditModal}) => {
       <label>New number of guests:</label>
       <input type="number" placeholder={`${guestNum}`} onChange={handleGuestNum}/>
     </div>
-    <button onClick={handleEdit}>Request</button>
+    <button className="btn-request" onClick={handleEdit}>Request</button>
     </form>
     </>
   )
