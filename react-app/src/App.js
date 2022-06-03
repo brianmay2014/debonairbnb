@@ -19,6 +19,7 @@ import {genCharters} from "./store/charter"
 import HostPage from "./components/HostPage/HostPage";
 import SingleCharterPage from "./components/Charters/SingleCharterPage/SingleCharterPage"
 import Footer from "./components/HomePage/Footer";
+import { genEstateTypes } from "./store/estateType";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,9 +29,12 @@ function App() {
   const sessionUser = useSelector(state => state.session.user)
 
   useEffect(() => {
-    dispatch(genEstates());
-    dispatch(genCharters());
-  }, [dispatch]);
+    if (loaded) {
+      dispatch(genEstates());
+      dispatch(genCharters());
+      dispatch(genEstateTypes());
+    }
+  }, [dispatch, loaded]);
 
   useEffect(() => {
     (async () => {

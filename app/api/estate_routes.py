@@ -2,7 +2,7 @@ import types
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.forms.critique_form import CritiqueForm
-from app.models import db, Estate, EstateImage, Critique
+from app.models import db, Estate, EstateImage, Critique, EstateType
 from app.forms import EstateForm
 from ..utils.s3utils import  upload_file_to_s3, allowed_file, get_unique_filename
 from ..utils.geoutils import EstateLocationData
@@ -141,6 +141,10 @@ def estate(id):
     estate = Estate.query.get(id)
     return estate.to_dict()
 
+@estate_routes.route('/types')
+def estate_types():
+    types = EstateType.query.all()
+    return {'estate_types': [type.to_dict() for type in types]}
 
 
 # @estate_routes.route('/new', methods=["POST"])
