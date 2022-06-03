@@ -13,6 +13,8 @@ import './CalendarFix.css';
 const AvailabilityCal = ({ estate, stateVars } ) => {
 	// const { id } = useParams();
 
+	const today = new Date()
+
 	let {
 		checkinDate,
 		setCheckinDate,
@@ -22,13 +24,15 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 		setNightStay,
 	} = stateVars;
 
+// console.log(checkinDate, checkoutDate, today, 'AHHHHHHH')
+
 	const [state, setState] = useState([
 		{
 			// startDate: new Date(),
 			// endDate: addDays(new Date(), 7),
 			// key: "selection",
-			startDate: checkinDate,
-			endDate: checkoutDate,
+			startDate: today,
+			endDate: addDays(today, 1),
 			key: "selection",
 			color: '#c28849'
 		},
@@ -43,7 +47,7 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 	let disabledDatesArray = []
 
 	estateCharters?.forEach(charter => {
-		(dateArrayCreator(new Date (charter?.start_date), new Date (charter.end_date))).forEach(date => {
+		(dateArrayCreator(addDays(new Date (charter?.start_date), 1), addDays(new Date (charter.end_date), 1))).forEach(date => {
 			disabledDatesArray.push(date)
 		})
 	})
@@ -51,6 +55,7 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 	useEffect(() => {
 		setCheckinDate(state[0].startDate)
 		setCheckoutDate(state[0].endDate)
+		console.log(disabledDatesArray)
 	}, [state])
 
 	useEffect(() => {

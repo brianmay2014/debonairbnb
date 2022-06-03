@@ -1,0 +1,8 @@
+.btn-request {
+  background-color: var(--medgold);
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+  border: 2px solid var(--darkgold);
+  transition: all 0.3s;
+}

@@ -41,6 +41,9 @@
   appearance: none;
   width: 300px;
 }
+.search-buttons-container p {
+  font-family: 'Red Hat Display', sans-serif;
+}
 
 .search-inputs {
   border-radius: 40px;

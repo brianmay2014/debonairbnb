@@ -37,16 +37,16 @@ const updateCharter = (charter) => {
 
 
 export const addOneCharter = (charterTest) => async (dispatch) => {
-  const { sessionUserId, estateId, guestNum, startDate, endDate } = charterTest;
+  const { user_id, estate_id, guest_num, start_date, end_date } = charterTest;
   // console.log(charterTest, 'CREATE CHARTER DATA ===============')
 
   const f = new FormData();
 
-  f.append("user_id", sessionUserId);
-  f.append("estate_id", estateId);
-  f.append("guest_num", guestNum);
-  f.append("start_date", startDate);
-  f.append("end_date", endDate);
+  f.append("user_id", user_id);
+  f.append("estate_id", estate_id);
+  f.append("guest_num", guest_num);
+  f.append("start_date", start_date);
+  f.append("end_date", end_date);
 
 
   try {

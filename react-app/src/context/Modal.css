@@ -31,3 +31,24 @@
   border: none;
   border-radius: 16px;
 }
+
+#modal-content .btn .btn-request {
+  background-color: var(--medgold);
+  color: white;
+  padding: 5px;
+  margin-top: 5px;
+  border-radius: 3px;
+  border: 2px solid var(--darkgold);
+  transition: all 0.3s;
+
+}
+
+#modal-content .thank-you-modal {
+  padding: 40px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+#modal-content .btn-div {
+  margin-top: 10px;
+}

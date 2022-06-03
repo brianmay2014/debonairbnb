@@ -7,6 +7,7 @@ import {dateParser} from "../../../../utils/dateParser"
 import {dateArrayCreator} from "../../../../utils/dateArrayCreator"
 
 const EditForm = ({currCharter, setShowEditModal}) => {
+
   let ciDate = new Date(currCharter.start_date.replace('GMT', ''));
   let coDate = new Date(currCharter.end_date.replace('GMT', ''))
   let today = new Date()
@@ -16,14 +17,14 @@ const EditForm = ({currCharter, setShowEditModal}) => {
   const [checkoutDate, setCheckoutDate] = useState(coDate)
   const [guestNum, setGuestNum] = useState(currCharter.guest_num)
   const allCharters = useSelector(state => Object.values(state.charters))
-  const allChartersForEstate = allCharters?.filter(charter => charter.estate_id === currCharter.estate_id)
+  const allChartersForEstate = allCharters?.filter(charter => charter.estate_id === currCharter.estate_id && charter.id != currCharter.id)
 
 
 
   let disabledDatesArray = []
 
 	allChartersForEstate?.forEach(charter => {
-		(dateArrayCreator(new Date (charter?.start_date), new Date (charter.end_date))).forEach(date => {
+		(dateArrayCreator(addDays(new Date (charter?.start_date), 1), addDays(new Date (charter.end_date), 1))).forEach(date => {
 			disabledDatesArray.push(date)
 		})
 	})
@@ -45,6 +46,7 @@ const EditForm = ({currCharter, setShowEditModal}) => {
     e.preventDefault()
     const payload = {id:currCharter.id, userId:currCharter.user_id, estateId:currCharter.estate_id, guestNum: guestNum, startDate: dateParser(checkinDate), endDate: dateParser(checkoutDate)}
     dispatch(editCharter(payload))
+    console.log(payload)
     setShowEditModal(false)
   }
 
@@ -81,7 +83,7 @@ const EditForm = ({currCharter, setShowEditModal}) => {
       <label>New number of guests:</label>
       <input type="number" placeholder={`${guestNum}`} onChange={handleGuestNum}/>
     </div>
-    <button onClick={handleEdit}>Request</button>
+    <button className="btn-request" onClick={handleEdit}>Request</button>
     </form>
     </>
   )
