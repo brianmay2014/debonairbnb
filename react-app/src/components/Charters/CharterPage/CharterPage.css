@@ -5,9 +5,9 @@
 
 .charter-boxes {
   padding: 0 80px;
-  margin: 0 320px;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .charter-img-box img {
@@ -24,7 +24,7 @@
 
 .confirm-back-button {
   text-align: left;
-  margin: 0 400px;
+  margin-left: 30%;
   display: flex;
 }
 
@@ -76,4 +76,12 @@
 .charter-total {
   display: flex;
   justify-content: space-between;
+}
+
+.left-charter-box {
+  min-width: 200px;
+  margin-right: 50px;
+}
+.right-charter-box {
+  min-width: 400px;
 }
