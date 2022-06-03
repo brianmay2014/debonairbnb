@@ -44,6 +44,8 @@
 }
 .card-critique{
     color: var(--medgold);
+    width: 78px;
+    text-align: right;
 }
 .fa-star {
     font-size: 0.9em;
