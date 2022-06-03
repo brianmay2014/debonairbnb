@@ -1,7 +1,7 @@
 #home-page-container{
     display: flex;
     width: 1431px;
-    /* margin: 0 auto; */
+    margin: 0 auto;
 }
 
 .estate-display{

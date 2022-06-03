@@ -48,8 +48,8 @@ const LoginForm = () => {
 	return (
 		<form className="auth-form" onSubmit={onLogin}>
 			<div className="login-text">
-				<h3 id="h3-login">Debonairbnb is an exclusive platform</h3>
-				<h4 id="h4-login">you must log in to continue.</h4>
+				<h3 id="h3-login">Debonairbnb is an exclusive platform.</h3>
+				<h4 id="h4-login">You must log in to continue.</h4>
 			</div>
 			<div className="form-errors center">
 				{errors.map((error, ind) => (

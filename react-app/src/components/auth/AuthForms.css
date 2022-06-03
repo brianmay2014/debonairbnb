@@ -63,6 +63,14 @@
 #to-sign-up:hover {
     color: var(--medpink);
 }
+#to-log-in {
+    width: 170px;
+    margin: 0 auto;
+    color: white;
+}
+#to-log-in:hover {
+    color: var(--medpink);
+}
 .login-buttons-containers{
     display:flex;
     flex-direction: row;
