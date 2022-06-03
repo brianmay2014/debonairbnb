@@ -82,9 +82,9 @@ const CharterForm = ({ estate, stateVars, setCharterPayload }) => {
   }, [checkinDate, checkoutDate, nightStay]);
 
   useEffect(() => {
-		console.log("check in date", checkinDate);
-    console.log("check out date", checkoutDate);
-    console.log("check in < out - set to true", checkinDate < checkoutDate);
+		// console.log("check in date", checkinDate);
+    // console.log("check out date", checkoutDate);
+    // console.log("check in < out - set to true", checkinDate < checkoutDate);
 
 		if (checkinDate < checkoutDate) {
 			setDateValid(true);

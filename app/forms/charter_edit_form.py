@@ -4,12 +4,17 @@ from wtforms import StringField, IntegerField, DateField
 from wtforms.validators import DataRequired, Email, ValidationError
 from datetime import datetime
 
-from app.models import Charter
+from app.models import Charter, Estate
 
+def get_charters( data ):
+  all_charters = Estate.query.get(data['estate_id']).charters
+
+  return [charter for charter in all_charters if charter.id is not data.get('charter_id')]
+  
 def charter_exists_start(form, field):
   start_date = field.data
 
-  all_charters = Charter.query.filter(Charter.estate_id == form.data['estate_id'] or Charter.id != form.data['charter_id']).all()
+  all_charters = get_charters(form.data)
 
   def charter_date_checker(start_date):
     for charter in all_charters:
@@ -23,12 +28,12 @@ def charter_exists_start(form, field):
 
 def charter_exists_end(form, field):
   end_date = field.data
-  all_charters = Charter.query.filter(Charter.estate_id == form.data['estate_id'] or Charter.id != form.data['charter_id']).all()
-  # print(all_charters, '====================')
+  all_charters = get_charters(form.data)
 
   def charter_date_checker(end_date):
     for charter in all_charters:
       if charter.start_date <= end_date <= charter.end_date:
+        print
         return True
 
     return False

@@ -88,7 +88,9 @@ export const addOneCharter = (charterTest) => async (dispatch) => {
 }
 
 export const editCharter = (data) => async (dispatch) => {
-
+  console.log("------------editcharterTHUNK");
+  console.log(data)
+  console.log("------------editcharterTHUNK");
   const { id, userId, estateId, guestNum, startDate, endDate } = data;
 // console.log(data, '======================data')
 
