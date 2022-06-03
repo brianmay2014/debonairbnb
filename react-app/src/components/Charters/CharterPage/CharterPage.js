@@ -31,16 +31,29 @@ const CharterPage = () => {
 
   // const [searchParams, setSearchParams] = useSearchParams()
 
+  
+  
+  
   const lengthOfCharter =
-    (Date.parse(end_date) - Date.parse(start_date)) / (60 * 60 * 24 * 1000);
-
+  (Date.parse(end_date) - Date.parse(start_date)) / (60 * 60 * 24 * 1000);
+  
   const charterEstate = estates?.find(
     (estate) => parseInt(estate_id) === estate.id
-  );
-
-  const charter = {user_id, estate_id, guest_num, start_date, end_date}
-
-  console.log(charter)
+    );
+    
+    const charter = {user_id, estate_id, guest_num, start_date, end_date}
+    
+    const estate = estates.estate_id;
+    
+    let dispImg;
+    if (estate?.images.length) {
+      dispImg = estate?.images.reduce((img, accum) =>
+      img.created_at > accum.created_at ? img : accum
+      );
+    }
+    const dispImgURL = dispImg ? dispImg.url : null;
+    
+  // console.log(charter)
 
   const serviceFees = charterEstate?.nightly_rate * lengthOfCharter * 0.1;
   const occupancyFees = charterEstate?.nightly_rate * lengthOfCharter * 0.09;
@@ -128,94 +141,141 @@ const CharterPage = () => {
 console.log(guest_num, '=============')
 
   return (
-    <>
-      <div className="charter-container">
-        <div className="confirm-back-button">
-          <button onClick={handleBackButton}><i class="fas fa-arrow-left fa-xl"></i></button>
-          <h1>Confirm and pay</h1>
-        </div>
-        <div className="charter-boxes">
-          <div className="left-charter-box">
-            <div className="charter-details">
-              <h2>Your trip</h2>
-              <div className="charter-dates">
-                <h3>Dates</h3>
-                <p>
-                  {addDays(new Date(start_date), 1).toDateString().split(" ").splice(1).join(' ')} - {addDays(new Date(end_date), 1).toDateString().split(" ").splice(1).join(' ')}
-                </p>
-                <button className="btn" onClick={() => setShowEditModal(true)}>Edit your dates</button>
-              </div>
-              <div className="charter-guests">
-                <h3>Guests</h3>
-                <p>{guest_num} guest(s)</p>
-
-              </div>
-            </div>
-            <button className="btn" onClick={handleConfirm}>Confirm charter</button>
-            {errorMessages && (
-              <ErrorMessage message={errorMessages[0]} />
-            )}
-          </div>
-          <div className="right-charter-box">
-            <div className="charter-img-box">
-              <img src={charterEstate?.images[0].url}></img>
-              <div className="charter-title-rating">
-                <p>{charterEstate?.type}</p>
-                <h4>{charterEstate?.title}</h4>
-                <div id='confirm-charter-rating'>
-                <RatingDisplay rating={charterEstate?.rating} places={2}></RatingDisplay>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h3>Price details</h3>
-              <div className="charter-nightly-cost">
-                <p>
-                  ${charterEstate?.nightly_rate} x {lengthOfCharter} nights
-                </p>
-                <p>${charterEstate?.nightly_rate * lengthOfCharter}</p>
-              </div>
-              <div className="charter-fees">
-                <p>Cleaning fee</p>
-                <p>${cleaningFees.toFixed(2)}</p>
-              </div>
-              <div className="charter-fees">
-                <p>Service fee</p>
-                <p>${serviceFees.toFixed(2)}</p>
-              </div>
-              <div className="charter-fees">
-                <p>Occupancy taxes and fees</p>
-                <p>${occupancyFees.toFixed(2)}</p>
-              </div>
-              <div className="charter-total">
-                <p>Total(USD)</p>
-                <p>
-                  $
-                  {totalCost(cleaningFees, serviceFees, occupancyFees).toFixed(
-                    2
-                  )}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {showThankYouModal && (
-        <Modal onClose={() => history.push(`/users/${sessionUser[0]?.id}/my-charters/`)}>
-          <div className="thank-you-modal">
-
-          <h1>You have great taste...</h1>
-          <p>Your charter has been confirmed.</p>
-          </div>
-        </Modal>
-      )}
-            {showEditModal && (
-        <Modal onClose={() => setShowEditModal(false)}>
-          <EditFormTwo currCharter={charter} setShowEditModal={setShowEditModal} setStartDate={setStartDate} setEndDate={setEndDate} endDate={end_date} startDate={start_date}/>
-        </Modal>
-      )}
-
-    </>
+		<>
+			<div className="charter-container">
+				<div className="confirm-back-button">
+					<button onClick={handleBackButton}>
+						<i class="fas fa-arrow-left fa-xl"></i>
+					</button>
+					<h1>Confirm and pay</h1>
+				</div>
+				<div className="charter-boxes">
+					<div className="left-charter-box">
+						<div className="charter-details">
+							<h2>Your trip</h2>
+							<div className="charter-dates">
+								<h3>Dates</h3>
+								<p>
+									{addDays(new Date(start_date), 1)
+										.toDateString()
+										.split(" ")
+										.splice(1)
+										.join(" ")}{" "}
+									-{" "}
+									{addDays(new Date(end_date), 1)
+										.toDateString()
+										.split(" ")
+										.splice(1)
+										.join(" ")}
+								</p>
+								<button
+									className="btn"
+									onClick={() => setShowEditModal(true)}
+								>
+									Edit your dates
+								</button>
+							</div>
+							<div className="charter-guests">
+								<h3>Guests</h3>
+								<p>{guest_num} guest(s)</p>
+							</div>
+						</div>
+						<button className="btn" onClick={handleConfirm}>
+							Confirm charter
+						</button>
+						{errorMessages && (
+							<ErrorMessage message={errorMessages[0]} />
+						)}
+					</div>
+					<div className="right-charter-box">
+						<div className="charter-img-box">
+							{/* <img src={charterEstate?.images[0]?.url}></img> */}
+							{dispImgURL ? (
+								<img
+									src={dispImgURL}
+									alt={`main-estate-${estate?.id}`}
+								/>
+							) : (
+								<p className="no-img small">No Images!</p>
+							)}
+							<div className="charter-title-rating">
+								<p>{charterEstate?.type}</p>
+								<h4>{charterEstate?.title}</h4>
+								<div id="confirm-charter-rating">
+									<RatingDisplay
+										rating={charterEstate?.rating}
+										places={2}
+									></RatingDisplay>
+								</div>
+							</div>
+						</div>
+						<div>
+							<h3>Price details</h3>
+							<div className="charter-nightly-cost">
+								<p>
+									${charterEstate?.nightly_rate} x{" "}
+									{lengthOfCharter} nights
+								</p>
+								<p>
+									$
+									{charterEstate?.nightly_rate *
+										lengthOfCharter}
+								</p>
+							</div>
+							<div className="charter-fees">
+								<p>Cleaning fee</p>
+								<p>${cleaningFees.toFixed(2)}</p>
+							</div>
+							<div className="charter-fees">
+								<p>Service fee</p>
+								<p>${serviceFees.toFixed(2)}</p>
+							</div>
+							<div className="charter-fees">
+								<p>Occupancy taxes and fees</p>
+								<p>${occupancyFees.toFixed(2)}</p>
+							</div>
+							<div className="charter-total">
+								<p>Total(USD)</p>
+								<p>
+									$
+									{totalCost(
+										cleaningFees,
+										serviceFees,
+										occupancyFees
+									).toFixed(2)}
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{showThankYouModal && (
+				<Modal
+					onClose={() =>
+						history.push(
+							`/users/${sessionUser[0]?.id}/my-charters/`
+						)
+					}
+				>
+					<div className="thank-you-modal">
+						<h1>You have great taste...</h1>
+						<p>Your charter has been confirmed.</p>
+					</div>
+				</Modal>
+			)}
+			{showEditModal && (
+				<Modal onClose={() => setShowEditModal(false)}>
+					<EditFormTwo
+						currCharter={charter}
+						setShowEditModal={setShowEditModal}
+						setStartDate={setStartDate}
+						setEndDate={setEndDate}
+						endDate={end_date}
+						startDate={start_date}
+					/>
+				</Modal>
+			)}
+		</>
   );
 };
 

@@ -25,6 +25,10 @@ const ProfileButton = () => {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  const closeMenu = () => {
+		setShowMenu(false);
+  };
+
   return (
 		<div>
 			<button className="menu-button btn" onClick={openMenu}>
@@ -43,6 +47,7 @@ const ProfileButton = () => {
 									to="/sign-up"
 									exact={true}
 									activeClassName="active"
+									onClick={closeMenu}
 								>
 									Sign Up
 								</NavLink>
@@ -52,6 +57,7 @@ const ProfileButton = () => {
 									to="/login"
 									exact={true}
 									activeClassName="active"
+									onClick={closeMenu}
 								>
 									Login
 								</NavLink>
@@ -66,6 +72,7 @@ const ProfileButton = () => {
 									to="/"
 									exact={true}
 									activeClassName="active"
+									onClick={closeMenu}
 								>
 									Home
 								</NavLink>
@@ -74,6 +81,7 @@ const ProfileButton = () => {
 								<NavLink
 									to={`/users/${sessionUser.id}/my-charters/`}
 									activeClassName="active"
+									onClick={closeMenu}
 								>
 									My Charters
 								</NavLink>
@@ -82,6 +90,7 @@ const ProfileButton = () => {
 								<NavLink
 									to={`/users/${sessionUser.id}/estates/`}
 									activeClassName="active"
+									onClick={closeMenu}
 								>
 									My Estates
 								</NavLink>

@@ -38,60 +38,88 @@ const CharterRow = ({ charter, estateId }) => {
 
   const estates = useSelector((state) => Object.values(state.estates));
   const estate = estates.find((estate) => estate.id === estateId);
+
+
+  let dispImg;
+  if (estate?.images.length) {
+		dispImg = estate?.images.reduce((img, accum) =>
+			img.created_at > accum.created_at ? img : accum
+		);
+  }
+
+  const dispImgURL = dispImg ? dispImg.url : null;
+
   return (
-    <>
-      <div className="estate-rows" id={`estate-row-${estate?.id}`}>
-        <div className="row-left" id="estate-display">
-          <a href={`/estates/${estate?.id}`}>
-            <img
-              src={estate?.images[0].url}
-              alt={`main-estate-${estate?.id}`}
-            />
-          </a>
-          <div className="row-buttons">
-            <button onClick={handleModify} className="btn">
-              Modify Charter
-            </button>
-            <button onClick={handleDispose} className="btn-cancel">
-              Dispose Charter
-            </button>
-          </div>
-        </div>
-        <div className="home-row-text">
+		<>
+			<div className="estate-rows" id={`estate-row-${estate?.id}`}>
+				<div className="row-left" id="estate-display">
+					<a href={`/estates/${estate?.id}`}>
+						{/* <img
+							src={estate?.images[0]?.url}
+							alt={`main-estate-${estate?.id}`}
+						/> */}
+						{dispImgURL ? (
+							<img
+								src={dispImgURL}
+								alt={`main-estate-${estate?.id}`}
+							/>
+						) : (
+							<p className="no-img small">No Images!</p>
+						)}
+					</a>
+					<div className="row-buttons">
+						<button onClick={handleModify} className="btn">
+							Modify Charter
+						</button>
+						<button onClick={handleDispose} className="btn-cancel">
+							Dispose Charter
+						</button>
+					</div>
+				</div>
+				<div className="home-row-text">
+					<h3>
+						{dateConverter(charter.start_date)} -
+						{" " + dateConverter(charter.end_date)}
+					</h3>
 
-            <h3>
-              {dateConverter(charter.start_date)} -
-              {' ' + dateConverter(charter.end_date)}
-            </h3>
-
-          <div className="row-title">{estate?.title}</div>
-          <div className="row-address">{estate?.address}</div>
-          {/* <div className="row-description">{estate?.description}</div> */}
-          <div className="row-cost">
-            <div>
-            ${estate?.nightly_rate} <span className="per-night">per night</span>{" "}
-            </div>
-            <div>
-            {lengthOfCharter} <span className="per-night">nights</span>
-            </div>
-            <div>
-            {moneyFormatter.format(estate?.nightly_rate * lengthOfCharter)}{" "}
-            <span className="per-night">total cost</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      {showEditModal && (
-        <Modal onClose={() => setShowEditModal(false)}>
-          <EditForm currCharter={charter} setShowEditModal={setShowEditModal}/>
-        </Modal>
-      )}
-      {showDeleteModal && (
-        <Modal onClose={() => setShowDeleteModal(false)}>
-          <DeleteForm charter={charter} setShowDeleteModal={setShowDeleteModal} />
-        </Modal>
-      )}
-    </>
+					<div className="row-title">{estate?.title}</div>
+					<div className="row-address">{estate?.address}</div>
+					{/* <div className="row-description">{estate?.description}</div> */}
+					<div className="row-cost">
+						<div>
+							${estate?.nightly_rate}{" "}
+							<span className="per-night">per night</span>{" "}
+						</div>
+						<div>
+							{lengthOfCharter}{" "}
+							<span className="per-night">nights</span>
+						</div>
+						<div>
+							{moneyFormatter.format(
+								estate?.nightly_rate * lengthOfCharter
+							)}{" "}
+							<span className="per-night">total cost</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			{showEditModal && (
+				<Modal onClose={() => setShowEditModal(false)}>
+					<EditForm
+						currCharter={charter}
+						setShowEditModal={setShowEditModal}
+					/>
+				</Modal>
+			)}
+			{showDeleteModal && (
+				<Modal onClose={() => setShowDeleteModal(false)}>
+					<DeleteForm
+						charter={charter}
+						setShowDeleteModal={setShowDeleteModal}
+					/>
+				</Modal>
+			)}
+		</>
   );
 };
 
