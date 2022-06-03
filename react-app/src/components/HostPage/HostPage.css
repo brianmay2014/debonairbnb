@@ -31,7 +31,7 @@ label, input, button{
     margin: 5px;
 }
 
-.row-left img, .row-left .no-img.small{
+.row-left img, .row-left .no-img.small, .delete-gallery-img, .delete-gallery-img img{
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -155,4 +155,52 @@ h3.add-text{
     /* padding: 1em; */
     /* box-shadow: inset 1px 1px 15px var(--lightestgold), inset -1px -1px 15px var(--lightestgold); */
     /* background-color: green; */
+}
+
+.delete-gallery {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+}
+
+.delete-gallery-img {
+    position: relative;
+}
+
+.delete-gallery-control {
+    height: 100px;
+    width: 100px;
+    color: var(--lightestegg);
+    opacity: 0.8;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    transition: font-size 0.5s, justify-content 0.5s, align-items 0.5s;
+}
+
+.delete-gallery-control svg {
+    padding-top: 8px;
+    padding-right: 8px;
+}
+
+.delete-gallery-control:hover {
+
+    font-size: 5em;
+    opacity: 0.5;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+}
+
+.delete-gallery-control:hover svg {
+    padding-top: 0px;
+    padding-right: 0px;
+}
+
+.delete-gallery-modal img {
+    width: 300px;
+    object-fit: cover;
 }

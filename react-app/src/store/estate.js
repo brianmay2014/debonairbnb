@@ -121,6 +121,19 @@ export const deleteEstate = (estate) => async (dispatch) => {
   }
 };
 
+export const deleteEstateImage = (estateImage) => async (dispatch) => {
+  const { id, estate_id } = estateImage;
+  console.log(id, estate_id);
+  console.log(`/api/estates/${estate_id}/images/${id}`);
+  const response = await fetch(`/api/estates/${estate_id}/images/${id}`, {
+    method: "DELETE",
+  });
+  if (response.ok) {
+    const estates = await response.json();
+    dispatch(genEstates());
+  }
+};
+
 export const genEstates = () => async (dispatch) => {
   // doing it this way in case we want more types of responses here later ...
   const [estatesResponse] = await Promise.all([

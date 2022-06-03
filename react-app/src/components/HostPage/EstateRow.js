@@ -4,6 +4,7 @@ import { deleteEstate } from "../../store/estate";
 import UploadImage from "../UploadImage/UploadeImage";
 import { Modal } from "../../context/Modal";
 import { genEstates, editEstate } from '../../store/estate'
+import ImageDeleteGallery from "./ImageDeleteGallery";
 
 const EstateRow = ({ estate }) => {
 	// const address = `${estate?.city}, ${estate?.state}`;
@@ -92,6 +93,7 @@ const EstateRow = ({ estate }) => {
 							<span className="per-night">per night</span>
 						</div>
 					</div>
+					{<ImageDeleteGallery estate={estate} />}
 				</div>
 			)}
 		</div>

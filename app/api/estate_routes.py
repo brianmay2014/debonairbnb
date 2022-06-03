@@ -107,6 +107,18 @@ def delete_critique(estate_id, critique_id):
         critiques = estate.critiques
         return {"critiques" : [critique.to_dict() for critique in critiques]}
 
+@estate_routes.route('/<int:estate_id>/images/<int:image_id>', methods=["DELETE"])
+@login_required
+def delete_image(estate_id, image_id):
+    image = EstateImage.query.get(image_id)
+    if not image:
+        return {"errors": f"No image with id {image_id} exists"}, 404
+    else:
+        db.session.delete(image)
+        db.session.commit()
+        estates = Estate.query.all();
+        return {"estates" : [estate.to_dict() for estate in estates]}
+
 
 @estate_routes.route('/<int:id>', methods=["PATCH"])
 @login_required

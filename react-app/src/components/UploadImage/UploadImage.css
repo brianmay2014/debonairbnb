@@ -1,60 +1,56 @@
 .dropArea {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
-    width: 500px;
-    height: 300px;
-    background-color: var(--lightestgold);
-    color: var(--medgold);
-    border: none;
-    border-radius: 16px;
-    box-shadow: 2px 3px 3px rgba(0,0,0,0.4);
-    margin-bottom: 1em;
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  width: 500px;
+  height: 300px;
+  background-color: var(--lightestgold);
+  color: var(--medgold);
+  border: none;
+  border-radius: 16px;
+  box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.4);
+  margin-bottom: 1em;
+  cursor: pointer;
 }
 
 .dropArea:hover {
-    background-color: var(--lightgold);
-    color: var(--darkestgold)
+  background-color: var(--lightgold);
+  color: var(--darkestgold);
 }
 
 .withError {
-    background-color: var(--darkpink);
+  background-color: var(--darkpink);
 }
 
 .withError:hover {
-    background-color: var(--medpink)
+  background-color: var(--medpink);
 }
 
 .withError span {
-    color: black;
+  color: black;
 }
 
 .dropArea .uploadImg {
-    height: 200px;
-    width: auto;
-    object-fit: cover;
+  height: 200px;
+  width: auto;
+  object-fit: cover;
 }
 
 .dropAreaIcon {
-    font-size: 6em;
-    display: contents;
-}
-
-.dropAreaIcon svg {
-    opacity: 75%
+  font-size: 6em;
+  display: contents;
 }
 
 .iEmpty {
-    color: var(--darkestgold)
+  color: var(--darkestgold);
 }
 
 .iError {
-    color: var(--darkestred)
+  color: var(--darkestred);
 }
 
 .fileError {
-    font-weight: bold;
+  font-weight: bold;
 }

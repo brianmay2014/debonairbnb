@@ -20,7 +20,7 @@ const EstatePage = ({setCharterPayload}) => {
   const user = useSelector((state) => state.session.user);
   const critiquesCount = useSelector((state) => Object.keys(state.critiques).length)
   const rating = useSelector((state) => state.estates[id]?.rating)
-  
+
   const [gKey, setGKey] = useState(null);
 
   useEffect(() => {
@@ -32,23 +32,23 @@ const EstatePage = ({setCharterPayload}) => {
     getKey();
   }, []);
 
-  
-  
-  
+
+
+
   useEffect(() => {
     if (estate) {
       dispatch(genCritiques(estate));
     }
   }, [dispatch, estate]);
-  
+
   useEffect(() => {
     dispatch(genEstates())
   }, [dispatch, critiquesCount])
-  
+
   if (!estate) {
     return null;
   }
-  
+
   const address = `${estate.city}, ${estate.state}, ${estate.country}`;
 
   return (
