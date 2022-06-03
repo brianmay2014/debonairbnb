@@ -1,7 +1,8 @@
 #home-page-container{
     display: flex;
     width: 1431px;
-    margin: 0 auto;
+    margin: 0 auto 237px;
+    
 }
 
 .estate-display{
@@ -47,8 +48,12 @@
 .fa-star {
     font-size: 0.9em;
 }
-.per-night, .card-critique, .card-availabilty{
+.per-night, .card-critique, .card-type{
     font-weight: 300;
+
+}
+.card-type{
+    padding-bottom: 4px;
 }
 
 .home-card-img a {

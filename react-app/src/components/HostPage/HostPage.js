@@ -39,27 +39,35 @@ const HostPage = () => {
 
 	return (
 		<div>
-            <h1> Welcome to the caviar and truffle of debonairbnb, hosting estates</h1>
+			<h1 id="my-estates-header">
+				{" "}
+				My Estates
+			</h1>
 
-            {userEstates.length && (
-                <div id='hosted-estates-container'>
-                    {userEstates.map((estate) =>  {
-                        return (
-                            <EstateRow key={`hosted-${estate.id}`} estate={estate}/>
-                        )
-                    })}
-                </div>
-            )}
+			{userEstates.length && (
+				<div id="hosted-estates-container">
+					{userEstates.map((estate) => {
+						return (
+							<EstateRow
+								key={`hosted-${estate.id}`}
+								estate={estate}
+							/>
+						);
+					})}
+				</div>
+			)}
 
-            {userEstates.length === 0 && (
-                <div>
-                    <h2>We don't see any estates listed from your account.</h2>
-                    <h3>It would be our absolute honour, if you were to host your estates.</h3>
-                </div>
-            )}
+			{userEstates.length === 0 && (
+				<div>
+					<h2>We don't see any estates listed from your account.</h2>
+					<h3>
+						It would be our absolute honour, if you were to host
+						your estates.
+					</h3>
+				</div>
+			)}
 
-            <EstateForm />
-
+			<EstateForm />
 		</div>
 	);
 };

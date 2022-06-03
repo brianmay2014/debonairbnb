@@ -50,10 +50,10 @@ const CharterRow = ({ charter, estateId }) => {
           </a>
           <div className="row-buttons">
             <button onClick={handleModify} className="btn">
-              Modify
+              Modify Charter
             </button>
             <button onClick={handleDispose} className="btn-cancel">
-              Dispose
+              Dispose Charter
             </button>
           </div>
         </div>
@@ -61,19 +61,23 @@ const CharterRow = ({ charter, estateId }) => {
 
             <h3>
               {dateConverter(charter.start_date)} -
-              {dateConverter(charter.end_date)}
+              {' ' + dateConverter(charter.end_date)}
             </h3>
 
           <div className="row-title">{estate?.title}</div>
           <div className="row-address">{estate?.address}</div>
-          <div className="row-description">{estate?.description}</div>
+          {/* <div className="row-description">{estate?.description}</div> */}
           <div className="row-cost">
+            <div>
             ${estate?.nightly_rate} <span className="per-night">per night</span>{" "}
-            <br></br>
+            </div>
+            <div>
             {lengthOfCharter} <span className="per-night">nights</span>
-            <br></br>{" "}
+            </div>
+            <div>
             {moneyFormatter.format(estate?.nightly_rate * lengthOfCharter)}{" "}
             <span className="per-night">total cost</span>
+            </div>
           </div>
         </div>
       </div>

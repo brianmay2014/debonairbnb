@@ -3,11 +3,32 @@
   margin-top: 50px;
 }
 
+.my-charters-container {
+  margin-bottom: 237px;
+}
+
 .delete-form-container {
  padding: 80px;
 }
 
 .button-delete-form {
+  display: flex;
+  justify-content: space-around;
+}
+
+.row-left a {
+  margin: 0 auto;
+}
+
+.row-left{
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.row-cost{
   display: flex;
   justify-content: space-around;
 }

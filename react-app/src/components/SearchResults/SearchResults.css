@@ -2,6 +2,8 @@
   margin: 0;
   width: 100%;
   display: flex;
+  margin-bottom: 100px;
+  
 }
 
 .search-results-card img {

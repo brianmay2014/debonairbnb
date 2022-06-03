@@ -48,7 +48,7 @@ const EstateRow = ({ estate }) => {
 						className="btn btn-host-row"
 						onClick={() => setShowModal(true)}
 					>
-						Modify
+						Modify Estate
 					</button>
 					{showModal && (
 						<Modal onClose={() => setShowModal(false)}>
@@ -62,7 +62,7 @@ const EstateRow = ({ estate }) => {
 						className="btn-cancel btn-host-row"
 						onClick={submitDelete}
 					>
-						Dispose
+						Dispose Estate
 					</button>
 					<button
 						className="btn btn-pink btn-host-row"

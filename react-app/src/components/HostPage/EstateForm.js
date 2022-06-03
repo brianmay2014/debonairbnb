@@ -56,15 +56,17 @@ const EstateForm = () => {
 
 	return (
 		<form id="estate-form" onSubmit={submitEstate}>
+			<h2 className="add-text">Have any extra estates lying around?</h2>
+			<h3 className="add-text">Add them to debonairbnb below</h3>
 			{/* <ul className="form-errors"> */}
-				{Object.keys(errors).length > 0 && (
-					<div className="form-errors">
-						{Object.keys(errors).map(
-							// (key) => `${errors[key]}`
-							(key) => `${key.toUpperCase()}: ${errors[key]}`
-						)}
-					</div>
-				)}
+			{Object.keys(errors).length > 0 && (
+				<div className="form-errors">
+					{Object.keys(errors).map(
+						// (key) => `${errors[key]}`
+						(key) => `${key.toUpperCase()}: ${errors[key]}`
+					)}
+				</div>
+			)}
 			{/* </ul> */}
 			<div className="form-field">
 				<label>Estate Title</label>
@@ -111,15 +113,15 @@ const EstateForm = () => {
 					))}
 				</select>
 			</div>
-			<div className="form-field">
+			<div className="form-field field-textarea">
 				<label>Description</label>
 				<input
 					id="text-input"
 					type="textarea"
 					value={description}
 					required
-					rows={5}
-					cols={5}
+					rows='5'
+					cols='5'
 					onChange={(e) => setDescription(e.target.value)}
 				/>
 			</div>
