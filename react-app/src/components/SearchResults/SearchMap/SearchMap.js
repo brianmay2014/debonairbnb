@@ -6,16 +6,16 @@ import {
   withGoogleMap,
   GoogleMap,
   useJsApiLoader,
+  Circle,
   Marker,
 } from "@react-google-maps/api";
 
 const containerStyle = {
   width: "100%",
-  height:"800px",
+  height: "800px",
 };
 
 const SearchMap = ({ resultIds, gKey }) => {
-
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: gKey,
@@ -51,6 +51,20 @@ const SearchMap = ({ resultIds, gKey }) => {
     setMap(null);
   }, []);
 
+  const options = {
+    strokeColor: "#9f703f",
+    strokeOpacity: 0.8,
+    strokeWeight: 5,
+    fillColor: "#c28849",
+    fillOpacity: 0.55,
+    clickable: false,
+    draggable: false,
+    editable: false,
+    visible: true,
+    radius: 2000,
+    zIndex: 1,
+  };
+
   useEffect(() => {
     if (estates) {
       setEstatesLoaded(true);
@@ -59,28 +73,42 @@ const SearchMap = ({ resultIds, gKey }) => {
 
   return isLoaded ? (
     <>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={{ lat: estates[0]?.latitude, lng: estates[0]?.longitude }}
+        zoom={4}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+        className="google-map-search"
+      >
+        {/* Child components, such as markers, info windows, etc. */}
+        {isLoaded &&
+          estates?.map((estate) => {
+            return (
+              <>
+                <Marker
+                  position={{ lat: estate?.latitude, lng: estate?.longitude }}
+                  labelAnchor={{
+                    lat: estate?.latitude,
+                    lng: estate?.longitude,
+                  }}
+                  label={`$${estate.nightly_rate.toString()}`}
+                  icon={{
+                    url: './MarkerIcon/rectangle-wide-solid.svg'
 
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={{ lat: estates[0]?.latitude, lng: estates[0]?.longitude }}
-      zoom={4}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-      className="google-map-search"
-    >
-      {/* Child components, such as markers, info windows, etc. */}
-      {isLoaded &&
-        estates?.map((estate) => {
-          return (
-            <Marker
-              position={{ lat: estate?.latitude, lng: estate?.longitude }}
-              labelAnchor={{ lat: estate?.latitude, lng: estate?.longitude }}
-              label={`$${estate.nightly_rate.toString()}`}
-            >
-            </Marker>
-          );
-        })}
-    </GoogleMap>
+                  }}
+                ></Marker>
+                {/* <Circle
+                  center={{
+                    lat: estate?.latitude,
+                    lng: estate?.longitude,
+                  }}
+                  options={options}
+                /> */}
+              </>
+            );
+          })}
+      </GoogleMap>
     </>
   ) : (
     <></>

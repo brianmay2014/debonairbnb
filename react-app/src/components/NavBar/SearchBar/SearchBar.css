@@ -136,6 +136,11 @@
 
 #search-duration-input {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
   align-items: center;
+}
+
+#when-label {
+  padding: 0;
+  margin: 0;
 }

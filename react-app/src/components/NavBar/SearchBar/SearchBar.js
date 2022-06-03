@@ -6,6 +6,7 @@ import SearchDurationInput from "./SearchDurationInput/SearchDurationInput";
 import SearchGuestsInput from "./SearchGuestsInput/SearchGuestsInput";
 import { createResults } from "../../../store/search";
 // import AnimatedButton from "./AnimatedButton/AnimatedButton"
+import { dateArrayCreator } from "../../../utils/dateArrayCreator";
 
 import "./SearchBar.css";
 
@@ -18,12 +19,16 @@ function SearchBar() {
   const [dateRange, setDateRange] = useState(null);
   const [guestNumber, setGuestNumber] = useState(1);
   const estates = useSelector((state) => Object.values(state.estates));
+  const charters = useSelector((state) => Object.values(state.charters));
   const history = useHistory();
   const [destinationValueHolder, setDestinationValueHolder] =
     useState("Anywhere");
   const [alphabetizedSet, setAlphabetizedSet] = useState([]);
   const [hiddenButtonsDest, setHiddenButtonsDest] = useState(false);
   const [hiddenButtons, setHiddenButtons] = useState(false);
+  const [showDateRange, setShowDateRange] = useState(false);
+  const [checkinDate, setCheckinDate] = useState(new Date());
+  const [checkoutDate, setCheckoutDate] = useState(new Date());
 
   const openDestinationMenu = (e) => {
     e.stopPropagation();
@@ -49,6 +54,8 @@ function SearchBar() {
 
   useEffect(() => {
     if (!showDestinationMenu && !showDateMenu && !showGuestsMenu) return;
+    console.log(showDateRange);
+    if (showDateRange) return;
 
     const closeForms = () => {
       setShowDestinationMenu(false);
@@ -57,7 +64,7 @@ function SearchBar() {
     };
     document.addEventListener("click", closeForms);
     return () => document.removeEventListener("click", closeForms);
-  }, [showDestinationMenu, showDateMenu, showGuestsMenu]);
+  }, [showDestinationMenu, showDateMenu, showGuestsMenu, showDateRange]);
 
   // useEffect for hiding buttons
   useEffect(() => {
@@ -78,16 +85,105 @@ function SearchBar() {
   // Submits filtered search results to store and redirects to link which displays results
   const handleSubmit = (e) => {
     e.preventDefault();
-    const filteredEstateResults = estates.filter((estate) => {
-      return estate.state === destination;
+
+    const dateRangeFromSearch = dateArrayCreator(
+      new Date(checkinDate),
+      new Date(checkoutDate)
+    );
+
+    const filteredEstateResults = estates?.filter((estate) => {
+      return estate.state === destination?.split(",")[0];
     });
-    dispatch(createResults(filteredEstateResults));
+    const filteredEstateIds = [];
+    filteredEstateResults.map((estate) => {
+      return filteredEstateIds.push(estate.id);
+    });
+    const chartersFromFilteredEstates = charters.filter((charter) =>
+      filteredEstateIds.includes(charter.estate_id)
+    );
+    console.log(destination);
+    console.log(filteredEstateResults);
+    console.log(filteredEstateIds);
+    console.log(chartersFromFilteredEstates);
+    const allDestCharterObjs = [];
+
+    chartersFromFilteredEstates.forEach((charter) => {
+      const charterObj = {};
+      charterObj.estate_id = charter.estate_id;
+      charterObj.dateArray = dateArrayCreator(
+        new Date(charter.start_date),
+        new Date(charter.end_date)
+      );
+      allDestCharterObjs.push(charterObj);
+      //  allDatesFromCharters.push( {[`estate_id: ${charter.estate_id}`]: dateArrayCreator(new Date(charter.start_date), new Date(charter.end_date))})
+    });
+
+    // console.log(allDestCharterObjs, '==================')
+
+    // console.log(allDatesFromCharters, 'HERE')
+    // const conflictingCharters = charters.filter(charter => {
+    const allCharterObjs = []
+    // })
+    const excludedEstateIds = [];
+    // console.log(dateRangeFromSearch);
+    dateRangeFromSearch.forEach((date) => {
+      // console.log(allDestCharterObjs)
+      allDestCharterObjs.forEach((obj) => {
+        obj.dateArray.forEach((objDate) => {
+          if (
+            objDate.toString().split(" ").splice(0, 4).join(" ") ===
+            date.toString().split(" ").splice(0, 4).join(" ")
+          ) {
+            // console.log("===========");
+            if (!excludedEstateIds.includes(obj.estate_id)) {
+              excludedEstateIds.push(obj.estate_id);
+            }
+          }
+        });
+      });
+    });
+
+    if (!destination) {
+
+      charters.forEach((charter) => {
+        const charterObj = {};
+        charterObj.estate_id = charter.estate_id;
+        charterObj.dateArray = dateArrayCreator(
+          new Date(charter.start_date),
+          new Date(charter.end_date)
+        );
+        allCharterObjs.push(charterObj);
+        //  allDatesFromCharters.push( {[`estate_id: ${charter.estate_id}`]: dateArrayCreator(new Date(charter.start_date), new Date(charter.end_date))})
+      });
+
+      dateRangeFromSearch.forEach((date) => {
+        // console.log(allDestCharterObjs)
+        allCharterObjs.forEach((obj) => {
+          obj.dateArray.forEach((objDate) => {
+            if (
+              objDate.toString().split(" ").splice(0, 4).join(" ") ===
+              date.toString().split(" ").splice(0, 4).join(" ")
+            ) {
+              // console.log("===========");
+              if (!excludedEstateIds.includes(obj.estate_id)) {
+                excludedEstateIds.push(obj.estate_id);
+              }
+            }
+          });
+        });
+      });
+    }
+
+    console.log(excludedEstateIds, "===============");
+
     let searchUrlArray = [];
     filteredEstateResults.map((estate) => {
+      if (!excludedEstateIds.includes(estate.id))
       searchUrlArray.push(estate.id);
     });
     let anywhereArrayResults = [];
     estates.map((estate) => {
+      if (!excludedEstateIds.includes(estate.id))
       anywhereArrayResults.push(estate.id);
     });
     if (searchUrlArray.length) {
@@ -178,7 +274,7 @@ function SearchBar() {
               <p>Any Week</p>
             </button>
             {/* <span className="search-button-spans"></span> */}
-{/*
+            {/*
             <button onClick={openGuestsMenu} className="guest-icon-button">
               <p>
                 Add guests
@@ -195,9 +291,17 @@ function SearchBar() {
               />
             </div>
             <div className="search-inputs">
-              <label>When</label>
+              {/* <label id='when-label'>When</label> */}
               <div id="search-duration-input">
-                <SearchDurationInput setDateRange={setDateRange} />
+                <SearchDurationInput
+                  setCheckinDate={setCheckinDate}
+                  setCheckoutDate={setCheckoutDate}
+                  checkoutDate={checkoutDate}
+                  checkinDate={checkinDate}
+                  setDateRange={setDateRange}
+                  showDateRange={showDateRange}
+                  setShowDateRange={setShowDateRange}
+                />
                 <button type="submit">
                   <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
