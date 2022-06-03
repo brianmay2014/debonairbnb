@@ -22,16 +22,17 @@
 }
 
 .dropAreaIcon {
-    opacity: 50%;
+    opacity: 75%;
+    font-size: 6em;
 }
 
-.dropAreaIcon img {
-    border: none;
-    width: 6em;
-    height: 6em;
-    padding: 1em;
+.iEmpty {
+    color: var(--darkestgold)
 }
 
+.iError {
+    color: var(--darkred)
+}
 
 .dropArea:hover {
     background-color: var(--lightgold);

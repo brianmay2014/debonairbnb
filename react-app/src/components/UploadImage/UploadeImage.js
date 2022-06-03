@@ -4,8 +4,6 @@ import { editEstate } from "../../store/estate";
 import { FileUploader } from "react-drag-drop-files";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileArrowUp, faFileCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import errorico from "../../images/close.png"
-import camico from "../../images/camera.png"
 
 import "./UploadImage.css";
 
@@ -16,6 +14,7 @@ const UploadImage = ({ estate, onFinish }) => {
   const [loading, setLoading] = useState(false);
   const [previewImg, setPreviewImg] = useState(null)
   const [disabled, setDisabled] = useState(true)
+  const [icon, setIcon] = useState(faFileArrowUp)
 
   const fileTypes = ["JPG", "JPEG", "PNG", "GIF"];
 
@@ -28,10 +27,10 @@ const UploadImage = ({ estate, onFinish }) => {
   const dropArea = (
     <div className="dropArea">
       {previewImg ? (
-        <img src={previewImg} />
+        <img src={previewImg} alt={"img preview"}/>
       ) : (
         <div className={"dropAreaIcon iEmpty"}>
-          <img src={camico} />
+          <FontAwesomeIcon icon={icon} />
         </div>
       )}
       <span>Drag & Drop or Click to Select an Image</span>
@@ -44,7 +43,7 @@ const UploadImage = ({ estate, onFinish }) => {
   const dropAreaErrored = (
     <div className="dropArea ">
       <div className={"dropAreaIcon iError"}>
-        <img src={errorico} />
+        <FontAwesomeIcon icon={icon} />
       </div>
       <span className="fileError">
         That file didn't adhere to our dress code.
@@ -58,16 +57,21 @@ const UploadImage = ({ estate, onFinish }) => {
     const dropAreaFilled = (
       <div className="dropArea drop-filled">
         <span>Upload this Image?</span>
-        <img src={previewImg} className={"uploadImg"} />
+        <img src={previewImg} className={"uploadImg"} alt={"image preview"}/>
         <span>Drag & Drop or Click to Change the Image</span>
       </div>);
       setDropChild(dropAreaFilled);
+      setErrors([])
     }
   }, [previewImg]);
 
   useEffect(() => {
     if (image && errors.length === 0) {
       setDisabled(false)
+      setIcon(faFileArrowUp)
+    } else {
+      setDisabled(true)
+      setIcon(faFileCircleXmark)
     }
   },[errors, image])
 
@@ -110,7 +114,7 @@ const UploadImage = ({ estate, onFinish }) => {
         name="image"
         types={fileTypes}
       />
-      <button className={"btn"} type="submit" disabled={disabled}>Add Image</button>
+      <button className={"btn"} type="submit" disabled={disabled}>Upload</button>
       {loading && <p>Loading...</p>}
     </form>
   );
