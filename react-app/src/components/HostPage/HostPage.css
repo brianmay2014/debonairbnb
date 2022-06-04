@@ -150,12 +150,16 @@ h3.add-text{
     display: block;
     width: 100%;
     min-height: 200px;
-    /* background-color: var(--lightestegg); */
+    /* background-color: var(--lightestegg);
     resize: vertical;
     /* border-radius: 26px; */
-    /* padding: 1em; */
+    padding: 1em;
     /* box-shadow: inset 1px 1px 15px var(--lightestgold), inset -1px -1px 15px var(--lightestgold); */
     /* background-color: green; */
+}
+
+.field-textarea #text-input{
+    word-break: break-all;
 }
 
 .delete-gallery {
@@ -163,6 +167,7 @@ h3.add-text{
     flex-direction: row;
     flex-flow: row wrap;
 }
+
 
 .delete-gallery-img {
     position: relative;
