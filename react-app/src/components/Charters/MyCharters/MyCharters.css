@@ -40,3 +40,8 @@
 p.edit-date-error {
   color: var(--darkred);
 }
+
+.no-charter-header{
+    text-align: center;
+    color: var(--darkgold);
+}
