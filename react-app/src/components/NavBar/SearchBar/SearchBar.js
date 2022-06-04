@@ -23,7 +23,7 @@ function SearchBar() {
   const charters = useSelector((state) => Object.values(state.charters));
   const history = useHistory();
   const [destinationValueHolder, setDestinationValueHolder] =
-    useState("Anywhere");
+    useState("Search States");
   const [alphabetizedSet, setAlphabetizedSet] = useState([]);
   const [hiddenButtonsDest, setHiddenButtonsDest] = useState(false);
   const [hiddenButtons, setHiddenButtons] = useState(false);
@@ -283,7 +283,8 @@ function SearchBar() {
 					>
 						{/* <AnimatedButton /> */}
 						<button onClick={handleHiddenButtonsDestination}>
-							<p>{destinationValueHolder}</p>
+							{/* <p>{destinationValueHolder}</p> */}
+							<p>Search States</p>
 						</button>
 						<span className="search-button-spans">|</span>
 						{/* <button onClick={openDateMenu}> */}
@@ -324,7 +325,7 @@ function SearchBar() {
 									showDateRange={showDateRange}
 									setShowDateRange={setShowDateRange}
 								/>
-								<button type="submit">
+								<button id="search-button-icon" type="submit">
 									<i class="fa-solid fa-magnifying-glass"></i>
 								</button>
 							</div>

@@ -73,34 +73,48 @@ const EditForm = ({currCharter, setShowEditModal}) => {
 
 
   return (
-    <>
-    <form method="PATCH">
-      <div>
-        <h3>Please submit your edit request</h3>
-      </div>
-		<div id="avail-cal">
-
-			<DateRangePicker
-				onChange={(item) => setDateRange([item.selection])}
-				showSelectionPreview={true}
-				moveRangeOnFirstSelection={false}
-				months={2}
-				ranges={dateRange}
-				direction="horizontal"
-        disabledDates={disabledDatesArray}
-			/>
-		</div>
-    <div>
-      <label>New number of guests:</label>
-      <input type="number" placeholder={`${guestNum}`} onChange={handleGuestNum}/>
-    </div>
-    <button className="btn-request" disabled={dateBeforeToday} onClick={handleEdit}>Request</button>
-    {dateBeforeToday && (
-      <p className='edit-date-error'>Cannot request a charter change for today's date, or any date in the past.</p>
-    )}
-    </form>
-    </>
-  )
+		<>
+			<form method="PATCH">
+				<div>
+					<h3>Please submit your edit request</h3>
+				</div>
+				<div id="avail-cal">
+					<DateRangePicker
+						onChange={(item) => setDateRange([item.selection])}
+						showSelectionPreview={true}
+						moveRangeOnFirstSelection={false}
+						months={2}
+						ranges={dateRange}
+						direction="horizontal"
+						disabledDates={disabledDatesArray}
+					/>
+				</div>
+				<div>
+					<label>New number of guests:</label>
+					<input
+						type="number"
+						placeholder={`${guestNum}`}
+						onChange={handleGuestNum}
+						min="1" 
+						max="10"
+					/>
+				</div>
+				<button
+					className="btn-request"
+					disabled={dateBeforeToday}
+					onClick={handleEdit}
+				>
+					Request
+				</button>
+				{dateBeforeToday && (
+					<p className="edit-date-error">
+						Cannot request a charter change for today's date, or any
+						date in the past.
+					</p>
+				)}
+			</form>
+		</>
+  );
 }
 
 export default EditForm

@@ -87,6 +87,10 @@ const CharterRow = ({ charter, estateId }) => {
 					{/* <div className="row-description">{estate?.description}</div> */}
 					<div className="row-cost">
 						<div>
+							{charter.guest_num}{" "}
+							<span className="per-night">guest(s)</span>{" "}
+						</div>
+						<div>
 							${estate?.nightly_rate}{" "}
 							<span className="per-night">per night</span>{" "}
 						</div>
