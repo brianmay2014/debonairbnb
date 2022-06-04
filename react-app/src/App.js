@@ -20,6 +20,7 @@ import HostPage from "./components/HostPage/HostPage";
 import SingleCharterPage from "./components/Charters/SingleCharterPage/SingleCharterPage"
 import Footer from "./components/HomePage/Footer";
 import { genEstateTypes } from "./store/estateType";
+import FourOhFour from "./components/HomePage/FourOhFour";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -85,6 +86,9 @@ function App() {
         <ProtectedRoute path={`/users/:id/my-charters/:id`}>
           <SingleCharterPage/>
         </ProtectedRoute>
+        <Route path=''>
+          <FourOhFour />
+        </Route>
       </Switch>
       <Footer />
     </BrowserRouter>

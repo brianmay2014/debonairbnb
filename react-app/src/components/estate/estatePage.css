@@ -250,3 +250,9 @@ img, .no-img {
 .dates-invalid{
     color: var(--darkred);
 }
+
+#date-notice{
+    font-weight: 300;
+    font-size: 12px;
+    margin-left: 38px;
+}

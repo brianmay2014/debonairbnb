@@ -134,3 +134,14 @@
     color: var(--lightestegg);
     background-color: var(--darkred)
 }
+
+
+.four-header{
+    margin: 100px auto;
+    color: var(--medgold);
+    text-align: center;
+}
+.four-header a{
+    color: var(--darkpink);
+    font-size: 1em;
+}

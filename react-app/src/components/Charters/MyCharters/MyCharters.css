@@ -30,7 +30,7 @@
 
 .row-cost{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .error-message{

@@ -104,6 +104,7 @@ const SearchDurationInput = ({setCheckoutDate, setCheckinDate, checkoutDate, che
 					value={dateParser(checkoutDate)}
 					required
 					onChange={setCheckoutFunc}
+					onClick={() => setShowDateRange(true)}
 				/>
 			</div>
 			{showDateRange && (
@@ -117,9 +118,9 @@ const SearchDurationInput = ({setCheckoutDate, setCheckinDate, checkoutDate, che
 						direction="horizontal"
 						dragSelectionEnabled={true}
 					/>
-          <button className='btn' onClick={closeCal}>
-            Use Selected Dates
-          </button>
+					<button className="btn" id="selected-dates-button" onClick={closeCal}>
+						Use Selected Dates
+					</button>
 				</div>
 			)}
 		</div>

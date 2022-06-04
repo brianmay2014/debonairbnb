@@ -65,6 +65,7 @@ const SearchDestinationInput = ({
 	return (
 		<div>
 			<input
+				id='state-search-input'
 				type="text"
 				placeholder="Search destinations"
 				value={destinationValue}
