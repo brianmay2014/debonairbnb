@@ -10,6 +10,8 @@ import {
   Marker,
 } from "@react-google-maps/api";
 
+import ico from "./MarkerIcon/red-diamond.svg"
+
 const containerStyle = {
   width: "100%",
   height: "800px",
@@ -42,10 +44,14 @@ const SearchMap = ({ resultIds, gKey }) => {
         lat: estates[0]?.latitude,
         lng: estates[0]?.longitude,
       });
+      estates.forEach(estate => {
+        bounds.extend({lat: estate.latitude, lng: estate.longitude})
+      })
+      console.log(estates);
       map.fitBounds(bounds);
       setMap(map);
     }
-  }, []);
+  }, [estates, estatesLoaded]);
 
   const onUnmount = useCallback(function callback(map) {
     setMap(null);
@@ -92,19 +98,16 @@ const SearchMap = ({ resultIds, gKey }) => {
                     lat: estate?.latitude,
                     lng: estate?.longitude,
                   }}
-                  label={`$${estate.nightly_rate.toString()}`}
+                  label={{text: `$${estate.nightly_rate.toString()}`, fontWeight: "bold"}}
                   icon={{
-                    url: './MarkerIcon/rectangle-wide-solid.svg'
-
+                    url: ico,
+                    size: new window.google.maps.Size(26, 26),
+                    origin: new window.google.maps.Point(0, 0),
+                    anchor: new window.google.maps.Point(17, 34),
+                    scaledSize: new window.google.maps.Size(26, 26),
+                    labelOrigin: new window.google.maps.Point(13,-10),
                   }}
                 ></Marker>
-                {/* <Circle
-                  center={{
-                    lat: estate?.latitude,
-                    lng: estate?.longitude,
-                  }}
-                  options={options}
-                /> */}
               </>
             );
           })}
