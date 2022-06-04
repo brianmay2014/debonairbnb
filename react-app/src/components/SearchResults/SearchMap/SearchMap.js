@@ -53,6 +53,22 @@ const SearchMap = ({ resultIds, gKey }) => {
     }
   }, [estates, estatesLoaded]);
 
+  useEffect(() => {
+    if (!estates || !map) {
+      return;
+    }
+     const bounds = new window.google.maps.LatLngBounds({
+       lat: estates[0]?.latitude,
+       lng: estates[0]?.longitude,
+     });
+     estates.forEach((estate) => {
+       bounds.extend({ lat: estate.latitude, lng: estate.longitude });
+     });
+     console.log(estates);
+     map.fitBounds(bounds);
+     setMap(map);
+  }, [estates, map])
+
   const onUnmount = useCallback(function callback(map) {
     setMap(null);
   }, []);
@@ -75,7 +91,7 @@ const SearchMap = ({ resultIds, gKey }) => {
     if (estates) {
       setEstatesLoaded(true);
     }
-  }, []);
+  }, [estates]);
 
   return isLoaded ? (
     <>
