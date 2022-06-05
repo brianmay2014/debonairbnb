@@ -41,7 +41,7 @@ const ProfileButton = () => {
 					onClick={(e) => e.stopPropagation()}
 				>
 					{!sessionUser && (
-						<>
+						<div className="profile-dropdown-container">
 							<li>
 								<NavLink
 									to="/sign-up"
@@ -62,7 +62,7 @@ const ProfileButton = () => {
 									Login
 								</NavLink>
 							</li>
-						</>
+						</div>
 					)}
 
 					{sessionUser && (

@@ -1,7 +1,7 @@
 .profile-dropdown-menu {
   position: absolute;
-  /* top: 28px;
-  right: -106px; */
+  right: 131px;
+  top: 24px;
   width: fit-content;
   background-color: var(--lightestgold);
   padding: 15px;
