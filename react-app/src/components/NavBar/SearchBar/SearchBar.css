@@ -18,6 +18,7 @@
  justify-content: space-between;
  align-items: center;
  width: 400px;
+ margin-top: 4px;
 }
 .search-container-hidden {
   display: none;
