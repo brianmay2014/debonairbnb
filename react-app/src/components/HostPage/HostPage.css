@@ -119,26 +119,26 @@ h3.add-text{
     margin-bottom: 50px;
 }
 
-#estate-form input, #estate-form select{
+#estate-form input, #estate-form select, #estate-form textarea{
     /* margin-bottom: 18px;
     margin: 0 auto 18px; */
     border: 0.2px var(--lightgold) solid;
     border-radius: 2px;
     box-shadow: 0px 0px 2px var(--medgold);
 }
-#estate-form input:focus, #estate-form select:focus{
+#estate-form input:focus, #estate-form select:focus, #estate-form textarea:focus{
     outline: none;
     box-shadow: 1px 1px 6px var(--medgold);
 }
 
-.estate-edit-form input, .estate-edit-form select{
+.estate-edit-form input, .estate-edit-form select, .estate-edit-form textarea{
     /* margin-bottom: 18px;
     margin: 0 auto 18px; */
     border: 0.2px var(--lightgold) solid;
     border-radius: 2px;
     box-shadow: 0px 0px 2px var(--medgold);
 }
-.estate-edit-form input:focus, .estate-edit-form select:focus{
+.estate-edit-form input:focus, .estate-edit-form select:focus, .estate-edit-form textarea:focus{
     outline: none;
     box-shadow: 1px 1px 6px var(--medgold);
 }

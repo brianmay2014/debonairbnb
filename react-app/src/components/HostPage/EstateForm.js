@@ -115,8 +115,8 @@ const EstateForm = () => {
 			</div>
 			<div className="form-field field-textarea">
 				<label>Description</label>
-				<input
-					id="text-input"
+				<textarea
+					id="text-input-text-area"
 					type="textarea"
 					value={description}
 					// value={'1 df1ecd7 guest num max set on edit page, guest displayed on charters page, 404, hide profile dropdown after link clicked, update search bar default text, updated search icon, note for creating charters under availability on estate page, fixed styling for patrons with no estates uploaded 15 files changed, 204 insertions, 74 deletions create mode 100644 react-app/src/components/HomePage/FourOhFour'}
@@ -125,6 +125,15 @@ const EstateForm = () => {
 					cols={25}
 					onChange={(e) => setDescription(e.target.value)}
 				/>
+				{/* <input
+					id="text-input"
+					type="textarea"
+					value={description}
+					required
+					rows={5}
+					cols={25}
+					onChange={(e) => setDescription(e.target.value)}
+				/> */}
 			</div>
 			<input type="number" value={ownerId} required hidden />
 			<button type="submit" className="btn">

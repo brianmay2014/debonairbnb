@@ -149,9 +149,9 @@ const EstateEditModal = ({ estate, setShowModal }) => {
 	};
 	return (
 		<form className="estate-edit-form" onSubmit={handleSubmit}>
-			<h2 className='edit-estate'>Edit Estate</h2>
+			<h2 className="edit-estate">Edit Estate</h2>
 			<div className={"estate-edit-input"}>
-					{/* <textarea
+				{/* <textarea
 						className={"critique-text-area"}
 						name="body"
 						placeholder="Leave a review... "
@@ -159,64 +159,73 @@ const EstateEditModal = ({ estate, setShowModal }) => {
 						onChange={(e) => setBody(e.target.value)}
 					/> */}
 
-					<div className="form-field">
-						<label>Estate Title</label>
-						<input
-							type="text"
-							value={title}
-							required
-							onChange={(e) => setTitle(e.target.value)}
-						/>
-					</div>
-					<div className="form-field">
-						<label>Address</label>
-						<input
-							type="text"
-							value={address}
-							required
-							onChange={(e) => setAddress(e.target.value)}
-						/>
-					</div>
-					<div className="form-field">
-						<label>Nightly Rate</label>
-						<input
-							type="number"
-							value={nightlyRate}
-							className="short-input"
-							required
-							onChange={(e) => setNightlyRate(e.target.value)}
-						/>
-					</div>
-					<div className="form-field">
-						<label>Estate Type</label>
-						<select
-							className="short-input"
-							onChange={(e) => {
-								// console.log(e.target.value);
-								setType(e.target.value);
-							}}
-							value={type}
-						>
-							{typeList.map((type) => (
-								<option key={type.id} value={type.id}>
-									{type.name}
-								</option>
-							))}
-						</select>
-					</div>
-					<div className="form-field">
-						<label>Description</label>
-						<input
-							id="text-input"
-							type="textarea"
-							value={description}
-							required
-							rows={5}
-							cols={5}
-							onChange={(e) => setDescription(e.target.value)}
-						/>
-					</div>
-					<input type="number" value={ownerId} required hidden readOnly/>
+				<div className="form-field">
+					<label>Estate Title</label>
+					<input
+						type="text"
+						value={title}
+						required
+						onChange={(e) => setTitle(e.target.value)}
+					/>
+				</div>
+				<div className="form-field">
+					<label>Address</label>
+					<input
+						type="text"
+						value={address}
+						required
+						onChange={(e) => setAddress(e.target.value)}
+					/>
+				</div>
+				<div className="form-field">
+					<label>Nightly Rate</label>
+					<input
+						type="number"
+						value={nightlyRate}
+						className="short-input"
+						required
+						onChange={(e) => setNightlyRate(e.target.value)}
+					/>
+				</div>
+				<div className="form-field">
+					<label>Estate Type</label>
+					<select
+						className="short-input"
+						onChange={(e) => {
+							// console.log(e.target.value);
+							setType(e.target.value);
+						}}
+						value={type}
+					>
+						{typeList.map((type) => (
+							<option key={type.id} value={type.id}>
+								{type.name}
+							</option>
+						))}
+					</select>
+				</div>
+				<div className="form-field">
+					<label>Description</label>
+					<textarea
+						id="text-input-text-area"
+						type="textarea"
+						value={description}
+						required
+						rows={5}
+						cols={25}
+						onChange={(e) => setDescription(e.target.value)}
+					/>
+					{/* <input
+						id="text-input"
+						type="textarea"
+						value={description}
+						required
+						rows={5}
+						cols={5}
+						onChange={(e) => setDescription(e.target.value)}
+					/> */}
+				</div>
+				<input type="number" value={ownerId} required hidden readOnly />
 			</div>
 			<button className={"btn"} type="submit">
 				Update Estate
