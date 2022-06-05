@@ -31,8 +31,8 @@ margin: 5px;
   padding-top: 20px;
 }
 
-.search-message {
+.search-message p{
   position: absolute;
   margin-left: 30px;
-  width: 620px;
+  width: 33%;
 }
