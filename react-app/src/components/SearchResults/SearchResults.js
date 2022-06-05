@@ -29,7 +29,7 @@ const SearchResults = () => {
   if (!resultIds) {
     resultIds = []
   }
-console.log(resultIds, 'RESULT IDS')
+// console.log(resultIds, 'RESULT IDS')
   const firstResultState = reloadEstates?.find((estate) => estate.id === parseInt(resultIds[0]))
         ?.state;
 
@@ -106,7 +106,7 @@ console.log(resultIds, 'RESULT IDS')
       setIsLoaded(true);
     }
   }, []);
-  console.log(resultIds)
+  // console.log(resultIds)
 
   return (
     <div className="search-results-container">
