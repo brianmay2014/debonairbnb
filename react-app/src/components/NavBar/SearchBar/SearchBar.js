@@ -98,7 +98,7 @@ function SearchBar() {
   // Submits filtered search results to store and redirects to link which displays results
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('YES')
+    // console.log('YES')
     setShowDateRange(false);
 
 
@@ -229,7 +229,7 @@ console.log(excludedEstateIds, 'EXCLUDED')
     // });
 
     // console.log("==============AISOPDFJIOPAJFPOIAWIJE=", alphabetizedSet);
-    if (!destination || !alphabetizedSet.length) {
+    if (!destination || !alphabetizedSet.length ) {
 
       return history.push(
         `/search?noResults=${noResultUrlArray.join(',')}`

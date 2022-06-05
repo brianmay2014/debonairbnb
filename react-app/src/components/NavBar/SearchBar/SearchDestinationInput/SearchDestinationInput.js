@@ -12,7 +12,7 @@ const SearchDestinationInput = ({
   showSearchSuggestions,
   setShowSearchSuggestions
 }) => {
- 
+
   const [filteredData, setFilteredData] = useState([]);
   const estates = useSelector((state) => Object.values(state.estates));
 
@@ -77,11 +77,7 @@ const SearchDestinationInput = ({
     setDestination(destinationValue);
   }, [destinationValue, filteredData]);
 
-	useEffect(()=>{
-		if (filteredData === []) {
-      setFilteredData([]);
-    }
-	},[])
+
 
   return (
     <div>
