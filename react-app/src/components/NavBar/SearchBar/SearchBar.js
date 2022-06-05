@@ -68,24 +68,22 @@ function SearchBar() {
   };
 
   const stateId = parseInt(search?.split("=")[1]?.split(",")[0]);
+  const searchUrlNoResults = search?.split("=")[0];
   const stateIdEstate = estates?.find((estate) => estate.id === stateId)?.state;
-  console.log(stateId);
   useEffect(() => {
-    setCurrentState(stateIdEstate);
-    if (!destination || destination === " " || !alphabetizedSet.length) {
+    console.log(searchUrlNoResults);
+    if (searchUrlNoResults === "?noResults") {
       setCurrentState("Anywhere");
+    } else {
+      setCurrentState(stateIdEstate);
     }
+
     setSearchResultLoaded(true);
-
-  }, [estates]);
-
-
-
-
+  }, [estates, currentState]);
 
   useEffect(() => {
     if (!showDestinationMenu && !showDateMenu && !showGuestsMenu) return;
-    console.log(showDateRange);
+    // console.log(showDateRange);
     if (showDateRange) return;
 
     const closeForms = () => {
@@ -117,7 +115,7 @@ function SearchBar() {
   // Submits filtered search results to store and redirects to link which displays results
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("YES");
+    // console.log("YES");
     setShowDateRange(false);
     setHiddenButtonsDest(false);
 
@@ -149,7 +147,7 @@ function SearchBar() {
     );
     // console.log(destination);
     // console.log(filteredEstateResults);
-    console.log(filteredEstateIds, "FILTERED ESTATE IDSSSSS");
+    // console.log(filteredEstateIds, "FILTERED ESTATE IDSSSSS");
     // console.log(chartersFromFilteredEstates);
     const allDestCharterObjs = [];
 
@@ -287,9 +285,13 @@ function SearchBar() {
       destination !== alphabetizedSet[0].split(",")[0]
     ) {
       let firstSearchResultArray = [];
+      // console.log(alphabetizedSet, 'ALPHA HERE')
+      // console.log(excludedEstateIds, 'EXXCLUDED')
 
       const firstSearchFilter = estates.filter(
-        (estate) => estate.state === alphabetizedSet[0].split(",")[0]
+        (estate) =>
+          estate.state === alphabetizedSet[0].split(",")[0] &&
+          !excludedEstateIds.includes(estate.id)
       );
 
       firstSearchFilter.map((estate) => {
@@ -335,8 +337,8 @@ function SearchBar() {
   if (!sessionUser) {
     return null;
   }
-  console.log(destination, "DESTINATION YOOOO");
-  console.log(filteredData);
+  // console.log(destination, "DESTINATION YOOOO");
+  // console.log(filteredData);
 
   return (
     <div className="search-container-with-nav">
@@ -354,13 +356,7 @@ function SearchBar() {
             {/* <AnimatedButton /> */}
             <button onClick={handleHiddenButtonsDestination}>
               {/* <p>{destinationValueHolder}</p> */}
-              {searchResultLoaded && (
-                <p>
-                  {currentState}
-                </p>
-              )
-
-              }
+              {searchResultLoaded && <p>{currentState}</p>}
             </button>
             <span className="search-button-spans">|</span>
             {/* <button onClick={openDateMenu}> */}
