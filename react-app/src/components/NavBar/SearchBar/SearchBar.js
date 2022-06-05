@@ -11,8 +11,11 @@ import { dateArrayCreator } from "../../../utils/dateArrayCreator";
 import "./SearchBar.css";
 
 function SearchBar() {
+
+
   const sessionUser = useSelector((state => state.session.user));
   const dispatch = useDispatch();
+  const [destinationValue, setDestinationValue] = useState();
   const [showDestinationMenu, setShowDestinationMenu] = useState(false);
   const [showDateMenu, setShowDateMenu] = useState(false);
   const [showGuestsMenu, setShowGuestsMenu] = useState(false);
@@ -30,6 +33,7 @@ function SearchBar() {
   const [showDateRange, setShowDateRange] = useState(false);
   const [checkinDate, setCheckinDate] = useState(new Date());
   const [checkoutDate, setCheckoutDate] = useState(new Date());
+  const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
 
   const openDestinationMenu = (e) => {
     e.stopPropagation();
@@ -85,7 +89,8 @@ function SearchBar() {
     return () => document.removeEventListener("click", unHideButtons);
   }, [hiddenButtonsDest, hiddenButtons]);
 
-  const handleHiddenButtonsDestination = () => {
+  const handleHiddenButtonsDestination = (e) => {
+    e.preventDefault()
     setHiddenButtonsDest(true);
     setHiddenButtons(true);
   };
@@ -93,8 +98,9 @@ function SearchBar() {
   // Submits filtered search results to store and redirects to link which displays results
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log('YES')
     setShowDateRange(false);
+
 
     const dateRangeFromSearch = dateArrayCreator(
       new Date(checkinDate),
@@ -104,17 +110,31 @@ function SearchBar() {
     const filteredEstateResults = estates?.filter((estate) => {
       return estate.state === destination?.split(",")[0];
     });
+
+
+
     const filteredEstateIds = [];
-    filteredEstateResults.map((estate) => {
-      return filteredEstateIds.push(estate.id);
-    });
+
+    if (filteredEstateResults.length) {
+      filteredEstateResults.map((estate) => {
+        return filteredEstateIds.push(estate.id);
+      });
+    } else {
+      estates?.map((estate) => {
+        return filteredEstateIds.push(estate.id)
+      })
+    }
+
+
+
+
     const chartersFromFilteredEstates = charters.filter((charter) =>
       filteredEstateIds.includes(charter.estate_id)
     );
-    console.log(destination);
-    console.log(filteredEstateResults);
-    console.log(filteredEstateIds);
-    console.log(chartersFromFilteredEstates);
+    // console.log(destination);
+    // console.log(filteredEstateResults);
+    console.log(filteredEstateIds, 'FILTERED ESTATE IDSSSSS');
+    // console.log(chartersFromFilteredEstates);
     const allDestCharterObjs = [];
 
     chartersFromFilteredEstates.forEach((charter) => {
@@ -153,7 +173,7 @@ function SearchBar() {
       });
     });
 
-    if (!destination) {
+// console.log(excludedEstateIds, 'HERE ESTAte')
 
       charters.forEach((charter) => {
         const charterObj = {};
@@ -182,31 +202,52 @@ function SearchBar() {
           });
         });
       });
-    }
 
-    console.log(excludedEstateIds, "===============");
+
+console.log(excludedEstateIds, 'EXCLUDED')
 
     let searchUrlArray = [];
-    filteredEstateResults.map((estate) => {
+    let noResultUrlArray=  []
+
+   filteredEstateResults.map((estate) => {
       if (!excludedEstateIds.includes(estate.id))
       searchUrlArray.push(estate.id);
     });
-    let anywhereArrayResults = [];
-    estates.map((estate) => {
-      if (!excludedEstateIds.includes(estate.id))
-      anywhereArrayResults.push(estate.id);
-    });
+
+
+  estates.map((estate) => {
+    if (!excludedEstateIds.includes(estate.id))
+    noResultUrlArray.push(estate.id);
+  });
+
+    // console.log(searchUrlArray, 'URL ARRAY')
+
+    // let anywhereArrayResults = [];
+    // estates.map((estate) => {
+    //   if (!excludedEstateIds.includes(estate.id))
+    //   anywhereArrayResults.push(estate.id);
+    // });
+
+    // console.log("==============AISOPDFJIOPAJFPOIAWIJE=", alphabetizedSet);
+    if (!destination || !alphabetizedSet.length) {
+
+      return history.push(
+        `/search?noResults=${noResultUrlArray.join(',')}`
+      );
+    }
+
     if (searchUrlArray.length) {
       setDestinationValueHolder(destination);
+      setAlphabetizedSet([]);
+      setDestination('')
+      setShowSearchSuggestions(false)
       return history.push(`/search?estateids=${searchUrlArray.join(",")}`);
     }
 
+
     // returns all estates if there are no search result suggestions
-    if (!destination) {
-      return history.push(
-        `/search?estateids=${anywhereArrayResults.join(",")}`
-      );
-    }
+
+
 
     if (
       destination &&
@@ -221,6 +262,9 @@ function SearchBar() {
           estatesArraySingle.push(estate.id);
         }
       });
+      setAlphabetizedSet([]);
+      setDestination('')
+      setShowSearchSuggestions(false)
 
       return history.push(`/search?estateids=${estatesArraySingle.join(",")}`);
     }
@@ -239,6 +283,10 @@ function SearchBar() {
         firstSearchResultArray.push(estate.id);
       });
 
+      setAlphabetizedSet([]);
+      setDestination('')
+      setShowSearchSuggestions(false)
+
       return history.push(
         `/search?estateids=${firstSearchResultArray.join(",")}`
       );
@@ -254,11 +302,18 @@ function SearchBar() {
         firstSearchResultArray.push(estate.id);
       });
 
+      setAlphabetizedSet([]);
+      setDestination('')
+      setShowSearchSuggestions(false)
+
       return history.push(
         `/search?estateids=${firstSearchResultArray.join(",")}`
       );
     }
+
     setAlphabetizedSet([]);
+    setDestination('')
+    setShowSearchSuggestions(false)
   };
 
   if (!sessionUser) {
@@ -308,9 +363,15 @@ function SearchBar() {
 						<div className="search-inputs">
 							<label>Where</label>
 							<SearchDestinationInput
+
+               showSearchSuggestions={showSearchSuggestions}
+               setShowSearchSuggestions={setShowSearchSuggestions}
 								setDestination={setDestination}
 								setAlphabetizedSet={setAlphabetizedSet}
 								setShowDateRange={setShowDateRange}
+                setDestinationValue={setDestinationValue}
+                destinationValue={destinationValue}
+
 							/>
 						</div>
 						<div className="search-inputs">
@@ -325,7 +386,7 @@ function SearchBar() {
 									showDateRange={showDateRange}
 									setShowDateRange={setShowDateRange}
 								/>
-								<button id="search-button-icon" type="submit">
+								<button id="search-button-icon">
 									<i class="fa-solid fa-magnifying-glass"></i>
 								</button>
 							</div>

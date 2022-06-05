@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "../../../context/Modal";
 import EditForm from "./EditForm/EditForm";
 import CharterRow from "./CharterRow";
+import moneyFormatter from "../../../utils/currency"
 
 const MyCharters = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,9 @@ const MyCharters = () => {
 
   const yourCharters = charters.filter(
     (charter) => charter.user_id === parseInt(id)
-  );
+  ).sort((a, b) => {
+return new Date(b.created_at) - new Date(a.created_at)
+	})
 
   // const [showCharterModal, setShowCharterModal] = useState(false);
 

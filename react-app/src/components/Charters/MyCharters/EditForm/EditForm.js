@@ -87,6 +87,7 @@ const EditForm = ({currCharter, setShowEditModal}) => {
 						ranges={dateRange}
 						direction="horizontal"
 						disabledDates={disabledDatesArray}
+						minDate={new Date()}
 					/>
 				</div>
 				<div>
@@ -95,7 +96,7 @@ const EditForm = ({currCharter, setShowEditModal}) => {
 						type="number"
 						placeholder={`${guestNum}`}
 						onChange={handleGuestNum}
-						min="1" 
+						min="1"
 						max="10"
 					/>
 				</div>

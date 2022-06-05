@@ -10,7 +10,7 @@ def get_charters( data ):
   all_charters = Estate.query.get(data['estate_id']).charters
 
   return [charter for charter in all_charters if charter.id is not data.get('charter_id')]
-  
+
 def charter_exists_start(form, field):
   start_date = field.data
 
@@ -48,3 +48,4 @@ class CharterEditForm(FlaskForm):
   start_date = DateField('start_date', validators=[DataRequired(), charter_exists_start])
   end_date = DateField('end_date', validators=[DataRequired(), charter_exists_end])
   charter_id = IntegerField('charter_id')
+

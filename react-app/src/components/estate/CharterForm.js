@@ -12,6 +12,7 @@ import { getCheckinDate, getCheckoutDate, getNightStay } from "./utils";
 import { addDays } from "date-fns";
 import { useSelector, useDispatch } from "react-redux";
 import { dateArrayCreator } from "../../utils/dateArrayCreator";
+import moneyFormatter from "../../utils/currency"
 
 const CharterForm = ({ estate, stateVars, setCharterPayload }) => {
   const params = useParams();
@@ -41,20 +42,20 @@ const CharterForm = ({ estate, stateVars, setCharterPayload }) => {
   const [dateBeforeToday, setDateBeforeToday] = useState(false);
   const sessionUserId = useSelector((state) => state.session.user?.id);
   const [dateRangeValid, setDateRangeValid] = useState(true);
-  
-  
+
+
   const dateParser = (dateobj) => {
     let year = dateobj.getFullYear();
     let month = dateobj.getMonth() + 1;
     let day = dateobj.getDate();
-  
+
     if (month < 10) {
       month = `0${month.toString()}`;
     }
     if (day < 10) {
       day = `0${day.toString()}`;
     }
-  
+
     return `${year}-${month.toString()}-${day.toString()}`;
   };
 
@@ -137,7 +138,7 @@ useEffect(() => {
 		"disabled button?",
 		!dateValid && dateBeforeToday && !dateRangeValid
   );
-  
+
 }, [checkinDate, checkoutDate]);
 
   const handleSubmit = async (e) => {
@@ -195,7 +196,7 @@ useEffect(() => {
 
   const baseCost = nightStay * estate?.nightly_rate;
   const cleanCost = estate?.nightly_rate * cleanRate;
-  const servCost = 0;
+  const servCost = estate?.nightly_rate * .30
   const totalCost = baseCost + cleanCost + servCost;
 
 
@@ -208,7 +209,7 @@ useEffect(() => {
 							<li key={idx}>{error}</li>
 						))}
 					</ul>
-					<p>${estate?.nightly_rate} / night</p>
+					<p>{moneyFormatter.format(estate?.nightly_rate)} / night</p>
 					<div className="checkdates">
 						<label>Check-in</label>
 						<input
@@ -264,29 +265,29 @@ useEffect(() => {
 				)}
 				{!dateRangeValid && (
 					<p className="dates-invalid">
-						The estate is not available these dates, try again 
+						The estate is not available these dates, try again
 					</p>
 				)}
 				<div id="charter-invoice">
 					<div className="invoice-row" id="base-cost">
 						<p className="invoice-left">
-							${estate?.nightly_rate} x {nightStay} nights
+							{moneyFormatter.format(estate?.nightly_rate)} x {nightStay} nights
 						</p>
-						<p className="invoice-right">${baseCost}</p>
+						<p className="invoice-right">{moneyFormatter.format(baseCost)}</p>
 					</div>
 					<div className="invoice-row" id="clean-cost">
 						<p className="invoice-left">Cleaning fee</p>
-						<p className="invoice-right">${cleanCost}</p>
+						<p className="invoice-right">{moneyFormatter.format(cleanCost)}</p>
 					</div>
 					<div className="invoice-row" id="service-cost">
 						<p className="invoice-left">Service Fee</p>
-						<p className="invoice-right">${servCost}</p>
+						<p className="invoice-right">{moneyFormatter.format(servCost)}</p>
 					</div>
 					<div className="invoice-row" id="total-cost">
 						<p className="invoice-left">
-							${estate?.nightly_rate} x {nightStay} nights
+							{moneyFormatter.format(estate?.nightly_rate)} x {nightStay} nights
 						</p>
-						<p className="invoice-right">${totalCost}</p>
+						<p className="invoice-right">{moneyFormatter.format(totalCost)}</p>
 					</div>
 				</div>
 			</div>

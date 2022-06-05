@@ -6,6 +6,7 @@ import EditForm from "./EditForm/EditForm";
 import { Modal } from "../../../context/Modal";
 import { addDays } from 'date-fns';
 
+
 const CharterRow = ({ charter, estateId }) => {
 
 
@@ -91,7 +92,7 @@ const CharterRow = ({ charter, estateId }) => {
 							<span className="per-night">guest(s)</span>{" "}
 						</div>
 						<div>
-							${estate?.nightly_rate}{" "}
+							{moneyFormatter.format(estate?.nightly_rate)}{" "}
 							<span className="per-night">per night</span>{" "}
 						</div>
 						<div>

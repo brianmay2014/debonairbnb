@@ -3,7 +3,7 @@
   width: 100%;
   display: flex;
   margin-bottom: 100px;
-  
+
 }
 
 .search-results-card img {
@@ -16,7 +16,8 @@ margin: 5px;
   width: 33.33%;
   display: flex;
   flex-wrap: wrap;
-  padding: 15px;
+  padding: 0 15px;
+  margin-top: 60px;
   overflow-y: scroll;
   height: 800px;
 }
@@ -28,4 +29,10 @@ margin: 5px;
 .search-results-map {
   width: 66.66%;
   padding-top: 20px;
+}
+
+.search-message {
+  position: absolute;
+  margin-left: 30px;
+  width: 620px;
 }

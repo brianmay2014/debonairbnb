@@ -9,6 +9,7 @@ import { Modal } from "../../../context/Modal";
 import EditFormTwo from "./EditModalTwo";
 import { set } from "date-fns/esm";
 import RatingDisplay from "../../estate/RatingDisplay";
+import moneyFormatter from "../../../utils/currency"
 
 import { addDays } from 'date-fns';
 // import { ratingEmoji } from "../../estate/StarRating";
@@ -31,44 +32,43 @@ const CharterPage = () => {
 
   // const [searchParams, setSearchParams] = useSearchParams()
 
-  
-  
-  
+
+
+
   const lengthOfCharter =
   (Date.parse(end_date) - Date.parse(start_date)) / (60 * 60 * 24 * 1000);
-  
+
   const charterEstate = estates?.find(
     (estate) => parseInt(estate_id) === estate.id
     );
-    
+
     const charter = {user_id, estate_id, guest_num, start_date, end_date}
-    
+
     const estate = estates.estate_id;
-    
+
+		// console.log(estate, 'here')
     let dispImg;
-    if (estate?.images.length) {
-      dispImg = estate?.images.reduce((img, accum) =>
+    if (charterEstate?.images.length) {
+      dispImg = charterEstate?.images.reduce((img, accum) =>
       img.created_at > accum.created_at ? img : accum
       );
     }
     const dispImgURL = dispImg ? dispImg.url : null;
-    
+
   // console.log(charter)
 
-  const serviceFees = charterEstate?.nightly_rate * lengthOfCharter * 0.1;
-  const occupancyFees = charterEstate?.nightly_rate * lengthOfCharter * 0.09;
-  const cleaningFees = charterEstate?.nightly_rate * lengthOfCharter * 0.08;
+  const serviceFees = charterEstate?.nightly_rate * lengthOfCharter * 0.30
+  const cleaningFees = charterEstate?.nightly_rate * lengthOfCharter * 0.15
   const { search } = useLocation();
   // const params = new URLSearchParams(search)
 
 
-  const totalCost = (serviceFees, occupancyFees, cleaningFees) => {
+  const totalCost = (serviceFees, cleaningFees) => {
     const total =
       serviceFees +
-      occupancyFees +
       cleaningFees +
       charterEstate?.nightly_rate * lengthOfCharter;
-    return total;
+    return moneyFormatter.format(total);
   };
 
   const handleBackButton = (e) => {
@@ -138,7 +138,7 @@ const CharterPage = () => {
     });
   }, []);
 
-console.log(guest_num, '=============')
+console.log(dispImg, '=============')
 
   return (
 		<>
@@ -213,36 +213,31 @@ console.log(guest_num, '=============')
 							<h3>Price details</h3>
 							<div className="charter-nightly-cost">
 								<p>
-									${charterEstate?.nightly_rate} x{" "}
+									{moneyFormatter.format(charterEstate?.nightly_rate)} x{" "}
 									{lengthOfCharter} nights
 								</p>
 								<p>
-									$
-									{charterEstate?.nightly_rate *
-										lengthOfCharter}
+
+									{moneyFormatter.format(charterEstate?.nightly_rate *
+										lengthOfCharter)}
 								</p>
 							</div>
 							<div className="charter-fees">
 								<p>Cleaning fee</p>
-								<p>${cleaningFees.toFixed(2)}</p>
+								<p>{moneyFormatter.format(cleaningFees)}</p>
 							</div>
 							<div className="charter-fees">
 								<p>Service fee</p>
-								<p>${serviceFees.toFixed(2)}</p>
-							</div>
-							<div className="charter-fees">
-								<p>Occupancy taxes and fees</p>
-								<p>${occupancyFees.toFixed(2)}</p>
+								<p>{moneyFormatter.format(serviceFees)}</p>
 							</div>
 							<div className="charter-total">
 								<p>Total(USD)</p>
 								<p>
-									$
+
 									{totalCost(
 										cleaningFees,
-										serviceFees,
-										occupancyFees
-									).toFixed(2)}
+										serviceFees
+									)}
 								</p>
 							</div>
 						</div>
