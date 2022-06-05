@@ -31,28 +31,29 @@ const CharterPage = () => {
 
   // const [searchParams, setSearchParams] = useSearchParams()
 
-  
-  
-  
+
+
+
   const lengthOfCharter =
   (Date.parse(end_date) - Date.parse(start_date)) / (60 * 60 * 24 * 1000);
-  
+
   const charterEstate = estates?.find(
     (estate) => parseInt(estate_id) === estate.id
     );
-    
+
     const charter = {user_id, estate_id, guest_num, start_date, end_date}
-    
+
     const estate = estates.estate_id;
-    
+
+		// console.log(estate, 'here')
     let dispImg;
-    if (estate?.images.length) {
-      dispImg = estate?.images.reduce((img, accum) =>
+    if (charterEstate?.images.length) {
+      dispImg = charterEstate?.images.reduce((img, accum) =>
       img.created_at > accum.created_at ? img : accum
       );
     }
     const dispImgURL = dispImg ? dispImg.url : null;
-    
+
   // console.log(charter)
 
   const serviceFees = charterEstate?.nightly_rate * lengthOfCharter * 0.1;
@@ -138,7 +139,7 @@ const CharterPage = () => {
     });
   }, []);
 
-console.log(guest_num, '=============')
+console.log(dispImg, '=============')
 
   return (
 		<>
