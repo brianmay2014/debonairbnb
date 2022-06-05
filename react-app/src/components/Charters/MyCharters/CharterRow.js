@@ -5,7 +5,8 @@ import DeleteForm from "./DeleteForm/DeleteForm";
 import EditForm from "./EditForm/EditForm";
 import { Modal } from "../../../context/Modal";
 import { addDays } from "date-fns";
-import "./CharterRow.css";
+// import "./CharterRow.css";
+import "./MyCharters.css"
 
 const CharterRow = ({ charter, estateId }) => {
   const [showEditModal, setShowEditModal] = useState(false);
