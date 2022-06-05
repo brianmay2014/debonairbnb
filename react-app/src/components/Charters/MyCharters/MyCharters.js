@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "../../../context/Modal";
 import EditForm from "./EditForm/EditForm";
 import CharterRow from "./CharterRow";
-import moneyFormatter from "../../../utils/currency"
+
 
 const MyCharters = () => {
   const dispatch = useDispatch();
