@@ -192,7 +192,7 @@ const EstateEditModal = ({ estate, setShowModal }) => {
 						<select
 							className="short-input"
 							onChange={(e) => {
-								console.log(e.target.value);
+								// console.log(e.target.value);
 								setType(e.target.value);
 							}}
 							value={type}

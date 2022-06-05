@@ -101,7 +101,8 @@ const ProfileButton = () => {
                 </NavLink>
               </li> */}
 							<li>
-								<LogoutButton />
+								<LogoutButton closeMenu={closeMenu} />
+
 							</li>
 						</>
 					)}

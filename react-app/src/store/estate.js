@@ -33,7 +33,7 @@ const loadEstates = (estates) => {
 // };
 
 export const editEstate = (estate, image) => async (dispatch) => {
-  console.log(estate, image);
+  // console.log(estate, image);
   const { id, address, title, nightly_rate, type_id, description, owner_id } = estate;
   // console.log(estate['owner_id']);
   const f = new FormData();
@@ -44,7 +44,7 @@ export const editEstate = (estate, image) => async (dispatch) => {
   f.append("type_id", type_id);
   f.append("owner_id", owner_id);
   if (image) {
-    console.log(image);
+    // console.log(image);
     f.append("image", image);
   }
   const response = await fetch(`/api/users/${estate.owner_id}/estates/${id}`, {
@@ -52,8 +52,8 @@ export const editEstate = (estate, image) => async (dispatch) => {
     body: f,
   });
   const estateData = await response.json();
-  console.log('*-/*-/*/-*/-*/-*/-*/--*/*-/*-/*-//*-*-/*-/*-/*-/');
-  console.log(estateData)
+  // console.log('*-/*-/*/-*/-*/-*/-*/--*/*-/*-/*-//*-*-/*-/*-/*-/');
+  // console.log(estateData)
   dispatch(addEstate(estateData))
   return { ...estateData}
 };
@@ -86,7 +86,7 @@ export const createEstate = (address, title, nightlyRate, type_id, description, 
 		});
 
     const estateData = await response.json();
-		console.log(estateData);
+		// console.log(estateData);
 		if (response.ok) {
 			dispatch(addEstate(estateData));
 			return estateData;
@@ -109,9 +109,9 @@ export const createEstate = (address, title, nightlyRate, type_id, description, 
 
 export const deleteEstate = (estate) => async (dispatch) => {
   const { id } = estate;
-  console.log('inside the thunk');
-  console.log('estateowner', estate.owner_id);
-  console.log("estateid", estate.id);
+  // console.log('inside the thunk');
+  // console.log('estateowner', estate.owner_id);
+  // console.log("estateid", estate.id);
   const response = await fetch(`/api/users/${estate.owner_id}/estates/${estate.id}/`, {
     method: "DELETE",
     body: JSON.stringify({ estate_id: estate.id })
@@ -123,8 +123,8 @@ export const deleteEstate = (estate) => async (dispatch) => {
 
 export const deleteEstateImage = (estateImage) => async (dispatch) => {
   const { id, estate_id } = estateImage;
-  console.log(id, estate_id);
-  console.log(`/api/estates/${estate_id}/images/${id}`);
+  // console.log(id, estate_id);
+  // console.log(`/api/estates/${estate_id}/images/${id}`);
   const response = await fetch(`/api/estates/${estate_id}/images/${id}`, {
     method: "DELETE",
   });

@@ -103,7 +103,7 @@ const UploadImage = ({ estate, onFinish }) => {
     setDropChild(dropAreaErrored);
     setErrors([...errors, "Incorrect file type"]);
   }
-  console.log(image, disabled)
+  // console.log(image, disabled)
   return (
     <form onSubmit={handleSubmit}>
       <FileUploader

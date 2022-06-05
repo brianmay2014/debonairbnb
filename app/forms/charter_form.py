@@ -7,8 +7,8 @@ from datetime import datetime
 from app.models import Charter
 
 def charter_exists_start(form, field):
-  print('top of the -------------------')
-  print('-*/-*/-*/-*/-beforeall charters*/-*/-*/')
+  # print('top of the -------------------')
+  # print('-*/-*/-*/-*/-beforeall charters*/-*/-*/')
   start_date = field.data
 
   all_charters = Charter.query.filter(Charter.estate_id == form.data['estate_id']).all()
@@ -17,38 +17,38 @@ def charter_exists_start(form, field):
   def charter_date_checker(start_date):
     for charter in all_charters:
       if charter.start_date <= start_date <= charter.end_date:
-        print('-*/-*/-*/-*/-*/-*/-*/')
-        print(charter)
-        print('-*/-*/-*/-*/-*/-*/-*/')
+        # print('-*/-*/-*/-*/-*/-*/-*/')
+        # print(charter)
+        # print('-*/-*/-*/-*/-*/-*/-*/')
         return True
 
     return False
 
   if charter_date_checker(start_date):
-    print('-------failreure')
+    # print('-------failreure')
     raise ValidationError(f'Date range unavailable for this estate. Please choose another date range.')
 
 def charter_exists_end(form, field):
-  print('top of the -------------------')
+  # print('top of the -------------------')
   end_date = field.data
 
-  print('-*/-*/-*/-*/-beforeall charters*/-*/-*/')
+  # print('-*/-*/-*/-*/-beforeall charters*/-*/-*/')
   all_charters = Charter.query.filter(Charter.estate_id == form.data['estate_id']).all()
   
-  print('-*/-*/-*/-*/-*/-*/-*/')
-  print(all_charters)
-  print('-*/-*/-*/-*/-*/-*/-*/')
+  # print('-*/-*/-*/-*/-*/-*/-*/')
+  # print(all_charters)
+  # print('-*/-*/-*/-*/-*/-*/-*/')
 
   def charter_date_checker(end_date):
     for charter in all_charters:
       if charter.start_date <= end_date <= charter.end_date:
-        print('charter-id---------------',charter.id)
+        # print('charter-id---------------',charter.id)
         return True
 
     return False
 
   if charter_date_checker(end_date):
-    print('-------failreure')
+    # print('-------failreure')
     raise ValidationError('Date range unavailable for this estate. Please choose another date range.')
 
 

@@ -37,8 +37,8 @@ const SearchMap = ({ resultIds, gKey }) => {
   const [map, setMap] = useState(null);
 
   const [estatesLoaded, setEstatesLoaded] = useState(false);
-  console.log(resultIds)
-  console.log(estates, "AHHHHHHH");
+  // console.log(resultIds)
+  // console.log(estates, "AHHHHHHH");
   const onLoad = useCallback(
     function callback(map) {
       if (estatesLoaded) {

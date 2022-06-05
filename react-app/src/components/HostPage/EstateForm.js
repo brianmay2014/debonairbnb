@@ -40,7 +40,7 @@ const EstateForm = () => {
 		// console.log(address, title, nightlyRate, type_id, description, ownerId);
 		const newEstate = await dispatch(createEstate(address, title, nightlyRate, type, description, ownerId));
 		if (newEstate.errors) {
-			console.log(newEstate.errors)
+			// console.log(newEstate.errors)
 			setErrors(newEstate.errors)
 			return;
 		} else {
@@ -101,7 +101,7 @@ const EstateForm = () => {
 				<select
 					className="short-input"
 					onChange={(e) => {
-						console.log(e.target.value);
+						// console.log(e.target.value);
 						setType(e.target.value);
 					}}
 					value={type}

@@ -36,7 +36,7 @@ class EstateLocationData():
     @staticmethod
     def parse_raw(data):
         rawgoogledata = data.get("address_components");
-        print(rawgoogledata)
+        # print(rawgoogledata)
         city = [comp.get("long_name") for comp in rawgoogledata if comp.get("types") == city_types]
         if not city:
             city = [comp.get("long_name") for comp in rawgoogledata if comp.get("types") == neighbourhood_types]

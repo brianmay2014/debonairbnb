@@ -30,7 +30,7 @@ const EditFormTwo = ({
       charter.id !== parseInt(currCharter.id)
   );
 
-  console.log(allChartersForEstate);
+  // console.log(allChartersForEstate);
 
   let disabledDatesArray = [];
 

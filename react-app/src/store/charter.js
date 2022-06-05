@@ -88,9 +88,9 @@ export const addOneCharter = (charterTest) => async (dispatch) => {
 }
 
 export const editCharter = (data) => async (dispatch) => {
-  console.log("------------editcharterTHUNK");
-  console.log(data)
-  console.log("------------editcharterTHUNK");
+  // console.log("------------editcharterTHUNK");
+  // console.log(data)
+  // console.log("------------editcharterTHUNK");
   const { id, userId, estateId, guestNum, startDate, endDate } = data;
 // console.log(data, '======================data')
 
@@ -117,7 +117,7 @@ export const deleteCharter = (charter) => async (dispatch) => {
 
   const [response] = await Promise.all([fetch(`/api/charters/${id}`, {method: "DELETE"})]);
 
-  console.log(response.ok, 'HEEEEERE')
+  // console.log(response.ok, 'HEEEEERE')
   if (response.ok) {
     const charterResponse = await response.json();
     dispatch(removeCharter(charterResponse))

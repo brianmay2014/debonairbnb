@@ -26,7 +26,7 @@ const loadCritiques = (critiques) => {
 
 export const makeCritique = (critique) => async (dispatch) => {
   const estateId  = critique.estate_id;
-  console.log(critique)
+  // console.log(critique)
   const form = new FormData();
   form.append("estate_id", estateId)
   form.append("user_id", critique.user_id)
@@ -37,7 +37,7 @@ export const makeCritique = (critique) => async (dispatch) => {
     {method: "POST", body: form}
   );
   const critiqueData = await response.json();
-  console.log(critiqueData);
+  // console.log(critiqueData);
   if (response.ok) {
     dispatch(loadCritiques(critiqueData.critiques));
     return { ...critiqueData.critiques };
@@ -47,7 +47,7 @@ export const makeCritique = (critique) => async (dispatch) => {
 };
 
 export const editCritique = (critique) => async (dispatch) => {
-  console.log("YOOOOO")
+  // console.log("YOOOOO")
   const id = critique.id;
   const estateId = critique.estate_id;
   const form = new FormData();
@@ -63,7 +63,7 @@ export const editCritique = (critique) => async (dispatch) => {
   if (critiqueData.errors) {
       return critiqueData;
   }
-  console.log(critiqueData);
+  // console.log(critiqueData);
   if (response.ok) {
     dispatch(loadCritiques(critiqueData.critiques));
     return { ...critiqueData.critiques };
@@ -74,8 +74,8 @@ export const editCritique = (critique) => async (dispatch) => {
 
 export const deleteCritique = (critique) => async (dispatch) => {
   const {id, estate_id} = critique;
-  console.log(id, estate_id);
-  console.log(`/api/estates/${estate_id}/critiques/${id}`);
+  // console.log(id, estate_id);
+  // console.log(`/api/estates/${estate_id}/critiques/${id}`);
   const response = await fetch(`/api/estates/${estate_id}/critiques/${id}`, {method: "DELETE"});
   if (response.ok) {
     const critiques = await response.json();
@@ -90,7 +90,7 @@ export const genCritiques = (estate) => async (dispatch) => {
 
   if (critiquesResponse.ok) {
     const [critiques] = await Promise.all([critiquesResponse.json()]);
-    console.log(critiques)
+    // console.log(critiques)
     dispatch(loadCritiques(critiques.critiques))
     return critiques.critiques;
   }

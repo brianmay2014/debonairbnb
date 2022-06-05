@@ -77,7 +77,7 @@ const CharterPage = () => {
 
   const handleConfirm = async (e) => {
     const payload = { user_id, estate_id, guest_num, start_date, end_date };
-    console.log(payload)
+    // console.log(payload)
     let createdCharter;
     try {
       createdCharter = await dispatch(addOneCharter(payload));
@@ -88,7 +88,7 @@ const CharterPage = () => {
     } catch (error) {
       if (error instanceof ValidationError) {
         setErrorMessages(error.errors);
-        console.log(error.errors);
+        // console.log(error.errors);
       }
     }
   };
@@ -138,7 +138,7 @@ const CharterPage = () => {
     });
   }, []);
 
-console.log(dispImg, '=============')
+// console.log(dispImg, '=============')
 
   return (
 		<>

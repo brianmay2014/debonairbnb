@@ -70,6 +70,7 @@ function SearchBar() {
   const stateId = parseInt(search?.split("=")[1]?.split(",")[0]);
   const searchUrlNoResults = search?.split("=")[0];
   const stateIdEstate = estates?.find((estate) => estate.id === stateId)?.state;
+  // console.log(stateId);
   useEffect(() => {
     console.log(searchUrlNoResults);
     if (searchUrlNoResults === "?noResults") {
