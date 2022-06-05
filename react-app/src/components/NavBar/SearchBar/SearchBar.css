@@ -18,6 +18,10 @@
  justify-content: space-between;
  align-items: center;
  width: 400px;
+ margin-top: 4px;
+}
+.search-container-hidden {
+  display: none;
 }
 
 .search-container-with-nav nav {
@@ -197,6 +201,7 @@
     border: 0.2px var(--lightgold) solid;
     border-radius: 2px;
     box-shadow: 0px 0px 2px var(--medgold);
+    margin-bottom: 8px;
 }
 #state-search-input:focus{
     outline: none;

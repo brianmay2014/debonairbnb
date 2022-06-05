@@ -28,6 +28,15 @@
   align-items: center;
 }
 
+.charter-row-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.charter-row-title p {
+font-weight: lighter
+}
+
 .row-cost{
   display: flex;
   justify-content: space-between;
