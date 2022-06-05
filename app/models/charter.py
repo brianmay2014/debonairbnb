@@ -11,6 +11,7 @@ class Charter(db.Model, CrUpMixin):
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
 
+
     #relationships
     # belongs to
     estate = db.relationship("Estate", back_populates="charters")
@@ -23,7 +24,9 @@ class Charter(db.Model, CrUpMixin):
             'estate_id': self.estate_id,
             'guest_num': self.guest_num,
             'start_date': self.start_date,
-            'end_date': self.end_date
+            'end_date': self.end_date,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
         }
     @staticmethod
     def seed(charter_data):

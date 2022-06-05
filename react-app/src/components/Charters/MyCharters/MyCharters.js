@@ -15,7 +15,9 @@ const MyCharters = () => {
 
   const yourCharters = charters.filter(
     (charter) => charter.user_id === parseInt(id)
-  );
+  ).sort((a, b) => {
+return new Date(b.created_at) - new Date(a.created_at)
+	})
 
   // const [showCharterModal, setShowCharterModal] = useState(false);
 
