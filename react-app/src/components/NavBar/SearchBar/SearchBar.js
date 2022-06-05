@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import SearchDestinationInput from "./SearchDestinationInput/SearchDestinationInput";
 import SearchDurationInput from "./SearchDurationInput/SearchDurationInput";
 import SearchGuestsInput from "./SearchGuestsInput/SearchGuestsInput";
@@ -35,6 +35,8 @@ function SearchBar() {
   const [filteredData, setFilteredData] = useState([]);
   const [currentState, setCurrentState] = useState("Search States");
   const [showSearchBar, setShowSearchBar] = useState(true);
+  const { search } = useLocation();
+  const [searchResultLoaded, setSearchResultLoaded] = useState(false);
 
   const openDestinationMenu = (e) => {
     e.stopPropagation();
@@ -64,6 +66,22 @@ function SearchBar() {
     setShowDestinationMenu(false);
     setShowDateMenu(false);
   };
+
+  const stateId = parseInt(search.split("=")[1].split(",")[0]);
+  const stateIdEstate = estates?.find((estate) => estate.id === stateId)?.state;
+  console.log(stateId);
+  useEffect(() => {
+    setCurrentState(stateIdEstate);
+    if (!destination || destination === " " || !alphabetizedSet.length) {
+      setCurrentState("Anywhere");
+    }
+    setSearchResultLoaded(true);
+
+  }, [estates]);
+
+
+
+
 
   useEffect(() => {
     if (!showDestinationMenu && !showDateMenu && !showGuestsMenu) return;
@@ -104,7 +122,6 @@ function SearchBar() {
     setHiddenButtonsDest(false);
 
     setHiddenButtons(false);
-    
 
     const dateRangeFromSearch = dateArrayCreator(
       new Date(checkinDate),
@@ -225,7 +242,6 @@ function SearchBar() {
     //   anywhereArrayResults.push(estate.id);
     // });
 
-
     if (!destination || destination === " " || !alphabetizedSet.length) {
       setShowSearchSuggestions(false);
       setCurrentState("Anywhere");
@@ -248,14 +264,14 @@ function SearchBar() {
       destination &&
       estates.find(
         (estate) => `${estate.state}, ${estate.country}` === destination
-        )
-        ) {
-          let estatesArraySingle = [];
+      )
+    ) {
+      let estatesArraySingle = [];
 
-          estates.map((estate) => {
-            if (`${estate.state}, ${estate.country}` === destination) {
-              setCurrentState(estate?.state);
-              estatesArraySingle.push(estate.id);
+      estates.map((estate) => {
+        if (`${estate.state}, ${estate.country}` === destination) {
+          setCurrentState(estate?.state);
+          estatesArraySingle.push(estate.id);
         }
       });
       // setAlphabetizedSet([]);
@@ -316,17 +332,15 @@ function SearchBar() {
     setShowSearchSuggestions(false);
   };
 
-
   if (!sessionUser) {
     return null;
   }
-  console.log(destination, 'DESTINATION YOOOO')
-  console.log(filteredData)
+  console.log(destination, "DESTINATION YOOOO");
+  console.log(filteredData);
 
   return (
     <div className="search-container-with-nav">
       <div className={hiddenButtons ? "" : "search-container"}>
-
         <form
           onSubmit={handleSubmit}
           className="search-form"
@@ -340,7 +354,13 @@ function SearchBar() {
             {/* <AnimatedButton /> */}
             <button onClick={handleHiddenButtonsDestination}>
               {/* <p>{destinationValueHolder}</p> */}
-              <p>{currentState}</p>
+              {searchResultLoaded && (
+                <p>
+                  {currentState}
+                </p>
+              )
+
+              }
             </button>
             <span className="search-button-spans">|</span>
             {/* <button onClick={openDateMenu}> */}
