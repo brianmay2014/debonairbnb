@@ -117,6 +117,7 @@ const SearchDurationInput = ({setCheckoutDate, setCheckinDate, checkoutDate, che
 						ranges={state}
 						direction="horizontal"
 						dragSelectionEnabled={true}
+            minDate={new Date()}
 					/>
 					<button className="btn" id="selected-dates-button" onClick={closeCal}>
 						Use Selected Dates

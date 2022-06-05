@@ -24,7 +24,7 @@
 
 .confirm-back-button {
   text-align: left;
-  margin-left: 30%;
+  margin-left: 15%;
   display: flex;
 }
 
@@ -81,6 +81,7 @@
 .left-charter-box {
   min-width: 200px;
   margin-right: 50px;
+  margin-bottom: 50px;
 }
 .right-charter-box {
   min-width: 400px;
