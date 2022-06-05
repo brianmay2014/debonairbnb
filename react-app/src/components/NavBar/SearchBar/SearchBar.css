@@ -200,6 +200,7 @@
     border: 0.2px var(--lightgold) solid;
     border-radius: 2px;
     box-shadow: 0px 0px 2px var(--medgold);
+    margin-bottom: 8px;
 }
 #state-search-input:focus{
     outline: none;

@@ -5,15 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 const SearchDestinationInput = ({
   data,
   setDestination,
+  destination,
   setAlphabetizedSet,
   setShowDateRange,
   setDestinationValue,
   destinationValue,
   showSearchSuggestions,
-  setShowSearchSuggestions
+  setShowSearchSuggestions,
+  setFilteredData,
+  filteredData,
+  showSearchBar
 }) => {
 
-  const [filteredData, setFilteredData] = useState([]);
   const estates = useSelector((state) => Object.values(state.estates));
 
   // sets value of input to search suggestion
@@ -35,7 +38,7 @@ const SearchDestinationInput = ({
         return;
       }
     });
-    console.log(newFilter);
+    // console.log(newFilter);
     if (newFilter.length) {
       newFilter.map((estate) => {
         filteredSet.add(`${estate.state}, ${estate.country}`);
@@ -44,7 +47,7 @@ const SearchDestinationInput = ({
     const filteredAlphabetized = Array.from(filteredSet).sort();
 
 
-    if (filteredAlphabetized.length) {
+    if (filteredAlphabetized.length && destination !== ' ') {
       // console.log(filteredAlphabetized)
       setAlphabetizedSet(filteredAlphabetized);
     } else {
@@ -66,18 +69,20 @@ const SearchDestinationInput = ({
     if (filteredData) {
       setShowSearchSuggestions(true);
     }
-
     if (filteredData === []) {
-      setFilteredData([]);
+      setFilteredData([])
     }
 
-    if (destinationValue === "") {
+    if (destinationValue === "" || destinationValue === ' ') {
       setShowSearchSuggestions(false);
     }
     setDestination(destinationValue);
-  }, [destinationValue, filteredData]);
+  }, [destinationValue, filteredData, destination]);
 
 
+  useEffect(() => {
+    setDestination(destinationValue)
+  }, [])
 
   return (
     <div>
