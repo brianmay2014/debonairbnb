@@ -229,6 +229,7 @@ console.log(excludedEstateIds, 'EXCLUDED')
     // });
 
     // console.log("==============AISOPDFJIOPAJFPOIAWIJE=", alphabetizedSet);
+
     if (!destination || !alphabetizedSet.length ) {
 
       return history.push(
@@ -239,7 +240,7 @@ console.log(excludedEstateIds, 'EXCLUDED')
     if (searchUrlArray.length) {
       setDestinationValueHolder(destination);
       setAlphabetizedSet([]);
-      setDestination('')
+      // setDestination('')
       setShowSearchSuggestions(false)
       return history.push(`/search?estateids=${searchUrlArray.join(",")}`);
     }
@@ -263,7 +264,7 @@ console.log(excludedEstateIds, 'EXCLUDED')
         }
       });
       setAlphabetizedSet([]);
-      setDestination('')
+      // setDestination('')
       setShowSearchSuggestions(false)
 
       return history.push(`/search?estateids=${estatesArraySingle.join(",")}`);
@@ -284,7 +285,7 @@ console.log(excludedEstateIds, 'EXCLUDED')
       });
 
       setAlphabetizedSet([]);
-      setDestination('')
+      // setDestination('')
       setShowSearchSuggestions(false)
 
       return history.push(
@@ -303,7 +304,7 @@ console.log(excludedEstateIds, 'EXCLUDED')
       });
 
       setAlphabetizedSet([]);
-      setDestination('')
+      // setDestination('')
       setShowSearchSuggestions(false)
 
       return history.push(
@@ -312,7 +313,7 @@ console.log(excludedEstateIds, 'EXCLUDED')
     }
 
     setAlphabetizedSet([]);
-    setDestination('')
+    // setDestination('')
     setShowSearchSuggestions(false)
   };
 
