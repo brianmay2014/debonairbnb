@@ -1,7 +1,7 @@
 #home-page-container{
     display: flex;
     flex-direction: column;
-    width: 1431px;
+    width: fit-content;
     margin: 0 auto 237px;
 
 }

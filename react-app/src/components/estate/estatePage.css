@@ -1,6 +1,7 @@
 #estate-body{
 
     width: 65%;
+    min-width: 1122px;
     margin: 0 auto;
     margin-bottom: 237px;
 }
@@ -31,8 +32,9 @@
     border-radius: 12px;
     /* border: 2px black solid; */
     display: flex;
-    min-width: 1121px;
+    margin: 0 auto;
     width: 1121px;
+    /* width: 1121px; */
 }
 img, .no-img {
     border-radius: 12px;
@@ -50,6 +52,10 @@ img, .no-img {
     height: 275px;
     object-fit: cover;
     margin-left: 5px;
+}
+
+#cluster-images{
+    max-width: 565px;
 }
 
 #desc-avail-charter{

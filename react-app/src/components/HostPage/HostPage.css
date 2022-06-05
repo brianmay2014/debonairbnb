@@ -144,12 +144,12 @@ h3.add-text{
 }
 
 #text-input{
-    height: 100px;
+    /* height: 1.25em; */
     word-break: break-all;
-    overflow: scroll;
+    /* overflow: scroll; */
     display: block;
-    width: 100%;
-    min-height: 200px;
+    /* width: 100%; */
+    /* min-height: em; */
     /* background-color: var(--lightestegg);
     resize: vertical;
     /* border-radius: 26px; */
