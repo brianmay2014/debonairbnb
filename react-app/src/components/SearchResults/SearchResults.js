@@ -110,10 +110,14 @@ const SearchResults = () => {
 
   return (
     <div className="search-results-container">
-      <div className="search-results-list">
+      <div className='search-message-container'>
+
         <div className="search-message">
           {reloadEstates && <p>{searchMessage}</p>}
         </div>
+
+      </div>
+      <div className="search-results-list">
 
         {isLoaded &&
           reloadEstates &&
@@ -124,11 +128,13 @@ const SearchResults = () => {
               resultIds === estate.id.toString()
             ) {
               return (
+                <div>
                 <EstateCard
                   className="search-results-card"
                   estate={estate}
                   showType={true}
                 />
+                </div>
               );
             }
           })}

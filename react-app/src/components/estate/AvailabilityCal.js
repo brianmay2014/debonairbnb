@@ -75,6 +75,7 @@ const AvailabilityCal = ({ estate, stateVars } ) => {
 				direction="horizontal"
 				disabledDates={disabledDatesArray}
 				dragSelectionEnabled={true}
+				minDate={new Date()}
 			/>
 			<p id='date-notice'>*To ensure the utmost cleanliness, we require a deep cleaning of the estate. <br></br>Therefore you cannot book a charter until the day after the last patron has checked out.</p>
 		</div>

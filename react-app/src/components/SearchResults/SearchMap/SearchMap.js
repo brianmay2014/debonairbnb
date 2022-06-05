@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "./SearchMap.css";
+import {Link, useHistory} from "react-router-dom"
 import {
   withScriptjs,
   withGoogleMap,
@@ -18,6 +19,8 @@ const containerStyle = {
 };
 
 const SearchMap = ({ resultIds, gKey }) => {
+
+  const history = useHistory()
 
   const estates = useSelector((state) =>
     Object.values(state.estates).filter(
@@ -135,6 +138,7 @@ const SearchMap = ({ resultIds, gKey }) => {
                       scaledSize: new window.google.maps.Size(26, 26),
                       labelOrigin: new window.google.maps.Point(13, -10),
                     }}
+                    onClick={() => {history.push(`/estates/${estate?.id}`)}}
                   ></Marker>
                 </>
               );

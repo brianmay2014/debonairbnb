@@ -85,6 +85,7 @@ const EditFormTwo = ({
             ranges={dateRange}
             direction="horizontal"
             disabledDates={disabledDatesArray}
+            minDate={new Date()}
           />
         </div>
         <div className="btn-div">
