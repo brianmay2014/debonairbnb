@@ -75,8 +75,11 @@ function SearchBar() {
     console.log(searchUrlNoResults);
     if (searchUrlNoResults === "?noResults") {
       setCurrentState("Anywhere");
-    } else {
+    }
+    else if (stateIdEstate) {
       setCurrentState(stateIdEstate);
+    } else {
+      setCurrentState('Search States')
     }
 
     setSearchResultLoaded(true);
