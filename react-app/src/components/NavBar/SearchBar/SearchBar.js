@@ -67,7 +67,7 @@ function SearchBar() {
     setShowDateMenu(false);
   };
 
-  const stateId = parseInt(search.split("=")[1].split(",")[0]);
+  const stateId = parseInt(search?.split("=")[1]?.split(",")[0]);
   const stateIdEstate = estates?.find((estate) => estate.id === stateId)?.state;
   console.log(stateId);
   useEffect(() => {
