@@ -9,8 +9,10 @@ const SearchDestinationInput = ({
   setShowDateRange,
   setDestinationValue,
   destinationValue,
+  showSearchSuggestions,
+  setShowSearchSuggestions
 }) => {
-  const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
+ 
   const [filteredData, setFilteredData] = useState([]);
   const estates = useSelector((state) => Object.values(state.estates));
 

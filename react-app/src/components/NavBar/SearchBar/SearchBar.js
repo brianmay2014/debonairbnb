@@ -33,6 +33,7 @@ function SearchBar() {
   const [showDateRange, setShowDateRange] = useState(false);
   const [checkinDate, setCheckinDate] = useState(new Date());
   const [checkoutDate, setCheckoutDate] = useState(new Date());
+  const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
 
   const openDestinationMenu = (e) => {
     e.stopPropagation();
@@ -229,6 +230,7 @@ console.log(excludedEstateIds, 'EXCLUDED')
 
     // console.log("==============AISOPDFJIOPAJFPOIAWIJE=", alphabetizedSet);
     if (!destination || !alphabetizedSet.length) {
+
       return history.push(
         `/search?noResults=${noResultUrlArray.join(',')}`
       );
@@ -236,6 +238,9 @@ console.log(excludedEstateIds, 'EXCLUDED')
 
     if (searchUrlArray.length) {
       setDestinationValueHolder(destination);
+      setAlphabetizedSet([]);
+      setDestination('')
+      setShowSearchSuggestions(false)
       return history.push(`/search?estateids=${searchUrlArray.join(",")}`);
     }
 
@@ -257,6 +262,9 @@ console.log(excludedEstateIds, 'EXCLUDED')
           estatesArraySingle.push(estate.id);
         }
       });
+      setAlphabetizedSet([]);
+      setDestination('')
+      setShowSearchSuggestions(false)
 
       return history.push(`/search?estateids=${estatesArraySingle.join(",")}`);
     }
@@ -275,6 +283,10 @@ console.log(excludedEstateIds, 'EXCLUDED')
         firstSearchResultArray.push(estate.id);
       });
 
+      setAlphabetizedSet([]);
+      setDestination('')
+      setShowSearchSuggestions(false)
+
       return history.push(
         `/search?estateids=${firstSearchResultArray.join(",")}`
       );
@@ -290,12 +302,18 @@ console.log(excludedEstateIds, 'EXCLUDED')
         firstSearchResultArray.push(estate.id);
       });
 
+      setAlphabetizedSet([]);
+      setDestination('')
+      setShowSearchSuggestions(false)
+
       return history.push(
         `/search?estateids=${firstSearchResultArray.join(",")}`
       );
     }
+
     setAlphabetizedSet([]);
     setDestination('')
+    setShowSearchSuggestions(false)
   };
 
   if (!sessionUser) {
@@ -345,11 +363,15 @@ console.log(excludedEstateIds, 'EXCLUDED')
 						<div className="search-inputs">
 							<label>Where</label>
 							<SearchDestinationInput
+
+               showSearchSuggestions={showSearchSuggestions}
+               setShowSearchSuggestions={setShowSearchSuggestions}
 								setDestination={setDestination}
 								setAlphabetizedSet={setAlphabetizedSet}
 								setShowDateRange={setShowDateRange}
                 setDestinationValue={setDestinationValue}
                 destinationValue={destinationValue}
+
 							/>
 						</div>
 						<div className="search-inputs">
