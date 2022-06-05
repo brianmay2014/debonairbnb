@@ -234,7 +234,6 @@ function SearchBar() {
     });
 
     // console.log(searchUrlArray, 'URL ARRAY')
-
     // let anywhereArrayResults = [];
     // estates.map((estate) => {
     //   if (!excludedEstateIds.includes(estate.id))
