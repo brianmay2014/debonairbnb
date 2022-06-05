@@ -29,7 +29,7 @@ const SearchResults = () => {
   if (!resultIds) {
     resultIds = []
   }
-
+console.log(resultIds, 'RESULT IDS')
   const firstResultState = reloadEstates?.find((estate) => estate.id === parseInt(resultIds[0]))
         ?.state;
 
@@ -60,10 +60,10 @@ const SearchResults = () => {
 
   useEffect(() => {
 
-      if (search === "?noResults") {
-        setSearchIds(false);
+      if (search.split('=')[0] === "?noResults") {
+
         setSearchMessage(
-          "Could not find any estates based on your search. Showing results for all estates."
+          "Could not find any estates based on your destination. Showing results for all estates within given date range."
         );
       } else {
         setSearchIds(true);
@@ -121,7 +121,6 @@ const SearchResults = () => {
 
         {isLoaded &&
           reloadEstates &&
-          searchIds &&
           reloadEstates.map((estate) => {
             if (
               resultIds?.includes(estate.id.toString()) ||
@@ -139,7 +138,7 @@ const SearchResults = () => {
             }
           })}
 
-        {!searchIds &&
+        {/* {!searchIds &&
           allEstates.length &&
           allEstates?.map((estate) => {
             return (
@@ -151,14 +150,14 @@ const SearchResults = () => {
                 />
               </>
             );
-          })}
+          })} */}
       </div>
       <div className="search-results-map">
         {gKey &&  (
           <SearchMap
             isMarkerShown
             googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-            resultIds={resultIds.length ? resultIds : allEstateIds}
+            resultIds={resultIds}
             gKey={gKey}
           />
         )}

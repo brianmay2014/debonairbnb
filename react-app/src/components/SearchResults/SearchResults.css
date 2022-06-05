@@ -16,8 +16,8 @@ margin: 5px;
   width: 33.33%;
   display: flex;
   flex-wrap: wrap;
-  padding: 15px;
-  padding-top: 40px;
+  padding: 0 15px;
+  margin-top: 60px;
   overflow-y: scroll;
   height: 800px;
 }
@@ -34,4 +34,5 @@ margin: 5px;
 .search-message {
   position: absolute;
   margin-left: 30px;
+  width: 620px;
 }

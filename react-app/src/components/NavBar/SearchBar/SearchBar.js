@@ -109,16 +109,30 @@ function SearchBar() {
     const filteredEstateResults = estates?.filter((estate) => {
       return estate.state === destination?.split(",")[0];
     });
+
+
+
     const filteredEstateIds = [];
-    filteredEstateResults.map((estate) => {
-      return filteredEstateIds.push(estate.id);
-    });
+
+    if (filteredEstateResults.length) {
+      filteredEstateResults.map((estate) => {
+        return filteredEstateIds.push(estate.id);
+      });
+    } else {
+      estates?.map((estate) => {
+        return filteredEstateIds.push(estate.id)
+      })
+    }
+
+
+
+
     const chartersFromFilteredEstates = charters.filter((charter) =>
       filteredEstateIds.includes(charter.estate_id)
     );
     // console.log(destination);
     // console.log(filteredEstateResults);
-    // console.log(filteredEstateIds);
+    console.log(filteredEstateIds, 'FILTERED ESTATE IDSSSSS');
     // console.log(chartersFromFilteredEstates);
     const allDestCharterObjs = [];
 
@@ -158,7 +172,7 @@ function SearchBar() {
       });
     });
 
-
+// console.log(excludedEstateIds, 'HERE ESTAte')
 
       charters.forEach((charter) => {
         const charterObj = {};
@@ -189,23 +203,34 @@ function SearchBar() {
       });
 
 
-
+console.log(excludedEstateIds, 'EXCLUDED')
 
     let searchUrlArray = [];
-    filteredEstateResults.map((estate) => {
+    let noResultUrlArray=  []
+
+   filteredEstateResults.map((estate) => {
       if (!excludedEstateIds.includes(estate.id))
       searchUrlArray.push(estate.id);
     });
-    let anywhereArrayResults = [];
-    estates.map((estate) => {
-      if (!excludedEstateIds.includes(estate.id))
-      anywhereArrayResults.push(estate.id);
-    });
 
-    console.log("==============AISOPDFJIOPAJFPOIAWIJE=", alphabetizedSet);
+
+  estates.map((estate) => {
+    if (!excludedEstateIds.includes(estate.id))
+    noResultUrlArray.push(estate.id);
+  });
+
+    // console.log(searchUrlArray, 'URL ARRAY')
+
+    // let anywhereArrayResults = [];
+    // estates.map((estate) => {
+    //   if (!excludedEstateIds.includes(estate.id))
+    //   anywhereArrayResults.push(estate.id);
+    // });
+
+    // console.log("==============AISOPDFJIOPAJFPOIAWIJE=", alphabetizedSet);
     if (!destination || !alphabetizedSet.length) {
       return history.push(
-        `/search?noResults`
+        `/search?noResults=${noResultUrlArray.join(',')}`
       );
     }
 
