@@ -81,17 +81,17 @@ def patch_critique(estate_id, critique_id):
         form = CritiqueForm()
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
-            print(critique)
-            print(form.data)
+            # print(critique)
+            # print(form.data)
             form.populate_obj(critique)
-            print(critique)
+            # print(critique)
             db.session.add(critique)
             db.session.commit()
             estate = Estate.query.get(estate_id)
             critiques = estate.critiques
             return {"critiques" : [critique.to_dict() for critique in critiques]}
         else:
-            print(form.errors);
+            # print(form.errors);
             return {"errors": form.errors}, 403
 
 @estate_routes.route('/<int:estate_id>/critiques/<int:critique_id>', methods=["DELETE"])
@@ -136,7 +136,7 @@ def estate_create_or_update(id):
             # then the upload le failed, oh no!
             return upload, 400
         url = upload["url"]
-        print(url)
+        # print(url)
         new_image = EstateImage(estate=estate, title=estate.title, url=url)
         db.session.add(new_image)
         db.session.commit()

@@ -130,16 +130,16 @@ const CharterForm = ({ estate, stateVars, setCharterPayload }) => {
 // disabledDatesArray
 
 
-useEffect(() => {
-	console.log('dateValid', dateValid);
-  console.log('dateBeforeToday', dateBeforeToday);
-  console.log("dateRangeValid", dateRangeValid);
-  console.log(
-		"disabled button?",
-		!dateValid && dateBeforeToday && !dateRangeValid
-  );
+// useEffect(() => {
+// 	console.log('dateValid', dateValid);
+//   console.log('dateBeforeToday', dateBeforeToday);
+//   console.log("dateRangeValid", dateRangeValid);
+//   console.log(
+// 		"disabled button?",
+// 		!dateValid && dateBeforeToday && !dateRangeValid
+//   );
 
-}, [checkinDate, checkoutDate]);
+// }, [checkinDate, checkoutDate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

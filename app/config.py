@@ -1,6 +1,6 @@
 import os
 
-print(__name__)
+# print(__name__)
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')

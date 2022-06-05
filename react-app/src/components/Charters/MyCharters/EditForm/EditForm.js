@@ -44,10 +44,10 @@ const EditForm = ({currCharter, setShowEditModal}) => {
 
   const handleEdit = (e) => {
     e.preventDefault()
-    console.log('------------handleEdit');
+    // console.log('------------handleEdit');
     const payload = {id:currCharter.id, userId:currCharter.user_id, estateId:currCharter.estate_id, guestNum: guestNum, startDate: dateParser(checkinDate), endDate: dateParser(checkoutDate)}
     dispatch(editCharter(payload))
-    console.log(payload)
+    // console.log(payload)
     setShowEditModal(false)
   }
 

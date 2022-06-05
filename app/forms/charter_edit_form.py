@@ -33,7 +33,7 @@ def charter_exists_end(form, field):
   def charter_date_checker(end_date):
     for charter in all_charters:
       if charter.start_date <= end_date <= charter.end_date:
-        print
+        # print
         return True
 
     return False

@@ -8,7 +8,7 @@ const loadEstateTypes = (types) => {
 };
 
 export const genEstateTypes = () => async (dispatch) => {
-  console.log("hello");
+  // console.log("hello");
   const [estateTypesResponse] = await Promise.all([fetch("/api/estates/types")]);
   const [estateTypes] = await Promise.all([estateTypesResponse.json()]);
   if (estateTypesResponse.ok) {
