@@ -100,7 +100,7 @@ function SearchBar() {
     e.preventDefault();
     // console.log('YES')
     setShowDateRange(false);
-
+    setHiddenButtonsDest(true)
 
     const dateRangeFromSearch = dateArrayCreator(
       new Date(checkinDate),
@@ -323,8 +323,8 @@ console.log(excludedEstateIds, 'EXCLUDED')
 
   return (
 		<div className="search-container-with-nav">
-			{hiddenButtons && <nav className="search-mini-nav">Stays</nav>}
 			<div className={hiddenButtons ? "" : "search-container"}>
+			{hiddenButtons && <div className="search-mini-nav">Stays</div>}
 				<form
 					onSubmit={handleSubmit}
 					className="search-form"
@@ -354,8 +354,8 @@ console.log(excludedEstateIds, 'EXCLUDED')
                 Add guests
               </p>
             </button> */}
-					</div>
 
+					</div>
 					<div
 						className={
 							hiddenButtons ? "inputs-revealed" : "inputs-hidden"

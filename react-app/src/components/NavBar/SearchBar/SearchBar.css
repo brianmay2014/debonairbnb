@@ -19,6 +19,9 @@
  align-items: center;
  width: 400px;
 }
+.search-container-hidden {
+  display: none;
+}
 
 .search-container-with-nav nav {
   margin-bottom: 20px;
