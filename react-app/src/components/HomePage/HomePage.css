@@ -63,6 +63,10 @@
     width:277px;
 }
 
+.home-card-img p{
+    margin:0;
+}
+
 .footer-backer{
     position: fixed;
     bottom:0;
