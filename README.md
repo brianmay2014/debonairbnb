@@ -164,4 +164,4 @@ The next step for Debonairbnb is to add missives (commonly known as messages) be
 For any questions about any instructions, features, or any requested features, send us an e-mail at <a href='mailto:brianmay2014@gmail.com'>brianmay2014@gmail.com</a>, and we'll get back to you as quick as we can!
 
 Thanks,
-Brian May, Kai Sweard, and Paul Melhus
+Brian May, Kai Seward, and Paul Melhus
