@@ -28,7 +28,7 @@ const EstateCard = ({ estate, showType }) => {
 
   return (
     <div className="estate-cards" id={`estate-card-${estate?.id}`}>
-      <div id="type-filter-bar"></div>
+      {/* <div id="type-filter-bar"></div> */}
       <div className="home-card-img" id="estate-display">
         <a
           href={`/estates/${estate?.id}`}

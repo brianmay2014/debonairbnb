@@ -1,9 +1,10 @@
 .my-charters-container h1 {
   margin-left: 375px;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 
 .my-charters-container {
+  padding-top: 90px;
   margin-bottom: 237px;
 }
 

@@ -8,7 +8,7 @@
 
 #my-estates-header {
   margin-left: 375px;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 
 #estate-display{
@@ -16,6 +16,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+#my-estates-container {
+    padding-top: 90px;
 }
 .row-left a {
     margin: 0 auto;
