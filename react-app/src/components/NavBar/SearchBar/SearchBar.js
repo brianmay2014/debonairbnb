@@ -72,7 +72,7 @@ function SearchBar() {
   const stateIdEstate = estates?.find((estate) => estate.id === stateId)?.state;
   // console.log(stateId);
   useEffect(() => {
-    console.log(searchUrlNoResults);
+    // console.log(searchUrlNoResults);
     if (searchUrlNoResults === "?noResults") {
       setCurrentState("Anywhere");
     }
