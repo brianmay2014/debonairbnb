@@ -25,7 +25,7 @@ const SearchDestinationInput = ({
     setDestinationValue(e.target.innerText);
     setFilteredData(Array.from(filteredSet).sort());
   };
-
+const dispatch = useDispatch()
   const filteredSet = new Set();
   // filters through states to list corresponding states in list
   const handleDestinationFilter = (e) => {
@@ -91,6 +91,8 @@ const SearchDestinationInput = ({
   //   e.preventDefault()
   //   setDragLeave(true)
   //   };
+
+  console.log(destinationValue)
 
   return (
     <div>

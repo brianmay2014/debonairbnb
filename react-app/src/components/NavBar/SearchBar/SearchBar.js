@@ -256,7 +256,7 @@ function SearchBar() {
     if (searchUrlArray.length) {
       setDestinationValueHolder(destination);
       // setAlphabetizedSet([]);
-      // setDestination('')
+      setDestinationValue(destination)
       // setFilteredData([]);
       setShowSearchSuggestions(false);
 
@@ -328,6 +328,7 @@ function SearchBar() {
       // setAlphabetizedSet([]);
       // setDestination('')
       // setFilteredData([]);
+
       setShowSearchSuggestions(false);
       setCurrentState(firstSearchFilter[0]?.state);
       return history.push(
@@ -336,10 +337,14 @@ function SearchBar() {
     }
 
     setAlphabetizedSet([]);
-    // setDestination('')
     setFilteredData([]);
     setShowSearchSuggestions(false);
+    // console.log(destinationValue)
   };
+
+  useEffect(() => {
+    setDestinationValue(destinationValue)
+  },[dispatch])
 
   if (!sessionUser) {
     return null;
