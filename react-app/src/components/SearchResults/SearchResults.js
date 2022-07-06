@@ -8,9 +8,9 @@ import "./SearchResults.css";
 import EstateCard from "../HomePage/EstateCard";
 
 const SearchResults = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const reloadEstates = useSelector((state) => Object.values(state.estates));
-  const [estateResults, setEstateResults] = useState([]);
+  // const [estateResults, setEstateResults] = useState([]);
   const { search } = useLocation();
   let resultIds = search?.split("=")[1]?.split(",");
   const [isLoaded, setIsLoaded] = useState(false);

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const SearchDestinationInput = ({
-  data,
   setDestination,
   destination,
   setAlphabetizedSet,
@@ -14,7 +13,8 @@ const SearchDestinationInput = ({
   setShowSearchSuggestions,
   setFilteredData,
   filteredData,
-  showSearchBar
+  setDragLeave
+
 }) => {
 
   const estates = useSelector((state) => Object.values(state.estates));
@@ -25,7 +25,7 @@ const SearchDestinationInput = ({
     setDestinationValue(e.target.innerText);
     setFilteredData(Array.from(filteredSet).sort());
   };
-
+const dispatch = useDispatch()
   const filteredSet = new Set();
   // filters through states to list corresponding states in list
   const handleDestinationFilter = (e) => {
@@ -33,7 +33,8 @@ const SearchDestinationInput = ({
     const newFilter = estates.filter((value) => {
       if (value.state) {
         // console.log(value.state, "value-state")
-        return value.state.toLowerCase().includes(searchWord.toLowerCase());
+        console.log(searchWord)
+        return `${value.state.toLowerCase()} ${value.country.toLowerCase()}`.includes(searchWord.toLowerCase());
       } else {
         return;
       }
@@ -61,6 +62,7 @@ const SearchDestinationInput = ({
   const closeCal = async (e) => {
     e.preventDefault();
     setShowDateRange(false);
+    // setDragLeave(true)
   };
 
   // shows suggestions if there is data to filter through and closes suggestions if it's an empty string
@@ -84,6 +86,14 @@ const SearchDestinationInput = ({
     setDestination(destinationValue)
   }, [])
 
+  // const handleDragLeave = (e) => {
+  //   // console.log('HERE')
+  //   e.preventDefault()
+  //   setDragLeave(true)
+  //   };
+
+  console.log(destinationValue)
+
   return (
     <div>
       <input
@@ -93,6 +103,9 @@ const SearchDestinationInput = ({
         value={destinationValue}
         onChange={handleDestinationFilter}
         onClick={closeCal}
+        autocomplete='off'
+        // onDrag={handleDragLeave}
+        // draggable="true"
       />
       <div
         className={

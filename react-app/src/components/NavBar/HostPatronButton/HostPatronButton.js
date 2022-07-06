@@ -6,14 +6,14 @@ const HostPatron = () => {
 
 	const user = useSelector((state) => state.session.user);
 
-		
+
 	return (
 		<div>
 			<a className="host-button btn" href={`/users/${user?.id}/estates`}>
 				Become a Host
 			</a>
 
-			
+
 		</div>
 	);
 };

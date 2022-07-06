@@ -32,7 +32,7 @@ const HostPage = () => {
 
 	if (userEstates.length) {
 		return (
-			<div>
+			<div id="my-estates-container">
 				<h1 id="my-estates-header">
 					My Estates
 				</h1>

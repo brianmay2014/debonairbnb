@@ -37,6 +37,7 @@ function SearchBar() {
   const [showSearchBar, setShowSearchBar] = useState(true);
   const { search } = useLocation();
   const [searchResultLoaded, setSearchResultLoaded] = useState(false);
+  const [dragLeave, setDragLeave] = useState(false);
 
   const openDestinationMenu = (e) => {
     e.stopPropagation();
@@ -75,11 +76,10 @@ function SearchBar() {
     // console.log(searchUrlNoResults);
     if (searchUrlNoResults === "?noResults") {
       setCurrentState("Anywhere");
-    }
-    else if (stateIdEstate) {
+    } else if (stateIdEstate) {
       setCurrentState(stateIdEstate);
     } else {
-      setCurrentState('Search States')
+      setCurrentState("Search States");
     }
 
     setSearchResultLoaded(true);
@@ -99,12 +99,16 @@ function SearchBar() {
     return () => document.removeEventListener("click", closeForms);
   }, [showDestinationMenu, showDateMenu, showGuestsMenu, showDateRange]);
 
+
+
   // useEffect for hiding buttons
   useEffect(() => {
     const unHideButtons = () => {
-      setHiddenButtonsDest(false);
-      setHiddenButtons(false);
-    };
+
+        // setHiddenButtonsDest(false);
+        // setHiddenButtons(false);
+      }
+
 
     document.addEventListener("click", unHideButtons);
     return () => document.removeEventListener("click", unHideButtons);
@@ -252,7 +256,7 @@ function SearchBar() {
     if (searchUrlArray.length) {
       setDestinationValueHolder(destination);
       // setAlphabetizedSet([]);
-      // setDestination('')
+      setDestinationValue(destination)
       // setFilteredData([]);
       setShowSearchSuggestions(false);
 
@@ -264,13 +268,13 @@ function SearchBar() {
     if (
       destination &&
       estates.find(
-        (estate) => `${estate.state}, ${estate.country}` === destination
+        (estate) => `${estate.state}, ${estate.country}`.toLowerCase() === destination.toLowerCase()
       )
     ) {
       let estatesArraySingle = [];
 
       estates.map((estate) => {
-        if (`${estate.state}, ${estate.country}` === destination) {
+        if (`${estate.state}, ${estate.country}`.toLowerCase() === destination.toLowerCase) {
           setCurrentState(estate?.state);
           estatesArraySingle.push(estate.id);
         }
@@ -315,7 +319,7 @@ function SearchBar() {
     if (alphabetizedSet.length > 1 && alphabetizedSet.includes(destination)) {
       let firstSearchResultArray = [];
       const firstSearchFilter = estates.filter(
-        (estate) => `${estate.state}, ${estate.country}` === destination
+        (estate) => `${estate.state}, ${estate.country}`.toLowerCase() === destination.toLowerCase()
       );
 
       firstSearchFilter.map((estate) => {
@@ -324,6 +328,7 @@ function SearchBar() {
       // setAlphabetizedSet([]);
       // setDestination('')
       // setFilteredData([]);
+
       setShowSearchSuggestions(false);
       setCurrentState(firstSearchFilter[0]?.state);
       return history.push(
@@ -332,10 +337,14 @@ function SearchBar() {
     }
 
     setAlphabetizedSet([]);
-    // setDestination('')
     setFilteredData([]);
     setShowSearchSuggestions(false);
+    // console.log(destinationValue)
   };
+
+  useEffect(() => {
+    setDestinationValue(destinationValue)
+  },[dispatch])
 
   if (!sessionUser) {
     return null;
@@ -343,9 +352,15 @@ function SearchBar() {
   // console.log(destination, "DESTINATION YOOOO");
   // console.log(filteredData);
 
+
+
   return (
     <div className="search-container-with-nav">
-      <div className={hiddenButtons ? "" : "search-container"}>
+      <div
+        className={
+          hiddenButtons ? "search-container-showing" : "search-container"
+        }
+      >
         <form
           onSubmit={handleSubmit}
           className="search-form"
@@ -379,6 +394,7 @@ function SearchBar() {
             <div className="search-inputs">
               <label>Where</label>
               <SearchDestinationInput
+                setDragLeave={setDragLeave}
                 showSearchSuggestions={showSearchSuggestions}
                 setShowSearchSuggestions={setShowSearchSuggestions}
                 setDestination={setDestination}

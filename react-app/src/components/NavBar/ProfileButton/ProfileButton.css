@@ -1,7 +1,8 @@
 .profile-dropdown-menu {
+  z-index: 200;
   position: absolute;
   right: 131px;
-  top: 24px;
+  top: 42px;
   width: fit-content;
   background-color: var(--lightestgold);
   padding: 15px;
@@ -12,6 +13,7 @@
 
 
 .profile-dropdown-menu li{
+
 list-style: none;
 }
 
@@ -24,10 +26,11 @@ list-style: none;
   font-size: 1em;
   margin: 0;
   padding-top: 0;
-  bottom: 8px;
-  top: 8px;
-  right: 160px;
+  /* bottom: 8px; */
+  /* top: 8px; */
+  /* right: 160px; */
   width: 80px;
+  z-index: 20;
   height: 25px;
-  position: absolute;
+  /* position: absolute; */
 }
