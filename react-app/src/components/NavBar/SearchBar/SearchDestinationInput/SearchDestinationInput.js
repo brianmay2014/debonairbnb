@@ -86,11 +86,11 @@ const SearchDestinationInput = ({
     setDestination(destinationValue)
   }, [])
 
-  const handleDragLeave = (e) => {
-    console.log('HERE')
-    e.preventDefault()
-    setDragLeave(true)
-    };
+  // const handleDragLeave = (e) => {
+  //   // console.log('HERE')
+  //   e.preventDefault()
+  //   setDragLeave(true)
+  //   };
 
   return (
     <div>
@@ -101,7 +101,8 @@ const SearchDestinationInput = ({
         value={destinationValue}
         onChange={handleDestinationFilter}
         onClick={closeCal}
-        onDrag={handleDragLeave}
+        autocomplete='off'
+        // onDrag={handleDragLeave}
         // draggable="true"
       />
       <div

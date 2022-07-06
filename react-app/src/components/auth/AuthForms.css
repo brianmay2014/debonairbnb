@@ -9,10 +9,14 @@
     box-shadow: 1px 1px 25px var(--lightblue);
     width: fit-content;
     margin: 0 auto;
-    
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.auth-form {
+    padding-top: 30px;
+}
+
 .auth-fields {
     display:flex;
     flex-direction: column;

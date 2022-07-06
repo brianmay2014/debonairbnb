@@ -18,9 +18,9 @@ margin: 5px;
   display: flex;
   flex-wrap: wrap;
   padding: 0 15px;
-  margin-top: 80px;
   overflow-y: scroll;
   height: 800px;
+  padding-top: 125px;
 }
 
 .search-results-card {
@@ -36,4 +36,8 @@ margin: 5px;
   position: absolute;
   margin-left: 30px;
   width: 33%;
+}
+
+.search-message-container {
+  padding-top: 86px;
 }
