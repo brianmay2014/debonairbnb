@@ -3,7 +3,9 @@
   display: flex;
   height: 66px;
   position: relative;
-  width: 100%;
+  /* width: 100%; */
+  min-width: 1220px;
+  max-width: 100%;
   align-items: center;
   justify-content: space-between;
   z-index: 1;
