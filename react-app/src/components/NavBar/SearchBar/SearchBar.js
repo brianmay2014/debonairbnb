@@ -37,6 +37,7 @@ function SearchBar() {
   const [showSearchBar, setShowSearchBar] = useState(true);
   const { search } = useLocation();
   const [searchResultLoaded, setSearchResultLoaded] = useState(false);
+  const [dragLeave, setDragLeave] = useState(false);
 
   const openDestinationMenu = (e) => {
     e.stopPropagation();
@@ -75,11 +76,10 @@ function SearchBar() {
     // console.log(searchUrlNoResults);
     if (searchUrlNoResults === "?noResults") {
       setCurrentState("Anywhere");
-    }
-    else if (stateIdEstate) {
+    } else if (stateIdEstate) {
       setCurrentState(stateIdEstate);
     } else {
-      setCurrentState('Search States')
+      setCurrentState("Search States");
     }
 
     setSearchResultLoaded(true);
@@ -99,12 +99,16 @@ function SearchBar() {
     return () => document.removeEventListener("click", closeForms);
   }, [showDestinationMenu, showDateMenu, showGuestsMenu, showDateRange]);
 
+
+
   // useEffect for hiding buttons
   useEffect(() => {
     const unHideButtons = () => {
-      setHiddenButtonsDest(false);
-      setHiddenButtons(false);
-    };
+
+        // setHiddenButtonsDest(false);
+        // setHiddenButtons(false);
+      }
+
 
     document.addEventListener("click", unHideButtons);
     return () => document.removeEventListener("click", unHideButtons);
@@ -343,9 +347,15 @@ function SearchBar() {
   // console.log(destination, "DESTINATION YOOOO");
   // console.log(filteredData);
 
+
+
   return (
     <div className="search-container-with-nav">
-      <div className={hiddenButtons ? "search-container-showing" : "search-container"}>
+      <div
+        className={
+          hiddenButtons ? "search-container-showing" : "search-container"
+        }
+      >
         <form
           onSubmit={handleSubmit}
           className="search-form"
@@ -379,6 +389,7 @@ function SearchBar() {
             <div className="search-inputs">
               <label>Where</label>
               <SearchDestinationInput
+                setDragLeave={setDragLeave}
                 showSearchSuggestions={showSearchSuggestions}
                 setShowSearchSuggestions={setShowSearchSuggestions}
                 setDestination={setDestination}

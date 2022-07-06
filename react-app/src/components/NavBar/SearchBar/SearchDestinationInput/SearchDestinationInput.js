@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const SearchDestinationInput = ({
-  data,
   setDestination,
   destination,
   setAlphabetizedSet,
@@ -14,7 +13,8 @@ const SearchDestinationInput = ({
   setShowSearchSuggestions,
   setFilteredData,
   filteredData,
-  showSearchBar
+  setDragLeave
+
 }) => {
 
   const estates = useSelector((state) => Object.values(state.estates));
@@ -61,6 +61,7 @@ const SearchDestinationInput = ({
   const closeCal = async (e) => {
     e.preventDefault();
     setShowDateRange(false);
+    // setDragLeave(true)
   };
 
   // shows suggestions if there is data to filter through and closes suggestions if it's an empty string
@@ -84,6 +85,12 @@ const SearchDestinationInput = ({
     setDestination(destinationValue)
   }, [])
 
+  const handleDragLeave = (e) => {
+    console.log('HERE')
+    e.preventDefault()
+    setDragLeave(true)
+    };
+
   return (
     <div>
       <input
@@ -93,6 +100,8 @@ const SearchDestinationInput = ({
         value={destinationValue}
         onChange={handleDestinationFilter}
         onClick={closeCal}
+        onDrag={handleDragLeave}
+        // draggable="true"
       />
       <div
         className={
