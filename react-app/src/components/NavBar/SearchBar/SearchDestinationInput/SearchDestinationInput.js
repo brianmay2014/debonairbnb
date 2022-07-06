@@ -33,7 +33,8 @@ const SearchDestinationInput = ({
     const newFilter = estates.filter((value) => {
       if (value.state) {
         // console.log(value.state, "value-state")
-        return value.state.toLowerCase().includes(searchWord.toLowerCase());
+        console.log(searchWord)
+        return `${value.state.toLowerCase()} ${value.country.toLowerCase()}`.includes(searchWord.toLowerCase());
       } else {
         return;
       }

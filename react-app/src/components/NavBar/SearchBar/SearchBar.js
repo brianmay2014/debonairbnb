@@ -268,13 +268,13 @@ function SearchBar() {
     if (
       destination &&
       estates.find(
-        (estate) => `${estate.state}, ${estate.country}` === destination
+        (estate) => `${estate.state}, ${estate.country}`.toLowerCase() === destination.toLowerCase()
       )
     ) {
       let estatesArraySingle = [];
 
       estates.map((estate) => {
-        if (`${estate.state}, ${estate.country}` === destination) {
+        if (`${estate.state}, ${estate.country}`.toLowerCase() === destination.toLowerCase) {
           setCurrentState(estate?.state);
           estatesArraySingle.push(estate.id);
         }
@@ -319,7 +319,7 @@ function SearchBar() {
     if (alphabetizedSet.length > 1 && alphabetizedSet.includes(destination)) {
       let firstSearchResultArray = [];
       const firstSearchFilter = estates.filter(
-        (estate) => `${estate.state}, ${estate.country}` === destination
+        (estate) => `${estate.state}, ${estate.country}`.toLowerCase() === destination.toLowerCase()
       );
 
       firstSearchFilter.map((estate) => {
