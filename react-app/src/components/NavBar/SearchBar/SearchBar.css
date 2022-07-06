@@ -12,6 +12,11 @@
   z-index: 1;
 }
 
+.search-container-showing {
+  padding: 0;
+  margin: 0;
+}
+
 .search-container-with-nav {
  display: flex;
  flex-direction: column;

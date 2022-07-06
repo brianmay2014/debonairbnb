@@ -345,7 +345,7 @@ function SearchBar() {
 
   return (
     <div className="search-container-with-nav">
-      <div className={hiddenButtons ? "" : "search-container"}>
+      <div className={hiddenButtons ? "search-container-showing" : "search-container"}>
         <form
           onSubmit={handleSubmit}
           className="search-form"
