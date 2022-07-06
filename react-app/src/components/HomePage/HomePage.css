@@ -3,7 +3,8 @@
     flex-direction: column;
     width: fit-content;
     margin: 0 auto 237px;
-
+    /* margin-top: 20px; */
+    padding-top: 100px;
 }
 
 .estate-display{

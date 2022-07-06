@@ -24,10 +24,10 @@ list-style: none;
   font-size: 1em;
   margin: 0;
   padding-top: 0;
-  bottom: 8px;
-  top: 8px;
-  right: 160px;
+  /* bottom: 8px; */
+  /* top: 8px; */
+  /* right: 160px; */
   width: 80px;
   height: 25px;
-  position: absolute;
+  /* position: absolute; */
 }
