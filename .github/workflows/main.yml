@@ -18,7 +18,7 @@ jobs:
     - name: Build React App
       working-directory: react-app
       # CI=false allows the build to ignore any warnings when building
-      run: npm install && CI=false npm run build
+      run: npm install --force && CI=false npm run build
 
     # https://github.com/actions/setup-python
     # If a student sees this, they could speed up their builds 
