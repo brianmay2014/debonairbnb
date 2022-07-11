@@ -33,7 +33,7 @@ const dispatch = useDispatch()
     const newFilter = estates.filter((value) => {
       if (value.state) {
         // console.log(value.state, "value-state")
-        console.log(searchWord)
+        // console.log(searchWord)
         return `${value.state.toLowerCase()} ${value.country.toLowerCase()}`.includes(searchWord.toLowerCase());
       } else {
         return;
@@ -92,7 +92,7 @@ const dispatch = useDispatch()
   //   setDragLeave(true)
   //   };
 
-  console.log(destinationValue)
+  // console.log(destinationValue)
 
   return (
     <div>
